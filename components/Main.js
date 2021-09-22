@@ -34,60 +34,63 @@ export class Main extends Component {
   }
   render() {
     return (
-      <Tab.Navigator
-        initialRouteName="Course"
-        labeled={false}
-        color="white"
-        activeColor="#8E2835"
-        inactiveColor="#dadada"
-      >
-        <Tab.Screen
-          name="Course"
-          component={CourseScreen}
-          options={{
-            tabBarColor: "white",
-            tabBarIcon: ({ size }) => (
-              <MaterialCommunityIcons name="home-variant-outline" size={26} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Dictionary"
-          component={DictionaryScreen}
-          options={{
-            tabBarColor: "white",
-            tabBarIcon: ({ size }) => (
-              <MaterialCommunityIcons name="book-open-variant" size={26} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Community"
-          component={CommunityScreen}
-          listeners={({ navigation }) => ({
-            tabPress: (event) => {
-              event.preventDefault();
-              navigation.navigate("Community");
-            },
-          })}
-          options={{
-            tabBarColor: "white",
-            tabBarIcon: ({ size }) => (
-              <MaterialCommunityIcons name="plus-box-multiple" size={26} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Settings"
-          component={CourseScreen}
-          options={{
-            tabBarColor: "white",
-            tabBarIcon: ({ size }) => (
-              <MaterialCommunityIcons name="cog" size={26} />
-            ),
-          }}
-        />
-      </Tab.Navigator>
+      <Tab.Navigator initialRouteName = "Course" labeled={false} 
+      activeColor="#8E2835"
+      inactiveColor="#B2B2B2"
+      barStyle={{ backgroundColor: '#FFFFFF' }}> 
+
+          <Tab.Screen 
+              name="Course" 
+              component={CourseScreen}
+              options = {{
+                  tabBarIcon: ({ color, size }) => (
+                      <MaterialCommunityIcons
+                          name = "home" color = {color} size ={26}/>
+                  ),
+              }}/>
+          <Tab.Screen 
+              name="Dictionary" 
+              component={DictionaryScreen} 
+              //navigation = {this.props.navigation}
+              options = {{
+                  tabBarIcon: ({ color, size }) => (
+                      <MaterialCommunityIcons
+                          name = "book-open-page-variant" color = {color} size ={26}/>
+                  ),
+          }}/>
+          <Tab.Screen 
+              name="Community" 
+              component={CommunityScreen} 
+              //navigation = {this.props.navigation}
+              listeners={({ navigation }) => ({
+                  tabPress: event => {
+                      event.preventDefault();
+                      navigation.navigate("Community")
+                  }
+              })}
+              options = {{
+                  tabBarIcon: ({ color, size }) => (
+                      <MaterialCommunityIcons
+                          name = "account-group" color = {color} size ={26}/>
+                  ),
+              }}/>
+          <Tab.Screen 
+              name="Settings" 
+              component={CourseScreen} 
+              //navigation = {this.props.navigation}
+              //to pass along the props inside it and make it easier the logic from the profile screen perspective
+              listeners={({ navigation }) => ({
+                  tabPress: event => {
+                      event.preventDefault();
+                      navigation.navigate("Settings")
+                  }})}
+              options = {{
+                  tabBarIcon: ({ color, size }) => (
+                      <MaterialCommunityIcons
+                          name = "cog" color = {color} size ={26}/>
+                  ),
+              }}/>
+  </Tab.Navigator>
     );
   }
 }

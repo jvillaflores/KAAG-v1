@@ -46,7 +46,7 @@ function Community({ postsAll, route }) {
               tabBarPressColor:"#8E2835",
               tabBarLabelStyle: {
                 fontSize: 15, 
-                fontFamily: 'bold', 
+                fontWeight: 'bold', 
               }, 
             })}>
           <Tab.Screen name="Feed" component={FeedScreen}/>
