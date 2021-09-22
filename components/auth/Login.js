@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignContent: "center",
     justifyContent: "center",
-    top: 200,
+    top: 100,
     left: 30,
   },
   miniGroup: {

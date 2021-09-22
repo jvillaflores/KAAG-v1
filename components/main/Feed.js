@@ -8,50 +8,36 @@ import {
   TextInput,
   FlatList,
   SafeAreaView,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
-import AddButton from './AddButton'
+import AddButton from "./AddButton";
 
-
-function Community({ postsAll, navigation }) {
-  console.log({ postsAll });
-  
+function Community({ posts, navigation }) {
   return (
+    <FlatList
+      nestedScrollEnabled
+      numColumns={1}
+      horizontal={false}
+      data={posts}
+      style={{ flex: 1 }}
+      renderItem={({ item }) => (
+        <View style={styles.container}>
+          <Text style={styles.textVocab}> {item.caption}</Text>
 
-    <ScrollView 
-        scrollEnabled={true}>
-
-      <FlatList
-        nestedScrollEnabled
-        numColumns={1}
-        horizontal={false}
-        data={postsAll}
-        style={{ flex: 1 }}
-        renderItem={({ item }) => 
-          <View style={styles.container}>
-            <Text style={styles.textVocab}> {item.caption}</Text>
-
-            <Image
-              style={{ width: 290, height: 180, paddingLeft: 20 }}
-              source={{ uri: item.downloadURL }}
-            />
-          </View>
-        }
-      />
-
-      
-      
-    </ScrollView>
-    
-    
+          <Image
+            style={{ width: 290, height: 180, paddingLeft: 20 }}
+            source={{ uri: item.downloadURL }}
+          />
+        </View>
+      )}
+    />
   );
-  
-};
+}
 
 const mapStateToProps = (store) => ({
-  postsAll: store.userState.postsAll,
+  posts: store.userState.posts,
 });
 
 export default connect(mapStateToProps, null)(Community);
@@ -70,15 +56,14 @@ const styles = StyleSheet.create({
     position: "right",
     width: 60,
     height: 60,
-    borderRadius: 60/2,
+    borderRadius: 60 / 2,
     alignItems: "center",
     justifyContent: "center",
     shadowRadius: 10,
-    shadowColor: '#F02A4B',
+    shadowColor: "#F02A4B",
     shadowOpacity: 0.3,
-    shadowOffset: { height: 10},
-    backgroundColor: '#8E2835',
-    
+    shadowOffset: { height: 10 },
+    backgroundColor: "#8E2835",
   },
 
   textHead: {
