@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 
 export class Social extends Component {
     render() {
         return (
             <View>
-                choelte pogi moete
+                <Text>choelte pogi moete</Text>
             </View>
         )
     }

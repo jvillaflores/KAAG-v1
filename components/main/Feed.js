@@ -20,27 +20,29 @@ function Community({ postsAll, navigation }) {
   
   return (
 
-    <ScrollView 
-        scrollEnabled={true}>
+    <ScrollView>
+       
+        <View>
 
-      <FlatList
-        nestedScrollEnabled
-        numColumns={1}
-        horizontal={false}
-        data={postsAll}
-        style={{ flex: 1 }}
-        renderItem={({ item }) => 
-          <View style={styles.container}>
-            <Text style={styles.textVocab}> {item.caption}</Text>
+            <FlatList
+                nestedScrollEnabled
+                numColumns={1}
+                horizontal={false}
+                data={postsAll}
+                style={{ flex: 1 }}
+                renderItem={({ item }) => 
+                <View style={styles.container}>
+                    <Text style={styles.textVocab}> {item.caption}</Text>
 
-            <Image
-              style={{ width: 290, height: 180, paddingLeft: 20 }}
-              source={{ uri: item.downloadURL }}
+                    <Image
+                    style={{ width: 290, height: 180, paddingLeft: 20 }}
+                    source={{ uri: item.downloadURL }}
+                    />
+                </View>
+                }
+                
             />
-          </View>
-        }
-      />
-
+        </View>
       
       
     </ScrollView>
