@@ -17,33 +17,35 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 
 import FeedScreen from './Feed'
 import SocialScreen from './Social'
+import { NavigationContainer } from "@react-navigation/native";
+
 
 
 const Tab = createMaterialTopTabNavigator();
 
 
 
-function Community({ postsAll, route, }) {
+function Community({ posts, postsAll, navigation, }) {
   console.log({ postsAll });
  
   return (
     <SafeAreaView>
-
+      
       <SafeAreaView>
-
+      
           <View style={styles.container}>
               <View style={styles.innercontainer}>
-               <Text style = {styles.textHead}>Welcome, Erica!</Text>
+
+               <Text style = {styles.textHead} >Welcome, Kent</Text>
                 <Text style = {styles.textSubHead}>Engage in Community</Text>
                 <Text style = {styles.textreg}>Create and share your photos, stories, and videos with the friends you care about.
                 </Text>
-
-              </View>
               
-          </View>
-
+              </View>
+         </View>
           
       </SafeAreaView>
+      
       <SafeAreaView>
       <Tab.Navigator 
             screenOptions={({ route }) => ({ 
@@ -65,7 +67,7 @@ function Community({ postsAll, route, }) {
       </Tab.Navigator>
     </SafeAreaView>
     <SafeAreaView>
-      <Pressable style={styles.button} onPress={() => Alert.alert('Cannot press this one')}>
+      <Pressable style={styles.button} onPress={() => navigation.navigate("MainContribution")}>
       <MaterialCommunityIcons
         name = "plus" color = {'#ffffff'} size ={25}/>
       </Pressable> 
@@ -79,6 +81,7 @@ function Community({ postsAll, route, }) {
 
 const mapStateToProps = (store) => ({
   postsAll: store.userState.postsAll,
+  users: store.userState.users,
 });
 
 export default connect(mapStateToProps, null)(Community);

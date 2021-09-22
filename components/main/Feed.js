@@ -7,7 +7,8 @@ import {
   Pressable,
   TextInput,
   FlatList,
-  SafeAreaView
+  SafeAreaView,
+  ScrollView
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
@@ -18,31 +19,17 @@ function Community({ postsAll, navigation }) {
   console.log({ postsAll });
   
   return (
-//     <SafeAreaView>
 
-//     <View style={styles.container}>
-//         <View style={styles.innercontainer}>
-//          <Text style = {styles.textHead}>Welcome, Erica!</Text>
-//           <Text style = {styles.textSubHead}>Engage in Community</Text>
-//           <Text style = {styles.textreg}>Create and share your photos, stories, and videos with the friends you care about.
-//           </Text>
-
-//         </View>
-        
-//     </View>
-
-    
-// </SafeAreaView>
-
-
-    <View>
+    <ScrollView 
+        scrollEnabled={true}>
 
       <FlatList
+        nestedScrollEnabled
         numColumns={1}
         horizontal={false}
         data={postsAll}
         style={{ flex: 1 }}
-        renderItem={({ item }) => (
+        renderItem={({ item }) => 
           <View style={styles.container}>
             <Text style={styles.textVocab}> {item.caption}</Text>
 
@@ -51,24 +38,12 @@ function Community({ postsAll, navigation }) {
               source={{ uri: item.downloadURL }}
             />
           </View>
-        )}
+        }
       />
 
-      <Pressable
-        style={styles.buttonAudio}
-        onPress={() => navigation.navigate("MainContribution")}
-      >
-        <View style={styles.Icon}>
-          <MaterialCommunityIcons
-            name="plus"
-            size={35}
-            color="white"
-            style={{ left: -10 }}
-          />
-        </View>
-      </Pressable>
       
-    </View>
+      
+    </ScrollView>
     
     
   );
@@ -88,6 +63,8 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: "center",
+    margin: 5,
+    paddingTop: 20,
   },
   button: {
     position: "right",
