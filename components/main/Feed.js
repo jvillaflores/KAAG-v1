@@ -11,25 +11,31 @@ import {
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
-
+import AddButton from './AddButton'
 
 
 function Community({ postsAll, navigation }) {
   console.log({ postsAll });
   
   return (
+//     <SafeAreaView>
+
+//     <View style={styles.container}>
+//         <View style={styles.innercontainer}>
+//          <Text style = {styles.textHead}>Welcome, Erica!</Text>
+//           <Text style = {styles.textSubHead}>Engage in Community</Text>
+//           <Text style = {styles.textreg}>Create and share your photos, stories, and videos with the friends you care about.
+//           </Text>
+
+//         </View>
+        
+//     </View>
+
+    
+// </SafeAreaView>
+
+
     <View>
-      <View style={styles.headLine}>
-        <View style={styles.title}>
-          <Text style={styles.textHead}> Community</Text>
-        </View>
-        <View style={styles.searchBar}>
-          <TextInput
-            style={styles.input}
-            placeholder="   Search for keywords (Food, Event, etc)"
-          />
-        </View>
-      </View>
 
       <FlatList
         numColumns={1}
@@ -63,6 +69,8 @@ function Community({ postsAll, navigation }) {
       </Pressable>
       
     </View>
+    
+    
   );
   
 };
@@ -80,6 +88,20 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: "center",
+  },
+  button: {
+    position: "right",
+    width: 60,
+    height: 60,
+    borderRadius: 60/2,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowRadius: 10,
+    shadowColor: '#F02A4B',
+    shadowOpacity: 0.3,
+    shadowOffset: { height: 10},
+    backgroundColor: '#8E2835',
+    
   },
 
   textHead: {
@@ -137,7 +159,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: "black",
   },
-  button: {
+  Abutton: {
     justifyContent: "center",
     paddingVertical: 8,
     paddingHorizontal: 32,

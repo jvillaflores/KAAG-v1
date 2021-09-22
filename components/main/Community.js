@@ -7,7 +7,9 @@ import {
   Pressable,
   TextInput,
   FlatList,
-  SafeAreaView
+  SafeAreaView,
+  Button,
+  Alert
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
@@ -16,13 +18,14 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import FeedScreen from './Feed'
 import SocialScreen from './Social'
 
+
 const Tab = createMaterialTopTabNavigator();
 
 
 
-function Community({ postsAll, route }) {
+function Community({ postsAll, route, }) {
   console.log({ postsAll });
-  
+ 
   return (
     <SafeAreaView>
 
@@ -36,24 +39,40 @@ function Community({ postsAll, route }) {
                 </Text>
 
               </View>
+              
           </View>
-      </SafeAreaView>
 
-      <Tab.Navigator
-            screenOptions={({ route }) => ({
+          
+      </SafeAreaView>
+      <SafeAreaView>
+      <Tab.Navigator 
+            screenOptions={({ route }) => ({ 
+              tabBarContentContainerStyle: {
+                backgroundColor: '#f2f2f2'
+              },
               tabBarActiveTintColor: "#8E2835",
-              tabBarInactiveTintColor: "#70707033",
+              tabBarInactiveTintColor: "#B2B2B2",
+              
               tabBarPressColor:"#8E2835",
               tabBarLabelStyle: {
                 fontSize: 15, 
                 fontWeight: 'bold', 
+                
               }, 
             })}>
           <Tab.Screen name="Feed" component={FeedScreen}/>
           <Tab.Screen name="Social" component={SocialScreen} />
       </Tab.Navigator>
-
     </SafeAreaView>
+    <SafeAreaView>
+      <Pressable style={styles.button} onPress={() => Alert.alert('Cannot press this one')}>
+      <MaterialCommunityIcons
+        name = "plus" color = {'#ffffff'} size ={25}/>
+      </Pressable> 
+    </SafeAreaView>
+      
+    </SafeAreaView>
+    
   );
   
 };
@@ -78,6 +97,21 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     margin: 50,
     //backgroundColor: '#FFFFFF',
+  },
+  button: {
+    position: "fixed",
+    width: 60,
+    height: 60,
+    borderRadius: 60/2,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowRadius: 10,
+    shadowColor: '#F02A4B',
+    shadowOpacity: 0.3,
+    shadowOffset: { height: 10},
+    backgroundColor: '#8E2835',
+    bottom: 80,
+    right:30,
   },
 
   textHead: {
@@ -143,20 +177,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: "black",
   },
-  button: {
-    justifyContent: "center",
-    paddingVertical: 8,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: 150,
-    top: -120,
-    backgroundColor: "#8E2835",
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
-  },
+  
   buttonVocab: {
     alignSelf: "center",
     justifyContent: "center",
