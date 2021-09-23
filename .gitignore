@@ -1,0 +1,19 @@
+# Expo
+.expo
+__generated__
+web-build
+# Expo web env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+apps/bare-expo/deploy-url.txt
+
+# Expo Doc merging
+docs/pages/versions/*/react-native/ADDED_*.md
+docs/pages/versions/*/react-native/REMOVED_*.md
+docs/pages/versions/*/react-native/*.diff
+# Node
+node_modules
+npm-debug.log
+yarn-error.log

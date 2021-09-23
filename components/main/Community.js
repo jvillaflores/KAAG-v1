@@ -9,75 +9,65 @@ import {
   FlatList,
   SafeAreaView,
   Button,
-  Alert
+  Alert,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-import FeedScreen from './Feed'
-import SocialScreen from './Social'
+import FeedScreen from "./Feed";
+import SocialScreen from "./Social";
 import { NavigationContainer } from "@react-navigation/native";
-
-
 
 const Tab = createMaterialTopTabNavigator();
 
-
-
-function Community({ posts, postsAll, navigation, }) {
-  console.log({ postsAll });
- 
+function Community({ navigation }) {
   return (
     <SafeAreaView>
-      
       <SafeAreaView>
-      
-          <View style={styles.container}>
-              <View style={styles.innercontainer}>
-
-               <Text style = {styles.textHead} >Welcome, Kent</Text>
-                <Text style = {styles.textSubHead}>Engage in Community</Text>
-                <Text style = {styles.textreg}>Create and share your photos, stories, and videos with the friends you care about.
-                </Text>
-              
-              </View>
-         </View>
-          
+        <View style={styles.container}>
+          <View style={styles.innercontainer}>
+            <Text style={styles.textHead}>Welcome, Kent</Text>
+            <Text style={styles.textSubHead}>Engage in Community</Text>
+            <Text style={styles.textreg}>
+              Create and share your photos, stories, and videos with the friends
+              you care about.
+            </Text>
+          </View>
+        </View>
       </SafeAreaView>
-      
+
       <SafeAreaView>
-      <Tab.Navigator 
-            screenOptions={({ route }) => ({ 
-              tabBarContentContainerStyle: {
-                backgroundColor: '#f2f2f2'
-              },
-              tabBarActiveTintColor: "#8E2835",
-              tabBarInactiveTintColor: "#B2B2B2",
-              
-              tabBarPressColor:"#8E2835",
-              tabBarLabelStyle: {
-                fontSize: 15, 
-                fontWeight: 'bold', 
-                
-              }, 
-            })}>
-          <Tab.Screen name="Feed" component={FeedScreen}/>
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarContentContainerStyle: {
+              backgroundColor: "#f2f2f2",
+            },
+            tabBarActiveTintColor: "#8E2835",
+            tabBarInactiveTintColor: "#B2B2B2",
+
+            tabBarPressColor: "#8E2835",
+            tabBarLabelStyle: {
+              fontSize: 15,
+              fontWeight: "bold",
+            },
+          })}
+        >
+          <Tab.Screen name="Feed" component={FeedScreen} />
           <Tab.Screen name="Social" component={SocialScreen} />
-      </Tab.Navigator>
+        </Tab.Navigator>
+      </SafeAreaView>
+      <SafeAreaView>
+        <Pressable
+          style={styles.button}
+          onPress={() => navigation.navigate("MainContribution")}
+        >
+          <MaterialCommunityIcons name="plus" color={"#ffffff"} size={25} />
+        </Pressable>
+      </SafeAreaView>
     </SafeAreaView>
-    <SafeAreaView>
-      <Pressable style={styles.button} onPress={() => navigation.navigate("MainContribution")}>
-      <MaterialCommunityIcons
-        name = "plus" color = {'#ffffff'} size ={25}/>
-      </Pressable> 
-    </SafeAreaView>
-      
-    </SafeAreaView>
-    
   );
-  
-};
+}
 
 const mapStateToProps = (store) => ({
   postsAll: store.userState.postsAll,
@@ -94,10 +84,10 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
   },
-  innercontainer: { 
+  innercontainer: {
     flex: 1,
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
     margin: 50,
     //backgroundColor: '#FFFFFF',
   },
@@ -105,16 +95,16 @@ const styles = StyleSheet.create({
     position: "fixed",
     width: 60,
     height: 60,
-    borderRadius: 60/2,
+    borderRadius: 60 / 2,
     alignItems: "center",
     justifyContent: "center",
     shadowRadius: 10,
-    shadowColor: '#F02A4B',
+    shadowColor: "#F02A4B",
     shadowOpacity: 0.3,
-    shadowOffset: { height: 10},
-    backgroundColor: '#8E2835',
+    shadowOffset: { height: 10 },
+    backgroundColor: "#8E2835",
     bottom: 80,
-    right:30,
+    right: 30,
   },
 
   textHead: {
@@ -180,7 +170,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: "black",
   },
-  
+
   buttonVocab: {
     alignSelf: "center",
     justifyContent: "center",
