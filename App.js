@@ -108,6 +108,7 @@ export class App extends Component {
               name="MainContribution"
               component={ContributionScreen}
               navigation={this.props.navigation}
+              
               options={{
                 title: "Post",
                 headerTintColor: "#fff",

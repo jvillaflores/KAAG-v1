@@ -52,19 +52,6 @@ const styles = StyleSheet.create({
     margin: 5,
     paddingTop: 20,
   },
-  button: {
-    position: "right",
-    width: 60,
-    height: 60,
-    borderRadius: 60 / 2,
-    alignItems: "center",
-    justifyContent: "center",
-    shadowRadius: 10,
-    shadowColor: "#F02A4B",
-    shadowOpacity: 0.3,
-    shadowOffset: { height: 10 },
-    backgroundColor: "#8E2835",
-  },
 
   textHead: {
     flexDirection: "row",

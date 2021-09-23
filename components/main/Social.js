@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    position: "right",
+    position: "absolute",
     width: 60,
     height: 60,
     borderRadius: 60 / 2,

@@ -73,7 +73,7 @@ export default function Contribution({ navigation }) {
       </View>
       <Pressable
       
-          style={styles.button}
+          style={styles.Flipbutton}
           onPress={() =>  {
             setType(
               type === Camera.Constants.Type.back
@@ -84,7 +84,7 @@ export default function Contribution({ navigation }) {
              
           }}
          >
-          <MaterialCommunityIcons name="camera-party-mode" color={"#ffffff"} size={25} />
+          <MaterialCommunityIcons name="camera-party-mode" color={"#ffffff"} size={30} />
         </Pressable>
       
       <Pressable 
@@ -120,8 +120,9 @@ const styles = StyleSheet.create({
 
   },
   camerafixedRatio: {
-    flex: 2,
+    flex: 1,
     aspectRatio: 1 / 1
+    
 
   },
   capture: {
@@ -135,15 +136,26 @@ const styles = StyleSheet.create({
     alignSelf: "center"
 
   },
+  Flipbutton: {
+    position: "absolute",
+    alignSelf: "flex-end",
+    justifyContent: "center",
+    borderRadius: 4,
+    elevation: 3,
+    right: 25,
+    top: 15,
+    
+  },
   ChooseImageButton: {
     position: "absolute",
-    bottom: 5,
+    bottom: 10,
     width: 80,
     height: 80,
     alignSelf: "flex-end"
 
 
   },
+  
 
   loginGroup: {
     flex: 1,
@@ -181,22 +193,7 @@ const styles = StyleSheet.create({
   button1: {
     marginBottom: 200,
   },
-  button: {
-    position: "absolute",
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    left: -25,
-    //width: "80%",
-    //backgroundColor: "#8E2835",
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
-  },
+  
 
   text: {
     fontSize: 20,

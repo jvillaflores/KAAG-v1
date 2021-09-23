@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     //backgroundColor: '#FFFFFF',
   },
   button: {
-    position: "fixed",
+    position: "absolute",
     width: 60,
     height: 60,
     borderRadius: 60 / 2,
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowOffset: { height: 10 },
     backgroundColor: "#8E2835",
-    bottom: 80,
+    bottom: 40,
     right: 30,
   },
 
