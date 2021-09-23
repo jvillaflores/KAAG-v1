@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     margin: 5,
     paddingTop: 20,
+    flex: 1
   },
   button: {
     position: "right",

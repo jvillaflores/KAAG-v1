@@ -22,52 +22,103 @@ import { NavigationContainer } from "@react-navigation/native";
 const Tab = createMaterialTopTabNavigator();
 
 function Community({ navigation }) {
+  
   return (
-    <SafeAreaView>
-      <SafeAreaView>
-        <View style={styles.container}>
-          <View style={styles.innercontainer}>
-            <Text style={styles.textHead}>Welcome, Kent</Text>
-            <Text style={styles.textSubHead}>Engage in Community</Text>
-            <Text style={styles.textreg}>
-              Create and share your photos, stories, and videos with the friends
-              you care about.
-            </Text>
+    <NavigationContainer independent ={true}>
+       <View style={styles.container}>
+       <View style={styles.innercontainer}>
+             <Text style={styles.textHead}>Welcome, Kent</Text>
+             <Text style={styles.textSubHead}>Engage in Community</Text>
+             <Text style={styles.textreg}>
+               Create and share your photos, stories, and videos with the friends
+               you care about.
+             </Text>
           </View>
-        </View>
-      </SafeAreaView>
+         </View>
+         <Tab.Navigator
+           screenOptions={({ route }) => ({
+             tabBarContentContainerStyle: {
+               backgroundColor: "#f2f2f2",
+             },
+             tabBarActiveTintColor: "#8E2835",
+             tabBarInactiveTintColor: "#B2B2B2",
 
-      <SafeAreaView>
-        <Tab.Navigator
-          screenOptions={({ route }) => ({
-            tabBarContentContainerStyle: {
-              backgroundColor: "#f2f2f2",
-            },
-            tabBarActiveTintColor: "#8E2835",
-            tabBarInactiveTintColor: "#B2B2B2",
-
-            tabBarPressColor: "#8E2835",
-            tabBarLabelStyle: {
-              fontSize: 15,
-              fontWeight: "bold",
-            },
-          })}
-        >
-          <Tab.Screen name="Feed" component={FeedScreen} />
-          <Tab.Screen name="Social" component={SocialScreen} />
-        </Tab.Navigator>
-      </SafeAreaView>
-      <SafeAreaView>
-        <Pressable
-          style={styles.button}
+             tabBarPressColor: "#8E2835",
+             tabBarLabelStyle: {
+               fontSize: 15,
+               fontWeight: "bold",
+             },
+           })}
+         >
+           <Tab.Screen name="Feed" component={FeedScreen} />
+           <Tab.Screen name="Social" component={SocialScreen} />
+      </Tab.Navigator>
+      <Pressable
+           style={styles.button}
           onPress={() => navigation.navigate("MainContribution")}
-        >
+         >
           <MaterialCommunityIcons name="plus" color={"#ffffff"} size={25} />
         </Pressable>
-      </SafeAreaView>
-    </SafeAreaView>
-  );
-}
+    </NavigationContainer>
+  )
+      }
+    // <SafeAreaView>
+    //   <SafeAreaView>
+    //     <View style={styles.container}>
+    //       <View style={styles.innercontainer}>
+    //         <Text style={styles.textHead}>Welcome, Kent</Text>
+    //         <Text style={styles.textSubHead}>Engage in Community</Text>
+    //         <Text style={styles.textreg}>
+    //           Create and share your photos, stories, and videos with the friends
+    //           you care about.
+    //         </Text>
+    //       </View>
+    //     </View>
+    //   </SafeAreaView>
+
+    //   <SafeAreaView>
+    //     <Tab.Navigator
+    //       screenOptions={({ route }) => ({
+    //         tabBarContentContainerStyle: {
+    //           backgroundColor: "#f2f2f2",
+    //         },
+    //         tabBarActiveTintColor: "#8E2835",
+    //         tabBarInactiveTintColor: "#B2B2B2",
+
+    //         tabBarPressColor: "#8E2835",
+    //         tabBarLabelStyle: {
+    //           fontSize: 15,
+    //           fontWeight: "bold",
+    //         },
+    //       })}
+    //     >
+    //       <Tab.Screen name="Feed" component={FeedScreen} />
+    //       <Tab.Screen name="Social" component={SocialScreen} />
+    //     </Tab.Navigator>
+    //   </SafeAreaView>
+    //   <SafeAreaView>
+    //     <Pressable
+    //       style={styles.button}
+    //       onPress={() => navigation.navigate("MainContribution")}
+    //     >
+    //       <MaterialCommunityIcons name="plus" color={"#ffffff"} size={25} />
+    //     </Pressable>
+    //   </SafeAreaView>
+    // </SafeAreaView>
+    
+    // <View style={styles.container}>
+    //     <View style={styles.innercontainer}>
+    //        <Text style={styles.textHead}>Welcome, Kent</Text>
+    //         <Text style={styles.textSubHead}>Engage in Community</Text>
+    //         <Text style={styles.textreg}>
+    //            Create and share your photos, stories, and videos with the friends
+    //            you care about.
+    //      </Text>
+    //        </View>
+    // </View>
+
+        
+
 
 const mapStateToProps = (store) => ({
   postsAll: store.userState.postsAll,
