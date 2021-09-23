@@ -5,7 +5,7 @@ import {
 } from "../constants";
 
 const initialState = {
-  currentUser: null,
+  currentUser: [],
   posts: [],
   postsAll: [],
 };

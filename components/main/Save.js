@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { View, TextInput, Image, Button } from "react-native";
-
+import { connect } from "react-redux";
 import firebase from "firebase";
 import { NavigationContainer } from "@react-navigation/native";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 
-export default function Save(props, { navigation }) {
+function Save({ currentUser, route, navigation }) {
   const [caption, setCaption] = useState("");
-
+  const [username, setUsername] = useState("");
   const uploadImage = async () => {
-    const uri = props.route.params.image;
+    const uri = route.params.image;
     const childPath = `post/${
       firebase.auth().currentUser.uid
     }/${Math.random().toString(36)}`;
@@ -56,18 +56,21 @@ export default function Save(props, { navigation }) {
       .firestore()
       .collection("postsAll")
       .add({
+        username: currentUser.name,
         downloadURL,
         caption,
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
-        props.navigation.popToTop();
+        navigation.popToTop();
       });
   };
+
   return (
     <View style={{ flex: 1 }}>
-      <Image source={{ uri: props.route.params.image }} />
+      <Image source={{ uri: route.params.image }} />
 
+      <TextInput value={currentUser.name} />
       <TextInput
         placeholder="Caption . . ."
         onChangeText={(caption) => setCaption(caption)}
@@ -76,3 +79,8 @@ export default function Save(props, { navigation }) {
     </View>
   );
 }
+const mapStateToProps = (store) => ({
+  currentUser: store.userState.currentUser,
+});
+
+export default connect(mapStateToProps, null)(Save);

@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   View,
@@ -15,7 +14,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { connect } from "react-redux";
 import AddButton from "./AddButton";
 
-function Community({ postsAll, navigation }) {
+function Community({ postsAll, currentUser, navigation }) {
   return (
     <FlatList
       nestedScrollEnabled
@@ -38,6 +37,7 @@ function Community({ postsAll, navigation }) {
 }
 
 const mapStateToProps = (store) => ({
+  currentUser: store.userState.currentUser,
   postsAll: store.userState.postsAll,
 });
 
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     margin: 5,
     paddingTop: 20,
-    flex: 1
+    flex: 1,
   },
   button: {
     position: "right",
