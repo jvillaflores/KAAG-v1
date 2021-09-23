@@ -10,6 +10,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Camera } from "expo-camera";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
 import * as ImagePicker from "expo-image-picker";
 
 export default function Contribution({ navigation }) {
@@ -59,43 +61,49 @@ export default function Contribution({ navigation }) {
     return <Text>No access to camera</Text>;
   }
   return (
-    <View style={styles.container}>
-      <Camera
-        ref={(ref) => setCamera(ref)}
-        style={styles.camera}
-        type={type}
-        ratio={"1:1"}
-      >
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button1}
-            onPress={() => {
-              setType(
-                type === Camera.Constants.Type.back
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back
-              );
-            }}
-          >
-            <Text style={styles.text}> Flip </Text>
-          </TouchableOpacity>
-        </View>
-      </Camera>
-      <Button
-        title="Take Picture"
-        style={styles.button1}
-        onPress={() => takePicture()}
-      />
-      <Button
-        title="Pick Image from Gallery"
-        style={styles.button1}
-        onPress={() => pickImage()}
-      />
-      <Button
-        title="Post"
-        onPress={() => navigation.navigate("Save", { image })}
-      />
-      {image && <Image source={{ uri: image }} style={{ flex: 1 }} />}
+    <View style={{ flex: 1 }}>
+      <View style={styles.cameraContainer }>
+        <Camera 
+          ref = {ref => setCamera(ref)}
+          style={styles.fixedRatio} 
+          type={type}
+          ratio = {'1:1'} 
+          
+        />
+      </View>
+      <Pressable
+      
+          style={styles.button}
+          onPress={() =>  {
+            setType(
+              type === Camera.Constants.Type.back
+              ? Camera.Constants.Type.front
+              : Camera.Constants.Type.back
+             );
+             console.log('flipped')
+             
+          }}
+         >
+          <MaterialCommunityIcons name="camera-party-mode" color={"#ffffff"} size={25} />
+        </Pressable>
+      
+      <Pressable 
+          style = {styles.capture}
+          title = "Take Picture" onPress = {() => takePicture() } />
+
+      <Pressable
+        style = {styles.ChooseImageButton} 
+        title = "Choose Image" onPress = {() => pickImage() } >
+           <MaterialCommunityIcons name="image" color={"#ffffff"} size={30} />
+      </Pressable>
+
+      <Pressable 
+        style = {styles.SaveButton}
+        title = "Save" onPress = {() => navigation.navigate('Save',{image}) } />
+      
+      {image && <Image source = {{uri: image}} style = {{flex: 1}}/>}
+
+      
     </View>
   );
 }
@@ -104,6 +112,39 @@ const styles = StyleSheet.create({
   container: {
     height: 800,
   },
+  cameraContainer : {
+    flex: 1,
+    flexDirection: 'row',
+    aspectRatio: 1/1,
+    
+
+  },
+  camerafixedRatio: {
+    flex: 2,
+    aspectRatio: 1 / 1
+
+  },
+  capture: {
+    position: "absolute",
+    bottom: 30,
+    width: 80,
+    height: 80,
+    borderRadius: 100,
+    borderColor: "#eee",
+    borderWidth: 6,
+    alignSelf: "center"
+
+  },
+  ChooseImageButton: {
+    position: "absolute",
+    bottom: 5,
+    width: 80,
+    height: 80,
+    alignSelf: "flex-end"
+
+
+  },
+
   loginGroup: {
     flex: 1,
     alignContent: "center",
@@ -141,6 +182,7 @@ const styles = StyleSheet.create({
     marginBottom: 200,
   },
   button: {
+    position: "absolute",
     alignSelf: "center",
     justifyContent: "center",
     paddingVertical: 12,
@@ -148,8 +190,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 3,
     left: -25,
-    width: "80%",
-    backgroundColor: "#8E2835",
+    //width: "80%",
+    //backgroundColor: "#8E2835",
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
