@@ -155,7 +155,7 @@ export class App extends Component {
               component={SaveScreen}
               navigation={this.props.navigation}
               options={{
-                title: "Post",
+                title: "Save",
                 headerTintColor: "#fff",
                 headerStyle: {
                   backgroundColor: "#8E2835",

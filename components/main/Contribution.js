@@ -8,11 +8,16 @@ import {
   Pressable,
   Image,
   TouchableOpacity,
+  ScrollView,
+  Modal
 } from "react-native";
 import { Camera } from "expo-camera";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
 import * as ImagePicker from "expo-image-picker";
+
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import UploadList from "./UploadList";
+import UploadItem from "./UploadItem";
+
 
 export default function Contribution({ navigation }) {
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
@@ -20,6 +25,13 @@ export default function Contribution({ navigation }) {
   const [camera, setCamera] = useState(null);
   const [image, setImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+
+  const [uploadModal, setUploadModal] = useState(false);
+  const closeUploadModal = () => {
+    setUploadModal(false);
+  };
+
+  //const { width: winWidth, height: winHeight } = Dimensions.get('window');
 
   useEffect(() => {
     (async () => {
@@ -32,12 +44,33 @@ export default function Contribution({ navigation }) {
     })();
   }, []);
 
+
   const takePicture = async () => {
-    if (camera) {
-      const data = await camera.takePictureAsync(null);
-      setImage(data.uri);
+    const { granted } = await ImagePicker.requestCameraPermissionsAsync();
+    if (granted) {
+      setUploadModal(false);
+      let data = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+
+        aspect: [1, 1],
+        quality: 0.5,
+      });
+      if (!data.cancelled) {
+        //let newImages = [data, ...images];
+         setImage(data);
+        //setImage(newImages);
+      }
+    } else {
+      Alert.alert("Camera Permission Needed");
     }
+    
+    
   };
+
+  const handleAddPhoto = () => {
+    setUploadModal(true);
+  };
+
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -60,71 +93,151 @@ export default function Contribution({ navigation }) {
   if (hasCameraPermission === false || hasGalleryPermission === false) {
     return <Text>No access to camera</Text>;
   }
+
+  
   return (
-    <View style={{ flex: 1 }}>
-      <View style={styles.cameraContainer }>
-        <Camera 
-          ref = {ref => setCamera(ref)}
-          style={styles.fixedRatio} 
-          type={type}
-          ratio = {'1:1'} 
-          
-        />
+    <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flex: 1 }}>
+      <View style={styles.upload}>
+        <TextInput 
+            style={styles.text}
+            multiline = {true}
+            autoCorrect = {false}
+            blurOnSubmit = {true}
+            placeholder="What's happening?"/>
+            
+        
+        <View style={{ marginVertical: 10, flex: 1 }}>
+          {image && <UploadItem item={image} />}
+        </View>
+
+        {image && (
+          <TouchableOpacity
+            //style={styles.cart__checkoutButton}
+            activeOpacity={0.7}
+            onPress={() => navigation.navigate("UploadSuccess")}
+          >
+            <Text>Confirm</Text>
+          </TouchableOpacity>
+        )}
+
+        {!image && (
+          <View> 
+            <TouchableOpacity 
+                  style = {styles.cameraButton}
+                  //onPress={handleAddPhoto}
+                  activeOpacity={0.7}
+                  onPress={() => setUploadModal(true)}
+            >
+                    
+              <MaterialCommunityIcons
+                  style = {styles.center} 
+                  name="image-plus" 
+                  color="#8E2835" 
+                  size={45} />
+            </TouchableOpacity>
+            
+          </View>
+        )}
+
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={uploadModal}
+          onRequestClose={closeUploadModal}
+        >
+          <TouchableOpacity
+            style={styles.upload__containerOutside}
+            onPress={closeUploadModal}
+            activeOpacity={1}
+          >
+            {/* <View style={styles.upload__containerInside}> */}
+            <View>
+              <TouchableOpacity
+                style={{
+                 /*...styles.upload__containerInsideCol,*/
+                  borderRightColor: "lightgray",
+                  borderRightWidth: 1,
+                }}
+                onPress={takePicture}
+              >
+                <MaterialCommunityIcons name="camera" color="black" size={26} />
+                <Text>Camera</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                /*style={styles.upload__containerInsideCol}*/
+                onPress={pickImage}
+              >
+                <MaterialCommunityIcons name="image" color="black" size={26} />
+                <Text>Gallery</Text>
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+        </Modal>
       </View>
-      <Pressable
-      
-          style={styles.Flipbutton}
-          onPress={() =>  {
-            setType(
-              type === Camera.Constants.Type.back
-              ? Camera.Constants.Type.front
-              : Camera.Constants.Type.back
-             );
-             console.log('flipped')
-             
-          }}
-         >
-          <MaterialCommunityIcons name="camera-party-mode" color={"#ffffff"} size={30} />
-        </Pressable>
-      
-      <Pressable 
-          style = {styles.capture}
-          title = "Take Picture" onPress = {() => takePicture() } />
-
-      <Pressable
-        style = {styles.ChooseImageButton} 
-        title = "Choose Image" onPress = {() => pickImage() } >
-           <MaterialCommunityIcons name="image" color={"#ffffff"} size={30} />
-      </Pressable>
-
-      <Pressable 
-        style = {styles.SaveButton}
-        title = "Save" onPress = {() => navigation.navigate('Save',{image}) } />
-      
-      {image && <Image source = {{uri: image}} style = {{flex: 1}}/>}
-
-      
-    </View>
-  );
+    </ScrollView>
+    
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: 800,
+    flex: 1,
+    justifyContent: 'center',
+    //backgroundColor: 'white'
+  },
+  cameraButton:{
+    position: "absolute",
+    bottom: 30,
+    width: 80,
+    height: 80,
+    borderRadius: 20,
+    borderColor: "#8E2835",
+    borderWidth: 3,
+    alignSelf: "center"
+
+
+  },
+  center:{
+    position: "absolute",
+    alignSelf: "center",
+    top: 12.5,
   },
   cameraContainer : {
     flex: 1,
     flexDirection: 'row',
-    aspectRatio: 1/1,
     
-
   },
+  upload:{
+    flex: 1,
+    
+  },
+  upload__indicator:{
+    flex: 1,
+  },
+  upload__indicatorTitle:{
+    flex: 1,
+  },
+  upload__indicatorSemiTitle:{
+    flex: 1,
+  },
+  upload__containerOutside:{
+    position: "absolute",
+    bottom: 30,
+    width: 80,
+    height: 80,
+    backgroundColor: '#F9F9FD',
+    
+    alignSelf: "center",
+  },
+
   camerafixedRatio: {
     flex: 1,
-    aspectRatio: 1 / 1
+    aspectRatio: 1, 
+    backgroundColor: '#fff',
     
 
   },
+  
   capture: {
     position: "absolute",
     bottom: 30,
@@ -155,7 +268,6 @@ const styles = StyleSheet.create({
 
 
   },
-  
 
   loginGroup: {
     flex: 1,
@@ -194,13 +306,14 @@ const styles = StyleSheet.create({
     marginBottom: 200,
   },
   
-
   text: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: "normal",
     lineHeight: 21,
     letterSpacing: 0.25,
-    color: "white",
+    color: "black",
+    padding: 15,
+    margin: 12
   },
   text1: {
     alignSelf: "center",
@@ -210,4 +323,5 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: "white",
   },
+
 });
