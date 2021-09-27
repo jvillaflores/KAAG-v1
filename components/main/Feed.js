@@ -16,6 +16,7 @@ import AddButton from "./AddButton";
 
 function Community({ posts, navigation }) {
   return (
+    //no button stylesheet
     <FlatList
       nestedScrollEnabled
       numColumns={1}
@@ -24,8 +25,9 @@ function Community({ posts, navigation }) {
       style={{ flex: 1 }}
       renderItem={({ item }) => (
         <View style={styles.container}>
+          
           <Text style={styles.textVocab}> {item.caption}</Text>
-
+          
           <Image
             style={{ width: 290, height: 180, paddingLeft: 20 }}
             source={{ uri: item.downloadURL }}

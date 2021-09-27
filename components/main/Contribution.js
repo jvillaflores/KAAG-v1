@@ -224,9 +224,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 30,
     width: 80,
-    height: 80,
+    //height: 80,
     backgroundColor: '#F9F9FD',
-    
+    flexDirection:"row",
     alignSelf: "center",
   },
 
