@@ -1,5 +1,5 @@
 # Expo
-.expo
+.expo*
 __generated__
 web-build
 # Expo web env
@@ -17,3 +17,7 @@ docs/pages/versions/*/react-native/*.diff
 node_modules
 npm-debug.log
 yarn-error.log
+.expo/packager-info.json
+.expo/packager-info.json
+.expo/settings.json
+.expo/settings.json
