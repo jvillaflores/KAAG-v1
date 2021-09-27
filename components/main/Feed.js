@@ -7,14 +7,24 @@ import {
   Pressable,
   TextInput,
   FlatList,
-  SafeAreaView,
-  ScrollView,
+  RefreshControl,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
 import AddButton from "./AddButton";
 
 function Community({ posts, navigation }) {
+  const wait = (timeout) => {
+    return new Promise((resolve) => setTimeout(resolve, timeout));
+  };
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
   return (
     <FlatList
       nestedScrollEnabled
@@ -22,6 +32,9 @@ function Community({ posts, navigation }) {
       horizontal={false}
       data={posts}
       style={{ flex: 1 }}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
       renderItem={({ item }) => (
         <View style={styles.container}>
           <Text style={styles.textVocab}> {item.caption}</Text>
@@ -51,6 +64,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     margin: 5,
     paddingTop: 20,
+  },
+  button: {
+    position: "right",
+    width: 60,
+    height: 60,
+    borderRadius: 60 / 2,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowRadius: 10,
+    shadowColor: "#F02A4B",
+    shadowOpacity: 0.3,
+    shadowOffset: { height: 10 },
+    backgroundColor: "#8E2835",
   },
 
   textHead: {
