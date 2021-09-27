@@ -53,6 +53,7 @@ function Community({ navigation }) {
            <Tab.Screen name="Feed" component={FeedScreen} />
            <Tab.Screen name="Social" component={SocialScreen} />
       </Tab.Navigator>
+      
       <Pressable
            style={styles.button}
           onPress={() => navigation.navigate("MainContribution")}
@@ -77,6 +78,8 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: "center",
+    marginTop: 20,
+    marginBottom: 60,
   },
   innercontainer: {
     flex: 1,
