@@ -17,3 +17,4 @@ docs/pages/versions/*/react-native/*.diff
 node_modules
 npm-debug.log
 yarn-error.log
+.expo/packager-info.json
