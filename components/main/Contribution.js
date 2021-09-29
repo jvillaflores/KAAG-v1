@@ -138,7 +138,7 @@ export default function Contribution({ navigation }) {
             
           </View>
         )}
-
+        
         <Modal
           animationType="slide"
           transparent={true}
@@ -150,25 +150,24 @@ export default function Contribution({ navigation }) {
             onPress={closeUploadModal}
             activeOpacity={1}
           >
-            {/* <View style={styles.upload__containerInside}> */}
-            <View>
+            <View style={styles.upload__containerInside}>
               <TouchableOpacity
                 style={{
-                 /*...styles.upload__containerInsideCol,*/
+                  ...styles.upload__containerInsideCol,
                   borderRightColor: "lightgray",
                   borderRightWidth: 1,
                 }}
                 onPress={takePicture}
               >
-                <MaterialCommunityIcons name="camera" color="black" size={26} />
-                <Text>Camera</Text>
+                <MaterialCommunityIcons name="camera" color="#8E2835" size={32} />
+                <Text style={styles.buttontext}>Camera</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                /*style={styles.upload__containerInsideCol}*/
+                style={styles.upload__containerInsideCol}
                 onPress={pickImage}
               >
-                <MaterialCommunityIcons name="image" color="black" size={26} />
-                <Text>Gallery</Text>
+                <MaterialCommunityIcons name="image" color="#8E2835" size={32} />
+                <Text style={styles.buttontext}>Gallery</Text>
               </TouchableOpacity>
             </View>
           </TouchableOpacity>
@@ -197,6 +196,10 @@ const styles = StyleSheet.create({
 
 
   },
+  buttontext:{
+    color: "#8E2835",
+    fontSize: 15,
+  },
   center:{
     position: "absolute",
     alignSelf: "center",
@@ -222,19 +225,44 @@ const styles = StyleSheet.create({
   },
   upload__containerOutside:{
     position: "absolute",
-    bottom: 30,
-    width: 80,
-    //height: 80,
-    backgroundColor: '#F9F9FD',
-    flexDirection:"row",
+    bottom: 0,
+    width: '100%',
+    height: '16%',
+    backgroundColor: '#F2F2F2',
+    flexDirection: "row",
     alignSelf: "center",
+    borderTopEndRadius: 25,
+    borderTopLeftRadius: 25,
+    shadowColor: '#8E2835',
+    
   },
-
+  upload__containerInside:{
+    flex:1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
+  upload__containerInsideCol:{
+    margin: 5,
+    
+    alignItems: "center",
+    width: 100,
+    height: 80,
+    borderRadius: 20,
+    borderColor: "#8E2835",
+    borderWidth: 3,
+    justifyContent: "center",
+    
+    
+  },
   camerafixedRatio: {
     flex: 1,
     aspectRatio: 1, 
     backgroundColor: '#fff',
-    
+  },
+  modalBackground:{
+    flex:1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
 
   },
   
