@@ -30,7 +30,7 @@ export default function Contribution({ navigation }) {
   const closeUploadModal = () => {
     setUploadModal(false);
   };
-
+ 
   //const { width: winWidth, height: winHeight } = Dimensions.get('window');
 
   useEffect(() => {
@@ -96,7 +96,10 @@ export default function Contribution({ navigation }) {
 
   
   return (
-    <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flex: 1 }}>
+    <ScrollView 
+      style={{ flex: 1 }} 
+      contentContainerStyle={{ flex: 1 }}
+      >
       <View style={styles.upload}>
         <TextInput 
             style={styles.text}
@@ -107,51 +110,27 @@ export default function Contribution({ navigation }) {
             
         
         <View style={{ marginVertical: 10, flex: 1 }}>
-          {image && <UploadItem item={image} />}
+          <View style={ {flex: 1, alignItems: "center"}}>
+            {image && <UploadItem 
+                  item={image} 
+                  />}
+          </View>
         </View>
 
         {image && (
           <TouchableOpacity
             //style={styles.cart__checkoutButton}
             activeOpacity={0.7}
-            onPress={() => navigation.navigate("UploadSuccess")}
+            onPress={() => navigation.navigate("Save",{image})}
           >
             <Text>Confirm</Text>
           </TouchableOpacity>
         )}
 
         {!image && (
-          <View> 
-            <TouchableOpacity 
-                  style = {styles.cameraButton}
-                  //onPress={handleAddPhoto}
-                  activeOpacity={0.7}
-                  onPress={() => setUploadModal(true)}
-            >
-                    
-              <MaterialCommunityIcons
-                  style = {styles.center} 
-                  name="image-plus" 
-                  color="#8E2835" 
-                  size={45} />
-            </TouchableOpacity>
-            
-          </View>
-        )}
-        
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={uploadModal}
-          onRequestClose={closeUploadModal}
-        >
-          <TouchableOpacity
-            style={styles.upload__containerOutside}
-            onPress={closeUploadModal}
-            activeOpacity={1}
-          >
-            <View style={styles.upload__containerInside}>
-              <TouchableOpacity
+          <View style={styles.cameraButton}> 
+          <View style={styles.imageButton}>
+            <TouchableOpacity
                 style={{
                   ...styles.upload__containerInsideCol,
                   borderRightColor: "lightgray",
@@ -159,19 +138,20 @@ export default function Contribution({ navigation }) {
                 }}
                 onPress={takePicture}
               >
-                <MaterialCommunityIcons name="camera" color="#8E2835" size={32} />
+                <MaterialCommunityIcons name="camera" color="#8E2835" size={30} />
                 <Text style={styles.buttontext}>Camera</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.upload__containerInsideCol}
                 onPress={pickImage}
               >
-                <MaterialCommunityIcons name="image" color="#8E2835" size={32} />
+                <MaterialCommunityIcons name="image" color="#8E2835" size={30} />
                 <Text style={styles.buttontext}>Gallery</Text>
               </TouchableOpacity>
             </View>
-          </TouchableOpacity>
-        </Modal>
+          </View>
+        )}
+        
       </View>
     </ScrollView>
     
@@ -185,20 +165,34 @@ const styles = StyleSheet.create({
     //backgroundColor: 'white'
   },
   cameraButton:{
-    position: "absolute",
-    bottom: 30,
+    //position: "absolute",
+    bottom: 0,
     width: 80,
     height: 80,
-    borderRadius: 20,
-    borderColor: "#8E2835",
-    borderWidth: 3,
-    alignSelf: "center"
+    // borderRadius: 20,
+    // borderColor: "#8E2835",
+    // borderWidth: 3,
+    alignSelf: "center",
+    flexDirection: "row",
+    justifyContent: "center",
 
 
   },
+  imageButton:{
+    position: "absolute",
+    bottom: 20,
+    width: 80,
+    height: 50,
+    // borderRadius: 20,
+    // borderColor: "#8E2835",
+    // borderWidth: 3,
+    alignSelf: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+  },
   buttontext:{
     color: "#8E2835",
-    fontSize: 15,
+    fontSize: 10,
   },
   center:{
     position: "absolute",
@@ -235,6 +229,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     shadowColor: '#8E2835',
     
+    
   },
   upload__containerInside:{
     flex:1,
@@ -242,18 +237,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
   },
+
   upload__containerInsideCol:{
-    margin: 5,
-    
+    margin: 1,
     alignItems: "center",
     width: 100,
-    height: 80,
-    borderRadius: 20,
-    borderColor: "#8E2835",
-    borderWidth: 3,
+    height: 60,
     justifyContent: "center",
-    
-    
   },
   camerafixedRatio: {
     flex: 1,
