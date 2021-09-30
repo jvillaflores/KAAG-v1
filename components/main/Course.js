@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     width: "78%",
     height: 200,
     backgroundColor: "#dadada",
+    alignItems:"center",
     top: 70,
     left: 40,
     borderTopLeftRadius: 10,
@@ -134,6 +135,7 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
+    alignItems:"center",
   },
   Kagan: {
     top: 90,
