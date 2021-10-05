@@ -52,11 +52,13 @@ export default class Login extends Component {
         <View style={styles.loginGroup}>
           <Text style={styles.textGrey}>Email</Text>
           <TextInput
+            placeholder = "Email" 
             onChangeText={(email) => this.setState({ email })}
             style={styles.input}
           />
           <Text style={styles.textGrey}>Password</Text>
           <TextInput
+            placeholder = "Password"
             secureTextEntry={true}
             onChangeText={(password) => this.setState({ password })}
             style={styles.input}

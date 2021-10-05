@@ -75,7 +75,7 @@ export default function Contribution({ navigation }) {
   return (
     <View style={{ flex: 1 }}>
       {!image && (
-    <View style={styles.cameraContainer}>     
+      <View style={styles.cameraContainer}>     
        <Camera
         ref={ref => setCamera(ref)}
         style={styles.fixedRatio}
@@ -84,11 +84,9 @@ export default function Contribution({ navigation }) {
         onCameraReady={() => setIsCameraReady(true)}
          /> 
     
-      
-
-   
-    <TouchableOpacity
-             style={styles.button1}
+    <View style={styles.button1}>
+      <TouchableOpacity
+             style={styles.flipCam}
              onPress={() => {
                setType(
                  type === Camera.Constants.Type.back
@@ -98,29 +96,30 @@ export default function Contribution({ navigation }) {
              }}
            >  
            <MaterialCommunityIcons name="camera-party-mode" color="#ffffff" size={32} />
-            
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
     </View>
   )}
 
     <View style = {styles.centered_Buttons} >
-    <Pressable 
-          style = {styles.capture}
-          title = "Take Picture" onPress = {() => takePicture() } />
-    <TouchableOpacity
-      style = {styles.ChooseImageButton}
-       title="Pick Image From Gallery" onPress={(onPress) => pickImage()}>
-      <MaterialCommunityIcons name="image-multiple" color="#263238" size={40} />
-    </TouchableOpacity>
+        <TouchableOpacity 
+              style = {styles.capture}
+              title = "Take Picture" onPress = {() => takePicture() } />
+        <TouchableOpacity
+          style = {styles.ChooseImageButton}
+          title="Pick Image From Gallery" onPress={(onPress) => pickImage()}>
+          <MaterialCommunityIcons name="image-multiple" color="#263238" size={50} />
+        </TouchableOpacity>
 
     </View>
-
+    <View>
     {image && (
-      <Image source={{ uri: image }} style={{ flex: 1 }} />
+      <Image source={{ uri: image }} style={{ flex: 1}} />
       )}
       {image && (
       <Button title="Save" onPress={() => navigation.navigate('Save', { image })} />
       )}
+    </View>
     
     
   </View>
@@ -130,7 +129,7 @@ export default function Contribution({ navigation }) {
 
 const styles = StyleSheet.create({
   capture: {
-    position: "relative",
+    //position: "relative",
     //bottom: 100,
     width: 100,
     height: 100,
@@ -149,14 +148,21 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     alignSelf: "flex-end",
+    paddingTop: 20,
+    right: 20,
     
   },
   centered_Buttons:{
     position: "relative",
     bottom: 100,
     //flexDirection: 'row',
+    justifyContent: "center",
     
-    
+  },
+  flipCam:{
+    alignContent: "center",
+    left: 330,
+    alignSelf: "flex-end",
   },
   cameraButtons:{
     position: "relative",
@@ -209,7 +215,7 @@ const styles = StyleSheet.create({
   button1: {
     //marginBottom: 200,
     position: "absolute",
-    alignSelf: "flex-end",
+    //alignSelf: "flex-end",
     padding: 20,
   },
   button: {
