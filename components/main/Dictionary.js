@@ -8,78 +8,39 @@ import {
   TextInput,
 } from "react-native";
 
+import { connect } from "react-redux";
+
 var head = require("../../assets/learning.svg");
 
-export default function Dictionary({ navigation }) {
+function Dictionary({ dictionary, navigation }) {
   return (
-    <View>
-      <View style={styles.headLine}>
-        <View style={styles.title}>
-          <Text style={styles.textHead}> Kaag</Text>
-        </View>
-        <View style={styles.subtitle}>
-          <Text style={styles.textSubHead}> Dictionary</Text>
-        </View>
-        <View style={styles.searchBar}>
-          <TextInput style={styles.input} placeholder="   Search for words" />
-        </View>
-      </View>
-      <View style={styles.Kagan}>
-        <Pressable
-          style={styles.buttonVocab}
-          onPress={() => navigation.navigate("Word")}
-        >
-          <View style={styles.Vocab}>
-            <Text style={styles.textVocab}> Aimbabaki</Text>
-          </View>
-          <View style={styles.VocabSubSub}>
-            <Text style={styles.textVocabSubSub}>/aim.ba.ba.'ki/</Text>
-          </View>
-          <View style={styles.VocabSub}>
-            <Text style={styles.textVocabSub}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              bibendum, odio a ultricies varius,
-            </Text>
-          </View>
-        </Pressable>
-      </View>
+    <FlatList
+      nestedScrollEnabled
+      numColumns={1}
+      horizontal={false}
+      data={dictionary}
+      style={{ flex: 1 }}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+      renderItem={({ item }) => (
+        <View style={styles.container}>
+          <Text style={styles.textVocab}> {item.caption}</Text>
 
-      <View style={styles.grammar}>
-        <Pressable style={styles.buttonGrammar}>
-          <View style={styles.Vocab}>
-            <Text style={styles.textVocab}> Ainarayawan</Text>
-          </View>
-          <View style={styles.VocabSubSub}>
-            <Text style={styles.textVocabSubSub}>/ai.na.ra.'ya.wan/</Text>
-          </View>
-          <View style={styles.VocabSub}>
-            <Text style={styles.textVocabSub}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              bibendum,
-            </Text>
-          </View>
-        </Pressable>
-      </View>
-
-      <View style={styles.pronun}>
-        <Pressable style={styles.buttonPronun}>
-          <View style={styles.Vocab}>
-            <Text style={styles.textVocab}> Aigpakarakuaoan</Text>
-          </View>
-          <View style={styles.VocabSubSub}>
-            <Text style={styles.textVocabSubSub}>/aig.pa.ka.ra.ku.'a.qan/</Text>
-          </View>
-          <View style={styles.VocabSub}>
-            <Text style={styles.textVocabSub}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              bibendum, odio a ultricies varius,
-            </Text>
-          </View>
-        </Pressable>
-      </View>
-    </View>
+          <Image
+            style={{ width: 290, height: 180, paddingLeft: 20 }}
+            source={{ uri: item.downloadURL }}
+          />
+        </View>
+      )}
+    />
   );
 }
+const mapStateToProps = (store) => ({
+  dictionary: store.userState.dictionary,
+});
+
+export default connect(mapStateToProps, null)(Dictionary);
 
 const styles = StyleSheet.create({
   header: {

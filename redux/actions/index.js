@@ -2,6 +2,7 @@ import {
   USER_STATE_CHANGE,
   USER_POSTS_STATE_CHANGE,
   USER_ALL_POSTS_STATE_CHANGE,
+  DICTIONARY_STATE_CHANGE,
 } from "../constants/index";
 import firebase from "firebase";
 require("firebase/firestore");
@@ -58,6 +59,24 @@ export function fetchAllUserPosts() {
         });
         console.log(postsAll);
         dispatch({ type: USER_ALL_POSTS_STATE_CHANGE, postsAll });
+      });
+  };
+}
+export function fetchDictionary() {
+  return (dispatch) => {
+    firebase
+      .firestore()
+      .collection("dictionary")
+      .orderBy("word", "asc")
+      .get()
+      .then((snapshot) => {
+        let dictionary = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          const id = doc.id;
+          return { id, ...data };
+        });
+        console.log(dictionary);
+        dispatch({ type: DICTIONARY_STATE_CHANGE, dictionary });
       });
   };
 }

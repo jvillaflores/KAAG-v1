@@ -7,6 +7,7 @@ import {
   fetchUser,
   fetchUserPosts,
   fetchAllUserPosts,
+  fetchDictionary,
 } from "../redux/actions/index";
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -31,66 +32,78 @@ export class Main extends Component {
     this.props.fetchUser();
     this.props.fetchUserPosts();
     this.props.fetchAllUserPosts();
+    this.props.fetchDictionary();
   }
   render() {
     return (
-      <Tab.Navigator initialRouteName = "Course" labeled={false} 
-      activeColor="#8E2835"
-      inactiveColor="#B2B2B2"
-      barStyle={{ backgroundColor: '#f2f2f2' }}> 
-
-          <Tab.Screen 
-              name="Course" 
-              component={CourseScreen}
-              options = {{
-                  tabBarIcon: ({ color, size }) => (
-                      <MaterialCommunityIcons
-                          name = "home" color = {color} size ={26}/>
-                  ),
-              }}/>
-          <Tab.Screen 
-              name="Dictionary" 
-              component={DictionaryScreen} 
-              //navigation = {this.props.navigation}
-              options = {{
-                  tabBarIcon: ({ color, size }) => (
-                      <MaterialCommunityIcons
-                          name = "book-open-page-variant" color = {color} size ={26}/>
-                  ),
-          }}/>
-          <Tab.Screen 
-              name="Community" 
-              component={CommunityScreen} 
-              //navigation = {this.props.navigation}
-              listeners={({ navigation }) => ({
-                  tabPress: event => {
-                      event.preventDefault();
-                      navigation.navigate("Community")
-                  }
-              })}
-              options = {{
-                  tabBarIcon: ({ color, size }) => (
-                      <MaterialCommunityIcons
-                          name = "account-group" color = {color} size ={26}/>
-                  ),
-              }}/>
-          <Tab.Screen 
-              name="Settings" 
-              component={CourseScreen} 
-              //navigation = {this.props.navigation}
-              //to pass along the props inside it and make it easier the logic from the profile screen perspective
-              listeners={({ navigation }) => ({
-                  tabPress: event => {
-                      event.preventDefault();
-                      navigation.navigate("Settings")
-                  }})}
-              options = {{
-                  tabBarIcon: ({ color, size }) => (
-                      <MaterialCommunityIcons
-                          name = "cog" color = {color} size ={26}/>
-                  ),
-              }}/>
-  </Tab.Navigator>
+      <Tab.Navigator
+        initialRouteName="Course"
+        labeled={false}
+        activeColor="#8E2835"
+        inactiveColor="#B2B2B2"
+        barStyle={{ backgroundColor: "#f2f2f2" }}
+      >
+        <Tab.Screen
+          name="Course"
+          component={CourseScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={26} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Dictionary"
+          component={DictionaryScreen}
+          //navigation = {this.props.navigation}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="book-open-page-variant"
+                color={color}
+                size={26}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Community"
+          component={CommunityScreen}
+          //navigation = {this.props.navigation}
+          listeners={({ navigation }) => ({
+            tabPress: (event) => {
+              event.preventDefault();
+              navigation.navigate("Community");
+            },
+          })}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="account-group"
+                color={color}
+                size={26}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={CourseScreen}
+          //navigation = {this.props.navigation}
+          //to pass along the props inside it and make it easier the logic from the profile screen perspective
+          listeners={({ navigation }) => ({
+            tabPress: (event) => {
+              event.preventDefault();
+              navigation.navigate("Settings");
+            },
+          })}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="cog" color={color} size={26} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
     );
   }
 }
@@ -101,7 +114,7 @@ const mapStateToProps = (store) => ({
 
 const mapDispatchProps = (dispatch) =>
   bindActionCreators(
-    { fetchUser, fetchUserPosts, fetchAllUserPosts },
+    { fetchUser, fetchUserPosts, fetchAllUserPosts, fetchDictionary },
     dispatch
   );
 
