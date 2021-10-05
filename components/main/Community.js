@@ -57,9 +57,10 @@ function Community({ navigation }) {
       <Pressable
            style={styles.button}
           onPress={() => navigation.navigate("MainContribution")}
+          //onPress={() => navigation.navigate("NewContribution")}
          >
           <MaterialCommunityIcons name="plus" color={"#ffffff"} size={25} />
-        </Pressable>
+      </Pressable>
     </NavigationContainer>
   )
       }

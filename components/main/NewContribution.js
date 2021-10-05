@@ -13,21 +13,13 @@ import {
 } from "react-native";
 import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import UploadList from "./UploadList";
 import UploadItem from "./UploadItem";
 
 
-import { connect } from "react-redux";
-import firebase from "firebase";
-import { NavigationContainer } from "@react-navigation/native";
-require("firebase/firestore");
-require("firebase/firebase-storage");
-
-
-function Contribution({ currentUser, route, navigation }) {
+export default function Contribution({ navigation }) {
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [camera, setCamera] = useState(null);
@@ -40,69 +32,6 @@ function Contribution({ currentUser, route, navigation }) {
   };
  
   //const { width: winWidth, height: winHeight } = Dimensions.get('window');
-
-  //////// SAVE /////////
-
-  const [caption, setCaption] = useState("");
-  const [username, setUsername] = useState("");
-  const uploadImage = async () => {
-    const uri = route.params.image;
-    const childPath = `post/${
-      firebase.auth().currentUser.uid
-    }/${Math.random().toString(36)}`;
-    console.log(childPath);
-    const response = await fetch(uri);
-    const blob = await response.blob();
-
-    const task = firebase.storage().ref().child(childPath).put(blob);
-
-    const taskProgress = (snapshot) => {
-      console.log(`transferred: ${snapshot.bytesTransferred}`);
-    };
-
-    const taskCompleted = () => {
-      task.snapshot.ref.getDownloadURL().then((snapshot) => {
-        savePostData(snapshot);
-        saveAllPostData(snapshot);
-        console.log(snapshot);
-      });
-    };
-
-    const taskError = (snapshot) => {
-      console.log(snapshot);
-    };
-
-    task.on("state_changed", taskProgress, taskError, taskCompleted);
-  };
-
-  const savePostData = (downloadURL) => {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(firebase.auth().currentUser.uid)
-      .collection("userPosts")
-      .add({
-        downloadURL,
-        caption,
-        creation: firebase.firestore.FieldValue.serverTimestamp(),
-      });
-  };
-  const saveAllPostData = (downloadURL) => {
-    firebase
-      .firestore()
-      .collection("postsAll")
-      .add({
-        username: currentUser.name,
-        downloadURL,
-        caption,
-        creation: firebase.firestore.FieldValue.serverTimestamp(),
-      })
-      .then(function () {
-        navigation.popToTop();
-      });
-  };
-
-  //
 
   useEffect(() => {
     (async () => {
@@ -153,9 +82,9 @@ function Contribution({ currentUser, route, navigation }) {
 
     console.log(result);
 
-    // if (!result.cancelled) {
-    //   setImage(result.uri);
-    // }
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
   };
 
   if (hasCameraPermission === null || hasGalleryPermission === false) {
@@ -172,49 +101,43 @@ function Contribution({ currentUser, route, navigation }) {
       contentContainerStyle={{ flex: 1 }}
       >
       <View style={styles.upload}>
-        <TextInput value={currentUser.name} />
         <TextInput 
             style={styles.text}
             multiline = {true}
             autoCorrect = {false}
             blurOnSubmit = {true}
-            
-            placeholder="What's happening?"
-            onChangeText={(caption) => setCaption(caption)} />
+            placeholder="What's happening?"/>
             
         
         <View style={{ marginVertical: 10, flex: 1 }}>
-          <View style={ {flex: 1, alignItems: "center"}}>
-            {/* {image && <UploadItem item={image}/>}  */}
-            {image && (item=[image])}  
-          </View>
+          {image && <UploadItem item={image} />}
         </View>
 
-        {!image && (
-          <TouchableOpacity onPress={handleAddPhoto}>
-            <Text>Add</Text>
+        {image && (
+          <TouchableOpacity
+            //style={styles.cart__checkoutButton}
+            activeOpacity={0.7}
+            onPress={() => navigation.navigate("UploadSuccess")}
+          >
+            <Text>Confirm</Text>
           </TouchableOpacity>
         )}
 
-
-        {/* <Button title = "Save" onPress = {() => navigation.navigate('Save',{image}) } />
-      
-        {image && <Image source = {{uri: image}} style = {{flex: 1}}/>}  */}
-        {image && (
-          <Button title = "Save" onPress = {() => navigation.navigate('Save',{image}) }></Button>
-          // <TouchableOpacity
-          //   //style={styles.cart__checkoutButton}
-          //   activeOpacity={0.7}
-          //   //onPress={() => uploadImage()}
-          //   onPress = {() => navigation.navigate('Save',{image}) }
-          // >
-          //   <Text>Confirm</Text>
-          // </TouchableOpacity>
-        )}
-
         {!image && (
-          <View style={styles.cameraButton}> 
-          <View style={styles.imageButton}>
+          <View> 
+            {/* <TouchableOpacity 
+                  style = {styles.cameraButton}
+                  //onPress={handleAddPhoto}
+                  activeOpacity={0.7}
+                  onPress={() => setUploadModal(true)}
+            >
+                    
+              <MaterialCommunityIcons
+                  style = {styles.center} 
+                  name="image-plus" 
+                  color="#8E2835" 
+                  size={45} />
+            </TouchableOpacity> */}
             <TouchableOpacity
                 style={{
                   ...styles.upload__containerInsideCol,
@@ -223,30 +146,58 @@ function Contribution({ currentUser, route, navigation }) {
                 }}
                 onPress={takePicture}
               >
-                <MaterialCommunityIcons name="camera" color="#8E2835" size={30} />
+                <MaterialCommunityIcons name="camera" color="#8E2835" size={32} />
                 <Text style={styles.buttontext}>Camera</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.upload__containerInsideCol}
                 onPress={pickImage}
               >
-                <MaterialCommunityIcons name="image" color="#8E2835" size={30} />
+                <MaterialCommunityIcons name="image" color="#8E2835" size={32} />
                 <Text style={styles.buttontext}>Gallery</Text>
               </TouchableOpacity>
-            </View>
           </View>
         )}
         
+        {/* <Modal
+          animationType="slide"
+          transparent={true}
+          visible={uploadModal}
+          onRequestClose={closeUploadModal}
+          
+        >
+          <TouchableOpacity
+            style={styles.upload__containerOutside}
+            onPress={closeUploadModal}
+            activeOpacity={1}
+          >
+            <View style={styles.upload__containerInside}>
+              <TouchableOpacity
+                style={{
+                  ...styles.upload__containerInsideCol,
+                  borderRightColor: "lightgray",
+                  borderRightWidth: 1,
+                }}
+                onPress={takePicture}
+              >
+                <MaterialCommunityIcons name="camera" color="#8E2835" size={32} />
+                <Text style={styles.buttontext}>Camera</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.upload__containerInsideCol}
+                onPress={pickImage}
+              >
+                <MaterialCommunityIcons name="image" color="#8E2835" size={32} />
+                <Text style={styles.buttontext}>Gallery</Text>
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+        </Modal> */}
       </View>
     </ScrollView>
     
   )
 }
-const mapStateToProps = (store) => ({
-  currentUser: store.userState.currentUser,
-});
-
-export default connect(mapStateToProps, null)(Contribution);
 
 const styles = StyleSheet.create({
   container: {
@@ -255,34 +206,20 @@ const styles = StyleSheet.create({
     //backgroundColor: 'white'
   },
   cameraButton:{
-    //position: "absolute",
-    bottom: 0,
+    position: "absolute",
+    bottom: 30,
     width: 80,
     height: 80,
-    // borderRadius: 20,
-    // borderColor: "#8E2835",
-    // borderWidth: 3,
-    alignSelf: "center",
-    flexDirection: "row",
-    justifyContent: "center",
+    borderRadius: 20,
+    borderColor: "#8E2835",
+    borderWidth: 3,
+    alignSelf: "center"
 
 
-  },
-  imageButton:{
-    position: "absolute",
-    bottom: 20,
-    width: 80,
-    height: 50,
-    // borderRadius: 20,
-    // borderColor: "#8E2835",
-    // borderWidth: 3,
-    alignSelf: "center",
-    flexDirection: "row",
-    justifyContent: "center",
   },
   buttontext:{
     color: "#8E2835",
-    fontSize: 10,
+    fontSize: 15,
   },
   center:{
     position: "absolute",
@@ -327,13 +264,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
   },
-
   upload__containerInsideCol:{
-    margin: 1,
+    margin: 5,
+    
     alignItems: "center",
     width: 100,
-    height: 60,
+    height: 80,
+    borderRadius: 20,
+    borderColor: "#8E2835",
+    borderWidth: 3,
     justifyContent: "center",
+    
+    
   },
   camerafixedRatio: {
     flex: 1,
@@ -430,14 +372,6 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0.25,
     color: "white",
-  },
-  upload__addButton: {
-    borderStyle: "dashed",
-    //borderColor: Colors.primary,
-    borderWidth: 1,
-    borderRadius: 6,
-    paddingVertical: 10,
-    alignItems: "center",
   },
 
 });
