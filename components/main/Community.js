@@ -17,6 +17,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 
 import FeedScreen from "./Feed";
 import SocialScreen from "./Social";
+import SaveScreen from "./Save";
 import { NavigationContainer } from "@react-navigation/native";
 
 const Tab = createMaterialTopTabNavigator();

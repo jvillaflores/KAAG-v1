@@ -8,102 +8,24 @@ import {
   Pressable,
   Image,
   TouchableOpacity,
-  ScrollView,
-  Modal
 } from "react-native";
 import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import UploadList from "./UploadList";
-import UploadItem from "./UploadItem";
 
-
-import { connect } from "react-redux";
-import firebase from "firebase";
-import { NavigationContainer } from "@react-navigation/native";
-require("firebase/firestore");
-require("firebase/firebase-storage");
-
-
-function Contribution({ currentUser, route, navigation }) {
+export default function Contribution({ navigation }) {
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [camera, setCamera] = useState(null);
   const [image, setImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
-
-  const [uploadModal, setUploadModal] = useState(false);
-  const closeUploadModal = () => {
-    setUploadModal(false);
-  };
- 
-  //const { width: winWidth, height: winHeight } = Dimensions.get('window');
-
-  //////// SAVE /////////
-
-  const [caption, setCaption] = useState("");
-  const [username, setUsername] = useState("");
-  const uploadImage = async () => {
-    const uri = route.params.image;
-    const childPath = `post/${
-      firebase.auth().currentUser.uid
-    }/${Math.random().toString(36)}`;
-    console.log(childPath);
-    const response = await fetch(uri);
-    const blob = await response.blob();
-
-    const task = firebase.storage().ref().child(childPath).put(blob);
-
-    const taskProgress = (snapshot) => {
-      console.log(`transferred: ${snapshot.bytesTransferred}`);
-    };
-
-    const taskCompleted = () => {
-      task.snapshot.ref.getDownloadURL().then((snapshot) => {
-        savePostData(snapshot);
-        saveAllPostData(snapshot);
-        console.log(snapshot);
-      });
-    };
-
-    const taskError = (snapshot) => {
-      console.log(snapshot);
-    };
-
-    task.on("state_changed", taskProgress, taskError, taskCompleted);
-  };
-
-  const savePostData = (downloadURL) => {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(firebase.auth().currentUser.uid)
-      .collection("userPosts")
-      .add({
-        downloadURL,
-        caption,
-        creation: firebase.firestore.FieldValue.serverTimestamp(),
-      });
-  };
-  const saveAllPostData = (downloadURL) => {
-    firebase
-      .firestore()
-      .collection("postsAll")
-      .add({
-        username: currentUser.name,
-        downloadURL,
-        caption,
-        creation: firebase.firestore.FieldValue.serverTimestamp(),
-      })
-      .then(function () {
-        navigation.popToTop();
-      });
-  };
-
-  //
-
+  const [cameraRef, setCameraRef] = useState(null)
+  const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
+  const [cameraFlash, setCameraFlash] = useState(Camera.Constants.FlashMode.off)
+  const [isCameraReady, setIsCameraReady] = useState(false)
+   
   useEffect(() => {
     (async () => {
       const cameraStatus = await Camera.requestPermissionsAsync();
@@ -115,33 +37,19 @@ function Contribution({ currentUser, route, navigation }) {
     })();
   }, []);
 
-
   const takePicture = async () => {
-    const { granted } = await ImagePicker.requestCameraPermissionsAsync();
-    if (granted) {
-      setUploadModal(false);
-      let data = await ImagePicker.launchCameraAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-
-        aspect: [1, 1],
-        quality: 0.5,
-      });
-      if (!data.cancelled) {
-        //let newImages = [data, ...images];
-         setImage(data);
-        //setImage(newImages);
-      }
-    } else {
-      Alert.alert("Camera Permission Needed");
+    // if (camera) {
+    //   const data = await ImagePicker.launchCameraAsync({
+    //     mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    //   })
+    //   setImage(data.uri);
+    // }
+    if (camera) {
+      const data = await camera.takePictureAsync(null);
+      
+      setImage(data.uri);
     }
-    
-    
   };
-
-  const handleAddPhoto = () => {
-    setUploadModal(true);
-  };
-
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -153,9 +61,9 @@ function Contribution({ currentUser, route, navigation }) {
 
     console.log(result);
 
-    // if (!result.cancelled) {
-    //   setImage(result.uri);
-    // }
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
   };
 
   if (hasCameraPermission === null || hasGalleryPermission === false) {
@@ -164,219 +72,107 @@ function Contribution({ currentUser, route, navigation }) {
   if (hasCameraPermission === false || hasGalleryPermission === false) {
     return <Text>No access to camera</Text>;
   }
-
-  
   return (
-    <ScrollView 
-      style={{ flex: 1 }} 
-      contentContainerStyle={{ flex: 1 }}
-      >
-      <View style={styles.upload}>
-        <TextInput value={currentUser.name} />
-        <TextInput 
-            style={styles.text}
-            multiline = {true}
-            autoCorrect = {false}
-            blurOnSubmit = {true}
-            
-            placeholder="What's happening?"
-            onChangeText={(caption) => setCaption(caption)} />
-            
-        
-        <View style={{ marginVertical: 10, flex: 1 }}>
-          <View style={ {flex: 1, alignItems: "center"}}>
-            {/* {image && <UploadItem item={image}/>}  */}
-            {image && (item=[image])}  
-          </View>
-        </View>
-
-        {!image && (
-          <TouchableOpacity onPress={handleAddPhoto}>
-            <Text>Add</Text>
-          </TouchableOpacity>
-        )}
-
-
-        {/* <Button title = "Save" onPress = {() => navigation.navigate('Save',{image}) } />
-      
-        {image && <Image source = {{uri: image}} style = {{flex: 1}}/>}  */}
-        {image && (
-          <Button title = "Save" onPress = {() => navigation.navigate('Save',{image}) }></Button>
-          // <TouchableOpacity
-          //   //style={styles.cart__checkoutButton}
-          //   activeOpacity={0.7}
-          //   //onPress={() => uploadImage()}
-          //   onPress = {() => navigation.navigate('Save',{image}) }
-          // >
-          //   <Text>Confirm</Text>
-          // </TouchableOpacity>
-        )}
-
-        {!image && (
-          <View style={styles.cameraButton}> 
-          <View style={styles.imageButton}>
-            <TouchableOpacity
-                style={{
-                  ...styles.upload__containerInsideCol,
-                  borderRightColor: "lightgray",
-                  borderRightWidth: 1,
-                }}
-                onPress={takePicture}
-              >
-                <MaterialCommunityIcons name="camera" color="#8E2835" size={30} />
-                <Text style={styles.buttontext}>Camera</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.upload__containerInsideCol}
-                onPress={pickImage}
-              >
-                <MaterialCommunityIcons name="image" color="#8E2835" size={30} />
-                <Text style={styles.buttontext}>Gallery</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        )}
-        
-      </View>
-    </ScrollView>
+    <View style={{ flex: 1 }}>
+      {!image && (
+    <View style={styles.cameraContainer}>     
+       <Camera
+        ref={ref => setCamera(ref)}
+        style={styles.fixedRatio}
+        type={type}
+        ratio={'1:1'}
+        onCameraReady={() => setIsCameraReady(true)}
+         /> 
     
-  )
-}
-const mapStateToProps = (store) => ({
-  currentUser: store.userState.currentUser,
-});
+      
 
-export default connect(mapStateToProps, null)(Contribution);
+   
+    <TouchableOpacity
+             style={styles.button1}
+             onPress={() => {
+               setType(
+                 type === Camera.Constants.Type.back
+                   ? Camera.Constants.Type.front
+                   : Camera.Constants.Type.back
+               );
+             }}
+           >  
+           <MaterialCommunityIcons name="camera-party-mode" color="#ffffff" size={32} />
+            
+    </TouchableOpacity>
+    </View>
+  )}
+
+    <View style = {styles.centered_Buttons} >
+    <Pressable 
+          style = {styles.capture}
+          title = "Take Picture" onPress = {() => takePicture() } />
+    <TouchableOpacity
+      style = {styles.ChooseImageButton}
+       title="Pick Image From Gallery" onPress={(onPress) => pickImage()}>
+      <MaterialCommunityIcons name="image-multiple" color="#263238" size={40} />
+    </TouchableOpacity>
+
+    </View>
+
+    {image && (
+      <Image source={{ uri: image }} style={{ flex: 1 }} />
+      )}
+      {image && (
+      <Button title="Save" onPress={() => navigation.navigate('Save', { image })} />
+      )}
+    
+    
+  </View>
+    
+  );
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    //backgroundColor: 'white'
-  },
-  cameraButton:{
-    //position: "absolute",
-    bottom: 0,
-    width: 80,
-    height: 80,
-    // borderRadius: 20,
-    // borderColor: "#8E2835",
-    // borderWidth: 3,
-    alignSelf: "center",
-    flexDirection: "row",
-    justifyContent: "center",
-
-
-  },
-  imageButton:{
-    position: "absolute",
-    bottom: 20,
-    width: 80,
-    height: 50,
-    // borderRadius: 20,
-    // borderColor: "#8E2835",
-    // borderWidth: 3,
-    alignSelf: "center",
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  buttontext:{
-    color: "#8E2835",
-    fontSize: 10,
-  },
-  center:{
-    position: "absolute",
-    alignSelf: "center",
-    top: 12.5,
-  },
-  cameraContainer : {
-    flex: 1,
-    flexDirection: 'row',
-    
-  },
-  upload:{
-    flex: 1,
-    
-  },
-  upload__indicator:{
-    flex: 1,
-  },
-  upload__indicatorTitle:{
-    flex: 1,
-  },
-  upload__indicatorSemiTitle:{
-    flex: 1,
-  },
-  upload__containerOutside:{
-    position: "absolute",
-    bottom: 0,
-    width: '100%',
-    height: '16%',
-    backgroundColor: '#F2F2F2',
-    flexDirection: "row",
-    alignSelf: "center",
-    borderTopEndRadius: 25,
-    borderTopLeftRadius: 25,
-    shadowColor: '#8E2835',
-    
-    
-  },
-  upload__containerInside:{
-    flex:1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-evenly",
-  },
-
-  upload__containerInsideCol:{
-    margin: 1,
-    alignItems: "center",
-    width: 100,
-    height: 60,
-    justifyContent: "center",
-  },
-  camerafixedRatio: {
-    flex: 1,
-    aspectRatio: 1, 
-    backgroundColor: '#fff',
-  },
-  modalBackground:{
-    flex:1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-
-  },
-  
   capture: {
-    position: "absolute",
-    bottom: 30,
-    width: 80,
-    height: 80,
+    position: "relative",
+    //bottom: 100,
+    width: 100,
+    height: 100,
     borderRadius: 100,
-    borderColor: "#eee",
+    borderColor: "#263238",
     borderWidth: 6,
     alignSelf: "center"
-
   },
-  Flipbutton: {
-    position: "absolute",
-    alignSelf: "flex-end",
-    justifyContent: "center",
-    borderRadius: 4,
-    elevation: 3,
-    right: 25,
-    top: 15,
-    
+  cameraContainer: {
+    flex: 1,
+    flexDirection: 'row',
   },
   ChooseImageButton: {
     position: "absolute",
-    bottom: 10,
+    //bottom: 100,
     width: 80,
     height: 80,
-    alignSelf: "flex-end"
-
-
+    alignSelf: "flex-end",
+    
   },
-
+  centered_Buttons:{
+    position: "relative",
+    bottom: 100,
+    //flexDirection: 'row',
+    
+    
+  },
+  cameraButtons:{
+    position: "relative",
+    //flex: 1,
+    flexDirection: 'row',
+    marginBottom: 20,
+    alignContent: "center",
+  },
+  fixedRatio: {
+    flex: 1,
+    aspectRatio: 1
+  },
+  container: {
+    flex: 1,
+    //aspectRatio: 1 /1
+  },
   loginGroup: {
     flex: 1,
     alignContent: "center",
@@ -411,17 +207,33 @@ const styles = StyleSheet.create({
     left: 50,
   },
   button1: {
-    marginBottom: 200,
+    //marginBottom: 200,
+    position: "absolute",
+    alignSelf: "flex-end",
+    padding: 20,
   },
-  
+  button: {
+    alignSelf: "center",
+    justifyContent: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    left: -25,
+    width: "80%",
+    backgroundColor: "#8E2835",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+  },
+
   text: {
     fontSize: 20,
-    fontWeight: "normal",
+    fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.25,
-    color: "black",
-    padding: 15,
-    margin: 12
+    color: "white",
   },
   text1: {
     alignSelf: "center",
@@ -431,13 +243,4 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: "white",
   },
-  upload__addButton: {
-    borderStyle: "dashed",
-    //borderColor: Colors.primary,
-    borderWidth: 1,
-    borderRadius: 6,
-    paddingVertical: 10,
-    alignItems: "center",
-  },
-
 });
