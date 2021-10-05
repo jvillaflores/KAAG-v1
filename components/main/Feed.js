@@ -42,7 +42,7 @@ function Community({ posts, navigation }) {
           <Text style={styles.textVocab}> {item.caption}</Text>
           
           <Image
-            style={{ width: 290, height: 180, paddingLeft: 20 }}
+            style={{ width: 290, height: 290, paddingLeft: 20 }}
             source={{ uri: item.downloadURL }}
           />
         </View>
