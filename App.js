@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button,TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import firebase from "firebase/app";
@@ -11,6 +11,9 @@ import rootReducer from "./redux/reducers";
 import thunk from "redux-thunk";
 import { LogBox } from "react-native";
 import _ from "lodash";
+
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
 
 // LogBox.ignoreLogs(["Warning:..."]); // ignore specific logs
 // LogBox.ignoreAllLogs(); // ignore all logs
@@ -120,7 +123,7 @@ export class App extends Component {
               component={ContributionScreen}
               navigation={this.props.navigation}
               options={{
-                title: "Post",
+                title: "New Post",
                 headerTintColor: "#fff",
                 headerStyle: {
                   backgroundColor: "#8E2835",
@@ -165,13 +168,21 @@ export class App extends Component {
               component={SaveScreen}
               navigation={this.props.navigation}
               options={{
-                title: "Save",
+                title: "New Post",
                 headerTintColor: "#fff",
                 headerStyle: {
                   backgroundColor: "#8E2835",
                 },
+      //           headerRight:() => (
+      //             <TouchableOpacity title="Save" onPress={() => uploadImage()}>
+      //               <Text>Share</Text>
+      // {/* <MaterialCommunityIcons name="camera-party-mode" color="#ffffff" size={32} /> */}
+      //   </TouchableOpacity>
+      //           )
               }}
+              
             />
+            
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
@@ -179,4 +190,19 @@ export class App extends Component {
   }
 }
 
+
 export default App;
+
+const styles = StyleSheet.create({
+  capture: {
+    //position: "relative",
+    //bottom: 100,
+    right: 10,
+    width: 100,
+    height: 100,
+    borderRadius: 100,
+    borderColor: "#263238",
+    borderWidth: 6,
+    alignSelf: "center"
+  },
+})
