@@ -14,7 +14,7 @@ var head = require("../../assets/learning.svg");
 const Word = ({ route }) => {
   return (
     <View>
-      <View style={styles.headLine}>
+      {/* <View style={styles.headLine}>
         <View style={styles.title}>
           <Text style={styles.textHead}> AiMBABAKi</Text>
         </View>
@@ -34,6 +34,29 @@ const Word = ({ route }) => {
             />
           </View>
         </Pressable>
+      </View> */}
+      <View style={styles.headLine}>
+          <Text style={styles.textHead}> AiMBABAKi</Text>
+          <Text style={styles.textSubHead}> /aim.ba.ba.'ki/</Text>
+          
+          <View style = {styles.button_center}>
+              <Pressable
+                style={styles.buttonAudio}
+                onPress={() => navigation.navigate("Vocabulary")}
+                
+              >
+                <MaterialCommunityIcons
+                    
+                    name="volume-high"
+                    size={26}
+                    color="white"
+                    style={{ left: -10 }}
+                  />
+                </Pressable>
+                
+               
+              
+        </View>
       </View>
 
       <View style={styles.Kagan}>
@@ -77,36 +100,47 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
   },
   title: {
-    top: 40,
+    //top: 40,
     left: 110,
+    width: "100%",
+    alignContent: "center",
+    flex: 1,
   },
   subtitle: {
-    top: 65,
-    left: -20,
+    //top: 65,
+    //left: -20,
   },
 
   textHead: {
-    flexDirection: "row",
+    //flexDirection: "column",
     fontSize: 25,
+    //width: "100%",
     fontWeight: "bold",
-    lineHeight: 21,
+    //lineHeight: 21,
     letterSpacing: 0.25,
     color: "white",
+    //top: 40,
+    //left: 110,
+    
   },
   textSubHead: {
-    flexDirection: "row",
+    flexDirection: "column",
     fontSize: 15,
     // fontWeight: "bold",
-    lineHeight: 21,
+    //lineHeight: 21,
     letterSpacing: 0.25,
     color: "white",
   },
   headLine: {
-    flexDirection: "row",
+    //flexDirection: "column",
     width: "100%",
-    top: -25,
+    //top: -25,
     height: 150,
     backgroundColor: "#8E2835",
+    //padding: 50,
+    alignItems: "center",
+    justifyContent: "center"
+    
   },
   textHeadline: {
     flexDirection: "row",
@@ -175,18 +209,33 @@ const styles = StyleSheet.create({
   },
 
   buttonAudio: {
-    alignSelf: "center",
+    //alignItems:"center",
+    //alignSelf: "center",
     justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
+    //paddingVertical: 12,
+    //paddingHorizontal: 32,
     borderRadius: 7,
-    elevation: 3,
-    width: 60,
+    paddingLeft:20,
+    margin:5,
+    //elevation: 3,
+    width: 50,
     backgroundColor: "#79222D",
-    top: 40,
-    left: -100,
+    //top: 40,
+    //left: -100,
     height: 50,
-    borderColor: "black",
+    //borderColor: "black",
+  },
+  button_center:{
+    //justifyContent: "center",
+    alignItems:"center",
+    alignContent:"center",
+  },
+  icon_center:{
+    // /position:"absolute",
+    //justifyContent: "center",
+    //alignItems:"center",
+    //alignContent:"center",
+    //left: 100,
   },
   Vocab: {
     top: 0,

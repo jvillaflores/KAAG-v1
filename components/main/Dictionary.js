@@ -1,3 +1,4 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import {
   View,
@@ -13,7 +14,7 @@ var head = require("../../assets/learning.svg");
 export default function Dictionary({ navigation }) {
   return (
     <View>
-      <View style={styles.headLine}>
+      {/* <View style={styles.headLine}>
         <View style={styles.title}>
           <Text style={styles.textHead}> Kaag</Text>
         </View>
@@ -23,7 +24,20 @@ export default function Dictionary({ navigation }) {
         <View style={styles.searchBar}>
           <TextInput style={styles.input} placeholder="   Search for words" />
         </View>
+      </View> */}
+      <View style={styles.headLine}>
+        <View style={styles.title}>
+          <Text style={styles.textHead}> Kaag</Text>
+          <Text style={styles.textSubHead}> Dictionary</Text>
+          <TextInput 
+              style={styles.input} 
+              placeholder= "Search for words..." >
+                
+            </TextInput>
+        
+        </View>
       </View>
+
       <View style={styles.Kagan}>
         <Pressable
           style={styles.buttonVocab}
@@ -82,6 +96,26 @@ export default function Dictionary({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  searchSection: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+},
+searchIcon: {
+    position: "absolute",
+    //padding: 10,
+},
+input: {
+    flex: 1,
+    paddingTop: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
+    paddingLeft: 0,
+    backgroundColor: '#fff',
+    color: '#424242',
+},
   header: {
     flexDirection: "row",
     width: "100%",
@@ -101,7 +135,9 @@ const styles = StyleSheet.create({
   },
   title: {
     top: 40,
-    left: 25,
+    bottom: 40,
+    left: 5,
+
   },
   subtitle: {
     top: 65,
@@ -115,6 +151,7 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0.25,
     color: "white",
+    marginLeft:11,
   },
   textSubHead: {
     flexDirection: "row",
@@ -123,12 +160,15 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0.25,
     color: "white",
+    marginLeft: 12,
   },
   headLine: {
-    flexDirection: "row",
+    flexDirection: "column",
     width: "100%",
-    height: 170,
+    height: 200,
     backgroundColor: "#8E2835",
+    padding: 10,
+    
   },
   textHeadline: {
     flexDirection: "row",
@@ -274,7 +314,7 @@ const styles = StyleSheet.create({
     width: "90%",
     backgroundColor: "white",
     margin: 12,
-    borderWidth: 1,
+    paddingLeft: 20,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
