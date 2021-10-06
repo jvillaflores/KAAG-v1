@@ -183,7 +183,8 @@ const styles = StyleSheet.create({
   checkButton:{
     justifyContent: "center",
     alignItems: "center",
-    bottom: 20
+    top: 80,
+    bottom: -10
   },
   container: {
     flex: 1,
