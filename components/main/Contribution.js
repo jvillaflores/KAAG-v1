@@ -112,17 +112,22 @@ export default function Contribution({ navigation }) {
         </TouchableOpacity>
 
     </View>
-    <View>
+         
     {image && (
-      <Image source={{ uri: image }} style={{ flex: 1}} />
+      <Image source={{ uri: image }} style={{  bottom: 100, aspectRatio: 1 }} />
       )}
       {image && (
-      <Button title="Save" onPress={() => navigation.navigate('Save', { image })} />
+      <TouchableOpacity 
+        //title="Save" 
+           style = {styles.checkButton}
+           onPress={() => navigation.navigate('Save', { image })}>
+          <MaterialCommunityIcons name="check" color="#263238" size={100} />
+        </TouchableOpacity>
       )}
-    </View>
+      
     
     
-  </View>
+  </View>    
     
   );
 }
@@ -175,9 +180,15 @@ const styles = StyleSheet.create({
     flex: 1,
     aspectRatio: 1
   },
+  checkButton:{
+    justifyContent: "center",
+    alignItems: "center",
+    bottom: 20
+  },
   container: {
     flex: 1,
-    //aspectRatio: 1 /1
+    height: 20,
+    width: '100%',
   },
   loginGroup: {
     flex: 1,
