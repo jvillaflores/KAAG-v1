@@ -61,3 +61,25 @@ export function fetchAllUserPosts() {
       });
   };
 }
+<<<<<<< Updated upstream
+=======
+// hello
+export function fetchDictionary() {
+  return (dispatch) => {
+    firebase
+      .firestore()
+      .collection("dictionary")
+      .orderBy("word", "asc")
+      .get()
+      .then((snapshot) => {
+        let dictionary = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          const id = doc.id;
+          return { id, ...data };
+        });
+        console.log(dictionary);
+        dispatch({ type: DICTIONARY_STATE_CHANGE, dictionary });
+      });
+  };
+}
+>>>>>>> Stashed changes

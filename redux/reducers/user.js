@@ -9,7 +9,7 @@ const initialState = {
   posts: [],
   postsAll: [],
 };
-
+// hello
 export const user = (state = initialState, action) => {
   switch (action.type) {
     case USER_STATE_CHANGE:
