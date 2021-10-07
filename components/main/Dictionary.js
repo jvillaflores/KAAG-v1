@@ -6,6 +6,7 @@ import {
   Image,
   Pressable,
   TextInput,
+  FlatList,
 } from "react-native";
 
 import { connect } from "react-redux";
@@ -14,26 +15,57 @@ var head = require("../../assets/learning.svg");
 
 function Dictionary({ dictionary, navigation }) {
   return (
-    <FlatList
-      nestedScrollEnabled
-      numColumns={1}
-      horizontal={false}
-      data={dictionary}
-      style={{ flex: 1 }}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-      renderItem={({ item }) => (
-        <View style={styles.container}>
-          <Text style={styles.textVocab}> {item.caption}</Text>
-
-          <Image
-            style={{ width: 290, height: 180, paddingLeft: 20 }}
-            source={{ uri: item.downloadURL }}
-          />
+    <View>
+      {/* <View style={styles.headLine}>
+        <View style={styles.title}>
+          <Text style={styles.textHead}> Kaag</Text>
         </View>
-      )}
-    />
+        <View style={styles.subtitle}>
+          <Text style={styles.textSubHead}> Dictionary</Text>
+        </View>
+        <View style={styles.searchBar}>
+          <TextInput style={styles.input} placeholder="   Search for words" />
+        </View>
+      </View> */}
+      <View style={styles.headLine}>
+        <View style={styles.title}>
+          <Text style={styles.textHead}> Kaag</Text>
+          <Text style={styles.textSubHead}> Dictionary</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Search for words..."
+          ></TextInput>
+        </View>
+      </View>
+      <FlatList
+        nestedScrollEnabled
+        numColumns={1}
+        horizontal={false}
+        data={dictionary}
+        style={{ flex: 1 }}
+        renderItem={({ item }) => (
+          <View style={styles.Kagan}>
+            <Pressable
+              style={styles.buttonVocab}
+              onPress={() => navigation.navigate("Word")}
+            >
+              <View style={styles.Vocab}>
+                <Text style={styles.textVocab}> {item.word} </Text>
+              </View>
+              <View style={styles.VocabSubSub}>
+                <Text style={styles.textVocabSubSub}>/{item.english}/</Text>
+              </View>
+              <View style={styles.VocabSub}>
+                <Text style={styles.textVocabSub}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+                  bibendum, odio a ultricies varius, AA
+                </Text>
+              </View>
+            </Pressable>
+          </View>
+        )}
+      />
+    </View>
   );
 }
 const mapStateToProps = (store) => ({
@@ -43,6 +75,26 @@ const mapStateToProps = (store) => ({
 export default connect(mapStateToProps, null)(Dictionary);
 
 const styles = StyleSheet.create({
+  searchSection: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+  },
+  searchIcon: {
+    position: "absolute",
+    //padding: 10,
+  },
+  input: {
+    flex: 1,
+    paddingTop: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
+    paddingLeft: 0,
+    backgroundColor: "#fff",
+    color: "#424242",
+  },
   header: {
     flexDirection: "row",
     width: "100%",
@@ -62,7 +114,8 @@ const styles = StyleSheet.create({
   },
   title: {
     top: 40,
-    left: 25,
+    bottom: 40,
+    left: 5,
   },
   subtitle: {
     top: 65,
@@ -76,6 +129,7 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0.25,
     color: "white",
+    marginLeft: 11,
   },
   textSubHead: {
     flexDirection: "row",
@@ -84,12 +138,14 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0.25,
     color: "white",
+    marginLeft: 12,
   },
   headLine: {
-    flexDirection: "row",
+    flexDirection: "column",
     width: "100%",
-    height: 170,
+    height: 200,
     backgroundColor: "#8E2835",
+    padding: 10,
   },
   textHeadline: {
     flexDirection: "row",
@@ -235,7 +291,7 @@ const styles = StyleSheet.create({
     width: "90%",
     backgroundColor: "white",
     margin: 12,
-    borderWidth: 1,
+    paddingLeft: 20,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
