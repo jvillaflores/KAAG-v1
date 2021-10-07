@@ -2,14 +2,16 @@ import {
   USER_STATE_CHANGE,
   USER_POSTS_STATE_CHANGE,
   USER_ALL_POSTS_STATE_CHANGE,
+  DICTIONARY_STATE_CHANGE,
 } from "../constants";
 
 const initialState = {
   currentUser: [],
   posts: [],
   postsAll: [],
+  dictionary: [],
 };
-// hello
+
 export const user = (state = initialState, action) => {
   switch (action.type) {
     case USER_STATE_CHANGE:
@@ -27,6 +29,11 @@ export const user = (state = initialState, action) => {
       return {
         ...state,
         postsAll: action.postsAll,
+      };
+    case DICTIONARY_STATE_CHANGE:
+      return {
+        ...state,
+        dictionary: action.dictionary,
       };
 
     default:

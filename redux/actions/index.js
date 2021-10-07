@@ -61,8 +61,6 @@ export function fetchAllUserPosts() {
       });
   };
 }
-<<<<<<< Updated upstream
-=======
 // hello
 export function fetchDictionary() {
   return (dispatch) => {
@@ -82,4 +80,3 @@ export function fetchDictionary() {
       });
   };
 }
->>>>>>> Stashed changes
