@@ -22,7 +22,7 @@ export function fetchUser() {
       });
   };
 }
-
+// hello
 export function fetchUserPosts() {
   return (dispatch) => {
     firebase
