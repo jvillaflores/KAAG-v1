@@ -52,7 +52,7 @@ export default function Dictionary({ navigation }) {
           <View style={styles.VocabSub}>
             <Text style={styles.textVocabSub}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              bibendum, odio a ultricies varius,
+              bibendum, odio a ultricies varius, AA 
             </Text>
           </View>
         </Pressable>
