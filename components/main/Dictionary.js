@@ -7,24 +7,15 @@ import {
   Image,
   Pressable,
   TextInput,
+  FlatList,
 } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 
 var head = require("../../assets/learning.svg");
 
 export default function Dictionary({ navigation }) {
   return (
     <View>
-      {/* <View style={styles.headLine}>
-        <View style={styles.title}>
-          <Text style={styles.textHead}> Kaag</Text>
-        </View>
-        <View style={styles.subtitle}>
-          <Text style={styles.textSubHead}> Dictionary</Text>
-        </View>
-        <View style={styles.searchBar}>
-          <TextInput style={styles.input} placeholder="   Search for words" />
-        </View>
-      </View> */}
       <View style={styles.headLine}>
         <View style={styles.title}>
           <Text style={styles.textHead}> Kaag</Text>
@@ -38,7 +29,14 @@ export default function Dictionary({ navigation }) {
         </View>
       </View>
 
-      <View style={styles.Kagan}>
+      <FlatList
+         nestedScrollEnabled
+         numColumns={1}
+         horizontal={false}
+         style={{ flex: 1 }}
+      />
+
+      {/* <View style={styles.Kagan}>
         <Pressable
           style={styles.buttonVocab}
           onPress={() => navigation.navigate("Word")}
@@ -90,7 +88,7 @@ export default function Dictionary({ navigation }) {
             </Text>
           </View>
         </Pressable>
-      </View>
+      </View> */}
     </View>
   );
 }

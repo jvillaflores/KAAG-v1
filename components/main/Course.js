@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
+    paddingLeft: 10,
   },
   textHead: {
     flexDirection: "row",
