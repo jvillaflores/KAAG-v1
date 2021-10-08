@@ -1,5 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  Image, 
+  Pressable 
+} from "react-native";
 
 const Vocabulary = ({ navigation }) => {
   return (
@@ -98,21 +104,22 @@ const styles = StyleSheet.create({
   },
   contextButton: {
     padding: 20,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection:"row",
+    left: 20,
+    alignItems:"center"
   },
-  text_Context: {
-    flexDirection: "column",
-    marginLeft: 20,
+  text_Context:{
+    flexDirection:"column",
+    marginLeft: 30,
   },
   buttonVocab: {
     alignSelf: "center",
+    alignItems:"flex-start",
     marginTop: 10,
     elevation: 0.7,
-    width: "100%",
-    paddingLeft: 35,
-    paddingRight: 35,
+    width: 300,
+    // paddingLeft:35,
+    // paddingRight:35,
     backgroundColor: "#EBEBEB",
     left: -24,
     borderRadius: 10,
