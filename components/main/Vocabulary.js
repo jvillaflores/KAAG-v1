@@ -1,85 +1,86 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 
-const Vocabulary = ({ route }) => {
+const Vocabulary = ({ navigation }) => {
   return (
     <View style={styles.Kagan}>
-        <Text style={styles.textKagan}> Courses </Text>
+      <Text style={styles.textKagan}> Courses </Text>
 
-        <View>
-            <Pressable
-              style={styles.buttonVocab}
-              onPress={() => navigation.navigate("MainContribution")}>
-              
-              <View style={styles.contextButton}>
-                <Image 
-                  style = {{width: 60, height: 60}}
-                  source={require("../../assets/Learning-cuate.png")}/>
-                  <View style={styles.text_Context}>
-                    <Text style={styles.textVocab}> Lesson 1</Text>
-                    <Text style={styles.textVocabSub}> 15 words - 20 minutes</Text>
-                  </View>
-              </View>
-            </Pressable> 
-        </View>  
-        <View>
-            <Pressable
-              style={styles.buttonVocab}
-              onPress={() => navigation.navigate("MainContribution")}>
-              
-              <View style={styles.contextButton}>
-                <Image 
-                  style = {{width: 60, height: 60}}
-                  source={require("../../assets/Learning-cuate.png")}/>
-                  <View style={styles.text_Context}>
-                    <Text style={styles.textVocab}> Lesson 2</Text>
-                    <Text style={styles.textVocabSub}> 10 words - 15 minutes</Text>
-                  </View>
-              </View>
-            </Pressable> 
-        </View> 
-        <View>
-            <Pressable
-              style={styles.buttonVocab}
-              onPress={() => navigation.navigate("MainContribution")}>
-              
-              <View style={styles.contextButton}>
-                <Image 
-                  style = {{width: 60, height: 60}}
-                  source={require("../../assets/Learning-cuate.png")}/>
-                  <View style={styles.text_Context}>
-                    <Text style={styles.textVocab}> Lesson 3</Text>
-                    <Text style={styles.textVocabSub}> 10 words - 15 minutes</Text>
-                  </View>
-              </View>
-            </Pressable> 
-        </View> 
-        <View>
-            <Pressable
-              style={styles.buttonVocab}
-              onPress={() => navigation.navigate("MainContribution")}>
-              
-              <View style={styles.contextButton}>
-                <Image 
-                  style = {{width: 60, height: 60}}
-                  source={require("../../assets/Learning-cuate.png")}/>
-                  <View style={styles.text_Context}>
-                    <Text style={styles.textVocab}> Lesson 4</Text>
-                    <Text style={styles.textVocabSub}> 15 words - 20 minutes</Text>
-                  </View>
-              </View>
-            </Pressable> 
-        </View> 
-           
+      <View>
+        <Pressable
+          style={styles.buttonVocab}
+          onPress={() => navigation.navigate("Vocabulary1")}
+        >
+          <View style={styles.contextButton}>
+            <Image
+              style={{ width: 60, height: 60 }}
+              source={require("../../assets/Learning-cuate.png")}
+            />
+            <View style={styles.text_Context}>
+              <Text style={styles.textVocab}> Lesson 1</Text>
+              <Text style={styles.textVocabSub}> 15 words - 20 minutes</Text>
+            </View>
+          </View>
+        </Pressable>
+      </View>
+      <View>
+        <Pressable
+          style={styles.buttonVocab}
+          onPress={() => navigation.navigate("MainContribution")}
+        >
+          <View style={styles.contextButton}>
+            <Image
+              style={{ width: 60, height: 60 }}
+              source={require("../../assets/Learning-cuate.png")}
+            />
+            <View style={styles.text_Context}>
+              <Text style={styles.textVocab}> Lesson 2</Text>
+              <Text style={styles.textVocabSub}> 10 words - 15 minutes</Text>
+            </View>
+          </View>
+        </Pressable>
+      </View>
+      <View>
+        <Pressable
+          style={styles.buttonVocab}
+          onPress={() => navigation.navigate("MainContribution")}
+        >
+          <View style={styles.contextButton}>
+            <Image
+              style={{ width: 60, height: 60 }}
+              source={require("../../assets/Learning-cuate.png")}
+            />
+            <View style={styles.text_Context}>
+              <Text style={styles.textVocab}> Lesson 3</Text>
+              <Text style={styles.textVocabSub}> 10 words - 15 minutes</Text>
+            </View>
+          </View>
+        </Pressable>
+      </View>
+      <View>
+        <Pressable
+          style={styles.buttonVocab}
+          onPress={() => navigation.navigate("MainContribution")}
+        >
+          <View style={styles.contextButton}>
+            <Image
+              style={{ width: 60, height: 60 }}
+              source={require("../../assets/Learning-cuate.png")}
+            />
+            <View style={styles.text_Context}>
+              <Text style={styles.textVocab}> Lesson 4</Text>
+              <Text style={styles.textVocabSub}> 15 words - 20 minutes</Text>
+            </View>
+          </View>
+        </Pressable>
+      </View>
     </View>
-    
   );
 };
 
 export default Vocabulary;
 
 const styles = StyleSheet.create({
-  
   header: {
     top: 40,
     left: 30,
@@ -95,27 +96,26 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
   },
-  contextButton:{
+  contextButton: {
     padding: 20,
-    flexDirection:"row",
-    justifyContent:"center",
-    alignItems:"center"
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  text_Context:{
-    flexDirection:"column",
+  text_Context: {
+    flexDirection: "column",
     marginLeft: 20,
   },
   buttonVocab: {
     alignSelf: "center",
     marginTop: 10,
     elevation: 0.7,
-    width: '100%',
-    paddingLeft:35,
-    paddingRight:35,
+    width: "100%",
+    paddingLeft: 35,
+    paddingRight: 35,
     backgroundColor: "#EBEBEB",
     left: -24,
     borderRadius: 10,
-    
   },
   textKagan: {
     flexDirection: "row",
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     //lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
-    alignSelf:"flex-start",
+    alignSelf: "flex-start",
   },
   textHead: {
     flexDirection: "row",
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   Kagan: {
     top: 20,
     left: 20,
-    alignItems:"center"
+    alignItems: "center",
   },
   grammar: {
     top: 10,
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   shit1: {
     top: 60,
   },
-  
+
   button: {
     justifyContent: "center",
     paddingVertical: 8,
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
   },
-  
+
   buttonGrammar: {
     alignSelf: "center",
     justifyContent: "center",

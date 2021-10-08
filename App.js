@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button,TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import firebase from "firebase/app";
@@ -13,7 +13,6 @@ import { LogBox } from "react-native";
 import _ from "lodash";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
 
 // LogBox.ignoreLogs(["Warning:..."]); // ignore specific logs
 // LogBox.ignoreAllLogs(); // ignore all logs
@@ -50,6 +49,7 @@ import VocabularyScreen from "./components/main/Vocabulary";
 import GrammarScreen from "./components/main/Grammar";
 import WordScreen from "./components/main/Word";
 import SaveScreen from "./components/main/Save";
+import Vocabulary1Screen from "./components/main/coursepacks/screens/Vocabulary1";
 
 const Stack = createStackNavigator();
 
@@ -176,23 +176,34 @@ export class App extends Component {
                 headerStyle: {
                   backgroundColor: "#8E2835",
                 },
-      //           headerRight:() => (
-      //             <TouchableOpacity title="Save" onPress={() => uploadImage()}>
-      //               <Text>Share</Text>
-      // {/* <MaterialCommunityIcons name="camera-party-mode" color="#ffffff" size={32} /> */}
-      //   </TouchableOpacity>
-      //           )
+                //           headerRight:() => (
+                //             <TouchableOpacity title="Save" onPress={() => uploadImage()}>
+                //               <Text>Share</Text>
+                // {/* <MaterialCommunityIcons name="camera-party-mode" color="#ffffff" size={32} /> */}
+                //   </TouchableOpacity>
+                //           )
               }}
-              
             />
-            
+            <Stack.Screen
+              name="Vocabulary1"
+              component={Vocabulary1Screen}
+              options={{
+                title: "",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
     );
   }
 }
-
 
 export default App;
 
@@ -206,6 +217,6 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     borderColor: "#263238",
     borderWidth: 6,
-    alignSelf: "center"
+    alignSelf: "center",
   },
-})
+});
