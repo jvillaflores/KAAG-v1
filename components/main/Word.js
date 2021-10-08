@@ -15,43 +15,34 @@ const Word = ({ route }) => {
   return (
     <View>
       <View style={styles.headLine}>
-        <View style={styles.title}>
+        <View style={styles.header_line}>
           <Text style={styles.textHead}> AiMBABAKi</Text>
-        </View>
-        <View style={styles.subtitle}>
           <Text style={styles.textSubHead}> /aim.ba.ba.'ki/</Text>
         </View>
+
+
         <Pressable
           style={styles.buttonAudio}
           onPress={() => navigation.navigate("Vocabulary")}
         >
-          <View style={styles.Icon}>
+          <View>
             <MaterialCommunityIcons
               name="volume-high"
               size={26}
               color="white"
-              style={{ left: -10 }}
             />
           </View>
         </Pressable>
       </View>
 
       <View style={styles.Kagan}>
-        <Pressable style={styles.buttonVocab}>
-          <View style={styles.Vocab}>
             <Text style={styles.textVocab}> Adjective</Text>
-          </View>
-          <View style={styles.VocabSubSub}>
             <Text style={styles.textVocabSubSub}>
               1. feeling or showing pleasure or contentment.
             </Text>
-          </View>
-          <View style={styles.VocabSub}>
             <Text style={styles.textVocabSub}>
               "Melissa came in looking happy and excited"
             </Text>
-          </View>
-        </Pressable>
       </View>
     </View>
   );
@@ -86,27 +77,37 @@ const styles = StyleSheet.create({
   },
 
   textHead: {
-    flexDirection: "row",
     fontSize: 25,
     fontWeight: "bold",
-    lineHeight: 21,
     letterSpacing: 0.25,
+    position:"relative",
+    alignSelf: "center",
     color: "white",
   },
   textSubHead: {
     flexDirection: "row",
-    fontSize: 15,
-    // fontWeight: "bold",
-    lineHeight: 21,
+    fontSize: 13,
     letterSpacing: 0.25,
     color: "white",
   },
   headLine: {
-    flexDirection: "row",
-    width: "100%",
-    top: -25,
+    flexDirection: "column",
+    //width: "100%",
+    padding: 30,
+    top: -20,
     height: 150,
     backgroundColor: "#8E2835",
+    alignItems:"center",
+    justifyContent: "center",
+
+  }, header_line: {
+    flexDirection: "column",
+    //padding: 30,
+    //top: 20,
+    //height: 150,
+    alignItems:"center",
+    //justifyContent: "center",
+
   },
   textHeadline: {
     flexDirection: "row",
@@ -122,7 +123,8 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   Kagan: {
-    top: 90,
+    justifyContent:"flex-start",
+    top: 20,
     left: 40,
   },
   grammar: {
@@ -176,17 +178,19 @@ const styles = StyleSheet.create({
 
   buttonAudio: {
     alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 7,
-    elevation: 3,
-    width: 60,
-    backgroundColor: "#79222D",
-    top: 40,
-    left: -100,
-    height: 50,
-    borderColor: "black",
+    padding: 8,
+    margin: 10,
+    // justifyContent: "center",
+    // paddingVertical: 12,
+    // paddingHorizontal: 32,
+     borderRadius: 7,
+    // elevation: 3,
+    // width: 60,
+     backgroundColor: "#79222D",
+    // top: 40,
+    // left: -100,
+    // height: 50,
+    // borderColor: "black",
   },
   Vocab: {
     top: 0,
@@ -203,21 +207,21 @@ const styles = StyleSheet.create({
   textVocab: {
     fontSize: 20,
     fontWeight: "bold",
-    lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
   },
   textVocabSub: {
     fontSize: 11,
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
-  textVocabSubSub: {
-    fontSize: 11,
-    lineHeight: 21,
+    marginTop: 5,
     letterSpacing: 0.25,
     color: "#8E2835",
+    paddingLeft: 15,
+  },
+  textVocabSubSub: {
+    fontSize: 13,
+    letterSpacing: 0.25,
+    color: "#000000",
+    marginTop:5,
   },
   text: {
     fontSize: 15,
@@ -236,8 +240,5 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
-  },
-  Icon: {
-    left: -10,
   },
 });

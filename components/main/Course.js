@@ -1,6 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 
+import * as Svg from 'react-native-svg';
+
+
 export default function Course({ navigation }) {
   return (
     <View>

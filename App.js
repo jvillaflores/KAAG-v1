@@ -157,9 +157,12 @@ export class App extends Component {
               component={WordScreen}
               options={{
                 title: "",
+                headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {
                   backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
                 },
               }}
             />

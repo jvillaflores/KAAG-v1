@@ -10,23 +10,13 @@ import {
 } from "react-native";
 
 import { connect } from "react-redux";
+import { NavigationContainer } from "@react-navigation/native";
 
 var head = require("../../assets/learning.svg");
 
 function Dictionary({ dictionary, navigation }) {
   return (
-    <View>
-      {/* <View style={styles.headLine}>
-        <View style={styles.title}>
-          <Text style={styles.textHead}> Kaag</Text>
-        </View>
-        <View style={styles.subtitle}>
-          <Text style={styles.textSubHead}> Dictionary</Text>
-        </View>
-        <View style={styles.searchBar}>
-          <TextInput style={styles.input} placeholder="   Search for words" />
-        </View>
-      </View> */}
+    <NavigationContainer independent ={true}>
       <View style={styles.headLine}>
         <View style={styles.title}>
           <Text style={styles.textHead}> Kaag</Text>
@@ -37,35 +27,57 @@ function Dictionary({ dictionary, navigation }) {
           ></TextInput>
         </View>
       </View>
-      <FlatList
-        nestedScrollEnabled
-        numColumns={1}
-        horizontal={false}
-        data={dictionary}
-        style={{ flex: 1 }}
-        renderItem={({ item }) => (
-          <View style={styles.Kagan}>
-            <Pressable
-              style={styles.buttonVocab}
-              onPress={() => navigation.navigate("Word")}
-            >
-              <View style={styles.Vocab}>
-                <Text style={styles.textVocab}> {item.word} </Text>
+        <FlatList
+            nestedScrollEnabled
+            numColumns={1}
+            horizontal={false}
+            data={dictionary}
+            style={{ flex: 1 }}
+            renderItem={({ item }) => (
+
+              
+              <View style={styles.Kagan}>
+                <Pressable
+                  style={styles.buttonVocab}
+                  onPress={() => navigation.navigate("Word")}>
+
+                  <Text style={styles.textVocab}> {item.word} </Text>
+                  <Text style={styles.textVocabSubSub}>/{item.english}/</Text>
+                  <Text style={styles.textVocabSub}>{item.english}</Text>
+                  
+                </Pressable>
+
+                <Pressable
+                  style={styles.buttonVocab}
+                  onPress={() => navigation.navigate("Word")}>
+                    
+                  <Text style={styles.textVocab}> {item.word} </Text>
+                  <Text style={styles.textVocabSubSub}>/{item.english}/</Text>
+                  <Text style={styles.textVocabSub}>{item.english}</Text>
+                  
+                </Pressable>
+
+                <Pressable
+                  style={styles.buttonVocab}
+                  onPress={() => navigation.navigate("Word")}>
+                    
+                  <Text style={styles.textVocab}> Aigpakarakuaoa </Text>
+                  <Text style={styles.textVocabSubSub}>/aig.pa.ka.ra.ku.'a.qan/</Text>
+                  <Text style={styles.textVocabSub}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+                      bibendum, odio a ultricies varius, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+                      bibendum, odio a ultricies varius, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+                      bibendum, odio a ultricies varius, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+                      bibendum, odio a ultricies varius,</Text>
+                  
+                </Pressable>
+                
+        
               </View>
-              <View style={styles.VocabSubSub}>
-                <Text style={styles.textVocabSubSub}>/{item.english}/</Text>
-              </View>
-              <View style={styles.VocabSub}>
-                <Text style={styles.textVocabSub}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                  bibendum, odio a ultricies varius, AA
-                </Text>
-              </View>
-            </Pressable>
-          </View>
-        )}
-      />
-    </View>
+              
+            )}
+          />
+    </NavigationContainer>
+  
   );
 }
 const mapStateToProps = (store) => ({
@@ -161,8 +173,10 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   Kagan: {
-    top: 90,
+    top: 70,
     left: 40,
+    padding: 10,
+    paddingTop: 20,
   },
   grammar: {
     top: 70,
@@ -196,21 +210,16 @@ const styles = StyleSheet.create({
   },
   buttonVocab: {
     alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
+    //elevation: 2,
     width: "90%",
-    backgroundColor: "#dadada",
+    //backgroundColor: "#dadada",
     top: -70,
     left: -40,
-    height: 105,
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    borderBottomRightRadius: 7,
-    borderBottomLeftRadius: 7,
-    borderColor: "black",
+    padding:20,
+    paddingTop: 10,
+    paddingBottom:10,
+    margin: 5,
+    
   },
   buttonGrammar: {
     alignSelf: "center",
@@ -263,15 +272,17 @@ const styles = StyleSheet.create({
   textVocab: {
     fontSize: 20,
     fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
+    letterSpacing: 0.30,
     color: "black",
+    left:-6,
   },
   textVocabSub: {
     fontSize: 11,
     lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
+    textAlign:"justify"
+
   },
   textVocabSubSub: {
     fontSize: 11,
