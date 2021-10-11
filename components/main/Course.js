@@ -15,7 +15,7 @@ export default function Course({ navigation }) {
     
     <View style={styles.container}>
         <View style={styles.header}>
-            <Text style={styles.textHead}>Hello, Kent! </Text>
+            <Text style={styles.textHead}>Hello, Jan! </Text>
             <Text style={styles.textSubHead}>New user </Text>
         </View>
 
@@ -207,9 +207,6 @@ const styles = StyleSheet.create({
     flexDirection:"column",
     marginLeft: 30,
     alignItems:"flex-start"
-    
-    //position:"relative",
-    
   },
   textHead: {
     flexDirection: "row",

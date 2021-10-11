@@ -218,9 +218,10 @@ const styles = StyleSheet.create({
     left: -10,
   },
   textVocab: {
-    fontSize: 20,
-    fontWeight: "bold",
-    lineHeight: 21,
+    fontSize: 18,
+    margin: 10,
+    //fontWeight: "bold",
+    //lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
   },

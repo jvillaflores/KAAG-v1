@@ -82,14 +82,14 @@ const Grammar = ({ route }) => {
                   <Pressable 
                     style={styles.buttonVocab}>
                       <View style={styles.contextButton}>
-                        <Image
-                          style={{width: 60, height: 60}}
-                          source={require("../../assets/Learning-cuate.png")}
-                        />
-                      <View style={styles.text_Context}>
-                        <Text style={styles.textVocab}>Lesson 5</Text>
-                        <Text style={styles.textVocabSub}>8 phrases</Text>
-                      </View>
+                          <Image
+                            style={{width: 60, height: 60}}
+                            source={require("../../assets/Learning-cuate.png")}
+                          />
+                          <View style={styles.text_Context}>
+                            <Text style={styles.textVocab}>Lesson 5</Text>
+                            <Text style={styles.textVocabSub}>8 phrases</Text>
+                          </View>
                       </View>
                   </Pressable>
             

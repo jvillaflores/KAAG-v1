@@ -28,7 +28,7 @@ function Community({ navigation }) {
     <NavigationContainer independent ={true}>
        <View style={styles.container}>
        <View style={styles.innercontainer}>
-             <Text style={styles.textHead}>Welcome, Kent</Text>
+             <Text style={styles.textHead}>Welcome, Jan</Text>
              <Text style={styles.textSubHead}>Engage in Community</Text>
              <Text style={styles.textreg}>
                Create and share your photos, stories, and videos with the friends
@@ -51,8 +51,9 @@ function Community({ navigation }) {
              },
            })}
          >
-           <Tab.Screen name="Feed" component={FeedScreen} />
            <Tab.Screen name="Social" component={SocialScreen} />
+           <Tab.Screen name="Feed" component={FeedScreen} />
+           
       </Tab.Navigator>
       
       <Pressable

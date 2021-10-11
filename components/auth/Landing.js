@@ -1,18 +1,18 @@
 import React from "react";
 import { Text, View, Button, StyleSheet, Pressable, Image } from "react-native";
 
-var logo = require("../../assets/info1.svg");
+var logo = require("../../assets/info1.png");
 
 export default function Landing({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: "center" }}>
       <View style={styles.logoContainer}>
-        <Image source={logo} style={{ width: 300, height: 200 }} />
+        <Image source={logo} style={{ width: 280, height: 180 }} />
       </View>
       <View style={styles.header}>
         <Text style={styles.textHead}>Learn Kagan Language</Text>
-      </View>
-      <View style={styles.subHeader}>
+      {/* </View>
+      <View style={styles.subHeader}> */}
         <Text style={styles.textSubHead}>
           Kagan has a native language called Kinagan, which is related to the
           Mandayan Language and Maguindanaon, Tausug, Visayan, and Tagalog
@@ -28,7 +28,7 @@ export default function Landing({ navigation }) {
       </Pressable>
 
       <Pressable
-        style={styles.buttonSignUp}
+        style={styles.button}
         onPress={() => navigation.navigate("Register")}
       >
         <Text style={styles.text}>Sign Up</Text>
@@ -39,35 +39,16 @@ export default function Landing({ navigation }) {
 
 const styles = StyleSheet.create({
   button: {
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: "80%",
-    backgroundColor: "#8E2835",
-    top: 125,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
+     alignSelf: "center",
+     borderRadius: 10,
+     padding: 15,
+     margin: 5,
+     elevation: 2,
+     width: "80%",
+     backgroundColor: "#8E2835",
+    
   },
-  buttonSignUp: {
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: "80%",
-    backgroundColor: "#8E2835",
-    top: 135,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
-  },
+ 
   text: {
     alignSelf: "center",
     fontSize: 20,
@@ -83,13 +64,14 @@ const styles = StyleSheet.create({
     height: 200,
   },
   logoContainer: {
-    position: "absolute",
+    position: "relative",
     alignSelf: "center",
-    top: 100,
+    top: -30,
   },
   header: {
     alignSelf: "center",
-    bottom: -45,
+    //bottom: -45,
+    //top:50,
   },
 
   textHead: {
@@ -98,6 +80,8 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
+    alignSelf:"center",
+    margin:10,
   },
   subHeader: {
     alignSelf: "center",
@@ -114,5 +98,7 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
+    margin:15,
+    bottom: 10,
   },
 });
