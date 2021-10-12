@@ -10,7 +10,10 @@ import {
   SafeAreaView,
   Button,
   Alert,
+  Animated,
+  TouchableWithoutFeedback,
 } from "react-native";
+
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
@@ -20,11 +23,16 @@ import SocialScreen from "./Social";
 import SaveScreen from "./Save";
 import { NavigationContainer } from "@react-navigation/native";
 
+import FloatingButton from './AddButton'
+import { render } from "react-dom";
+//import Animated from "react-native-reanimated";
+
 const Tab = createMaterialTopTabNavigator();
 
 function Community({ navigation }) {
-  
+
   return (
+    
     <NavigationContainer independent ={true}>
        <View style={styles.container}>
        <View style={styles.innercontainer}>
@@ -51,18 +59,14 @@ function Community({ navigation }) {
              },
            })}
          >
-           <Tab.Screen name="Social" component={SocialScreen} />
-           <Tab.Screen name="Feed" component={FeedScreen} />
+           <Tab.Screen name="Feed" component={SocialScreen} />
+           <Tab.Screen name="Profile" component={FeedScreen} />
            
       </Tab.Navigator>
       
-      <Pressable
-           style={styles.button}
-          onPress={() => navigation.navigate("MainContribution")}
-          //onPress={() => navigation.navigate("NewContribution")}
-         >
-          <MaterialCommunityIcons name="plus" color={"#ffffff"} size={25} />
-      </Pressable>
+      <FloatingButton style={{bottom: 90, right: 60}}></FloatingButton>
+
+
     </NavigationContainer>
   )
       }
@@ -74,7 +78,41 @@ const mapStateToProps = (store) => ({
 
 export default connect(mapStateToProps, null)(Community);
 
+
+
 const styles = StyleSheet.create({
+  right:{
+    position:"absolute",
+    bottom: 90,
+    right: 60,
+    alignItems:"center",
+  },
+  Abutton:{
+    position: "absolute",
+    width: 60,
+    height: 60,
+    borderRadius: 60 / 2,
+    elevation:2,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowRadius: 10,
+    shadowColor: "#BFBFBF42",
+    shadowOpacity: 0.3,
+    shadowOffset: { height: 10 },
+    //backgroundColor: "#8E2835",
+    
+  },
+  secondary:{
+    width: 40,
+    height:40,
+    borderRadius: 48/2,
+    backgroundColor:"#FCFCFC"
+
+
+  },
+  menu:{
+    backgroundColor: "#8E2835",
+  },
   title: {
     top: 20,
     left: 10,
