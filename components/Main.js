@@ -25,6 +25,7 @@ const EmptyScreen = () => {
 import CourseScreen from "./main/Course";
 import DictionaryScreen from "./main/Dictionary";
 import CommunityScreen from "./main/Community";
+import ContributeDictionary from "./main/ContributeDictionary";
 // import { FirstScreenNavigator } from "../CustomNavigation";
 
 export class Main extends Component {
@@ -83,6 +84,23 @@ export class Main extends Component {
                 color={color}
                 size={26}
               />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="ContributeDictionary"
+          component={ContributeDictionary}
+          //navigation = {this.props.navigation}
+          //to pass along the props inside it and make it easier the logic from the profile screen perspective
+          listeners={({ navigation }) => ({
+            tabPress: (event) => {
+              event.preventDefault();
+              navigation.navigate("ContributeDictionary");
+            },
+          })}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="upload" color={color} size={26} />
             ),
           }}
         />

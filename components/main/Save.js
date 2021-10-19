@@ -5,7 +5,8 @@ import { View,
         Button, 
         TouchableOpacity, 
         Text,
-        StyleSheet
+        StyleSheet, 
+        Pressable
        } from "react-native";
 import { connect } from "react-redux";
 import firebase from "firebase";
@@ -76,29 +77,52 @@ function Save({ currentUser, route, navigation }) {
       });
   };
 
-  return (
-    <View style={styles.container}>
-      <Image source={{ uri: route.params.image }} />
+   return (
+      <View style={styles.container}>
       
-      <TextInput
-          style = {styles.text_input} 
-          value={currentUser.name} />
-      <TextInput
-        style={styles.input}
-        multiline = {true}
-        placeholder="Caption . . ."
-        onChangeText={(caption) => setCaption(caption)}
-      />
-       <TextInput
-        style={styles.tags_input}
-        multiline = {true}
-        placeholder="Add tags"
-        onChangeText={(caption) => setCaption(caption)}
-      />
-      <TouchableOpacity title="Save" onPress={() => uploadImage()}>
+          <View style={styles.bottom}>
+            <Image source={{ uri: route.params.image }} />
+              
+              {/* <TextInput
+              style = {styles.text_input} 
+              value={currentUser.name} /> */}
+          </View>
+          <View style = {styles.center}>
+              <View style = {styles.paddingLeft}>
+                  
+                  <Text style={styles.title_text}>Title </Text>
+                  <Text style = {styles.guidelines}> Type the title of your image.</Text>
+                  <TextInput
+                    style={styles.input}
+                    multiline = {true}
+                    onChangeText={(caption) => setCaption(caption)}
+                  />
+              </View>
+
+              <View style = {styles.paddingLeft}>
+                  <Text style={styles.title_text}>Description </Text>
+                  <Text style = {styles.guidelines}> Describe the image you have added.</Text>
+                  <TextInput
+                    style={styles.description_input}
+                    multiline = {true}
+                    onChangeText={(caption) => setCaption(caption)}
+                  />
+              </View>
+              <View style = {styles.paddingLeft}>
+                  <Text style={styles.title_text}>Tags </Text>
+                  <Text style = {styles.guidelines}> Add tags that are related to your image.</Text>
+                  <TextInput
+                    style={styles.tags_input}
+                    multiline = {true}
+                    onChangeText={(caption) => setCaption(caption)}
+                  />
+              </View>
+          </View>
+      <Pressable style = {styles.button} title="Save" onPress={() => uploadImage()}>
           <Text style = {styles.subtitle}>Share</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
+    
   );
 }
 const mapStateToProps = (store) => ({
@@ -108,18 +132,58 @@ const mapStateToProps = (store) => ({
 export default connect(mapStateToProps, null)(Save);
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-
+    alignContent: "center",
+    justifyContent: "center",
+    top: 1,
+    //left: 40,
   },
   subtitle: {
-    //flex: 1,
-    //left: 20,
-    fontSize: 25,
-    fontWeight: "bold",
-    color: "#7F3E3B",
-    //alignItems: "center"
-    margin: 20,
+    alignSelf: "center",
+    fontSize:18,
+    
+    letterSpacing: 0.25,
+    color: "white",
+  },
+  button:{
+    alignSelf: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 10,
+    elevation: 1,
+    width: "90%",
+    backgroundColor: "#8E2835",
+    //top: 130,
+    marginTop: 20,
+  },
+  guidelines:{
+    fontSize: 12,
+    fontStyle:"italic",
+    color:"#707070",
+  },
+
+  bottom: {
+    marginBottom: 20,
+  },
+
+  center:{
+    justifyContent:"center",
+    alignContent:"center",
+  },
+
+  paddingLeft:{
+    
+    alignContent:"flex-start",
+    // padding:15,
+    // paddingRight:5,
+     marginTop:20,
+     paddingLeft:20,
+    
+  },
+
+  title_text:{
+    //alignContent:"flex-start",
+    fontWeight:"bold",
+    fontSize:17,
   },
   text_input:{
     alignSelf: "flex-start",
@@ -128,27 +192,38 @@ const styles = StyleSheet.create({
   },
   input: {
     letterSpacing: 0.25,
-    height: 100,
-    width: "100%",
+    height: 50,
+    width: "95%",
     paddingLeft: 12,
     paddingTop: 1,
-    margin: 10,
-    //borderWidth: 1,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: '#70707033',
+    marginTop: 10,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#707070',
 
   },
   tags_input: {
     letterSpacing: 0.25,
-    height: 40,
-    width: "100%",
+    height: 80,
+    width: "95%",
     paddingLeft: 12,
-    paddingBottom: 12,
-    
-    
-    borderBottomWidth: 1,
-    borderColor: '#70707033',
+    paddingTop: 1,
+    marginTop: 10,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#707070',
+
+  },
+  description_input: {
+    letterSpacing: 0.25,
+    height: 100,
+    width: "95%",
+    paddingLeft: 12,
+    paddingTop: 1,
+    marginTop: 10,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#707070',
 
   },
 

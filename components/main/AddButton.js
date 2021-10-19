@@ -79,9 +79,6 @@ class AddButton extends Component {
             ]
           };
 
-          const { navigate } = this.props.navigation;
-
-        
         return (
             <View style = {[styles.container, this.props.style]}>
                 <TouchableWithoutFeedback>

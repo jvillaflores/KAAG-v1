@@ -112,7 +112,7 @@ export default function Contribution({ navigation }) {
         </TouchableOpacity>
 
     </View>
-         
+    
     {image && (
       <Image source={{ uri: image }} style={{  bottom: 100, aspectRatio: 1 }} />
       )}
@@ -182,9 +182,17 @@ const styles = StyleSheet.create({
   },
   checkButton:{
     justifyContent: "center",
-    alignItems: "center",
-    top: 80,
-    bottom: -10
+    alignContent: "center",
+    alignItems:"center",
+    //top: 50,
+    //bottom: -10, 
+    borderWidth: 3,
+    borderRadius: 100,
+    borderColor: "#263238",
+    borderWidth: 6,
+    width: 120,
+    height: 120,
+    left:130,
   },
   container: {
     flex: 1,
