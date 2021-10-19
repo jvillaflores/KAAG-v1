@@ -49,7 +49,9 @@ import VocabularyScreen from "./components/main/Vocabulary";
 import GrammarScreen from "./components/main/Grammar";
 import WordScreen from "./components/main/Word";
 import SaveScreen from "./components/main/Save";
+import NewDictionaryScreen from "./components/main/NewDictionary";
 import Vocabulary1Screen from "./components/main/coursepacks/screens/Vocabulary1";
+import newDReviewScreen from "./components/main/newDReview";
 
 const Stack = createStackNavigator();
 
@@ -166,6 +168,22 @@ export class App extends Component {
                 },
               }}
             />
+            
+            <Stack.Screen
+            name="NewWord"
+            component={newDReviewScreen}
+            options={{
+              title: "",
+              headerShadowVisible: false,
+              headerTintColor: "#fff",
+              headerStyle: {
+                backgroundColor: "#8E2835",
+                elevation: 0,
+                borderBottomWidth: 0,
+              },
+            }}
+          />
+
             <Stack.Screen
               name="Save"
               component={SaveScreen}
@@ -182,6 +200,19 @@ export class App extends Component {
                 // {/* <MaterialCommunityIcons name="camera-party-mode" color="#ffffff" size={32} /> */}
                 //   </TouchableOpacity>
                 //           )
+              }}
+            />
+            <Stack.Screen
+              name="NewDictionary"
+              component={NewDictionaryScreen}
+              navigation={this.props.navigation}
+              options={{
+                title: "Upload a Word",
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                },
+               
               }}
             />
             <Stack.Screen

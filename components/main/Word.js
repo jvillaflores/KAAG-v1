@@ -100,7 +100,8 @@ const styles = StyleSheet.create({
     alignItems:"center",
     justifyContent: "center",
 
-  }, header_line: {
+  },
+   header_line: {
     flexDirection: "column",
     //padding: 30,
     //top: 20,
