@@ -11,6 +11,11 @@ import {
 } from "../redux/actions/index";
 import { NavigationContainer } from "@react-navigation/native";
 
+import Icon from 'react-native-vector-icons/Ionicons';
+import {createStackNavigator} from '@react-navigation/stack';
+import EditProfileScreen from './main/EditProfileScreen';
+const ProfileStack = createStackNavigator();
+
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -26,6 +31,7 @@ import CourseScreen from "./main/Course";
 import DictionaryScreen from "./main/Dictionary";
 import CommunityScreen from "./main/Community";
 import ContributeDictionary from "./main/ContributeDictionary";
+import ProfileScreen from "./main/Settings";
 // import { FirstScreenNavigator } from "../CustomNavigation";
 
 export class Main extends Component {
@@ -106,7 +112,7 @@ export class Main extends Component {
         />
         <Tab.Screen
           name="Settings"
-          component={CourseScreen}
+          component={ProfileStackScreen}
           //navigation = {this.props.navigation}
           //to pass along the props inside it and make it easier the logic from the profile screen perspective
           listeners={({ navigation }) => ({
@@ -125,6 +131,60 @@ export class Main extends Component {
     );
   }
 }
+const ProfileStackScreen = ({navigation}) => {
+  // const {colors} = useTheme();
+
+  return (
+    <ProfileStack.Navigator
+      screenOptions={{
+        headerStyle: {
+          //backgroundColor: colors.background,
+          //shadowColor: colors.background, // iOS
+          elevation: 0, // Android
+        },
+        //headerTintColor: colors.text,
+      }}>
+      <ProfileStack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          
+        headerStyle: {
+          backgroundColor: '#f2f2f2',
+          elevation: 0,
+          borderBottomWidth: 0,
+        },
+
+          title: '',
+          headerRight: () => (
+            <View style={{marginRight: 10}}>
+              <MaterialCommunityIcons.Button
+                name="account-edit"
+                size={25}
+                backgroundColor="#f2f2f2"
+                color="#777777"
+                onPress={() => navigation.navigate('EditProfile')}
+              />
+            </View>
+          ),
+        }}
+      />
+      <ProfileStack.Screen
+        name="EditProfile"
+        options={{
+          title: 'Edit Profile',
+          headerStyle: {
+            backgroundColor: '#f2f2f2',
+            elevation: 0,
+            borderBottomWidth: 0,
+          },
+        }}
+        component={EditProfileScreen}
+      />
+    </ProfileStack.Navigator>
+  );
+};
+
 
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
