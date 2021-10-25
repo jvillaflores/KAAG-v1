@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { 
     View, 
     Text, 
@@ -17,30 +17,77 @@ import Feather from 'react-native-vector-icons/Feather';
 import BottomSheet from "reanimated-bottom-sheet";
 import Animated from 'react-native-reanimated';
 
+import * as ImagePicker from "expo-image-picker";
+
 const EditProfileScreen = () => {
 
-const renderInner = () => (
-    <Text>Hello</Text>
-        // <View style={styles.panel}>
-        //   <View style={{alignItems: 'center'}}>
-        //     <Text style={styles.panelTitle}>Upload Photo</Text>
-        //     <Text style={styles.panelSubtitle}>Choose Your Profile Picture</Text>
-        //   </View>
-        //   <TouchableOpacity style={styles.panelButton} onPress={takePhotoFromCamera}>
-        //     <Text style={styles.panelButtonTitle}>Take Photo</Text>
-        //   </TouchableOpacity>
-        //   <TouchableOpacity style={styles.panelButton} onPress={choosePhotoFromLibrary}>
-        //     <Text style={styles.panelButtonTitle}>Choose From Library</Text>
-        //   </TouchableOpacity>
-        //   <TouchableOpacity
-        //     style={styles.panelButton}
-        //     onPress={() => this.bs.current.snapTo(1)}>
-        //     <Text style={styles.panelButtonTitle}>Cancel</Text>
-        //   </TouchableOpacity>
-        // </View>
+    const [image, setImage] = useState(null);
+
+    
+
+    const pickImage = async () => {
+      let image = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    console.log(image);
+
+        
+
+        // if (!image.cancelled) {
+        //   setImage(image);
+        //   bs.current.snapTo(1);
+        // }
+      };
+    
+      //   console.log(result);
+    
+      //   then(image => {
+      //       console.log(image);
+      //       setImage(image.path);
+      //        bs.current.snapTo(1);
+      //     });
+      // };
+
+      // const takePhotoFromCamera = () => {
+      //   ImagePicker.openCamera({
+      //     compressImageMaxWidth: 300,
+      //     compressImageMaxHeight: 300,
+      //     cropping: true,
+      //     compressImageQuality: 0.7
+      //   }).then(image => {
+      //     console.log(image);
+      //     setImage(image.path);
+      //     bs.current.snapTo(1);
+      //   });
+      // }
+   
+
+  const renderInner = () => (
+    
+        <View style={styles.panel}>
+          <View style={{alignItems: 'center'}}>
+            <Text style={styles.panelTitle}>Upload Photo</Text>
+            <Text style={styles.panelSubtitle}>Choose Your Profile Picture</Text>
+          </View>
+          <TouchableOpacity style={styles.commandButton} >
+            <Text style={styles.panelButtonTitle}>Take Photo</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.commandButton}  onPressOut={pickImage}>
+            <Text style={styles.panelButtonTitle}>Choose From Library</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.commandButton}
+            onPressOut={() => bs.current.snapTo(1)}>
+            <Text style={styles.panelButtonTitle}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
       );
     
-const renderHeader = () => (
+   const renderHeader = () => (
         <View style={styles.header}>
           <View style={styles.panelHeader}>
             <View style={styles.panelHandle} />
@@ -50,23 +97,26 @@ const renderHeader = () => (
 
 
 
- ///this.bs = React.createRef();
- //this.fall = new Animated.Value(1);
+ 
+  const bs = React.createRef();
+  const fall = new Animated.Value(1);
 
     return (
         <View style = {styles.container}>
             <BottomSheet
-                //ref = {this.bs}
-                snapPoints = {[ 330, 0]}
-                renderContent = {this.renderInner }
-                renderHeader = {this.renderHeader}
+                ref = {bs}
+                snapPoints = {[ 370, 0]}
+                renderContent = {renderInner }
+                renderHeader = {renderHeader}
                 initialSnap = {1}
-                callbackNode = { this.fall }
+                callbackNode = { fall }
                 enabledGestureInteraction = {true}
                 />
-            <View style = {{margin: 20}}>
+            <Animated.View style = {{margin: 20,
+                opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
+                }}>
                 <View style = {{alignItems:"center"}}>
-                    <TouchableOpacity onPress={()=>{}}>
+                    <TouchableOpacity onPress={()=> bs.current.snapTo(0)}>
                         <View style = {{
                             height:100,
                             width: 100,
@@ -144,7 +194,7 @@ const renderHeader = () => (
                     <Text style = {styles.panelButtonTitle}>Submit</Text>
                 </TouchableOpacity>                               
                 
-            </View>
+            </Animated.View>
         </View>
     )
 }
@@ -185,7 +235,7 @@ const styles = StyleSheet.create({
 
         panel: {
             padding: 20,
-            backgroundColor: '#FFFFFF',
+            backgroundColor: '#ffffff',
             paddingTop: 20,
             // borderTopLeftRadius: 20,
             // borderTopRightRadius: 20,

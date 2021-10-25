@@ -111,11 +111,15 @@ function NewDictionary({ currentUser, route, navigation }) {
               <View style = {styles.paddingLeft}>
                   <Text style={styles.title_text}>Audio </Text>
                   <Text style = {styles.guidelines}>Upload an audio on how to pronounce the Kinagan word you have suggested.</Text>
-                  <TextInput
-                    style={styles.tags_input}
-                    multiline = {true}
-                    //onChangeText={(caption) => setCaption(caption)}
-                  />
+                  <TouchableOpacity style = {styles.audioButton}>
+                      <View>
+                        <MaterialCommunityIcons
+                            style = {styles.addAudio}
+                            name="plus-box" color={'#707070'} size={26} />
+                      </View>
+                  </TouchableOpacity>
+
+                  
               </View>
           </View>
       <Pressable style = {styles.button} onPress={() => navigation.navigate('NewWord')}>
@@ -156,10 +160,24 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom:80,
   },
+  audioButton:{
+    alignItems:"center",
+    justifyContent:"center",
+    width: "95%",
+    borderWidth:1,
+    borderRadius:10,
+    height:70,
+    borderColor:"#707070",
+    paddingTop: 20,
+    marginTop: 10,
+  },
   guidelines:{
     fontSize: 12,
     fontStyle:"italic",
     color:"#707070",
+  },
+  addAudio:{
+    flex: 1,
   },
 
   bottom: {
