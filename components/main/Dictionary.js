@@ -11,12 +11,16 @@ import {
 
 import { connect } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
-
+import { TouchableOpacity } from "react-native-gesture-handler";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { Audio } from "expo-av";
 var head = require("../../assets/learning.svg");
 
-function Dictionary({ dictionary, navigation }) {
+function Dictionary({ dictionaryAll, navigation }) {
+  console.log(dictionaryAll);
+
   return (
-    <NavigationContainer independent ={true}>
+    <NavigationContainer independent={true}>
       <View style={styles.headLine}>
         <View style={styles.title}>
           <Text style={styles.textHead}> Kaag</Text>
@@ -27,61 +31,51 @@ function Dictionary({ dictionary, navigation }) {
           ></TextInput>
         </View>
       </View>
-        <FlatList
-            nestedScrollEnabled
-            numColumns={1}
-            horizontal={false}
-            data={dictionary}
-            style={{ flex: 1 }}
-            renderItem={({ item }) => (
-
-              
-              <View style={styles.Kagan}>
-                <Pressable
-                  style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Word")}>
-
-                  <Text style={styles.textVocab}> {item.word} </Text>
-                  <Text style={styles.textVocabSubSub}>/{item.english}/</Text>
-                  <Text style={styles.textVocabSub}>{item.english}</Text>
-                  
-                </Pressable>
-
-                <Pressable
-                  style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Word")}>
-                    
-                  <Text style={styles.textVocab}> {item.word} </Text>
-                  <Text style={styles.textVocabSubSub}>/{item.english}/</Text>
-                  <Text style={styles.textVocabSub}>{item.english}</Text>
-                  
-                </Pressable>
-
-                <Pressable
-                  style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Word")}>
-                    
-                  <Text style={styles.textVocab}> Aigpakarakuaoa </Text>
-                  <Text style={styles.textVocabSubSub}>/aig.pa.ka.ra.ku.'a.qan/</Text>
-                  <Text style={styles.textVocabSub}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                      bibendum, odio a ultricies varius, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                      bibendum, odio a ultricies varius, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                      bibendum, odio a ultricies varius, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                      bibendum, odio a ultricies varius,</Text>
-                  
-                </Pressable>
-                
-        
+      <FlatList
+        nestedScrollEnabled
+        numColumns={1}
+        horizontal={false}
+        data={dictionaryAll}
+        style={{ flex: 1 }}
+        renderItem={({ item }) => {
+          const downloadAudio = async () => {
+            // The rest of this plays the audio
+            const soundObject = new Audio.Sound();
+            try {
+              await soundObject.loadAsync(item.downloadURL);
+              await soundObject.playAsync();
+            } catch (error) {
+              console.log("error:", error);
+            }
+          };
+          return (
+            <View style={styles.Kagan}>
+              <Text style={styles.textVocab}> {item.kagan} </Text>
+              <Text style={styles.textVocabSubSub}>/{item.filipino}/</Text>
+              <Text style={styles.textVocabSub}>{item.meaning}</Text>
+              <View>
+                <TouchableOpacity
+                  style={styles.audioButton}
+                  onPress={() => downloadAudio()}
+                >
+                  <MaterialCommunityIcons
+                    style={styles.addAudio}
+                    name="volume-high"
+                    color={"#707070"}
+                    size={26}
+                  />
+                </TouchableOpacity>
               </View>
-              
-            )}
-          />
+            </View>
+          );
+        }}
+      />
     </NavigationContainer>
-  
   );
 }
+
 const mapStateToProps = (store) => ({
-  dictionary: store.userState.dictionary,
+  dictionaryAll: store.userState.dictionaryAll,
 });
 
 export default connect(mapStateToProps, null)(Dictionary);
@@ -215,11 +209,10 @@ const styles = StyleSheet.create({
     //backgroundColor: "#dadada",
     top: -70,
     left: -40,
-    padding:20,
+    padding: 20,
     paddingTop: 10,
-    paddingBottom:10,
+    paddingBottom: 10,
     margin: 5,
-    
   },
   buttonGrammar: {
     alignSelf: "center",
@@ -272,17 +265,16 @@ const styles = StyleSheet.create({
   textVocab: {
     fontSize: 20,
     fontWeight: "bold",
-    letterSpacing: 0.30,
+    letterSpacing: 0.3,
     color: "black",
-    left:-6,
+    left: -6,
   },
   textVocabSub: {
     fontSize: 11,
     lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
-    textAlign:"justify"
-
+    textAlign: "justify",
   },
   textVocabSubSub: {
     fontSize: 11,

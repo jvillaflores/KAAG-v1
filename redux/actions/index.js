@@ -66,17 +66,17 @@ export function fetchDictionary() {
   return (dispatch) => {
     firebase
       .firestore()
-      .collection("dictionary")
-      .orderBy("word", "asc")
+      .collection("dictionaryAll")
+      .orderBy("kagan", "asc")
       .get()
       .then((snapshot) => {
-        let dictionary = snapshot.docs.map((doc) => {
+        let dictionaryAll = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;
           return { id, ...data };
         });
-        console.log(dictionary);
-        dispatch({ type: DICTIONARY_STATE_CHANGE, dictionary });
+        // console.log(dictionaryAll);
+        dispatch({ type: DICTIONARY_STATE_CHANGE, dictionaryAll });
       });
   };
 }

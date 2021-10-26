@@ -9,7 +9,7 @@ const initialState = {
   currentUser: [],
   posts: [],
   postsAll: [],
-  dictionary: [],
+  dictionaryAll: [],
 };
 
 export const user = (state = initialState, action) => {
@@ -33,7 +33,7 @@ export const user = (state = initialState, action) => {
     case DICTIONARY_STATE_CHANGE:
       return {
         ...state,
-        dictionary: action.dictionary,
+        dictionaryAll: action.dictionaryAll,
       };
 
     default:

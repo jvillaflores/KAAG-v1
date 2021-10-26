@@ -24,7 +24,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
-    "react-native-document-picker": "^7.1.1",
+    "react-native-document-picker": "^4.1.0",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-image-crop-picker": "^0.36.4",
     "react-native-pager-view": "^5.4.4",
@@ -42,7 +42,9 @@
     "react-redux": "^7.2.5",
     "reanimated-bottom-sheet": "*",
     "redux": "^4.1.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "expo-document-picker": "~9.2.4",
+    "expo-av": "~9.2.3"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

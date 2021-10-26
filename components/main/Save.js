@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { View, 
-        TextInput, 
-        Image, 
-        Button, 
-        TouchableOpacity, 
-        Text,
-        StyleSheet, 
-        Pressable
-       } from "react-native";
+import {
+  View,
+  TextInput,
+  Image,
+  Button,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Pressable,
+} from "react-native";
 import { connect } from "react-redux";
 import firebase from "firebase";
 import { NavigationContainer } from "@react-navigation/native";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
 
 function Save({ currentUser, route, navigation }) {
   const [caption, setCaption] = useState("");
@@ -50,7 +50,7 @@ function Save({ currentUser, route, navigation }) {
     task.on("state_changed", taskProgress, taskError, taskCompleted);
   };
 
-  const savePostData = (downloadURL) => {
+  const saveDictionaryData = (downloadURL) => {
     firebase
       .firestore()
       .collection("posts")
@@ -77,52 +77,59 @@ function Save({ currentUser, route, navigation }) {
       });
   };
 
-   return (
-      <View style={styles.container}>
-      
-          <View style={styles.bottom}>
-            <Image source={{ uri: route.params.image }} />
-              
-              {/* <TextInput
+  return (
+    <View style={styles.container}>
+      <View style={styles.bottom}>
+        <Image source={{ uri: route.params.image }} />
+
+        {/* <TextInput
               style = {styles.text_input} 
               value={currentUser.name} /> */}
-          </View>
-          <View style = {styles.center}>
-              <View style = {styles.paddingLeft}>
-                  
-                  <Text style={styles.title_text}>Title </Text>
-                  <Text style = {styles.guidelines}> Type the title of your image.</Text>
-                  <TextInput
-                    style={styles.input}
-                    multiline = {true}
-                    onChangeText={(caption) => setCaption(caption)}
-                  />
-              </View>
+      </View>
+      <View style={styles.center}>
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Title </Text>
+          <Text style={styles.guidelines}> Type the title of your image.</Text>
+          <TextInput
+            style={styles.input}
+            multiline={true}
+            onChangeText={(caption) => setCaption(caption)}
+          />
+        </View>
 
-              <View style = {styles.paddingLeft}>
-                  <Text style={styles.title_text}>Description </Text>
-                  <Text style = {styles.guidelines}> Describe the image you have added.</Text>
-                  <TextInput
-                    style={styles.description_input}
-                    multiline = {true}
-                    onChangeText={(caption) => setCaption(caption)}
-                  />
-              </View>
-              <View style = {styles.paddingLeft}>
-                  <Text style={styles.title_text}>Tags </Text>
-                  <Text style = {styles.guidelines}> Add tags that are related to your image.</Text>
-                  <TextInput
-                    style={styles.tags_input}
-                    multiline = {true}
-                    onChangeText={(caption) => setCaption(caption)}
-                  />
-              </View>
-          </View>
-      <Pressable style = {styles.button} title="Save" onPress={() => uploadImage()}>
-          <Text style = {styles.subtitle}>Share</Text>
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Description </Text>
+          <Text style={styles.guidelines}>
+            {" "}
+            Describe the image you have added.
+          </Text>
+          <TextInput
+            style={styles.description_input}
+            multiline={true}
+            onChangeText={(caption) => setCaption(caption)}
+          />
+        </View>
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Tags </Text>
+          <Text style={styles.guidelines}>
+            {" "}
+            Add tags that are related to your image.
+          </Text>
+          <TextInput
+            style={styles.tags_input}
+            multiline={true}
+            onChangeText={(caption) => setCaption(caption)}
+          />
+        </View>
+      </View>
+      <Pressable
+        style={styles.button}
+        title="Save"
+        onPress={() => uploadImage()}
+      >
+        <Text style={styles.subtitle}>Share</Text>
       </Pressable>
     </View>
-    
   );
 }
 const mapStateToProps = (store) => ({
@@ -139,12 +146,12 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     alignSelf: "center",
-    fontSize:18,
-    
+    fontSize: 18,
+
     letterSpacing: 0.25,
     color: "white",
   },
-  button:{
+  button: {
     alignSelf: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
@@ -155,37 +162,35 @@ const styles = StyleSheet.create({
     //top: 130,
     marginTop: 20,
   },
-  guidelines:{
+  guidelines: {
     fontSize: 12,
-    fontStyle:"italic",
-    color:"#707070",
+    fontStyle: "italic",
+    color: "#707070",
   },
 
   bottom: {
     marginBottom: 20,
   },
 
-  center:{
-    justifyContent:"center",
-    alignContent:"center",
+  center: {
+    justifyContent: "center",
+    alignContent: "center",
   },
 
-  paddingLeft:{
-    
-    alignContent:"flex-start",
+  paddingLeft: {
+    alignContent: "flex-start",
     // padding:15,
     // paddingRight:5,
-     marginTop:20,
-     paddingLeft:20,
-    
+    marginTop: 20,
+    paddingLeft: 20,
   },
 
-  title_text:{
+  title_text: {
     //alignContent:"flex-start",
-    fontWeight:"bold",
-    fontSize:17,
+    fontWeight: "bold",
+    fontSize: 17,
   },
-  text_input:{
+  text_input: {
     alignSelf: "flex-start",
     paddingLeft: 12,
     paddingTop: 10,
@@ -199,8 +204,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: '#707070',
-
+    borderColor: "#707070",
   },
   tags_input: {
     letterSpacing: 0.25,
@@ -211,8 +215,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: '#707070',
-
+    borderColor: "#707070",
   },
   description_input: {
     letterSpacing: 0.25,
@@ -223,8 +226,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: '#707070',
-
+    borderColor: "#707070",
   },
-
-})
+});
