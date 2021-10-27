@@ -169,7 +169,7 @@ const ProfileStackScreen = ({navigation}) => {
           ),
         }}
       />
-      <ProfileStack.Screen
+      {/* <ProfileStack.Screen
         name="EditProfile"
         options={{
           title: 'Edit Profile',
@@ -180,7 +180,7 @@ const ProfileStackScreen = ({navigation}) => {
           },
         }}
         component={EditProfileScreen}
-      />
+      /> */}
     </ProfileStack.Navigator>
   );
 };

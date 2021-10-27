@@ -6,45 +6,94 @@ import {
   Image,
   Pressable,
   TextInput,
+  FlatList,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
+import { Audio } from "expo-av";
+import { connect } from "react-redux";
+
 var head = require("../../assets/learning.svg");
 
-const Word = ({ route }) => {
+const Word = ({ dictionaryAll,route }) => {
+  console.log(dictionaryAll);
   return (
-    <View>
-      <View style={styles.headLine}>
-        <View style={styles.header_line}>
-          <Text style={styles.textHead}> AiMBABAKi</Text>
-          <Text style={styles.textSubHead}> /aim.ba.ba.'ki/</Text>
-        </View>
+    <FlatList
+        nestedScrollEnabled
+        numColumns={1}
+        horizontal={false}
+        data={dictionaryAll}
+        style={{ flex: 1 }}
+        renderItem={({ item }) => {
+          const downloadAudio = async () => {
+            // The rest of this plays the audio
+            const soundObject = new Audio.Sound();
+            try {
+              await soundObject.loadAsync(item.downloadURL);
+              await soundObject.playAsync();
+            } catch (error) {
+              console.log("error:", error);
+            
+
+            }
+          };
+          return (
+            
+            <TouchableOpacity onPress={()=>navigation.navigate("Word")}>
+              <Text>Hey</Text>
+              <Text> {item.kagan} </Text>
+              <Text>{item.filipino}/</Text>
+              <Text>{item.meaning}</Text>
+              <View>
+                <TouchableOpacity
+                  style={styles.audioButton}
+                  onPress={() => downloadAudio()}
+                >
+                  <MaterialCommunityIcons
+                    style={styles.addAudio}
+                    name="volume-high"
+                    color={"#707070"}
+                    size={26}
+                  />
+                </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
+          );
+        }}
+      />
+    // <View
+    //   data={dictionaryAll}>
+    //   <View style={styles.headLine}>
+    //     <View style={styles.header_line}>
+    //       <Text style={styles.textHead}> AiMBABAKi</Text>
+    //       <Text style={styles.textSubHead}> /aim.ba.ba.'ki/</Text>
+    //     </View>
 
 
-        <Pressable
-          style={styles.buttonAudio}
-          onPress={() => navigation.navigate("Vocabulary")}
-        >
-          <View>
-            <MaterialCommunityIcons
-              name="volume-high"
-              size={26}
-              color="white"
-            />
-          </View>
-        </Pressable>
-      </View>
+    //     <Pressable
+    //       style={styles.buttonAudio}
+    //       onPress={() => navigation.navigate("Vocabulary")}
+    //     >
+    //       <View>
+    //         <MaterialCommunityIcons
+    //           name="volume-high"
+    //           size={26}
+    //           color="white"
+    //         />
+    //       </View>
+    //     </Pressable>
+    //   </View>
 
-      <View style={styles.Kagan}>
-            <Text style={styles.textVocab}> Adjective</Text>
-            <Text style={styles.textVocabSubSub}>
-              1. feeling or showing pleasure or contentment.
-            </Text>
-            <Text style={styles.textVocabSub}>
-              "Melissa came in looking happy and excited"
-            </Text>
-      </View>
-    </View>
+    //   <View style={styles.Kagan}>
+    //         <Text style={styles.textVocab}> Adjective</Text>
+    //         <Text style={styles.textVocabSubSub}>
+    //           1. feeling or showing pleasure or contentment.
+    //         </Text>
+    //         <Text style={styles.textVocabSub}>
+    //           "Melissa came in looking happy and excited"
+    //         </Text>
+    //   </View>
+    // </View>
   );
 };
 

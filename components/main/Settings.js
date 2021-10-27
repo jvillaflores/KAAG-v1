@@ -44,7 +44,7 @@ export default function Settings({ navigation }) {
         </View>  
         
         <View style={styles.menuWrapper}>
-        <TouchableRipple onPress={() => {}}>
+        <TouchableRipple onPress={() => navigation.navigate("MyContribution")}>
           <View style={styles.menuItem}>
             <Icon name="heart-outline" color="#777777" size={25}/>
             <Text style={styles.menuItemText}>My Contributions</Text>

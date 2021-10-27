@@ -52,6 +52,7 @@ import SaveScreen from "./components/main/Save";
 import NewDictionaryScreen from "./components/main/NewDictionary";
 import Vocabulary1Screen from "./components/main/coursepacks/screens/Vocabulary1";
 import newDReviewScreen from "./components/main/newDReview";
+import MyContributionsScreen from "./components/main/MyContributions";
 
 const Stack = createStackNavigator();
 
@@ -218,6 +219,20 @@ export class App extends Component {
             <Stack.Screen
               name="Vocabulary1"
               component={Vocabulary1Screen}
+              options={{
+                title: "",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="MyContribution"
+              component={MyContributionsScreen}
               options={{
                 title: "",
                 headerShadowVisible: false,

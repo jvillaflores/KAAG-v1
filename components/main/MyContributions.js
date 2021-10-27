@@ -11,74 +11,77 @@ import {
 
 import { connect } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { Audio } from "expo-av";
+
 var head = require("../../assets/learning.svg");
 
-function Dictionary({ dictionaryAll, navigation }) {
-  console.log(dictionaryAll);
-
+function MyContributions({ dictionary, navigation }) {
   return (
-    <NavigationContainer independent={true}>
+    <NavigationContainer independent ={true}>
       <View style={styles.headLine}>
         <View style={styles.title}>
-          <Text style={styles.textHead}> Kaag</Text>
+          <Text style={styles.textHead}> My Contributions</Text>
           <Text style={styles.textSubHead}> Dictionary</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Search for words..."
-          ></TextInput>
+          
         </View>
       </View>
-      <FlatList
-        nestedScrollEnabled
-        numColumns={1}
-        horizontal={false}
-        data={dictionaryAll}
-        style={{ flex: 1 }}
-        renderItem={({ item }) => {
-          const downloadAudio = async () => {
-            // The rest of this plays the audio
-            const soundObject = new Audio.Sound();
-            try {
-              await soundObject.loadAsync(item.downloadURL);
-              await soundObject.playAsync();
-            } catch (error) {
-              console.log("error:", error);
-            }
-          };
-          return (
-            <TouchableOpacity style={styles.Kagan} onPress={()=>navigation.navigate("Word")}>
-              <Text style={styles.textVocab}> {item.kagan} </Text>
-              <Text style={styles.textVocabSubSub}>/{item.filipino}/</Text>
-              <Text style={styles.textVocabSub}>{item.meaning}</Text>
-              <View>
-                <TouchableOpacity
-                  style={styles.audioButton}
-                  onPress={() => downloadAudio()}
-                >
-                  <MaterialCommunityIcons
-                    style={styles.addAudio}
-                    name="volume-high"
-                    color={"#707070"}
-                    size={26}
-                  />
-                </TouchableOpacity>
+        <FlatList
+            nestedScrollEnabled
+            numColumns={1}
+            horizontal={false}
+            data={dictionary}
+            style={{ flex: 1 }}
+            renderItem={({ item }) => (
+
+              
+              <View style={styles.Kagan}>
+                <Pressable
+                  style={styles.buttonVocab}
+                  onPress={() => navigation.navigate("Word")}>
+
+                  <Text style={styles.textVocab}> {item.word} </Text>
+                  <Text style={styles.textVocabSubSub}>/{item.english}/</Text>
+                  <Text style={styles.textVocabSub}>{item.english}</Text>
+                  
+                </Pressable>
+
+                <Pressable
+                  style={styles.buttonVocab}
+                  onPress={() => navigation.navigate("Word")}>
+                    
+                  <Text style={styles.textVocab}> {item.word} </Text>
+                  <Text style={styles.textVocabSubSub}>/{item.english}/</Text>
+                  <Text style={styles.textVocabSub}>{item.english}</Text>
+                  
+                </Pressable>
+
+                <Pressable
+                  style={styles.buttonVocab}
+                  onPress={() => navigation.navigate("Word")}>
+                    
+                  <Text style={styles.textVocab}> Aigpakarakuaoa </Text>
+                  <Text style={styles.textVocabSubSub}>/aig.pa.ka.ra.ku.'a.qan/</Text>
+                  <Text style={styles.textVocabSub}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+                      bibendum, odio a ultricies varius, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+                      bibendum, odio a ultricies varius, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+                      bibendum, odio a ultricies varius, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+                      bibendum, odio a ultricies varius,</Text>
+                  
+                </Pressable>
+                
+        
               </View>
-            </TouchableOpacity>
-          );
-        }}
-      />
+              
+            )}
+          />
     </NavigationContainer>
+  
   );
 }
-
 const mapStateToProps = (store) => ({
-  dictionaryAll: store.userState.dictionaryAll,
+  dictionary: store.userState.dictionary,
 });
 
-export default connect(mapStateToProps, null)(Dictionary);
+export default connect(mapStateToProps, null)(MyContributions);
 
 const styles = StyleSheet.create({
   searchSection: {
@@ -119,9 +122,10 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
   },
   title: {
-    top: 40,
-    bottom: 40,
-    left: 5,
+    alignItems:"flex-start",
+    margin: 20,
+    
+    
   },
   subtitle: {
     top: 65,
@@ -149,7 +153,7 @@ const styles = StyleSheet.create({
   headLine: {
     flexDirection: "column",
     width: "100%",
-    height: 200,
+    //height: 200,
     backgroundColor: "#8E2835",
     padding: 10,
   },
@@ -167,11 +171,10 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   Kagan: {
-     flex:1,
-     marginTop:10,
-     marginLeft: 25,
-     padding: 10,
-    
+    top: 70,
+    left: 40,
+    padding: 10,
+    paddingTop: 20,
   },
   grammar: {
     top: 70,
@@ -210,10 +213,11 @@ const styles = StyleSheet.create({
     //backgroundColor: "#dadada",
     top: -70,
     left: -40,
-    padding: 20,
+    padding:20,
     paddingTop: 10,
-    paddingBottom: 10,
+    paddingBottom:10,
     margin: 5,
+    
   },
   buttonGrammar: {
     alignSelf: "center",
@@ -266,16 +270,17 @@ const styles = StyleSheet.create({
   textVocab: {
     fontSize: 20,
     fontWeight: "bold",
-    letterSpacing: 0.3,
+    letterSpacing: 0.30,
     color: "black",
-    left: -6,
+    left:-6,
   },
   textVocabSub: {
     fontSize: 11,
     lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
-    textAlign: "justify",
+    textAlign:"justify"
+
   },
   textVocabSubSub: {
     fontSize: 11,

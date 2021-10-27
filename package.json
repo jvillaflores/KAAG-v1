@@ -16,7 +16,9 @@
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/stack": "^6.0.7",
     "expo": "~42.0.1",
+    "expo-av": "~9.2.3",
     "expo-camera": "~11.2.2",
+    "expo-document-picker": "~9.2.4",
     "expo-image-picker": "~10.2.2",
     "expo-status-bar": "~1.0.4",
     "firebase": "8.2.3",
@@ -42,9 +44,7 @@
     "react-redux": "^7.2.5",
     "reanimated-bottom-sheet": "*",
     "redux": "^4.1.1",
-    "redux-thunk": "^2.3.0",
-    "expo-document-picker": "~9.2.4",
-    "expo-av": "~9.2.3"
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
