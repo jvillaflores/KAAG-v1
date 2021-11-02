@@ -49,17 +49,20 @@ function Dictionary({ dictionaryAll, navigation }) {
             }
           };
           return (
-            <TouchableOpacity style={styles.Kagan} onPress={()=>navigation.navigate("Word")}>
-              <Text style={styles.textVocab}> {item.kagan} </Text>
-              <Text style={styles.textVocabSubSub}>/{item.filipino}/</Text>
-              <Text style={styles.textVocabSub}>{item.meaning}</Text>
+            <TouchableOpacity style={styles.Kagan} onPress={()=>downloadAudio()}>
               <View>
+                <Text style={styles.textVocab}> {item.kagan} </Text>
+                <Text style={styles.textVocabSubSub}>/{item.filipino}/</Text>
+                <Text style={styles.textVocabSub}>{item.meaning}</Text>
+              </View>
+
+              <View style={styles.audioButton}>
                 <TouchableOpacity
                   style={styles.audioButton}
                   onPress={() => downloadAudio()}
                 >
+                  
                   <MaterialCommunityIcons
-                    style={styles.addAudio}
                     name="volume-high"
                     color={"#707070"}
                     size={26}
@@ -67,6 +70,8 @@ function Dictionary({ dictionaryAll, navigation }) {
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>
+            
+            
           );
         }}
       />
@@ -127,7 +132,12 @@ const styles = StyleSheet.create({
     top: 65,
     left: -30,
   },
-
+  audioButton:{
+    position:"relative",
+    flex:1,
+    alignSelf:"flex-end",
+    bottom: 10,    
+  },
   textHead: {
     flexDirection: "row",
     fontSize: 20,
@@ -170,7 +180,10 @@ const styles = StyleSheet.create({
      flex:1,
      marginTop:10,
      marginLeft: 25,
+     marginRight:20,
      padding: 10,
+     //backgroundColor:"#fafafa",
+     flexDirection:"row",
     
   },
   grammar: {
@@ -268,7 +281,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 0.3,
     color: "black",
-    left: -6,
+    //left: -6,
   },
   textVocabSub: {
     fontSize: 11,

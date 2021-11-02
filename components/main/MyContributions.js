@@ -124,8 +124,6 @@ const styles = StyleSheet.create({
   title: {
     alignItems:"flex-start",
     margin: 20,
-    
-    
   },
   subtitle: {
     top: 65,

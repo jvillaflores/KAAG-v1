@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -7,70 +7,80 @@ import {
   Pressable,
   TextInput,
   FlatList,
-  SafeAreaView,
-  Button,
-  Alert,
+  RefreshControl,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import AddButton from "./AddButton";
 
-import FeedScreen from "./Feed";
-import SocialScreen from "./Social";
-import { NavigationContainer } from "@react-navigation/native";
+import { Dimensions } from 'react-native';
 
-const Tab = createMaterialTopTabNavigator();
+import SeeMore from 'react-native-see-more-inline';
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-function Community({ navigation }) {
+
+
+function Image({ posts, navigation }) {
+  const wait = (timeout) => {
+    return new Promise((resolve) => setTimeout(resolve, timeout));
+  };
+
+  const dimensions = Dimensions.get('window');
+  const imageHeight = Math.round(dimensions.width * 1 / 1);
+  const imageWidth = dimensions.width;
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
   
-  return (
-    <NavigationContainer independent ={true}>
-       <View style={styles.container}>
-       <View style={styles.innercontainer}>
-             <Text style={styles.textHead}>Welcome, (change name)</Text>
-             <Text style={styles.textSubHead}>Engage in Community</Text>
-             <Text style={styles.textreg}>
-               Create and share your photos, stories, and videos with the friends
-               you care about.
-             </Text>
-          </View>
-         </View>
-         <Tab.Navigator
-           screenOptions={({ route }) => ({
-             tabBarContentContainerStyle: {
-               backgroundColor: "#f2f2f2",
-             },
-             tabBarActiveTintColor: "#8E2835",
-             tabBarInactiveTintColor: "#B2B2B2",
 
-             tabBarPressColor: "#8E2835",
-             tabBarLabelStyle: {
-               fontSize: 15,
-               fontWeight: "bold",
-             },
-           })}
-         >
-           <Tab.Screen name="Feed" component={FeedScreen} />
-           <Tab.Screen name="Social" component={SocialScreen} />
-      </Tab.Navigator>
-      
-      <Pressable
-           style={styles.button}
-          onPress={() => navigation.navigate("MainContribution")}
-          //onPress={() => navigation.navigate("NewContribution")}
-         >
-          <MaterialCommunityIcons name="plus" color={"#ffffff"} size={25} />
-      </Pressable>
-    </NavigationContainer>
-  )
-      }
+  return (
+
+    <View>
+        <Image
+            style={{  height: imageWidth, width: imageWidth }}
+            source={{ uri: item.downloadURL }}
+          />
+    </View>
+    //no button stylesheet
+    // <FlatList
+    //   nestedScrollEnabled
+    //   numColumns={1}
+    //   horizontal={false}
+    //   data={posts}
+    //   style={{ flex: 1 }}
+    //   refreshControl={
+    //     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+    //   }
+    //   renderItem={({ item }) => (
+    //     <View style={styles.container}>
+    //       <TouchableOpacity>
+    //       <Image
+    //         style={{  height: imageWidth, width: imageWidth }}
+    //         source={{ uri: item.downloadURL }}
+    //       />
+    //       <SeeMore 
+    //           numberOfLines={2} 
+    //           style={styles.textVocab}> "{item.caption}"
+    //       </SeeMore>
+    //       </TouchableOpacity>
+          
+    //     </View>
+    //   )}
+    // />
+  );
+}
 
 const mapStateToProps = (store) => ({
+  posts: store.userState.posts,
   postsAll: store.userState.postsAll,
-  users: store.userState.users,
 });
 
-export default connect(mapStateToProps, null)(Community);
+export default connect(mapStateToProps, null)(Image);
 
 const styles = StyleSheet.create({
   title: {
@@ -78,16 +88,10 @@ const styles = StyleSheet.create({
     left: 10,
   },
   container: {
-    alignItems: "center",
-    marginTop: 20,
-    marginBottom: 70,
-  },
-  innercontainer: {
-    flex: 1,
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
-    margin: 50,
-    //backgroundColor: '#FFFFFF',
+    paddingTop: 20,
+    justifyContent:"flex-start",
+
+    marginBottom: 20,
   },
   button: {
     position: "absolute",
@@ -101,8 +105,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowOffset: { height: 10 },
     backgroundColor: "#8E2835",
-    bottom: 40,
-    right: 30,
   },
 
   textHead: {
@@ -111,23 +113,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.25,
-    color: "#8E2835",
+    color: "white",
   },
   textSubHead: {
-    flexDirection: "row",
-    fontSize: 15,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    //color: "white",
-  },
-  textreg: {
     flexDirection: "row",
     fontSize: 15,
     // fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.25,
-    //color: "white",
+    color: "white",
   },
   headLine: {
     flexDirection: "row",
@@ -168,7 +162,20 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: "black",
   },
-
+  Abutton: {
+    justifyContent: "center",
+    paddingVertical: 8,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    width: 150,
+    top: -120,
+    backgroundColor: "#8E2835",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+  },
   buttonVocab: {
     alignSelf: "center",
     justifyContent: "center",
@@ -237,11 +244,13 @@ const styles = StyleSheet.create({
     left: -10,
   },
   textVocab: {
-    fontSize: 20,
-    fontWeight: "bold",
-    lineHeight: 21,
+    fontSize: 18,
+    margin: 10,
+    //fontWeight: "bold",
+    //lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
+    //alignContent:"flex-start",
   },
   textVocabSub: {
     fontSize: 11,

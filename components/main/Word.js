@@ -7,8 +7,13 @@ import {
   Pressable,
   TextInput,
   FlatList,
+  SafeAreaView,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
+import { NavigationContainer } from "@react-navigation/native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+
 
 import { Audio } from "expo-av";
 import { connect } from "react-redux";
@@ -18,86 +23,91 @@ var head = require("../../assets/learning.svg");
 const Word = ({ dictionaryAll,route }) => {
   console.log(dictionaryAll);
   return (
-    <FlatList
-        nestedScrollEnabled
-        numColumns={1}
-        horizontal={false}
-        data={dictionaryAll}
-        style={{ flex: 1 }}
-        renderItem={({ item }) => {
-          const downloadAudio = async () => {
-            // The rest of this plays the audio
-            const soundObject = new Audio.Sound();
-            try {
-              await soundObject.loadAsync(item.downloadURL);
-              await soundObject.playAsync();
-            } catch (error) {
-              console.log("error:", error);
+    //  <NavigationContainer independent={true}>
+    // <FlatList 
+    //   data={dictionaryAll}
+    //   style={{ flex: 1 }}
+    //     renderItem={({ item }) => {
+    //       const downloadAudio = async () => {
+    //         // The rest of this plays the audio
+    //         const soundObject = new Audio.Sound();
+    //         try {
+    //           await soundObject.loadAsync(item.downloadURL);
+    //           await soundObject.playAsync();
+    //         } catch (error) {
+    //           console.log("error:", error);
+    //         }
+    //       };
+    //       return (
+    //         <View style={styles.headLine}>
+    //           <View style={styles.header_line}>
+    //           <Text style={styles.textHead}>{item.kagan}</Text>
+    //           <Text style={styles.textSubHead}>{item.filipino}</Text>
+    //           </View>
+
+
+    //           <TouchableOpacity
+    //               style={styles.buttonAudio}
+    //               onPress={() => downloadAudio()}
+    //             >
+    //               <MaterialCommunityIcons
+    //                 // style={styles.addAudio}
+    //                 name="volume-high"
+    //                 color={"#707070"}
+    //                 size={26}
+    //               />
+    //             </TouchableOpacity>
+
+    //         </View>
             
-
-            }
-          };
-          return (
-            
-            <TouchableOpacity onPress={()=>navigation.navigate("Word")}>
-              <Text>Hey</Text>
-              <Text> {item.kagan} </Text>
-              <Text>{item.filipino}/</Text>
-              <Text>{item.meaning}</Text>
-              <View>
-                <TouchableOpacity
-                  style={styles.audioButton}
-                  onPress={() => downloadAudio()}
-                >
-                  <MaterialCommunityIcons
-                    style={styles.addAudio}
-                    name="volume-high"
-                    color={"#707070"}
-                    size={26}
-                  />
-                </TouchableOpacity>
-              </View>
-            </TouchableOpacity>
-          );
-        }}
-      />
-    // <View
-    //   data={dictionaryAll}>
-    //   <View style={styles.headLine}>
-    //     <View style={styles.header_line}>
-    //       <Text style={styles.textHead}> AiMBABAKi</Text>
-    //       <Text style={styles.textSubHead}> /aim.ba.ba.'ki/</Text>
-    //     </View>
+    //       );
+    //     }}
+      
+    //   />
+    //  </NavigationContainer>
+    
+    
+    <View
+      data={dictionaryAll}>
+      <View style={styles.headLine}>
+        <View style={styles.header_line}>
+          <Text style={styles.textHead}> AiMBABAKi</Text>
+          <Text style={styles.textSubHead}> /aim.ba.ba.'ki/</Text>
+        </View>
 
 
-    //     <Pressable
-    //       style={styles.buttonAudio}
-    //       onPress={() => navigation.navigate("Vocabulary")}
-    //     >
-    //       <View>
-    //         <MaterialCommunityIcons
-    //           name="volume-high"
-    //           size={26}
-    //           color="white"
-    //         />
-    //       </View>
-    //     </Pressable>
-    //   </View>
+        <Pressable
+          style={styles.buttonAudio}
+          onPress={() => navigation.navigate("Vocabulary")}
+        >
+          <View>
+            <MaterialCommunityIcons
+              name="volume-high"
+              size={26}
+              color="white"
+            />
+          </View>
+        </Pressable>
+      </View>
 
-    //   <View style={styles.Kagan}>
-    //         <Text style={styles.textVocab}> Adjective</Text>
-    //         <Text style={styles.textVocabSubSub}>
-    //           1. feeling or showing pleasure or contentment.
-    //         </Text>
-    //         <Text style={styles.textVocabSub}>
-    //           "Melissa came in looking happy and excited"
-    //         </Text>
-    //   </View>
-    // </View>
+      <View style={styles.Kagan}>
+            <Text style={styles.textVocab}> Adjective</Text>
+            <Text style={styles.textVocabSubSub}>
+              1. feeling or showing pleasure or contentment.
+            </Text>
+            <Text style={styles.textVocabSub}>
+              "Melissa came in looking happy and excited"
+            </Text>
+      </View>
+    </View>
   );
 };
 
-export default Word;
+const mapStateToProps = (store) => ({
+  dictionaryAll: store.userState.dictionaryAll,
+});
+
+export default connect (mapStateToProps, null)(Word);
 
 const styles = StyleSheet.create({
   header: {

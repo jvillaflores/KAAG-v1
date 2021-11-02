@@ -50,7 +50,7 @@ export default function Settings({ navigation }) {
             <Text style={styles.menuItemText}>My Contributions</Text>
           </View>
         </TouchableRipple>
-        <TouchableRipple onPress={() => {}}>
+        <TouchableRipple onPress={() => navigation.navigate("Validate")}>
           <View style={styles.menuItem}>
             <Icon name="credit-card" color="#777777" size={25}/>
             <Text style={styles.menuItemText}>Be A Validator</Text>
