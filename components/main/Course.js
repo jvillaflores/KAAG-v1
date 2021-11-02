@@ -141,7 +141,7 @@ export default function Course({ navigation }) {
                   style = {{width: 40, height:40}}
                   source={require("../../assets/grammar.png")}/>
                   <View style={styles.text_Context}>
-                    <Text style={styles.textVocab}> Basic Phrases</Text>
+                    <Text style={styles.textVocab}> Grammar</Text>
                     <Text style={styles.textVocabSub}> 7 topics to study</Text>
                   </View>
               </View>
@@ -155,7 +155,7 @@ export default function Course({ navigation }) {
                   style = {{width: 45, height: 38}}
                   source={require("../../assets/pronun.png")}/>
                   <View style={styles.text_Context}>
-                    <Text style={styles.textVocab}> Speech</Text>
+                    <Text style={styles.textVocab}> Pronunciation</Text>
                     <Text style={styles.textVocabSub}> 70 words to study</Text>
                   </View>
               </View>
