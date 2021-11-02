@@ -59,7 +59,7 @@ function Community({ navigation }) {
           onPress={() => navigation.navigate("MainContribution")}
           //onPress={() => navigation.navigate("NewContribution")}
          >
-          <MaterialCommunityIcons name="plus" color={"#ffffff"} size={25} />
+          <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
       </Pressable>
     </NavigationContainer>
   )
@@ -91,9 +91,9 @@ const styles = StyleSheet.create({
   },
   button: {
     position: "absolute",
-    width: 60,
-    height: 60,
-    borderRadius: 60 / 2,
+    width: 70,
+    height: 70,
+    borderRadius: 70 / 2,
     alignItems: "center",
     justifyContent: "center",
     shadowRadius: 10,
@@ -101,8 +101,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowOffset: { height: 10 },
     backgroundColor: "#8E2835",
-    bottom: 40,
+    bottom: 30,
     right: 30,
+    elevation:9,
   },
 
   textHead: {
