@@ -54,6 +54,7 @@ import Vocabulary1Screen from "./components/main/coursepacks/screens/Vocabulary1
 import newDReviewScreen from "./components/main/newDReview";
 import MyContributionsScreen from "./components/main/MyContributions";
 import BeAValidatorScreen from './components/main/BeAValidator';
+import ValidateWordScreen from './components/main/ValidateWord';
 
 const Stack = createStackNavigator();
 
@@ -249,6 +250,21 @@ export class App extends Component {
             <Stack.Screen
             name="Validate"
             component={BeAValidatorScreen}
+            options={{
+              title: "",
+              headerShadowVisible: false,
+              headerTintColor: "#fff",
+              headerStyle: {
+                backgroundColor: "#8E2835",
+                elevation: 0,
+                borderBottomWidth: 0,
+              },
+            }}
+          />
+
+          <Stack.Screen
+            name="ValidateWord"
+            component={ValidateWordScreen}
             options={{
               title: "",
               headerShadowVisible: false,

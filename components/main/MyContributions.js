@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   View,
   Text,
@@ -7,6 +7,10 @@ import {
   Pressable,
   TextInput,
   FlatList,
+  Picker,
+  SafeAreaView,
+  TouchableOpacity,
+  Dimensions,
 } from "react-native";
 
 import { connect } from "react-redux";
@@ -14,66 +18,140 @@ import { NavigationContainer } from "@react-navigation/native";
 
 var head = require("../../assets/learning.svg");
 
+const listTab =[
+  {
+    status: 'All'
+  },
+  {
+    status: 'Confirmed'
+  },
+  {
+    status: 'Pending'
+  },
+]
+
+
+
+const data = [
+  {
+    name : 'Ronaldo',
+    status: 'Confirmed'
+  },
+  {
+    name : 'Messi',
+    status: 'Confirmed'
+  },
+  {
+    name : 'Kaka',
+    status: 'Pending'
+  },
+  {
+    name : 'Lukaku',
+    status: 'Pending'
+  },
+  {
+    name : 'Mbappe',
+    status: 'Pending'
+  },
+  {
+    name : 'Ronaldo',
+    status: 'Confirmed'
+  },
+  {
+    name : 'Messi',
+    status: 'Confirmed'
+  },
+  {
+    name : 'Kaka',
+    status: 'Pending'
+  },
+  {
+    name : 'Lukaku',
+    status: 'Pending'
+  },
+  {
+    name : 'Mbappe',
+    status: 'Confirmed'
+  },
+
+]
+
 function MyContributions({ dictionary, navigation }) {
-  return (
-    <NavigationContainer independent ={true}>
-      <View style={styles.headLine}>
-        <View style={styles.title}>
-          <Text style={styles.textHead}> My Contributions</Text>
-          <Text style={styles.textSubHead}> Dictionary</Text>
-          
-        </View>
+
+  const [status, setStatus] = useState('All')
+  const [datalist, setDatalist] = useState(data)
+
+
+  const setStatusFilter = status =>{
+
+    if(status !== 'All'){ //purple and green
+      setDatalist([...data.filter(e => e.status === status)])
+    } else {
+      setDatalist(data)
+    }
+    setStatus(status)
+  }
+
+  const renderItem = ({item, index}) => {
+    return(
+      <View key ={index} style = {styles.itemContainer}>
+          <View style = {styles.itemLogo}>
+            <Image
+                style={styles.itemImage}
+                sources = {{uri:'https://www.jeep-outfitter.com/media/catalog/product/cache/11/image/9df78eab33525d08d6e5fb8d27136e95/o/1/o101180_e509_front_i.jpg'}}
+            />
+          </View>
+
+          <View style = {styles.itemBody}>
+            <Text style = {styles.itemsName}> {item.name}</Text>
+          </View>
+
+          <View 
+            style = { [styles.itemStatus,
+              {backgroundColor: item.status === 'Pending' ? '#e5848e': '#69c080'}]}
+            >
+            <Text> {item.status}</Text>
+          </View>
+
+
       </View>
-        <FlatList
-            nestedScrollEnabled
-            numColumns={1}
-            horizontal={false}
-            data={dictionary}
-            style={{ flex: 1 }}
-            renderItem={({ item }) => (
+    )
+  }
 
+  const separator = () => {
+    return <View style = {{height: 1, backgroundColor: "#E6E5E5"}}/>
+  }
+
+  return (
+    <SafeAreaView style = {styles.container}>
+        <View style={styles.headLine}>
+         <View style={styles.title}>
+           <Text style={styles.textHead}> My Contributions</Text>
+           <Text style={styles.textSubHead}> Dictionary</Text>
+          
+         </View>
+       </View>
+        <View style = {styles.listTab}>
+          {
+            listTab.map(e => (
+            <TouchableOpacity 
+                style = {[styles.btnTab, status === e.status && styles.brnTabActive]}
+                onPress={()=> setStatusFilter(e.status)}>
+                  <Text style = {styles.textTab, status === e.status && styles.textTabActive}>{e.status}</Text>
+            </TouchableOpacity>
               
-              <View style={styles.Kagan}>
-                <Pressable
-                  style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Word")}>
+            ))
+          }
+        </View>
 
-                  <Text style={styles.textVocab}> {item.word} </Text>
-                  <Text style={styles.textVocabSubSub}>/{item.english}/</Text>
-                  <Text style={styles.textVocabSub}>{item.english}</Text>
-                  
-                </Pressable>
-
-                <Pressable
-                  style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Word")}>
-                    
-                  <Text style={styles.textVocab}> {item.word} </Text>
-                  <Text style={styles.textVocabSubSub}>/{item.english}/</Text>
-                  <Text style={styles.textVocabSub}>{item.english}</Text>
-                  
-                </Pressable>
-
-                <Pressable
-                  style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Word")}>
-                    
-                  <Text style={styles.textVocab}> Aigpakarakuaoa </Text>
-                  <Text style={styles.textVocabSubSub}>/aig.pa.ka.ra.ku.'a.qan/</Text>
-                  <Text style={styles.textVocabSub}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                      bibendum, odio a ultricies varius, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                      bibendum, odio a ultricies varius, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                      bibendum, odio a ultricies varius, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                      bibendum, odio a ultricies varius,</Text>
-                  
-                </Pressable>
-                
-        
-              </View>
-              
-            )}
+          <FlatList
+            data = {datalist}
+            keyExtractor = {(e, i) => i.toString()}
+            renderItem={renderItem}
+            ItemSeparatorComponent={separator}
           />
-    </NavigationContainer>
+
+    </SafeAreaView>
   
   );
 }
@@ -84,224 +162,93 @@ const mapStateToProps = (store) => ({
 export default connect(mapStateToProps, null)(MyContributions);
 
 const styles = StyleSheet.create({
-  searchSection: {
-    flex: 1,
+  container:{
+    flex:1,
+    paddingHorizontal:10,
+    justifyContent: 'center',
+  },
+  listTab:{
+    alignSelf:"center",
+    marginBottom:20,
     flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
-  },
-  searchIcon: {
-    position: "absolute",
-    //padding: 10,
-  },
-  input: {
-    flex: 1,
-    paddingTop: 10,
-    paddingRight: 10,
-    paddingBottom: 10,
-    paddingLeft: 0,
-    backgroundColor: "#fff",
-    color: "#424242",
-  },
-  header: {
-    flexDirection: "row",
-    width: "100%",
-    height: 170,
-    backgroundColor: "#8E2835",
-  },
-  headline: {
-    width: "78%",
-    height: 200,
-    backgroundColor: "#dadada",
-    top: 70,
-    left: 40,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
-  },
-  title: {
-    alignItems:"flex-start",
-    margin: 20,
-  },
-  subtitle: {
-    top: 65,
-    left: -30,
   },
 
-  textHead: {
+  btnTab:{
+    width: Dimensions.get('window').width / 3.5,
     flexDirection: "row",
-    fontSize: 20,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "white",
-    marginLeft: 11,
+    borderWidth: 0.5,
+    borderColor: "#ebebeb",
+    padding:10,
+    justifyContent: 'center'
+
   },
-  textSubHead: {
-    flexDirection: "row",
-    fontSize: 15,
-    // fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "white",
-    marginLeft: 12,
+  textTab:{
+    fontSize:16,
+  },
+  brnTabActive: {
+    backgroundColor: "#E6838D"
+  },
+  textTabActive:{
+    color: "#fff"
+  },
+  itemContainer:{
+    flexDirection:"row",
+    paddingVertical:15
+  },
+  itemLogo: {
+    padding: 10
+  },
+  itemImage:{
+    width: 50,
+    height: 50,
+  },
+
+  itemBody: {
+    flex:1, 
+    paddingHorizontal: 10,
+    justifyContent: "center"
+  },
+
+  itemsName: {
+    fontWeight: "bold",
+    fontSize: 16
+  },
+  itemStatus:{
+    backgroundColor: "green",
+    paddingHorizontal: 6,
+    justifyContent: 'center',
+    right:12,
   },
   headLine: {
     flexDirection: "column",
-    width: "100%",
-    //height: 200,
+    //width: "100%",
+    padding: 30,
+    top: -20,
+    height: 150,
     backgroundColor: "#8E2835",
-    padding: 10,
-  },
-  textHeadline: {
-    flexDirection: "row",
-    fontSize: 20,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
-  searchBar: {
-    top: 85,
-    left: -120,
-    width: "100%",
-  },
-  Kagan: {
-    top: 70,
-    left: 40,
-    padding: 10,
-    paddingTop: 20,
-  },
-  grammar: {
-    top: 70,
-    left: 40,
-  },
-  pronun: {
-    top: 100,
-    left: 40,
-  },
-  textKagan: {
-    flexDirection: "row",
-    fontSize: 18,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
-  button: {
+    alignItems:"flex-start",
     justifyContent: "center",
-    paddingVertical: 8,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: 150,
-    top: -120,
-    backgroundColor: "#8E2835",
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
-  },
-  buttonVocab: {
-    alignSelf: "center",
-    //elevation: 2,
-    width: "90%",
-    //backgroundColor: "#dadada",
-    top: -70,
-    left: -40,
-    padding:20,
-    paddingTop: 10,
-    paddingBottom:10,
-    margin: 5,
-    
-  },
-  buttonGrammar: {
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: "90%",
-    backgroundColor: "#dadada",
-    top: -30,
-    left: -40,
-    height: 105,
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    borderBottomRightRadius: 7,
-    borderBottomLeftRadius: 7,
-    borderColor: "black",
-  },
-  buttonPronun: {
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: "90%",
-    backgroundColor: "#dadada",
-    top: -40,
-    left: -40,
-    height: 105,
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    borderBottomRightRadius: 7,
-    borderBottomLeftRadius: 7,
-    borderColor: "black",
-  },
-  Vocab: {
-    top: 0,
-    left: -20,
-  },
-  VocabSubSub: {
-    top: 5,
-    left: -10,
-  },
-  VocabSub: {
-    top: 5,
-    left: -10,
-  },
-  textVocab: {
-    fontSize: 20,
-    fontWeight: "bold",
-    letterSpacing: 0.30,
-    color: "black",
-    left:-6,
-  },
-  textVocabSub: {
-    fontSize: 11,
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-    textAlign:"justify"
+    position:"relative"
 
   },
-  textVocabSubSub: {
-    fontSize: 11,
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "#8E2835",
-  },
-  text: {
-    fontSize: 15,
+  textHead: {
+    fontSize: 20,
     fontWeight: "bold",
-    lineHeight: 21,
+    letterSpacing: 0.25,
+    position:"relative",
+    alignSelf: "center",
+    color: "white",
+  },
+  textSubHead: {
+    flexDirection: "row",
+    fontSize: 13,
     letterSpacing: 0.25,
     color: "white",
   },
-  input: {
-    height: 45,
-    width: "90%",
-    backgroundColor: "white",
-    margin: 12,
-    paddingLeft: 20,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
+  title: {
+    top: 40,
+    //left: 110,
   },
+
+  
 });
