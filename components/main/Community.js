@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
   View,
   Text,
@@ -12,22 +12,57 @@ import {
   Alert,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { connect } from "react-redux";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import FeedScreen from "./Feed";
 import SocialScreen from "./Social";
 import { NavigationContainer } from "@react-navigation/native";
 
+import firebase from 'firebase'
+require('firebase/firestore')
+import { connect } from 'react-redux'
+
 const Tab = createMaterialTopTabNavigator();
 
-function Community({ navigation }) {
-  
+function Community({ navigation, props }) {
+//   const [userPosts, setUserPosts] = useState([]);
+//   const [user, setUser] = useState(null);
+
+//   useEffect(() => {
+//     const { currentUser, posts } = props;
+
+//     if (props.route.params.uid === firebase.auth().currentUser.uid) {
+//         setUser(currentUser)
+//         setUserPosts(posts)
+//     }
+//     else {
+//         firebase.firestore()
+//             .collection("users")
+//             .doc(props.route.params.uid)
+//             .get()
+//             .then((snapshot) => {
+//                 if (snapshot.exists) {
+//                     setUser(snapshot.data());
+//                 }
+//                 else {
+//                     console.log('does not exist')
+//                 }
+//             })
+        
+//     }
+
+    
+// }, [props.route.params.uid])
+
+// if (user === null) {
+//   return <View />
+// }
+
   return (
     <NavigationContainer independent ={true}>
        <View style={styles.container}>
        <View style={styles.innercontainer}>
-             <Text style={styles.textHead}>Welcome, (change name)</Text>
+             <Text style={styles.textHead}>Welcome, (user.name)</Text>
              <Text style={styles.textSubHead}>Engage in Community</Text>
              <Text style={styles.textreg}>
                Create and share your photos, stories, and videos with the friends

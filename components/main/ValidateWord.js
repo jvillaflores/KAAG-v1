@@ -15,6 +15,8 @@ import {
 
 import { connect } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
 
 var head = require("../../assets/learning.svg");
 
@@ -36,44 +38,55 @@ const listTab =[
 
 
 const data = [
+  //from database which consists of words from contribution
   {
-    name : 'Ronaldo',
+    name : 'ako',
+    translated: 'ako',
     status: 'Confirmed'
   },
   {
-    name : 'Messi',
+    name : 'yan',
+    translated: 'siya',
     status: 'Confirmed'
   },
   {
-    name : 'Kaka',
+    name : 'silan',
+    translated: 'sila',
     status: 'Pending'
   },
   {
-    name : 'Lukaku',
+    name : 'isa',
+    translated: 'isa',
     status: 'Pending'
   },
   {
-    name : 'Mbappe',
+    name : 'yani',
+    translated: 'ito',
     status: 'Pending'
   },
   {
-    name : 'Ronaldo',
+    name : 'mapaso',
+    translated: 'mainit',
     status: 'Confirmed'
   },
   {
-    name : 'Messi',
+    name : 'oras',
+    translated: 'oras',
     status: 'Confirmed'
   },
   {
-    name : 'Kaka',
+    name : 'kami',
+    translated: 'namin',
     status: 'Pending'
   },
   {
-    name : 'Lukaku',
-    status: 'Pending'
+    name : 'yagalihok',
+    translated: 'gumagana',
+    status: 'Declined'
   },
   {
-    name : 'Mbappe',
+    name : 'kallini',
+    translated: 'gusto',
     status: 'Confirmed'
   },
 
@@ -97,27 +110,37 @@ function ValidateWord({ dictionary, navigation }) {
 
   const renderItem = ({item, index}) => {
     return(
-      <View key ={index} style = {styles.itemContainer}>
-          <View style = {styles.itemLogo}>
-            <Image
-                style={styles.itemImage}
-                sources = {{uri:'https://www.jeep-outfitter.com/media/catalog/product/cache/11/image/9df78eab33525d08d6e5fb8d27136e95/o/1/o101180_e509_front_i.jpg'}}
-            />
-          </View>
-
+      <TouchableOpacity key ={index} style = {styles.itemContainer}>
+          
+        <View style = {{flexDirection:"column", flex:1}}>
           <View style = {styles.itemBody}>
             <Text style = {styles.itemsName}> {item.name}</Text>
           </View>
+          <View style = {styles.itemBody}>
+            <Text> {item.translated}</Text>
+          </View>
+        </View>
 
+        <View style = {styles.buttonContainer}> 
           <View 
             style = { [styles.itemStatus,
-              {backgroundColor: item.status === 'Pending' ? '#e5848e': '#69c080'}]}
+              {backgroundColor: item.status === 'Pending' ? '#FFEFC5': '#B5F5D1' && item.status === 'Declined' ? '#FFEFEE' : '#B5F5D1'},
+             
+            ]}
             >
-            <Text> {item.status}</Text>
+              
+            <Text style = {[styles.statusFont, {color: item.status === 'Pending' ? '#CEA032':'#63C579'&& item.status === 'Declined' ? '#FF9797' : '#63C579'}]}> {item.status}</Text>
           </View>
-
-
+          <View style = { [styles.arrowRight,
+            ]}
+            >
+              
+            <MaterialCommunityIcons name="chevron-right" size={20} color = '#8E2835'/>
+          </View>
+          
       </View>
+
+      </TouchableOpacity>
     )
   }
 
@@ -129,7 +152,7 @@ function ValidateWord({ dictionary, navigation }) {
     <SafeAreaView style = {styles.container}>
         <View style={styles.headLine}>
          <View style={styles.title}>
-           <Text style={styles.textHead}> My Contributions</Text>
+           <Text style={styles.textHead}>Validating</Text>
            <Text style={styles.textSubHead}> Dictionary</Text>
           
          </View>
@@ -140,7 +163,8 @@ function ValidateWord({ dictionary, navigation }) {
             <TouchableOpacity 
                 style = {[styles.btnTab, status === e.status && styles.brnTabActive]}
                 onPress={()=> setStatusFilter(e.status)}>
-                  <Text style = {styles.textTab, status === e.status && styles.textTabActive}>{e.status}</Text>
+              {/* <Text style = {styles.textTab && status === e.status && styles.textTabActive}>{e.status}</Text> */}
+              <Text style = {styles.textTab && styles.textTabActive}>{e.status}</Text>
             </TouchableOpacity>
               
             ))
@@ -167,16 +191,16 @@ export default connect(mapStateToProps, null)(ValidateWord);
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    paddingHorizontal:10,
+    //paddingHorizontal:10,
     justifyContent: 'center',
   },
   listTab:{
     alignSelf:"center",
     marginBottom:20,
     flexDirection: "row",
-    paddingHorizontal:5,
+    paddingHorizontal:2,
     backgroundColor:"#ebebeb",
-    borderRadius:10
+    borderRadius:10,
   },
 
   btnTab:{
@@ -189,18 +213,24 @@ const styles = StyleSheet.create({
 
   },
   textTab:{
-    fontSize:25,
+    fontSize:12,
     fontWeight:"bold",
+    color:"#000000"
+    //lineHeight: 1,
   },
   brnTabActive: {
-    backgroundColor: "#E6838D"
+    backgroundColor: "#fff",
+    borderRadius: 10,
   },
   textTabActive:{
-    color: "#fff"
+    color: "#8E2835",
+    fontWeight:"bold",
+    fontSize:13,
   },
   itemContainer:{
     flexDirection:"row",
-    paddingVertical:15
+    paddingVertical:15,
+    paddingHorizontal:20,
   },
   itemLogo: {
     padding: 10
@@ -221,14 +251,16 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   itemStatus:{
-    backgroundColor: "green",
-    paddingHorizontal: 6,
+    backgroundColor: "#69C080",
+    paddingHorizontal: 17,
+    height:30,
     justifyContent: 'center',
-    right:12,
+    right:14,
+    borderRadius:5,
   },
   headLine: {
     flexDirection: "column",
-    //width: "100%",
+    width: "100%",
     padding: 30,
     top: -20,
     height: 150,
@@ -256,6 +288,24 @@ const styles = StyleSheet.create({
     top: 40,
     //left: 110,
   },
+  statusFont:{
+    fontWeight:"bold"
+  },
+  arrowRight:{
+    backgroundColor: "#ebebeb",
+    paddingHorizontal: 5,
+    width:30,
+    height:30,
+    justifyContent: 'center',
+    right:2,
+    borderRadius:5,
+    margin:10
+  },
+  buttonContainer:{
+    alignItems:"flex-end",
+    alignSelf:"center",
+
+  }
 
   
 });

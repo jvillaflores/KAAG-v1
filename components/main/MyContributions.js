@@ -95,12 +95,7 @@ function MyContributions({ dictionary, navigation }) {
   const renderItem = ({item, index}) => {
     return(
       <View key ={index} style = {styles.itemContainer}>
-          <View style = {styles.itemLogo}>
-            <Image
-                style={styles.itemImage}
-                sources = {{uri:'https://www.jeep-outfitter.com/media/catalog/product/cache/11/image/9df78eab33525d08d6e5fb8d27136e95/o/1/o101180_e509_front_i.jpg'}}
-            />
-          </View>
+         
 
           <View style = {styles.itemBody}>
             <Text style = {styles.itemsName}> {item.name}</Text>
@@ -164,13 +159,16 @@ export default connect(mapStateToProps, null)(MyContributions);
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    paddingHorizontal:10,
+    //paddingHorizontal:10,
     justifyContent: 'center',
   },
   listTab:{
     alignSelf:"center",
     marginBottom:20,
     flexDirection: "row",
+    paddingHorizontal:2,
+    backgroundColor:"#ebebeb",
+    borderRadius:10,
   },
 
   btnTab:{
@@ -186,7 +184,8 @@ const styles = StyleSheet.create({
     fontSize:16,
   },
   brnTabActive: {
-    backgroundColor: "#E6838D"
+    backgroundColor: "#fff",
+    borderRadius: 10,
   },
   textTabActive:{
     color: "#fff"
@@ -194,9 +193,6 @@ const styles = StyleSheet.create({
   itemContainer:{
     flexDirection:"row",
     paddingVertical:15
-  },
-  itemLogo: {
-    padding: 10
   },
   itemImage:{
     width: 50,
