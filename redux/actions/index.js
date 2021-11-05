@@ -18,7 +18,6 @@ export function fetchUser() {
         if (snapshot.exists) {
           dispatch({ type: USER_STATE_CHANGE, currentUser: snapshot.data() });
         } else {
-          console.log("does not exist");
         }
       });
   };
@@ -39,7 +38,6 @@ export function fetchUserPosts() {
           const id = doc.id;
           return { id, ...data };
         });
-        console.log(posts);
         dispatch({ type: USER_POSTS_STATE_CHANGE, posts });
       });
   };
@@ -49,7 +47,7 @@ export function fetchAllUserPosts() {
     firebase
       .firestore()
       .collection("postsAll")
-      .orderBy("creation", "asc")
+      .orderBy("creation", "desc")
       .get()
       .then((snapshot) => {
         let postsAll = snapshot.docs.map((doc) => {
@@ -57,7 +55,7 @@ export function fetchAllUserPosts() {
           const id = doc.id;
           return { id, ...data };
         });
-        console.log(postsAll);
+
         dispatch({ type: USER_ALL_POSTS_STATE_CHANGE, postsAll });
       });
   };

@@ -14,16 +14,15 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { connect } from "react-redux";
 import AddButton from "./AddButton";
 
-import SeeMore from 'react-native-see-more-inline';
+import SeeMore from "react-native-see-more-inline";
 
+import { Dimensions } from "react-native";
 
-import { Dimensions } from 'react-native';
-
-function Community({ postsAll, currentUser, navigation }) {
-  const dimensions = Dimensions.get('window');
+function Community({ postsAll }) {
+  const dimensions = Dimensions.get("window");
   //const imageHeight = Math.round(dimensions.width * 1 / 1);
   const imageWidth = dimensions.width;
-  
+
   return (
     <FlatList
       nestedScrollEnabled
@@ -33,26 +32,25 @@ function Community({ postsAll, currentUser, navigation }) {
       style={{ flex: 1 }}
       renderItem={({ item }) => (
         <View style={styles.container}>
-          <View style ={styles.profile}>
-              <Image style = {styles.imageprofile}
-                source={require('../../assets/jam.jpeg')}
-                
-              />
-              <Text style = {styles.profilename}>{item.username} </Text>
+          <View style={styles.profile}>
+            <Image
+              style={styles.imageprofile}
+              source={require("../../assets/jam.jpeg")}
+            />
+            <Text style={styles.profilename}>{item.username} </Text>
           </View>
 
-          <Text style = {{fontWeight:"bold"}}> "(TITLE)"</Text>
-          <View style = {{padding:10}}>
-              <SeeMore 
-                  numberOfLines={2} 
-                  style={styles.textVocab}> {item.caption}
-              </SeeMore>
+          <Text style={{ fontWeight: "bold" }}> {item.title}</Text>
+          <View style={{ padding: 10 }}>
+            <SeeMore numberOfLines={2} style={styles.textVocab}>
+              {" "}
+              {item.description}
+            </SeeMore>
           </View>
           <Image
-            style={{ width: imageWidth, height: imageWidth,}}
+            style={{ width: imageWidth, height: imageWidth }}
             source={{ uri: item.downloadURL }}
           />
-          
         </View>
       )}
     />
@@ -89,20 +87,19 @@ const styles = StyleSheet.create({
     shadowOffset: { height: 10 },
     backgroundColor: "#8E2835",
   },
-  imageprofile:{
-    height:45,
-    width:45,
-    borderRadius:100,
+  imageprofile: {
+    height: 45,
+    width: 45,
+    borderRadius: 100,
     margin: 10,
   },
-  profile:{
-    flexDirection:"row",
-    alignItems:"center"
+  profile: {
+    flexDirection: "row",
+    alignItems: "center",
   },
-  profilename:{
-    fontWeight:"bold"
+  profilename: {
+    fontWeight: "bold",
   },
-
 
   textHead: {
     flexDirection: "row",
@@ -243,7 +240,7 @@ const styles = StyleSheet.create({
   textVocab: {
     fontSize: 13,
     margin: 10,
-    fontStyle:"italic",
+    fontStyle: "italic",
     //lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
@@ -290,5 +287,4 @@ const styles = StyleSheet.create({
     height: 50,
     borderColor: "black",
   },
-  
 });

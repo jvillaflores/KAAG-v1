@@ -86,7 +86,7 @@ const Vocabulary1 = () => {
         >
           <Text
             style={{
-              color: COLORS.white,
+              color: COLORS.black,
               fontSize: 20,
               opacity: 0.6,
               marginRight: 2,
@@ -94,7 +94,7 @@ const Vocabulary1 = () => {
           >
             {currentQuestionIndex + 1}
           </Text>
-          <Text style={{ color: COLORS.white, fontSize: 18, opacity: 0.6 }}>
+          <Text style={{ color: COLORS.black, fontSize: 18, opacity: 0.6 }}>
             / {allQuestions.length}
           </Text>
         </View>
@@ -102,7 +102,7 @@ const Vocabulary1 = () => {
         {/* Question */}
         <Text
           style={{
-            color: COLORS.white,
+            color: COLORS.black,
             fontSize: 30,
           }}
         >
@@ -142,7 +142,7 @@ const Vocabulary1 = () => {
               marginVertical: 10,
             }}
           >
-            <Text style={{ fontSize: 20, color: COLORS.white }}>{option}</Text>
+            <Text style={{ fontSize: 20, color: COLORS.black }}>{option}</Text>
 
             {/* Show Check Or Cross Icon based on correct answer*/}
             {option == correctOption ? (

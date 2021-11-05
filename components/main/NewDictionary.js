@@ -19,6 +19,7 @@ require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { NavigationEvents } from "react-navigation";
 import * as DocumentPicker from "expo-document-picker";
+import * as FileSystem from "expo-file-system";
 
 function NewDictionary({ currentUser, route, navigation }) {
   const [kagan, setKagan] = useState("");
@@ -26,10 +27,22 @@ function NewDictionary({ currentUser, route, navigation }) {
   const [sentence, setSentence] = useState("");
   const [filipinoSentence, setFilipinoSentence] = useState("");
   const [meaning, setMeaning] = useState("");
+
   const chooseFile = async () => {
-    let result = await DocumentPicker.getDocumentAsync({ type: "audio/*" });
-    Alert.alert("Audio File", result.name);
-    console.log(result);
+    try {
+      let result = await DocumentPicker.getDocumentAsync({ type: "audio/*" });
+      Alert.alert("Audio File", result.name);
+      console.log(result);
+
+      const uri = FileSystem.documentDirectory + result.name;
+
+      await FileSystem.copyAsync({
+        from: result.uri,
+        to: uri,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const uploadAudio = async (uri) => {

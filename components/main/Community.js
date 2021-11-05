@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -12,97 +12,62 @@ import {
   Alert,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { connect } from "react-redux";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import FeedScreen from "./Feed";
 import SocialScreen from "./Social";
 import { NavigationContainer } from "@react-navigation/native";
 
-import firebase from 'firebase'
-require('firebase/firestore')
-import { connect } from 'react-redux'
-
 const Tab = createMaterialTopTabNavigator();
 
-function Community({ navigation, props }) {
-//   const [userPosts, setUserPosts] = useState([]);
-//   const [user, setUser] = useState(null);
-
-//   useEffect(() => {
-//     const { currentUser, posts } = props;
-
-//     if (props.route.params.uid === firebase.auth().currentUser.uid) {
-//         setUser(currentUser)
-//         setUserPosts(posts)
-//     }
-//     else {
-//         firebase.firestore()
-//             .collection("users")
-//             .doc(props.route.params.uid)
-//             .get()
-//             .then((snapshot) => {
-//                 if (snapshot.exists) {
-//                     setUser(snapshot.data());
-//                 }
-//                 else {
-//                     console.log('does not exist')
-//                 }
-//             })
-        
-//     }
-
-    
-// }, [props.route.params.uid])
-
-// if (user === null) {
-//   return <View />
-// }
-
+function Community({ currentUser, navigation }) {
   return (
-    <NavigationContainer independent ={true}>
-       <View style={styles.container}>
-       <View style={styles.innercontainer}>
-             <Text style={styles.textHead}>Welcome, (user.name)</Text>
-             <Text style={styles.textSubHead}>Engage in Community</Text>
-             <Text style={styles.textreg}>
-               Create and share your photos, stories, and videos with the friends
-               you care about.
-             </Text>
-          </View>
-         </View>
-         <Tab.Navigator
-           screenOptions={({ route }) => ({
-             tabBarContentContainerStyle: {
-               backgroundColor: "#f2f2f2",
-             },
-             tabBarActiveTintColor: "#8E2835",
-             tabBarInactiveTintColor: "#B2B2B2",
+    <NavigationContainer independent={true}>
+      <View style={styles.container}>
+        <View style={styles.innercontainer}>
+          <Text style={styles.textHead}>Welcome, {currentUser.name} </Text>
+          <Text style={styles.textSubHead}>Engage in Community</Text>
+          <Text style={styles.textreg}>
+            Create and share your photos, stories, and videos with the friends
+            you care about.
+          </Text>
+        </View>
+      </View>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarContentContainerStyle: {
+            backgroundColor: "#f2f2f2",
+          },
+          tabBarActiveTintColor: "#8E2835",
+          tabBarInactiveTintColor: "#B2B2B2",
 
-             tabBarPressColor: "#8E2835",
-             tabBarLabelStyle: {
-               fontSize: 15,
-               fontWeight: "bold",
-             },
-           })}
-         >
-           <Tab.Screen name="Feed" component={FeedScreen} />
-           <Tab.Screen name="Social" component={SocialScreen} />
+          tabBarPressColor: "#8E2835",
+          tabBarLabelStyle: {
+            fontSize: 15,
+            fontWeight: "bold",
+          },
+        })}
+      >
+        <Tab.Screen name="Feed" component={FeedScreen} />
+        <Tab.Screen name="Social" component={SocialScreen} />
       </Tab.Navigator>
-      
+
       <Pressable
-           style={styles.button}
-          onPress={() => navigation.navigate("MainContribution")}
-          //onPress={() => navigation.navigate("NewContribution")}
-         >
-          <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
+        style={styles.button}
+        onPress={() => navigation.navigate("MainContribution")}
+        //onPress={() => navigation.navigate("NewContribution")}
+      >
+        <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
       </Pressable>
     </NavigationContainer>
-  )
-      }
+  );
+}
 
 const mapStateToProps = (store) => ({
   postsAll: store.userState.postsAll,
   users: store.userState.users,
+  currentUser: store.userState.currentUser,
 });
 
 export default connect(mapStateToProps, null)(Community);
@@ -138,7 +103,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#8E2835",
     bottom: 30,
     right: 30,
-    elevation:9,
+    elevation: 9,
   },
 
   textHead: {

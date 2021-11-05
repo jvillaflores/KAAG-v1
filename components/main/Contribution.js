@@ -12,7 +12,6 @@ import {
 import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 
-
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 export default function Contribution({ navigation }) {
@@ -21,11 +20,11 @@ export default function Contribution({ navigation }) {
   const [camera, setCamera] = useState(null);
   const [image, setImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
-  const [cameraRef, setCameraRef] = useState(null)
-  const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
-  const [cameraFlash, setCameraFlash] = useState(Camera.Constants.FlashMode.off)
-  const [isCameraReady, setIsCameraReady] = useState(false)
-   
+  // const [cameraRef, setCameraRef] = useState(null)
+  // const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
+  // const [cameraFlash, setCameraFlash] = useState(Camera.Constants.FlashMode.off)
+  // const [isCameraReady, setIsCameraReady] = useState(false)
+
   useEffect(() => {
     (async () => {
       const cameraStatus = await Camera.requestPermissionsAsync();
@@ -46,7 +45,7 @@ export default function Contribution({ navigation }) {
     // }
     if (camera) {
       const data = await camera.takePictureAsync(null);
-      
+
       setImage(data.uri);
     }
   };
@@ -75,60 +74,71 @@ export default function Contribution({ navigation }) {
   return (
     <View style={{ flex: 1 }}>
       {!image && (
-      <View style={styles.cameraContainer}>     
-       <Camera
-        ref={ref => setCamera(ref)}
-        style={styles.fixedRatio}
-        type={type}
-        ratio={'1:1'}
-        onCameraReady={() => setIsCameraReady(true)}
-         /> 
-    
-    <View style={styles.button1}>
-      <TouchableOpacity
-             style={styles.flipCam}
-             onPress={() => {
-               setType(
-                 type === Camera.Constants.Type.back
-                   ? Camera.Constants.Type.front
-                   : Camera.Constants.Type.back
-               );
-             }}
-           >  
-           <MaterialCommunityIcons name="camera-party-mode" color="#ffffff" size={32} />
-      </TouchableOpacity>
-    </View>
-    </View>
-  )}
+        <View style={styles.cameraContainer}>
+          <Camera
+            ref={(ref) => setCamera(ref)}
+            style={styles.fixedRatio}
+            type={type}
+            ratio={"1:1"}
+            onCameraReady={() => setIsCameraReady(true)}
+          />
 
-    <View style = {styles.centered_Buttons} >
-        <TouchableOpacity 
-              style = {styles.capture}
-              title = "Take Picture" onPress = {() => takePicture() } />
+          <View style={styles.button1}>
+            <TouchableOpacity
+              style={styles.flipCam}
+              onPress={() => {
+                setType(
+                  type === Camera.Constants.Type.back
+                    ? Camera.Constants.Type.front
+                    : Camera.Constants.Type.back
+                );
+              }}
+            >
+              <MaterialCommunityIcons
+                name="camera-party-mode"
+                color="#ffffff"
+                size={32}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+
+      <View style={styles.centered_Buttons}>
         <TouchableOpacity
-          style = {styles.ChooseImageButton}
-          title="Pick Image From Gallery" onPress={(onPress) => pickImage()}>
-          <MaterialCommunityIcons name="image-multiple" color="#263238" size={50} />
+          style={styles.capture}
+          title="Take Picture"
+          onPress={() => takePicture()}
+        />
+        <TouchableOpacity
+          style={styles.ChooseImageButton}
+          title="Pick Image From Gallery"
+          onPress={(onPress) => pickImage()}
+        >
+          <MaterialCommunityIcons
+            name="image-multiple"
+            color="#263238"
+            size={50}
+          />
         </TouchableOpacity>
+      </View>
 
-    </View>
-    
-    {image && (
-      <Image source={{ uri: image }} style={{  bottom: 100, aspectRatio: 1 }} />
+      {image && (
+        <Image
+          source={{ uri: image }}
+          style={{ bottom: 100, aspectRatio: 1 }}
+        />
       )}
       {image && (
-      <TouchableOpacity 
-        //title="Save" 
-           style = {styles.checkButton}
-           onPress={() => navigation.navigate('Save', { image })}>
+        <TouchableOpacity
+          //title="Save"
+          style={styles.checkButton}
+          onPress={() => navigation.navigate("Save", { image })}
+        >
           <MaterialCommunityIcons name="check" color="#263238" size={100} />
         </TouchableOpacity>
       )}
-      
-    
-    
-  </View>    
-    
+    </View>
   );
 }
 
@@ -141,11 +151,11 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     borderColor: "#263238",
     borderWidth: 6,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   cameraContainer: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   ChooseImageButton: {
     position: "absolute",
@@ -155,49 +165,47 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     paddingTop: 20,
     right: 20,
-    
   },
-  centered_Buttons:{
+  centered_Buttons: {
     position: "relative",
     bottom: 100,
     //flexDirection: 'row',
     justifyContent: "center",
-    
   },
-  flipCam:{
+  flipCam: {
     alignContent: "center",
     left: 330,
     alignSelf: "flex-end",
   },
-  cameraButtons:{
+  cameraButtons: {
     position: "relative",
     //flex: 1,
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: 20,
     alignContent: "center",
   },
   fixedRatio: {
     flex: 1,
-    aspectRatio: 1
+    aspectRatio: 1,
   },
-  checkButton:{
+  checkButton: {
     justifyContent: "center",
     alignContent: "center",
-    alignItems:"center",
+    alignItems: "center",
     //top: 50,
-    //bottom: -10, 
+    //bottom: -10,
     borderWidth: 3,
     borderRadius: 100,
     borderColor: "#263238",
     borderWidth: 6,
     width: 120,
     height: 120,
-    left:130,
+    left: 130,
   },
   container: {
     flex: 1,
     height: 20,
-    width: '100%',
+    width: "100%",
   },
   loginGroup: {
     flex: 1,

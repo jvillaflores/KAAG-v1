@@ -9,8 +9,8 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./redux/reducers";
 import thunk from "redux-thunk";
-import { LogBox } from "react-native";
-import _ from "lodash";
+// import { LogBox } from "react-native";
+// import _ from "lodash";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -53,8 +53,7 @@ import NewDictionaryScreen from "./components/main/NewDictionary";
 import Vocabulary1Screen from "./components/main/coursepacks/screens/Vocabulary1";
 import newDReviewScreen from "./components/main/newDReview";
 import MyContributionsScreen from "./components/main/MyContributions";
-import BeAValidatorScreen from './components/main/BeAValidator';
-import ValidateWordScreen from './components/main/ValidateWord';
+import BeAValidatorScreen from "./components/main/BeAValidator";
 
 const Stack = createStackNavigator();
 
@@ -97,11 +96,6 @@ export class App extends Component {
       return (
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Landing">
-            <Stack.Screen
-              name="Splash"
-              component={SplashScreen}
-              options={{ headerShown: false }}
-            />
             <Stack.Screen
               name="Landing"
               component={LandingScreen}
@@ -171,21 +165,21 @@ export class App extends Component {
                 },
               }}
             />
-            
+
             <Stack.Screen
-            name="NewWord"
-            component={newDReviewScreen}
-            options={{
-              title: "",
-              headerShadowVisible: false,
-              headerTintColor: "#fff",
-              headerStyle: {
-                backgroundColor: "#8E2835",
-                elevation: 0,
-                borderBottomWidth: 0,
-              },
-            }}
-          />
+              name="NewWord"
+              component={newDReviewScreen}
+              options={{
+                title: "",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
 
             <Stack.Screen
               name="Save"
@@ -215,7 +209,6 @@ export class App extends Component {
                 headerStyle: {
                   backgroundColor: "#8E2835",
                 },
-               
               }}
             />
             <Stack.Screen
@@ -246,36 +239,21 @@ export class App extends Component {
                 },
               }}
             />
-            
-            <Stack.Screen
-            name="Validate"
-            component={BeAValidatorScreen}
-            options={{
-              title: "",
-              headerShadowVisible: false,
-              headerTintColor: "#fff",
-              headerStyle: {
-                backgroundColor: "#8E2835",
-                elevation: 0,
-                borderBottomWidth: 0,
-              },
-            }}
-          />
 
-          <Stack.Screen
-            name="ValidateWord"
-            component={ValidateWordScreen}
-            options={{
-              title: "",
-              headerShadowVisible: false,
-              headerTintColor: "#fff",
-              headerStyle: {
-                backgroundColor: "#8E2835",
-                elevation: 0,
-                borderBottomWidth: 0,
-              },
-            }}
-          />
+            <Stack.Screen
+              name="Validate"
+              component={BeAValidatorScreen}
+              options={{
+                title: "",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

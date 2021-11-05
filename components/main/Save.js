@@ -17,7 +17,9 @@ require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 function Save({ currentUser, route, navigation }) {
-  const [caption, setCaption] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [tags, setTags] = useState("");
   const [image, setImage] = useState(null);
   const [username, setUsername] = useState("");
   const uploadImage = async () => {
@@ -50,7 +52,7 @@ function Save({ currentUser, route, navigation }) {
     task.on("state_changed", taskProgress, taskError, taskCompleted);
   };
 
-  const saveDictionaryData = (downloadURL) => {
+  const savePostData = (downloadURL) => {
     firebase
       .firestore()
       .collection("posts")
@@ -58,7 +60,9 @@ function Save({ currentUser, route, navigation }) {
       .collection("userPosts")
       .add({
         downloadURL,
-        caption,
+        title,
+        description,
+        tags,
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       });
   };
@@ -69,7 +73,9 @@ function Save({ currentUser, route, navigation }) {
       .add({
         username: currentUser.name,
         downloadURL,
-        caption,
+        title,
+        description,
+        tags,
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
@@ -93,7 +99,7 @@ function Save({ currentUser, route, navigation }) {
           <TextInput
             style={styles.input}
             multiline={true}
-            onChangeText={(caption) => setCaption(caption)}
+            onChangeText={(title) => setTitle(title)}
           />
         </View>
 
@@ -106,7 +112,7 @@ function Save({ currentUser, route, navigation }) {
           <TextInput
             style={styles.description_input}
             multiline={true}
-            onChangeText={(caption) => setCaption(caption)}
+            onChangeText={(description) => setDescription(description)}
           />
         </View>
         <View style={styles.paddingLeft}>
@@ -118,7 +124,7 @@ function Save({ currentUser, route, navigation }) {
           <TextInput
             style={styles.tags_input}
             multiline={true}
-            onChangeText={(caption) => setCaption(caption)}
+            onChangeText={(tags) => setTags(tags)}
           />
         </View>
       </View>

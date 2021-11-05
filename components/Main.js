@@ -11,9 +11,9 @@ import {
 } from "../redux/actions/index";
 import { NavigationContainer } from "@react-navigation/native";
 
-import Icon from 'react-native-vector-icons/Ionicons';
-import {createStackNavigator} from '@react-navigation/stack';
-import EditProfileScreen from './main/EditProfileScreen';
+import Icon from "react-native-vector-icons/Ionicons";
+import { createStackNavigator } from "@react-navigation/stack";
+import EditProfileScreen from "./main/EditProfileScreen";
 const ProfileStack = createStackNavigator();
 
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
@@ -22,11 +22,17 @@ const Tab = createMaterialBottomTabNavigator();
 const EmptyScreen = () => {
   return null;
 };
-
 // import { LogBox } from "react-native";
+// import _ from "lodash";
 
-// LogBox.ignoreLogs(["Setting a timer"]);
-
+// LogBox.ignoreLogs(["Warning:..."]); // ignore specific logs
+// LogBox.ignoreAllLogs(); // ignore all logs
+// const _console = _.clone(console);
+// console.warn = (message) => {
+//   if (message.indexOf("Setting a timer") <= -1) {
+//     _console.warn(message);
+//   }
+// };
 import CourseScreen from "./main/Course";
 import DictionaryScreen from "./main/Dictionary";
 import CommunityScreen from "./main/Community";
@@ -131,7 +137,7 @@ export class Main extends Component {
     );
   }
 }
-const ProfileStackScreen = ({navigation}) => {
+const ProfileStackScreen = ({ navigation }) => {
   // const {colors} = useTheme();
 
   return (
@@ -143,27 +149,27 @@ const ProfileStackScreen = ({navigation}) => {
           elevation: 0, // Android
         },
         //headerTintColor: colors.text,
-      }}>
+      }}
+    >
       <ProfileStack.Screen
         name="Profile"
         component={ProfileScreen}
         options={{
-          
-        headerStyle: {
-          backgroundColor: '#f2f2f2',
-          elevation: 0,
-          borderBottomWidth: 0,
-        },
+          headerStyle: {
+            backgroundColor: "#f2f2f2",
+            elevation: 0,
+            borderBottomWidth: 0,
+          },
 
-          title: '',
+          title: "",
           headerRight: () => (
-            <View style={{marginRight: 10}}>
+            <View style={{ marginRight: 10 }}>
               <MaterialCommunityIcons.Button
                 name="account-edit"
                 size={25}
                 backgroundColor="#f2f2f2"
                 color="#777777"
-                onPress={() => navigation.navigate('EditProfile')}
+                onPress={() => navigation.navigate("EditProfile")}
               />
             </View>
           ),
@@ -184,7 +190,6 @@ const ProfileStackScreen = ({navigation}) => {
     </ProfileStack.Navigator>
   );
 };
-
 
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,

@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -13,20 +13,18 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { connect } from "react-redux";
 import AddButton from "./AddButton";
 
-import { Dimensions } from 'react-native';
+import { Dimensions } from "react-native";
 
-import SeeMore from 'react-native-see-more-inline';
+import SeeMore from "react-native-see-more-inline";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-
-
-function Community({ posts, navigation }) {
+function Community({ currentUser, posts, navigation }) {
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
   };
 
-  const dimensions = Dimensions.get('window');
-  const imageHeight = Math.round(dimensions.width * 1 / 1);
+  const dimensions = Dimensions.get("window");
+  const imageHeight = Math.round((dimensions.width * 1) / 1);
   const imageWidth = dimensions.width;
 
   const [refreshing, setRefreshing] = React.useState(false);
@@ -35,8 +33,6 @@ function Community({ posts, navigation }) {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
   }, []);
-
-  
 
   return (
     //no button stylesheet
@@ -51,26 +47,24 @@ function Community({ posts, navigation }) {
       }
       renderItem={({ item }) => (
         <View style={styles.container}>
-          <View style ={styles.profile}>
-              <Image style = {styles.imageprofile}
-                source={require('../../assets/jam.jpeg')}
-                
-              />
-              <Text style = {styles.profilename}> (insert name) </Text>
+          <View style={styles.profile}>
+            <Image
+              style={styles.imageprofile}
+              source={require("../../assets/jam.jpeg")}
+            />
+            <Text style={styles.profilename}> {currentUser.name}</Text>
           </View>
-          <Text style = {{fontWeight:"bold"}}> "(TITLE)"</Text>
-          <View style = {{padding:10}}>
-              <SeeMore 
-                  numberOfLines={2} 
-                  style={styles.textVocab}> {item.caption}
-              </SeeMore>
+          <Text style={{ fontWeight: "bold" }}> {item.title}</Text>
+          <View style={{ padding: 10 }}>
+            <SeeMore numberOfLines={2} style={styles.textVocab}>
+              {" "}
+              {item.description}
+            </SeeMore>
           </View>
           <Image
-            style={{  height: imageWidth, width: imageWidth,}}
+            style={{ height: imageWidth, width: imageWidth }}
             source={{ uri: item.downloadURL }}
           />
-         
-          
         </View>
       )}
     />
@@ -80,6 +74,7 @@ function Community({ posts, navigation }) {
 const mapStateToProps = (store) => ({
   posts: store.userState.posts,
   postsAll: store.userState.postsAll,
+  currentUser: store.userState.currentUser,
 });
 
 export default connect(mapStateToProps, null)(Community);
@@ -91,7 +86,7 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingTop: 20,
-    justifyContent:"flex-start",
+    justifyContent: "flex-start",
 
     marginBottom: 20,
   },
@@ -108,18 +103,18 @@ const styles = StyleSheet.create({
     shadowOffset: { height: 10 },
     backgroundColor: "#8E2835",
   },
-  imageprofile:{
-    height:45,
-    width:45,
-    borderRadius:100,
+  imageprofile: {
+    height: 45,
+    width: 45,
+    borderRadius: 100,
     margin: 10,
   },
-  profile:{
-    flexDirection:"row",
-    alignItems:"center"
+  profile: {
+    flexDirection: "row",
+    alignItems: "center",
   },
-  profilename:{
-    fontWeight:"bold"
+  profilename: {
+    fontWeight: "bold",
   },
   textHead: {
     flexDirection: "row",
@@ -259,8 +254,8 @@ const styles = StyleSheet.create({
   },
   textVocab: {
     fontSize: 13,
-    
-    fontStyle:"italic",
+
+    fontStyle: "italic",
     //lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
