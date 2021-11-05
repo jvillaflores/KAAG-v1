@@ -8,14 +8,14 @@ import {
   ScrollView } from "react-native";
 
 import Svg, {Path, G, Rect, Polygon, Title} from 'react-native-svg';
+import { connect } from "react-redux";
 
-
-export default function Course({ navigation }) {
+function Course({ currentUser, navigation }) {
   return (
     
     <View style={styles.container}>
         <View style={styles.header}>
-            <Text style={styles.textHead}>Hello, Jan! </Text>
+            <Text style={styles.textHead}>Hello, {currentUser.name}! </Text>
             <Text style={styles.textSubHead}>New user </Text>
         </View>
 
@@ -141,7 +141,7 @@ export default function Course({ navigation }) {
                   style = {{width: 40, height:40}}
                   source={require("../../assets/grammar.png")}/>
                   <View style={styles.text_Context}>
-                    <Text style={styles.textVocab}> Grammar</Text>
+                    <Text style={styles.textVocab}> Phrases</Text>
                     <Text style={styles.textVocabSub}> 7 topics to study</Text>
                   </View>
               </View>
@@ -155,7 +155,7 @@ export default function Course({ navigation }) {
                   style = {{width: 45, height: 38}}
                   source={require("../../assets/pronun.png")}/>
                   <View style={styles.text_Context}>
-                    <Text style={styles.textVocab}> Pronunciation</Text>
+                    <Text style={styles.textVocab}> Speech</Text>
                     <Text style={styles.textVocabSub}> 70 words to study</Text>
                   </View>
               </View>
@@ -165,6 +165,11 @@ export default function Course({ navigation }) {
   
   );
 }
+const mapStateToProps = (store) => ({
+  currentUser: store.userState.currentUser,
+});
+
+export default connect(mapStateToProps, null)(Course);
 
 const styles = StyleSheet.create({
   

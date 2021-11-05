@@ -34,43 +34,53 @@ const listTab =[
 
 const data = [
   {
-    name : 'Ronaldo',
+    name : 'ako',
+    translated: 'ako',
     status: 'Confirmed'
   },
   {
-    name : 'Messi',
+    name : 'yan',
+    translated: 'siya',
     status: 'Confirmed'
   },
   {
-    name : 'Kaka',
+    name : 'silan',
+    translated: 'sila',
     status: 'Pending'
   },
   {
-    name : 'Lukaku',
+    name : 'isa',
+    translated: 'isa',
     status: 'Pending'
   },
   {
-    name : 'Mbappe',
+    name : 'yani',
+    translated: 'ito',
     status: 'Pending'
   },
   {
-    name : 'Ronaldo',
+    name : 'mapaso',
+    translated: 'mainit',
     status: 'Confirmed'
   },
   {
-    name : 'Messi',
+    name : 'oras',
+    translated: 'oras',
     status: 'Confirmed'
   },
   {
-    name : 'Kaka',
+    name : 'kami',
+    translated: 'namin',
     status: 'Pending'
   },
   {
-    name : 'Lukaku',
+    name : 'yagalihok',
+    translated: 'gumagana',
     status: 'Pending'
   },
   {
-    name : 'Mbappe',
+    name : 'kallini',
+    translated: 'gusto',
     status: 'Confirmed'
   },
 
@@ -94,7 +104,7 @@ function MyContributions({ dictionary, navigation }) {
 
   const renderItem = ({item, index}) => {
     return(
-      <View key ={index} style = {styles.itemContainer}>
+      <TouchableOpacity key ={index} style = {styles.itemContainer}>
          
 
           <View style = {styles.itemBody}>
@@ -103,13 +113,13 @@ function MyContributions({ dictionary, navigation }) {
 
           <View 
             style = { [styles.itemStatus,
-              {backgroundColor: item.status === 'Pending' ? '#e5848e': '#69c080'}]}
+              {backgroundColor: item.status === 'Pending' ? '#FFEFC5': '#B5F5D1'}]}
             >
-            <Text> {item.status}</Text>
+            <Text style = {[styles.statusFont, {color: item.status === 'Pending' ? '#CEA032':'#63C579'}]}> {item.status}</Text>
           </View>
 
 
-      </View>
+      </TouchableOpacity>
     )
   }
 
@@ -188,11 +198,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   textTabActive:{
-    color: "#fff"
+    color: "#8E2835",
+    fontWeight:"bold",
+    fontSize:13,
   },
   itemContainer:{
     flexDirection:"row",
-    paddingVertical:15
+    paddingVertical:15,
+    paddingHorizontal:20,
   },
   itemImage:{
     width: 50,
@@ -210,10 +223,12 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   itemStatus:{
-    backgroundColor: "green",
-    paddingHorizontal: 6,
+    backgroundColor: "#69C080",
+    paddingHorizontal: 17,
+    height:30,
     justifyContent: 'center',
-    right:12,
+    right:14,
+    borderRadius:5,
   },
   headLine: {
     flexDirection: "column",
@@ -244,6 +259,9 @@ const styles = StyleSheet.create({
   title: {
     top: 40,
     //left: 110,
+  },
+  statusFont:{
+    fontWeight:"bold"
   },
 
   

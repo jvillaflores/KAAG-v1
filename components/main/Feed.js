@@ -54,8 +54,8 @@ function Community({ currentUser, posts, navigation }) {
             />
             <Text style={styles.profilename}> {currentUser.name}</Text>
           </View>
-          <Text style={{ fontWeight: "bold" }}> {item.title}</Text>
-          <View style={{ padding: 10 }}>
+          <Text style={{ fontWeight: "bold", marginLeft:10 }}> {item.title}</Text>
+          <View style={{ padding: 30 }}>
             <SeeMore numberOfLines={2} style={styles.textVocab}>
               {" "}
               {item.description}

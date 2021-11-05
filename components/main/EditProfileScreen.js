@@ -19,7 +19,9 @@ import Animated from 'react-native-reanimated';
 
 import * as ImagePicker from "expo-image-picker";
 
-const EditProfileScreen = () => {
+import { connect } from "react-redux";
+
+const EditProfileScreen = ({ currentUser, navigation }) => {
 
     const [image, setImage] = useState(null);
 
@@ -153,7 +155,7 @@ const EditProfileScreen = () => {
                     </TouchableOpacity>
                         
                         <Text style = {{marginTop: 10, fontSize: 18, fontWeight: "bold",  }}>
-                            Jan Villaflores
+                            {currentUser.name}
                         </Text>
                 </View>
 
@@ -199,7 +201,13 @@ const EditProfileScreen = () => {
     )
 }
 
-export default EditProfileScreen
+
+const mapStateToProps = (store) => ({
+  
+  currentUser: store.userState.currentUser,
+});
+
+export default connect(mapStateToProps, null)(EditProfileScreen);
 
 const styles = StyleSheet.create({
     container: {

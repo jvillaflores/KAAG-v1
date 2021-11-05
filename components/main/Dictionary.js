@@ -54,12 +54,13 @@ function Dictionary({ dictionaryAll, navigation }) {
                 <Text style={styles.textVocab}> {item.kagan} </Text>
                 <Text style={styles.textVocabSubSub}>/{item.filipino}/</Text>
                 <Text style={styles.textVocabSub}>{item.meaning}</Text>
+               
               </View>
 
               <View style={styles.audioButton}>
                 <TouchableOpacity
                   style={styles.audioButton}
-                  onPress={() => downloadAudio()}
+                  onPressOut={() => downloadAudio()}
                 >
                   
                   <MaterialCommunityIcons

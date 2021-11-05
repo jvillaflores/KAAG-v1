@@ -99,6 +99,7 @@ function Save({ currentUser, route, navigation }) {
           <TextInput
             style={styles.input}
             multiline={true}
+            autoCorrect={false}
             onChangeText={(title) => setTitle(title)}
           />
         </View>
@@ -112,6 +113,7 @@ function Save({ currentUser, route, navigation }) {
           <TextInput
             style={styles.description_input}
             multiline={true}
+            autoCorrect={false}
             onChangeText={(description) => setDescription(description)}
           />
         </View>
@@ -124,6 +126,7 @@ function Save({ currentUser, route, navigation }) {
           <TextInput
             style={styles.tags_input}
             multiline={true}
+            autoCorrect={false}
             onChangeText={(tags) => setTags(tags)}
           />
         </View>
