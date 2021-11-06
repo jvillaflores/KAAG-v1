@@ -68,7 +68,7 @@ function ValidatorApplication({ currentUser, route, navigation }) {
 
                     </TextInput>
                 </View>
-                <View style = {{flexDirection:"row", flex:1, justifyContent:"center", marginTop:10}}>
+                <View style = {{flexDirection:"row", flex:1, justifyContent:"center", marginVertical:25}}>
                     <Pressable style={[styles.button,{backgroundColor:"#8E2835"}]}>
                         <Text style={[styles.text,{fontSize:16, color:'white'}]}>Submit Application</Text>
                     </Pressable>
