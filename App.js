@@ -54,6 +54,7 @@ import Vocabulary1Screen from "./components/main/coursepacks/screens/Vocabulary1
 import newDReviewScreen from "./components/main/newDReview";
 import MyContributionsScreen from "./components/main/MyContributions";
 import BeAValidatorScreen from "./components/main/BeAValidator";
+import ValidatorAppScreen from './components/main/ValidatorApplication';
 import ValidationScreen from "./components/main/Validation";
 import ValidateWordScreen from "./components/main/ValidateWord";
 import DeclineScreen from "./components/main/Decline";
@@ -304,6 +305,35 @@ export class App extends Component {
               component={DeclineScreen}
               options={{
                 title: "Decline",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="ValidatorScreen"
+              component={BeAValidatorScreen}
+              options={{
+                title: " ",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+
+            <Stack.Screen
+              name="ValAppScreen"
+              component={ValidatorAppScreen}
+              options={{
+                title: " ",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {

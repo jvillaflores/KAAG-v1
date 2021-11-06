@@ -62,7 +62,7 @@ function ApplicationConf({ currentUser, route, navigation }) {
                 </View>
             </View>
 
-            <View style = {{flexDirection:"row" , justifyContent:"center"}}>
+            <View style = {{flexDirection:"row", flex:1, justifyContent:"center"}}>
                 <Pressable style={[styles.button,{backgroundColor:"#288E4D"}]}>
                     <Text style={[styles.text,{fontSize:16, color:'white'}]}>Accept</Text>
                 </Pressable>

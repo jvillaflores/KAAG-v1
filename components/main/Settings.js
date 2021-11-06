@@ -60,6 +60,12 @@ const onLogout = () => {
             <Text style={styles.menuItemText}>Check Submissions</Text>
           </View>
         </TouchableRipple>
+        <TouchableRipple onPress={() => navigation.navigate("ValidatorScreen")}>
+          <View style={styles.menuItem}>
+            <Icon name="account-tie" color="#777777" size={25} />
+            <Text style={styles.menuItemText}>Be A Validator</Text>
+          </View>
+        </TouchableRipple>
 
         <TouchableRipple onPress={() => onLogout()}>
           <View style={styles.menuItem}>
