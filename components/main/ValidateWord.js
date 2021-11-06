@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -17,246 +17,259 @@ import { connect } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-
 var head = require("../../assets/learning.svg");
 
-const listTab =[
+const listTab = [
   {
-    status: 'All'
+    status: "All",
   },
   {
-    status: 'Confirmed'
+    status: "Confirmed",
   },
   {
-    status: 'Pending'
+    status: "Pending",
   },
   {
-    status: 'Declined'
+    status: "Declined",
   },
-]
-
-
+];
 
 const data = [
   //from database which consists of words from contribution
   {
-    name : 'ako',
-    translated: 'ako',
-    status: 'Confirmed'
+    name: "ako",
+    translated: "ako",
+    status: "Confirmed",
   },
   {
-    name : 'yan',
-    translated: 'siya',
-    status: 'Confirmed'
+    name: "yan",
+    translated: "siya",
+    status: "Confirmed",
   },
   {
-    name : 'silan',
-    translated: 'sila',
-    status: 'Pending'
+    name: "silan",
+    translated: "sila",
+    status: "Pending",
   },
   {
-    name : 'isa',
-    translated: 'isa',
-    status: 'Pending'
+    name: "isa",
+    translated: "isa",
+    status: "Pending",
   },
   {
-    name : 'yani',
-    translated: 'ito',
-    status: 'Pending'
+    name: "yani",
+    translated: "ito",
+    status: "Pending",
   },
   {
-    name : 'mapaso',
-    translated: 'mainit',
-    status: 'Confirmed'
+    name: "mapaso",
+    translated: "mainit",
+    status: "Confirmed",
   },
   {
-    name : 'oras',
-    translated: 'oras',
-    status: 'Confirmed'
+    name: "oras",
+    translated: "oras",
+    status: "Confirmed",
   },
   {
-    name : 'kami',
-    translated: 'namin',
-    status: 'Pending'
+    name: "kami",
+    translated: "namin",
+    status: "Pending",
   },
   {
-    name : 'yagalihok',
-    translated: 'gumagana',
-    status: 'Declined'
+    name: "yagalihok",
+    translated: "gumagana",
+    status: "Declined",
   },
   {
-    name : 'kallini',
-    translated: 'gusto',
-    status: 'Confirmed'
+    name: "kallini",
+    translated: "gusto",
+    status: "Confirmed",
   },
+];
 
-]
+function ValidateWord({ dictionaryAll, navigation }) {
+  const [status, setStatus] = useState("All");
+  const [datalist, setDatalist] = useState(data);
 
-function ValidateWord({ dictionary, navigation }) {
-
-  const [status, setStatus] = useState('All')
-  const [datalist, setDatalist] = useState(data)
-
-
-  const setStatusFilter = status =>{
-
-    if(status !== 'All'){ //purple and green
-      setDatalist([...data.filter(e => e.status === status)])
+  const setStatusFilter = (status) => {
+    if (status !== "All") {
+      //purple and green
+      setDatalist([...data.filter((e) => e.status === status)]);
     } else {
-      setDatalist(data)
+      setDatalist(data);
     }
-    setStatus(status)
-  }
+    setStatus(status);
+  };
 
-  const renderItem = ({item, index}) => {
-    return(
-      <TouchableOpacity key ={index} style = {styles.itemContainer}>
-          
-        <View style = {{flexDirection:"column", flex:1}}>
-          <View style = {styles.itemBody}>
-            <Text style = {styles.itemsName}> {item.name}</Text>
+  const renderItem = ({ item, index }) => {
+    return (
+      <TouchableOpacity
+        key={index}
+        style={styles.itemContainer}
+        onPress={() => navigation.navigate("Validation")}
+      >
+        <View style={{ flexDirection: "column", flex: 1 }}>
+          <View style={styles.itemBody}>
+            <Text style={styles.itemsName}> {item.name}</Text>
           </View>
-          <View style = {styles.itemBody}>
+          <View style={styles.itemBody}>
             <Text> {item.translated}</Text>
           </View>
         </View>
 
-        <View style = {styles.buttonContainer}> 
-          <View 
-            style = { [styles.itemStatus,
-              {backgroundColor: item.status === 'Pending' ? '#FFEFC5': '#B5F5D1' && item.status === 'Declined' ? '#FFEFEE' : '#B5F5D1'},
-             
+        <View style={styles.buttonContainer}>
+          <View
+            style={[
+              styles.itemStatus,
+              {
+                backgroundColor:
+                  item.status === "Pending"
+                    ? "#FFEFC5"
+                    : "#B5F5D1" && item.status === "Declined"
+                    ? "#FFEFEE"
+                    : "#B5F5D1",
+              },
             ]}
+          >
+            <Text
+              style={[
+                styles.statusFont,
+                {
+                  color:
+                    item.status === "Pending"
+                      ? "#CEA032"
+                      : "#63C579" && item.status === "Declined"
+                      ? "#FF9797"
+                      : "#63C579",
+                },
+              ]}
             >
-              
-            <Text style = {[styles.statusFont, {color: item.status === 'Pending' ? '#CEA032':'#63C579'&& item.status === 'Declined' ? '#FF9797' : '#63C579'}]}> {item.status}</Text>
+              {" "}
+              {item.status}
+            </Text>
           </View>
-          <View style = { [styles.arrowRight,
-            ]}
-            >
-              
-            <MaterialCommunityIcons name="chevron-right" size={20} color = '#8E2835'/>
+          <View style={[styles.arrowRight]}>
+            <MaterialCommunityIcons
+              name="chevron-right"
+              size={20}
+              color="#8E2835"
+            />
           </View>
-          
-      </View>
-
+        </View>
       </TouchableOpacity>
-    )
-  }
+    );
+  };
 
   const separator = () => {
-    return <View style = {{height: 1, backgroundColor: "#E6E5E5"}}/>
-  }
+    return <View style={{ height: 1, backgroundColor: "#E6E5E5" }} />;
+  };
 
   return (
-    <SafeAreaView style = {styles.container}>
-        <View style={styles.headLine}>
-         <View style={styles.title}>
-           <Text style={styles.textHead}>Validating</Text>
-           <Text style={styles.textSubHead}> Dictionary</Text>
-          
-         </View>
-       </View>
-        <View style = {styles.listTab}>
-          {
-            listTab.map(e => (
-            <TouchableOpacity 
-                style = {[styles.btnTab, status === e.status && styles.brnTabActive]}
-                onPress={()=> setStatusFilter(e.status)}>
-              {/* <Text style = {styles.textTab && status === e.status && styles.textTabActive}>{e.status}</Text> */}
-              <Text style = {styles.textTab && styles.textTabActive}>{e.status}</Text>
-            </TouchableOpacity>
-              
-            ))
-          }
+    <SafeAreaView style={styles.container}>
+      <View style={styles.headLine}>
+        <View style={styles.title}>
+          <Text style={styles.textHead}>Validating</Text>
+          <Text style={styles.textSubHead}> Dictionary</Text>
         </View>
+      </View>
+      <View style={styles.listTab}>
+        {listTab.map((e) => (
+          <TouchableOpacity
+            style={[styles.btnTab, status === e.status && styles.brnTabActive]}
+            onPress={() => setStatusFilter(e.status)}
+          >
+            {/* <Text style = {styles.textTab && status === e.status && styles.textTabActive}>{e.status}</Text> */}
+            <Text style={styles.textTab && styles.textTabActive}>
+              {e.status}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
 
-          <FlatList
-            data = {datalist}
-            keyExtractor = {(e, i) => i.toString()}
-            renderItem={renderItem}
-            ItemSeparatorComponent={separator}
-          />
-
+      <FlatList
+        data={datalist}
+        keyExtractor={(e, i) => i.toString()}
+        renderItem={renderItem}
+        ItemSeparatorComponent={separator}
+      />
     </SafeAreaView>
-  
   );
 }
 const mapStateToProps = (store) => ({
-  dictionary: store.userState.dictionary,
+  dictionaryAll: store.userState.dictionaryAll,
 });
 
 export default connect(mapStateToProps, null)(ValidateWord);
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
+  container: {
+    flex: 1,
     //paddingHorizontal:10,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
-  listTab:{
-    alignSelf:"center",
-    marginBottom:20,
+  listTab: {
+    alignSelf: "center",
+    marginBottom: 20,
     flexDirection: "row",
-    paddingHorizontal:2,
-    backgroundColor:"#ebebeb",
-    borderRadius:10,
+    paddingHorizontal: 2,
+    backgroundColor: "#ebebeb",
+    borderRadius: 10,
   },
 
-  btnTab:{
-    width: Dimensions.get('window').width / 4.5,
+  btnTab: {
+    width: Dimensions.get("window").width / 4.5,
     flexDirection: "row",
     borderWidth: 0.5,
     borderColor: "#ebebeb",
-    padding:10,
-    justifyContent: 'center'
-
+    padding: 10,
+    justifyContent: "center",
   },
-  textTab:{
-    fontSize:12,
-    fontWeight:"bold",
-    color:"#000000"
+  textTab: {
+    fontSize: 12,
+    fontWeight: "bold",
+    color: "#000000",
     //lineHeight: 1,
   },
   brnTabActive: {
     backgroundColor: "#fff",
     borderRadius: 10,
   },
-  textTabActive:{
+  textTabActive: {
     color: "#8E2835",
-    fontWeight:"bold",
-    fontSize:13,
+    fontWeight: "bold",
+    fontSize: 13,
   },
-  itemContainer:{
-    flexDirection:"row",
-    paddingVertical:15,
-    paddingHorizontal:20,
+  itemContainer: {
+    flexDirection: "row",
+    paddingVertical: 15,
+    paddingHorizontal: 20,
   },
   itemLogo: {
-    padding: 10
+    padding: 10,
   },
-  itemImage:{
+  itemImage: {
     width: 50,
     height: 50,
   },
 
   itemBody: {
-    flex:1, 
+    flex: 1,
     paddingHorizontal: 10,
-    justifyContent: "center"
+    justifyContent: "center",
   },
 
   itemsName: {
     fontWeight: "bold",
-    fontSize: 16
+    fontSize: 16,
   },
-  itemStatus:{
+  itemStatus: {
     backgroundColor: "#69C080",
     paddingHorizontal: 17,
-    height:30,
-    justifyContent: 'center',
-    right:14,
-    borderRadius:5,
+    height: 30,
+    justifyContent: "center",
+    right: 14,
+    borderRadius: 5,
   },
   headLine: {
     flexDirection: "column",
@@ -265,16 +278,15 @@ const styles = StyleSheet.create({
     top: -20,
     height: 150,
     backgroundColor: "#8E2835",
-    alignItems:"flex-start",
+    alignItems: "flex-start",
     justifyContent: "center",
-    position:"relative"
-
+    position: "relative",
   },
   textHead: {
     fontSize: 20,
     fontWeight: "bold",
     letterSpacing: 0.25,
-    position:"relative",
+    position: "relative",
     alignSelf: "center",
     color: "white",
   },
@@ -288,24 +300,21 @@ const styles = StyleSheet.create({
     top: 40,
     //left: 110,
   },
-  statusFont:{
-    fontWeight:"bold"
+  statusFont: {
+    fontWeight: "bold",
   },
-  arrowRight:{
+  arrowRight: {
     backgroundColor: "#ebebeb",
     paddingHorizontal: 5,
-    width:30,
-    height:30,
-    justifyContent: 'center',
-    right:2,
-    borderRadius:5,
-    margin:10
+    width: 30,
+    height: 30,
+    justifyContent: "center",
+    right: 2,
+    borderRadius: 5,
+    margin: 10,
   },
-  buttonContainer:{
-    alignItems:"flex-end",
-    alignSelf:"center",
-
-  }
-
-  
+  buttonContainer: {
+    alignItems: "flex-end",
+    alignSelf: "center",
+  },
 });

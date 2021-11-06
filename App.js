@@ -54,6 +54,9 @@ import Vocabulary1Screen from "./components/main/coursepacks/screens/Vocabulary1
 import newDReviewScreen from "./components/main/newDReview";
 import MyContributionsScreen from "./components/main/MyContributions";
 import BeAValidatorScreen from "./components/main/BeAValidator";
+import ValidationScreen from "./components/main/Validation";
+import ValidateWordScreen from "./components/main/ValidateWord";
+import DeclineScreen from "./components/main/Decline";
 
 const Stack = createStackNavigator();
 
@@ -86,11 +89,7 @@ export class App extends Component {
   render() {
     const { loggedIn, loaded } = this.state;
     if (!loaded) {
-      return (
-        <View style={{ flex: 1, justifyContent: "center" }}>
-          <Text> Loading </Text>
-        </View>
-      );
+      return <View style={{ flex: 1, justifyContent: "center" }}></View>;
     }
     if (!loggedIn) {
       return (
@@ -242,9 +241,37 @@ export class App extends Component {
 
             <Stack.Screen
               name="Validate"
-              component={BeAValidatorScreen}
+              component={ValidateWordScreen}
               options={{
                 title: "",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="Validation"
+              component={ValidationScreen}
+              options={{
+                title: "Validation",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="Decline"
+              component={DeclineScreen}
+              options={{
+                title: "Decline",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {
