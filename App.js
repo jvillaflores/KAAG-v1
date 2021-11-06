@@ -57,6 +57,8 @@ import BeAValidatorScreen from "./components/main/BeAValidator";
 import ValidationScreen from "./components/main/Validation";
 import ValidateWordScreen from "./components/main/ValidateWord";
 import DeclineScreen from "./components/main/Decline";
+import ApplicationsScreen from "./components/main/Applications";
+import ApplicationConfScreen from "./components/main/ApplicationConf";
 
 const Stack = createStackNavigator();
 
@@ -267,6 +269,36 @@ export class App extends Component {
                 },
               }}
             />
+
+            <Stack.Screen
+              name="ApplicationScreen"
+              component={ApplicationsScreen}
+              options={{
+                title: " ",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="ConfrimationScreen"
+              component={ApplicationConfScreen}
+              options={{
+                title: " ",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+
             <Stack.Screen
               name="Decline"
               component={DeclineScreen}
@@ -281,6 +313,7 @@ export class App extends Component {
                 },
               }}
             />
+            
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

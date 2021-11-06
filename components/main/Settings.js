@@ -48,10 +48,16 @@ const onLogout = () => {
             <Text style={styles.menuItemText}>My Contributions</Text>
           </View>
         </TouchableRipple>
+        <TouchableRipple onPress={() => navigation.navigate("ApplicationScreen")}>
+          <View style={styles.menuItem}>
+            <Icon name="folder-account" color="#777777" size={25} />
+            <Text style={styles.menuItemText}>Applications</Text>
+          </View>
+        </TouchableRipple>
         <TouchableRipple onPress={() => navigation.navigate("Validate")}>
           <View style={styles.menuItem}>
             <Icon name="checkbox-marked-circle-outline" color="#777777" size={25} />
-            <Text style={styles.menuItemText}> Check Submissions</Text>
+            <Text style={styles.menuItemText}>Check Submissions</Text>
           </View>
         </TouchableRipple>
 
