@@ -50,28 +50,7 @@ function Dictionary({ dictionaryAll, navigation }) {
     return unsubscribe;
   }, [navigation]);
 
-  const SoundObject = useRef(new Audio.Sound());
-
   console.log(dictionaryAll);
-  const downloadAudio = async (uri) => {
-    // let SoundObject = new Audio.Sound();
-    try {
-      if (playing) await SoundObject.current.stopAsync();
-    } catch (error) {}
-    try {
-      await SoundObject.current.loadAsync({ uri: uri });
-      // let sound = await SoundObject.getStatusAsync();
-      // if (sound.isLoaded) {
-      // await SoundObject.stopAsync();
-      await SoundObject.current.playAsync();
-      setPlaying(true);
-      // }
-    } catch (error) {
-      console.log(error);
-      await SoundObject.current.unloadAsync(); // Unload any Sound loaded
-      SoundObject.current.setOnPlaybackStatusUpdate(null); // Unset all playback status loaded
-    }
-  };
 
   return (
     <NavigationContainer independent={true}>
@@ -95,7 +74,7 @@ function Dictionary({ dictionaryAll, navigation }) {
           return (
             <TouchableOpacity
               style={styles.Kagan}
-              onPress={() => downloadAudio(item.downloadURL)}
+              onPress={() => navigation.navigate("Word", { data: item })}
             >
               <View>
                 <Text style={styles.textVocab}> {item.kagan} </Text>
@@ -104,10 +83,7 @@ function Dictionary({ dictionaryAll, navigation }) {
               </View>
 
               <View style={styles.audioButton}>
-                <TouchableOpacity
-                  style={styles.audioButton}
-                  onPress={() => downloadAudio(item.downloadURL)}
-                >
+                <TouchableOpacity style={styles.audioButton}>
                   <MaterialCommunityIcons
                     name="volume-high"
                     color={"#707070"}

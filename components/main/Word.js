@@ -14,72 +14,38 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { NavigationContainer } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-
 import { Audio } from "expo-av";
 import { connect } from "react-redux";
 
 var head = require("../../assets/learning.svg");
 
-const Word = ({ dictionaryAll,route }) => {
-  console.log(dictionaryAll);
+const Word = ({ route }) => {
+  const { data } = route?.params ?? {};
+
+  const downloadAudio = async () => {
+    let SoundObject = new Audio.Sound();
+    try {
+      await SoundObject.loadAsync({ uri: data.downloadURL });
+      await SoundObject.playAsync();
+    } catch (error) {
+      console.log(error);
+      await SoundObject.unloadAsync(); // Unload any sound loaded
+      SoundObject.setOnPlaybackStatusUpdate(null); // Unset all playback status loaded
+      retryPlaySound();
+    }
+  };
+
+  const retryPlaySound = () => downloadAudio();
+
   return (
-    //  <NavigationContainer independent={true}>
-    // <FlatList 
-    //   data={dictionaryAll}
-    //   style={{ flex: 1 }}
-    //     renderItem={({ item }) => {
-    //       const downloadAudio = async () => {
-    //         // The rest of this plays the audio
-    //         const soundObject = new Audio.Sound();
-    //         try {
-    //           await soundObject.loadAsync(item.downloadURL);
-    //           await soundObject.playAsync();
-    //         } catch (error) {
-    //           console.log("error:", error);
-    //         }
-    //       };
-    //       return (
-    //         <View style={styles.headLine}>
-    //           <View style={styles.header_line}>
-    //           <Text style={styles.textHead}>{item.kagan}</Text>
-    //           <Text style={styles.textSubHead}>{item.filipino}</Text>
-    //           </View>
-
-
-    //           <TouchableOpacity
-    //               style={styles.buttonAudio}
-    //               onPress={() => downloadAudio()}
-    //             >
-    //               <MaterialCommunityIcons
-    //                 // style={styles.addAudio}
-    //                 name="volume-high"
-    //                 color={"#707070"}
-    //                 size={26}
-    //               />
-    //             </TouchableOpacity>
-
-    //         </View>
-            
-    //       );
-    //     }}
-      
-    //   />
-    //  </NavigationContainer>
-    
-    
-    <View
-      data={dictionaryAll}>
+    <View>
       <View style={styles.headLine}>
         <View style={styles.header_line}>
-          <Text style={styles.textHead}> AiMBABAKi</Text>
-          <Text style={styles.textSubHead}> /aim.ba.ba.'ki/</Text>
+          <Text style={styles.textHead}> {data?.kagan} </Text>
+          <Text style={styles.textSubHead}> {data?.filipino} </Text>
         </View>
 
-
-        <Pressable
-          style={styles.buttonAudio}
-          onPress={() => navigation.navigate("Vocabulary")}
-        >
+        <Pressable style={styles.buttonAudio} onPress={() => downloadAudio()}>
           <View>
             <MaterialCommunityIcons
               name="volume-high"
@@ -91,13 +57,13 @@ const Word = ({ dictionaryAll,route }) => {
       </View>
 
       <View style={styles.Kagan}>
-            <Text style={styles.textVocab}> Adjective</Text>
-            <Text style={styles.textVocabSubSub}>
-              1. feeling or showing pleasure or contentment.
-            </Text>
-            <Text style={styles.textVocabSub}>
-              "Melissa came in looking happy and excited"
-            </Text>
+        <Text style={styles.textVocab}> Definition </Text>
+        <Text style={styles.textVocabSubSub}> {data?.meaning} </Text>
+        <Text style={styles.textVocab}> Additional Information </Text>
+        <Text style={styles.textVocabSubSub}>1. Kagan Sentence </Text>
+        <Text style={styles.textVocabSub}>"{data?.sentence}"</Text>
+        <Text style={styles.textVocabSubSub}>2. Filipino Sentence </Text>
+        <Text style={styles.textVocabSub}> "{data?.filipinoSentence}"</Text>
       </View>
     </View>
   );
@@ -107,7 +73,7 @@ const mapStateToProps = (store) => ({
   dictionaryAll: store.userState.dictionaryAll,
 });
 
-export default connect (mapStateToProps, null)(Word);
+export default connect(mapStateToProps, null)(Word);
 
 const styles = StyleSheet.create({
   header: {
@@ -139,7 +105,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     letterSpacing: 0.25,
-    position:"relative",
+    position: "relative",
     alignSelf: "center",
     color: "white",
   },
@@ -156,18 +122,16 @@ const styles = StyleSheet.create({
     top: -20,
     height: 150,
     backgroundColor: "#8E2835",
-    alignItems:"center",
+    alignItems: "center",
     justifyContent: "center",
-
   },
-   header_line: {
+  header_line: {
     flexDirection: "column",
     //padding: 30,
     //top: 20,
     //height: 150,
-    alignItems:"center",
+    alignItems: "center",
     //justifyContent: "center",
-
   },
   textHeadline: {
     flexDirection: "row",
@@ -183,7 +147,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   Kagan: {
-    justifyContent:"flex-start",
+    justifyContent: "flex-start",
     top: 20,
     left: 40,
   },
@@ -243,10 +207,10 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     // paddingVertical: 12,
     // paddingHorizontal: 32,
-     borderRadius: 7,
+    borderRadius: 7,
     // elevation: 3,
     // width: 60,
-     backgroundColor: "#79222D",
+    backgroundColor: "#79222D",
     // top: 40,
     // left: -100,
     // height: 50,
@@ -281,7 +245,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     letterSpacing: 0.25,
     color: "#000000",
-    marginTop:5,
+    marginTop: 5,
   },
   text: {
     fontSize: 15,
