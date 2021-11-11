@@ -17,16 +17,21 @@ import { Dimensions } from "react-native";
 import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
-import SeeMore from "react-native-see-more-inline";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-function Community({ currentUser, posts, navigation }) {
+
+
+
+function Community({ currentUser, posts, navigation,props }) {
+  
   const dimensions = Dimensions.get("window");
   const imageHeight = Math.round((dimensions.width * 1) / 1);
   const imageWidth = dimensions.width;
 
   const [datalist, setDatalist] = useState(posts);
 
+
+  
   useEffect(() => {
     setDatalist(posts);
   }, [posts]);
@@ -54,6 +59,8 @@ function Community({ currentUser, posts, navigation }) {
     return unsubscribe;
   }, [navigation]);
 
+ 
+    
   return (
     //no button stylesheet
     <FlatList
@@ -76,10 +83,12 @@ function Community({ currentUser, posts, navigation }) {
             {item.title}
           </Text>
           <View style={{ padding: 30 }}>
-            <SeeMore numberOfLines={2} style={styles.textVocab}>
+            <Text numberOfLines={2} style={styles.textVocab}>
               {" "}
               {item.description}
-            </SeeMore>
+           
+            </Text>
+            
           </View>
           <Image
             style={{ height: imageWidth, width: imageWidth }}

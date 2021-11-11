@@ -8,6 +8,7 @@ import {
   Text,
   StyleSheet,
   Pressable,
+  ScrollView
 } from "react-native";
 import { connect } from "react-redux";
 import firebase from "firebase";
@@ -15,6 +16,8 @@ import { NavigationContainer } from "@react-navigation/native";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
+import { FloatingLabelInput } from 'react-native-floating-label-input';
 
 function Save({ currentUser, route, navigation }) {
   const [title, setTitle] = useState("");
@@ -84,61 +87,93 @@ function Save({ currentUser, route, navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.bottom}>
-        <Image source={{ uri: route.params.image }} />
+    <ScrollView style={styles.container}>
+            <View>
+              <Image source={{ uri: route.params.image }} />
+            </View>
 
-        {/* <TextInput
-              style = {styles.text_input} 
-              value={currentUser.name} /> */}
-      </View>
-      <View style={styles.center}>
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Title </Text>
-          <Text style={styles.guidelines}> Type the title of your image.</Text>
-          <TextInput
-            style={styles.input}
-            multiline={true}
-            autoCorrect={false}
-            onChangeText={(title) => setTitle(title)}
-          />
-        </View>
+            <View style={styles.bodycontainer}>
+              <View style = {{marginVertical:10,}}>
+                  <Text style = {[styles.text,{fontSize:16}]}>Title </Text>
+                  <Text style = {[styles.textItalized,{fontSize:14, color: "#707070"}]} > Type the title of your image.</Text>
+                  <TextInput
+                    style={[styles.addButton,{height:50}]}
+                    multiline={true}
+                    autoCorrect={false}
+                    onChangeText={(title) => setTitle(title)}
+                    maxLength={25}
+                  />
 
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Description </Text>
-          <Text style={styles.guidelines}>
-            {" "}
-            Describe the image you have added.
-          </Text>
-          <TextInput
-            style={styles.description_input}
-            multiline={true}
-            autoCorrect={false}
-            onChangeText={(description) => setDescription(description)}
-          />
-        </View>
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Tags </Text>
-          <Text style={styles.guidelines}>
-            {" "}
-            Add tags that are related to your image.
-          </Text>
-          <TextInput
-            style={styles.tags_input}
-            multiline={true}
-            autoCorrect={false}
-            onChangeText={(tags) => setTags(tags)}
-          />
-        </View>
-      </View>
-      <Pressable
-        style={styles.button}
-        title="Save"
-        onPress={() => uploadImage()}
-      >
-        <Text style={styles.subtitle}>Share</Text>
-      </Pressable>
-    </View>
+              
+              </View>
+
+              <View style = {{marginVertical:10,}}>
+                  <Text style = {[styles.text,{fontSize:16}]}>Description </Text>
+                  <Text style = {[styles.textItalized,{fontSize:14, color: "#707070"}]} >Describe the image you have added.</Text>
+                  <FloatingLabelInput
+                      value={description}
+                      blurOnSubmit={false}
+                      countdownLabel="chars left"
+                      multiline={true}
+                      autoCorrect={false}
+                      onChangeText={(description) => setDescription(description)}
+                      maxLength={95}
+                      showCountdown={true}
+                      color="black"
+                      containerStyles={{
+                        borderWidth: 1,
+                        paddingHorizontal: 10,
+                        borderColor: "#70707033",
+                        borderRadius: 5,
+                        marginVertical:10,
+                      }}
+                      inputStyles={{
+                        flex:1,
+                        letterSpacing: 0.25,
+                        height: 80,
+                        width: "95%",
+                        paddingTop: 1,
+                        marginTop: 10,
+                        borderRadius: 5,
+                        color:"black"
+                        
+                      }}
+                      showCountdownStyles={{
+                        color:"#707070",
+                        
+                        
+                      }}
+                      
+            
+                />
+              </View>
+              <View style = {{marginVertical:10,}}>
+                <Text style = {[styles.text,{fontSize:16}]}>Tags </Text>
+                    <Text style = {[styles.textItalized,{fontSize:14, color: "#707070"}]} > Add tags that are related to your image.</Text>
+                    <TextInput
+                      style={[styles.addButton,{height:50}]}
+                      multiline={true}
+                      autoCorrect={false}
+                      onChangeText={(tags) => setTags(tags)}
+                      
+                    />
+              </View>
+              <View style = {{flexDirection:"row", flex:1, justifyContent:"center",marginVertical:10,}}>
+                <Pressable 
+                    style={[styles.button,{backgroundColor:"#8E2835"}]}
+                    onPress={() => uploadImage()}
+                    >
+                    <Text style={[styles.text,{fontSize:16, color:'white'}]}>Share</Text>
+                </Pressable>
+            </View>
+            </View>
+            
+
+            
+
+
+
+    </ScrollView>
   );
 }
 const mapStateToProps = (store) => ({
@@ -149,92 +184,38 @@ export default connect(mapStateToProps, null)(Save);
 const styles = StyleSheet.create({
   container: {
     alignContent: "center",
-    justifyContent: "center",
     top: 1,
-    //left: 40,
+    paddingVertical:20,
+    paddingHorizontal:20,
+    
   },
-  subtitle: {
-    alignSelf: "center",
+  text: {
+      fontWeight:'bold',
+      fontSize: 20,
+      
+  },
+  textItalized:{
+    fontStyle:'italic',
     fontSize: 18,
-
-    letterSpacing: 0.25,
-    color: "white",
   },
-  button: {
-    alignSelf: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 10,
-    elevation: 1,
-    width: "90%",
-    backgroundColor: "#8E2835",
-    //top: 130,
-    marginTop: 20,
+  bodycontainer:{
+      paddingVertical:30,
+      paddingHorizontal:15,
   },
-  guidelines: {
-    fontSize: 12,
-    fontStyle: "italic",
-    color: "#707070",
+  addButton:{
+      borderColor:"#70707033",
+      borderWidth: 1.5,
+      marginVertical:10,
+      borderRadius:7,
+      alignItems:"center",
+      justifyContent:"center",
+      paddingHorizontal:10
   },
-
-  bottom: {
-    marginBottom: 20,
-  },
-
-  center: {
-    justifyContent: "center",
-    alignContent: "center",
-  },
-
-  paddingLeft: {
-    alignContent: "flex-start",
-    // padding:15,
-    // paddingRight:5,
-    marginTop: 20,
-    paddingLeft: 20,
-  },
-
-  title_text: {
-    //alignContent:"flex-start",
-    fontWeight: "bold",
-    fontSize: 17,
-  },
-  text_input: {
-    alignSelf: "flex-start",
-    paddingLeft: 12,
-    paddingTop: 10,
-  },
-  input: {
-    letterSpacing: 0.25,
-    height: 50,
-    width: "95%",
-    paddingLeft: 12,
-    paddingTop: 1,
-    marginTop: 10,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: "#707070",
-  },
-  tags_input: {
-    letterSpacing: 0.25,
-    height: 80,
-    width: "95%",
-    paddingLeft: 12,
-    paddingTop: 1,
-    marginTop: 10,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: "#707070",
-  },
-  description_input: {
-    letterSpacing: 0.25,
-    height: 100,
-    width: "95%",
-    paddingLeft: 12,
-    paddingTop: 1,
-    marginTop: 10,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: "#707070",
-  },
+  button:{
+      flex:1,
+      alignItems:"center",
+      paddingVertical:20,
+      borderRadius:5,
+  }
+  
 });

@@ -8,6 +8,7 @@ import {
   Pressable,
   Image,
   TouchableOpacity,
+  ScrollView
 } from "react-native";
 import Svg, {Path, G, Rect, Polygon, Title} from 'react-native-svg';
 import RegisterScreen from "./Register";
