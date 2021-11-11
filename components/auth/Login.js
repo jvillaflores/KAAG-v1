@@ -72,7 +72,7 @@ export default class Login extends Component {
            <Pressable style={styles.button} onPress={() => this.onSignUp()}>
               <Text style={styles.text}>Login</Text>
            </Pressable>
-           <Pressable style={styles.buttonGoogle} onPress={() => this.onSignUp()}>
+           {/* <Pressable style={styles.buttonGoogle} onPress={() => this.onSignUp()}>
                   <Svg id="search" xmlns="http://www.w3.org/2000/svg" width="22.845" height="22.845" viewBox="0 0 22.845 22.845">
                     <Path id="Path_382" data-name="Path 382" d="M5.063,145.9l-.8,2.969-2.906.061a11.442,11.442,0,0,1-.084-10.666h0l2.588.474L5,141.314a6.817,6.817,0,0,0,.064,4.59Z" transform="translate(0 -132.099)" fill="#fbbb00"/>
                     <Path id="Path_383" data-name="Path 383" d="M272.6,208.176a11.418,11.418,0,0,1-4.072,11.041h0l-3.259-.166-.461-2.879a6.808,6.808,0,0,0,2.929-3.476h-6.108v-4.519H272.6Z" transform="translate(-249.954 -198.887)" fill="#518ef8"/>
@@ -82,7 +82,7 @@ export default class Login extends Component {
             <Text style={styles.textGoogle}> 
                 
                     Connect with Google </Text>
-         </Pressable>
+         </Pressable> */}
          <View style={styles.signInGroup}>
           <TouchableOpacity onPress={() => navigation.navigate("Register")}>
             <Text>

@@ -142,7 +142,7 @@ function MyContributions({ dictionary, navigation }) {
             <TouchableOpacity 
                 style = {[styles.btnTab, status === e.status && styles.brnTabActive]}
                 onPress={()=> setStatusFilter(e.status)}>
-                  <Text style = {styles.textTab, status === e.status && styles.textTabActive}>{e.status}</Text>
+                  <Text style = {styles.textTab,  styles.textTabActive}>{e.status}</Text>
             </TouchableOpacity>
               
             ))

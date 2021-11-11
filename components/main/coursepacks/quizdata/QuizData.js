@@ -1,33 +1,33 @@
 const data = [
   {
-    question: "What’s the biggest planet in our solar system?",
-    options: ["Jupiter", "Saturn", "Neptune", "Mercury"],
-    correct_option: "Jupiter",
+    question: "TRANSLATE: 'silan' ",
+    options: ["siya", "na", "kanyang", "ako"],
+    correct_option: "siya",
   },
   {
-    question: "What attraction in India is one of the famus in the world?",
-    options: ["Chand Minar", "Taj Mahal", "Stadium"],
-    correct_option: "Taj Mahal",
+    question: "TRANSLATE: 'yan'",
+    options: ["siya", "na", "kanyang", "ako"],
+    correct_option: "na",
   },
   {
-    question: "What land animal can open its mouth the widest?",
-    options: ["Alligator", "Crocodile", "Baboon", "Hippo"],
-    correct_option: "Hippo",
+    question: "TRANSLATE: 'kanan'",
+    options: ["siya", "na", "kanyang", "ako"],
+    correct_option: "kanyang",
   },
   {
-    question: "What is the largest animal on Earth?",
-    options: [
-      "The African elephant",
-      "The blue whale",
-      "The sperm whale",
-      "The giant squid",
-    ],
-    correct_option: "The blue whale",
+    question: "TRANSLATE: 'yan na usog'",
+    options: ["para sa", "noon ay", "sa", "ako" ],
+    correct_option: "noon ay",
   },
   {
-    question: "What is the only flying mammal?",
-    options: ["The bat", "The flying squirrel", "The bald eagle", "The colugo"],
-    correct_option: "The bat",
+    question: "TRANSLATE: 'ako'",
+    options: ["para sa", "noon ay", "sa", "ako"],
+    correct_option: "ako",
+  },
+  {
+    question: "TRANSLATE: 'mapaso'",
+    options: ["malamig", "mainit", "madami", "marumi"],
+    correct_option: "mainit",
   },
 ];
 

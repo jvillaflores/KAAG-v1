@@ -80,9 +80,9 @@ export default class Register extends Component {
            </View>
            
            <Pressable style={styles.button} onPress={() => this.onSignUp()}>
-              <Text style={styles.text}>Login</Text>
+              <Text style={styles.text}>Sign Up</Text>
            </Pressable>
-           <Pressable style={styles.buttonGoogle} onPress={() => this.onSignUp()}>
+           {/* <Pressable style={styles.buttonGoogle} onPress={() => this.onSignUp()}>
                   <Svg id="search" xmlns="http://www.w3.org/2000/svg" width="22.845" height="22.845" viewBox="0 0 22.845 22.845">
                     <Path id="Path_382" data-name="Path 382" d="M5.063,145.9l-.8,2.969-2.906.061a11.442,11.442,0,0,1-.084-10.666h0l2.588.474L5,141.314a6.817,6.817,0,0,0,.064,4.59Z" transform="translate(0 -132.099)" fill="#fbbb00"/>
                     <Path id="Path_383" data-name="Path 383" d="M272.6,208.176a11.418,11.418,0,0,1-4.072,11.041h0l-3.259-.166-.461-2.879a6.808,6.808,0,0,0,2.929-3.476h-6.108v-4.519H272.6Z" transform="translate(-249.954 -198.887)" fill="#518ef8"/>
@@ -92,7 +92,7 @@ export default class Register extends Component {
             <Text style={styles.textGoogle}> 
                 
                     Connect with Google </Text>
-         </Pressable>
+         </Pressable> */}
          <View style={styles.signInGroup}>
           <TouchableOpacity onPress={() => navigation.navigate("RegisterScreen")}>
             <Text>
@@ -236,165 +236,3 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
 });
-
-//       <View>
-//         <View style={styles.banner}>
-//           <Text style={styles.welcome}>Create Account,</Text>
-//           <Text style={styles.subtitle}>Sign up to get started!</Text>
-//         </View>
-//         <View style={styles.loginGroup}>
-//           <Text style={styles.textGrey}>Name</Text>
-//           <TextInput
-//             onChangeText={(name) => this.setState({ name })}
-//             style={styles.input}
-//           />
-//           <Text style={styles.textGrey}>Email</Text>
-//           <TextInput
-//             onChangeText={(email) => this.setState({ email })}
-//             style={styles.input}
-//           />
-//           <Text style={styles.textGrey}>Password</Text>
-//           <TextInput
-//             secureTextEntry={true}
-//             onChangeText={(password) => this.setState({ password })}
-//             style={styles.input}
-//           />
-//         </View>
-//         <Pressable style={styles.button} onPress={() => this.onSignUp()}>
-//           <Text style={styles.text}>Login</Text>
-//         </Pressable>
-//         <Pressable style={styles.buttonGoogle} onPress={() => this.onSignUp()}>
-//           <Text style={styles.textGoogle}>
-//             <Image
-//               style={styles.logo}
-//               source={require("../../assets/Google.svg")}
-//             />
-//             Connect with Google
-//           </Text>
-//         </Pressable>
-//         <View>
-//           <TouchableOpacity
-//             onPress={() => navigation.navigate("RegisterScreen")}
-//             style={styles.signInGroup}
-//           >
-//             <Text>
-//               I'm already a member{" "}
-//               <Text style={styles.textSignUp}>Sign In</Text>
-//             </Text>
-//           </TouchableOpacity>
-//         </View>
-//       </View>
-//     );
-//   }
-// }
-// const styles = StyleSheet.create({
-//   banner: {
-//     flex: 1,
-//     top: 100,
-//     left: 40,
-//   },
-//   loginGroup: {
-//     flex: 1,
-//     top: 150,
-//     left: 30,
-//   },
-//   signInGroup: {
-//     flex: 1,
-
-//     top: 275,
-//     left: 90,
-//   },
-//   welcome: {
-//     flex: 1,
-//     left: 20,
-//     fontSize: 30,
-//     fontWeight: "bold",
-//   },
-//   subtitle: {
-//     flex: 1,
-//     left: 20,
-//     fontSize: 25,
-//     fontWeight: "bold",
-//     color: "grey",
-//   },
-//   button: {
-//     alignSelf: "center",
-//     justifyContent: "center",
-//     paddingVertical: 12,
-//     paddingHorizontal: 32,
-//     borderRadius: 4,
-//     elevation: 3,
-//     width: "80%",
-//     backgroundColor: "#8E2835",
-//     top: 200,
-//     borderTopLeftRadius: 10,
-//     borderTopRightRadius: 10,
-//     borderBottomRightRadius: 10,
-//     borderBottomLeftRadius: 10,
-//   },
-//   buttonGoogle: {
-//     alignSelf: "center",
-//     justifyContent: "center",
-//     paddingVertical: 12,
-//     paddingHorizontal: 32,
-//     borderRadius: 4,
-//     elevation: 3,
-//     width: "80%",
-//     backgroundColor: "#dadada",
-//     top: 215,
-//     borderTopLeftRadius: 10,
-//     borderTopRightRadius: 10,
-//     borderBottomRightRadius: 10,
-//     borderBottomLeftRadius: 10,
-//     borderColor: "black",
-//   },
-//   text: {
-//     alignSelf: "center",
-//     fontSize: 20,
-//     fontWeight: "bold",
-//     lineHeight: 21,
-//     letterSpacing: 0.25,
-//     color: "white",
-//   },
-//   logo: {
-//     width: 16,
-//     height: 16,
-//     right: 10,
-//   },
-//   textGoogle: {
-//     alignSelf: "center",
-//     fontSize: 16,
-//     fontWeight: "bold",
-//     lineHeight: 21,
-//     letterSpacing: 0.25,
-//     color: "black",
-//   },
-//   textGrey: {
-//     fontSize: 15,
-//     color: "grey",
-//     fontWeight: "bold",
-//     left: 50,
-//   },
-//   textMini: {
-//     fontSize: 12,
-//     color: "black",
-//     fontWeight: "bold",
-//     left: 200,
-//   },
-//   textSignUp: {
-//     fontSize: 14,
-//     color: "#8E2835",
-//     fontWeight: "bold",
-//     left: 200,
-//   },
-//   input: {
-//     height: 45,
-//     width: "80%",
-//     margin: 12,
-//     borderWidth: 1,
-//     borderTopLeftRadius: 10,
-//     borderTopRightRadius: 10,
-//     borderBottomRightRadius: 10,
-//     borderBottomLeftRadius: 10,
-//   },
-// });
