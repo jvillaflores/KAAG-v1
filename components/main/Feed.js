@@ -14,25 +14,45 @@ import { connect } from "react-redux";
 import AddButton from "./AddButton";
 
 import { Dimensions } from "react-native";
-
+import firebase from "firebase";
+require("firebase/firestore");
+require("firebase/firebase-storage");
 import SeeMore from "react-native-see-more-inline";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 function Community({ currentUser, posts, navigation }) {
-  const wait = (timeout) => {
-    return new Promise((resolve) => setTimeout(resolve, timeout));
-  };
-
   const dimensions = Dimensions.get("window");
   const imageHeight = Math.round((dimensions.width * 1) / 1);
   const imageWidth = dimensions.width;
 
-  const [refreshing, setRefreshing] = React.useState(false);
+  const [datalist, setDatalist] = useState(posts);
 
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
-  }, []);
+  useEffect(() => {
+    setDatalist(posts);
+  }, [posts]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      firebase
+        .firestore()
+        .collection("posts")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("userPosts")
+        .orderBy("creation", "desc")
+        .get()
+        .then((snapshot) => {
+          console.log(snapshot, "-=-=-=-=-=-=-=-=");
+          let posts = snapshot.docs.map((doc) => {
+            const data = doc.data();
+            const id = doc.id;
+            return { id, ...data };
+          });
+          setDatalist(posts);
+        });
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     //no button stylesheet
@@ -40,11 +60,8 @@ function Community({ currentUser, posts, navigation }) {
       nestedScrollEnabled
       numColumns={1}
       horizontal={false}
-      data={posts}
+      data={datalist}
       style={{ flex: 1 }}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
       renderItem={({ item }) => (
         <View style={styles.container}>
           <View style={styles.profile}>
@@ -54,7 +71,10 @@ function Community({ currentUser, posts, navigation }) {
             />
             <Text style={styles.profilename}> {currentUser.name}</Text>
           </View>
-          <Text style={{ fontWeight: "bold", marginLeft:10 }}> {item.title}</Text>
+          <Text style={{ fontWeight: "bold", marginLeft: 10 }}>
+            {" "}
+            {item.title}
+          </Text>
           <View style={{ padding: 30 }}>
             <SeeMore numberOfLines={2} style={styles.textVocab}>
               {" "}
@@ -73,7 +93,6 @@ function Community({ currentUser, posts, navigation }) {
 
 const mapStateToProps = (store) => ({
   posts: store.userState.posts,
-  postsAll: store.userState.postsAll,
   currentUser: store.userState.currentUser,
 });
 

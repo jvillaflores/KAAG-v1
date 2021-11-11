@@ -19,45 +19,72 @@ require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { NavigationEvents } from "react-navigation";
 import { Audio } from "expo-av";
+import { updateDictionary } from "../../redux/actions";
 
 function Validation({ currentUser, route, navigation }) {
+  const [loading, setLoading] = useState(false)
+  const { data } = route?.params ?? {}
+
+
   const downloadAudio = async () => {
-    // The rest of this plays the audio
-    const soundObject = new Audio.Sound();
+    let SoundObject = new Audio.Sound();
     try {
-      await soundObject.loadAsync(item.downloadURL);
-      await soundObject.playAsync();
+        await SoundObject.loadAsync({ uri: data.downloadURL });
+        await SoundObject.playAsync();
     } catch (error) {
-      console.log("error:", error);
+      console.log(error)
+        await SoundObject.unloadAsync(); // Unload any sound loaded
+        SoundObject.setOnPlaybackStatusUpdate(null); // Unset all playback status loaded
+        retryPlaySound();
     }
-  };
+  }
+
+  const retryPlaySound = () => downloadAudio();
+
+  
+
+  const Accept = () => {
+    setLoading(true)
+    firebase
+      .firestore()
+      .doc(`dictionaryAll/${data?.id}`)
+      .update({
+        status: "1",
+      })
+      .then(result => {
+        navigation.goBack()
+        setLoading(false)
+      })
+      .catch(err => console.log(err, '-=error'))
+  }
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.center}>
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Word </Text>
 
-          <TextInput style={styles.input} multiline={true} />
+          <TextInput style={styles.input} value={data?.kagan} multiline={true} />
         </View>
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>In Filipino </Text>
 
-          <TextInput style={styles.input} multiline={true} />
+          <TextInput style={styles.input} value={data?.filipino} multiline={true} />
         </View>
 
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Kagan Sentence Example </Text>
 
-          <TextInput style={styles.input} multiline={true} />
+          <TextInput style={styles.input} value={data?.sentence} multiline={true} />
         </View>
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Filipino Sentence Transalation </Text>
-          <TextInput style={styles.input} multiline={true} />
+          <TextInput style={styles.input} value={data?.filipinoSentence} multiline={true} />
         </View>
 
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Filipino Meaning </Text>
-          <TextInput style={styles.description_input} multiline={true} />
+          <TextInput style={styles.description_input} value={data?.meaning} multiline={true} />
         </View>
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Audio </Text>
@@ -77,15 +104,17 @@ function Validation({ currentUser, route, navigation }) {
           </TouchableOpacity>
         </View>
       </View>
-      <Pressable style={styles.buttonAccept}>
-        <Text style={styles.subtitle}>Accept</Text>
-      </Pressable>
-      <Pressable
-        style={styles.button}
-        onPress={() => navigation.navigate("Decline")}
-      >
-        <Text style={styles.subtitle}>Decline</Text>
-      </Pressable>
+      <View style={styles.row}>
+        <Pressable style={styles.buttonAccept} onPress={() => Accept()}>
+          <Text style={styles.subtitle}>{loading ? "Accepting..." : "Accept"}</Text>
+        </Pressable>
+        <Pressable
+          style={styles.button}
+          onPress={() => navigation.navigate("Decline", { data: data })}
+        >
+          <Text style={styles.subtitle}>Decline</Text>
+        </Pressable>
+      </View>
     </ScrollView>
   );
 }
@@ -102,6 +131,13 @@ const styles = StyleSheet.create({
     top: 1,
     //left: 40,
   },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    marginBottom: 100,
+    marginTop: 30
+  },
   subtitle: {
     alignSelf: "center",
     fontSize: 18,
@@ -110,7 +146,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   buttonAccept: {
-    alignSelf: "flex-start",
+    // alignSelf: "flex-start",
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 10,
@@ -118,11 +154,11 @@ const styles = StyleSheet.create({
     width: "40%",
     backgroundColor: "#73B504",
     //top: 130,
-    marginTop: 20,
-    marginBottom: 80,
+    // marginTop: 20,
+    // marginBottom: 80,
   },
   button: {
-    alignSelf: "flex-end",
+    // alignSelf: "flex-end",
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 10,
@@ -130,7 +166,7 @@ const styles = StyleSheet.create({
     width: "40%",
     backgroundColor: "#8E2835",
     //top: 130,
-    marginBottom: 100,
+    // marginBottom: 100,
   },
   audioButton: {
     alignItems: "center",

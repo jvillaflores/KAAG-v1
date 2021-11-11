@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -13,22 +13,50 @@ import {
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
 import AddButton from "./AddButton";
-
+import firebase from "firebase";
+require("firebase/firestore");
+require("firebase/firebase-storage");
 import SeeMore from "react-native-see-more-inline";
 
 import { Dimensions } from "react-native";
 
-function Community({ postsAll }) {
+function Community({ postsAll, navigation }) {
   const dimensions = Dimensions.get("window");
   //const imageHeight = Math.round(dimensions.width * 1 / 1);
   const imageWidth = dimensions.width;
+  const [datalist, setDatalist] = useState(postsAll);
+
+  useEffect(() => {
+    setDatalist(postsAll);
+  }, [postsAll]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      firebase
+        .firestore()
+        .collection("postsAll")
+        .orderBy("creation", "desc")
+        .get()
+        .then((snapshot) => {
+          console.log(snapshot, "-=-=-=-=-=-=-=-=");
+          let postsAll = snapshot.docs.map((doc) => {
+            const data = doc.data();
+            const id = doc.id;
+            return { id, ...data };
+          });
+          setDatalist(postsAll);
+        });
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <FlatList
       nestedScrollEnabled
       numColumns={1}
       horizontal={false}
-      data={postsAll}
+      data={datalist}
       style={{ flex: 1 }}
       renderItem={({ item }) => (
         <View style={styles.container}>
@@ -40,7 +68,10 @@ function Community({ postsAll }) {
             <Text style={styles.profilename}>{item.username} </Text>
           </View>
 
-          <Text style={{ fontWeight: "bold", marginLeft:10 }}> {item.title}</Text>
+          <Text style={{ fontWeight: "bold", marginLeft: 10 }}>
+            {" "}
+            {item.title}
+          </Text>
           <View style={{ padding: 30 }}>
             <SeeMore numberOfLines={2} style={styles.textVocab}>
               {" "}

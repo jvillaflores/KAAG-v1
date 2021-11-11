@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -9,15 +9,69 @@ import {
   FlatList,
 } from "react-native";
 
+import firebase from "firebase";
+require("firebase/firestore");
+require("firebase/firebase-storage");
 import { connect } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Audio } from "expo-av";
+import { Value } from "react-native-reanimated";
+import { Sound } from "expo-av/build/Audio";
 var head = require("../../assets/learning.svg");
 
 function Dictionary({ dictionaryAll, navigation }) {
+  const [playing, setPlaying] = useState(false);
+  const [datalist, setDatalist] = useState(dictionaryAll);
+
+  useEffect(() => {
+    setDatalist(dictionaryAll);
+  }, [dictionaryAll]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      firebase
+        .firestore()
+        .collection("dictionaryAll")
+        .where("status", "==", "1")
+        .get()
+        .then((snapshot) => {
+          console.log(snapshot, "-=-=-=-=-=-=-=-=");
+          let dictionaryAll = snapshot.docs.map((doc) => {
+            const data = doc.data();
+            const id = doc.id;
+            return { id, ...data };
+          });
+          setDatalist(dictionaryAll);
+        });
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  const SoundObject = useRef(new Audio.Sound());
+
   console.log(dictionaryAll);
+  const downloadAudio = async (uri) => {
+    // let SoundObject = new Audio.Sound();
+    try {
+      if (playing) await SoundObject.current.stopAsync();
+    } catch (error) {}
+    try {
+      await SoundObject.current.loadAsync({ uri: uri });
+      // let sound = await SoundObject.getStatusAsync();
+      // if (sound.isLoaded) {
+      // await SoundObject.stopAsync();
+      await SoundObject.current.playAsync();
+      setPlaying(true);
+      // }
+    } catch (error) {
+      console.log(error);
+      await SoundObject.current.unloadAsync(); // Unload any Sound loaded
+      SoundObject.current.setOnPlaybackStatusUpdate(null); // Unset all playback status loaded
+    }
+  };
 
   return (
     <NavigationContainer independent={true}>
@@ -35,34 +89,25 @@ function Dictionary({ dictionaryAll, navigation }) {
         nestedScrollEnabled
         numColumns={1}
         horizontal={false}
-        data={dictionaryAll}
+        data={datalist}
         style={{ flex: 1 }}
         renderItem={({ item }) => {
-          const downloadAudio = async () => {
-            // The rest of this plays the audio
-            const soundObject = new Audio.Sound();
-            try {
-              await soundObject.loadAsync(item.downloadURL);
-              await soundObject.playAsync();
-            } catch (error) {
-              console.log("error:", error);
-            }
-          };
           return (
-            <TouchableOpacity style={styles.Kagan} onPress={()=>downloadAudio()}>
+            <TouchableOpacity
+              style={styles.Kagan}
+              onPress={() => downloadAudio(item.downloadURL)}
+            >
               <View>
                 <Text style={styles.textVocab}> {item.kagan} </Text>
                 <Text style={styles.textVocabSubSub}>/{item.filipino}/</Text>
                 <Text style={styles.textVocabSub}>{item.meaning}</Text>
-               
               </View>
 
               <View style={styles.audioButton}>
                 <TouchableOpacity
                   style={styles.audioButton}
-                  onPressOut={() => downloadAudio()}
+                  onPress={() => downloadAudio(item.downloadURL)}
                 >
-                  
                   <MaterialCommunityIcons
                     name="volume-high"
                     color={"#707070"}
@@ -71,8 +116,6 @@ function Dictionary({ dictionaryAll, navigation }) {
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>
-            
-            
           );
         }}
       />
@@ -133,11 +176,11 @@ const styles = StyleSheet.create({
     top: 65,
     left: -30,
   },
-  audioButton:{
-    position:"relative",
-    flex:1,
-    alignSelf:"flex-end",
-    bottom: 10,    
+  audioButton: {
+    position: "relative",
+    flex: 1,
+    alignSelf: "flex-end",
+    bottom: 10,
   },
   textHead: {
     flexDirection: "row",
@@ -178,14 +221,13 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   Kagan: {
-     flex:1,
-     marginTop:10,
-     marginLeft: 25,
-     marginRight:20,
-     padding: 10,
-     //backgroundColor:"#fafafa",
-     flexDirection:"row",
-    
+    flex: 1,
+    marginTop: 10,
+    marginLeft: 25,
+    marginRight: 20,
+    padding: 10,
+    //backgroundColor:"#fafafa",
+    flexDirection: "row",
   },
   grammar: {
     top: 70,

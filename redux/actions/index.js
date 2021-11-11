@@ -65,7 +65,6 @@ export function fetchDictionary() {
     firebase
       .firestore()
       .collection("dictionaryAll")
-      .orderBy("kagan", "asc")
       .get()
       .then((snapshot) => {
         let dictionaryAll = snapshot.docs.map((doc) => {

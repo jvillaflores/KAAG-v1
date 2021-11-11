@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -12,10 +12,14 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
+import firebase from "firebase";
+require("firebase/firestore");
+require("firebase/firebase-storage");
 
 import { connect } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { fetchDictionary } from "../../redux/actions";
 
 var head = require("../../assets/learning.svg");
 
@@ -90,7 +94,35 @@ const data = [
 
 function ValidateWord({ dictionaryAll, navigation }) {
   const [status, setStatus] = useState("All");
-  const [datalist, setDatalist] = useState(data);
+  const [datalist, setDatalist] = useState(dictionaryAll);
+
+  useEffect(() => {
+    setDatalist(dictionaryAll)
+  }, [dictionaryAll]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      firebase
+        .firestore()
+        .collection("dictionaryAll")
+        .orderBy("kagan", "asc")
+        .get()
+        .then((snapshot) => {
+          console.log(snapshot, '-=-=-=-=-=-=-=-=')
+          let dictionaryAll = snapshot.docs.map((doc) => {
+            const data = doc.data();
+            const id = doc.id;
+            return { id, ...data };
+          });
+          setDatalist(dictionaryAll)
+        });
+
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+
 
   const setStatusFilter = (status) => {
     if (status !== "All") {
@@ -107,14 +139,14 @@ function ValidateWord({ dictionaryAll, navigation }) {
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}
-        onPress={() => navigation.navigate("Validation")}
+        onPress={() => navigation.navigate("Validation", { data: item })}
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
-            <Text style={styles.itemsName}> {item.name}</Text>
+            <Text style={styles.itemsName}> {item?.kagan}</Text>
           </View>
           <View style={styles.itemBody}>
-            <Text> {item.translated}</Text>
+            <Text> {item?.meaning}</Text>
           </View>
         </View>
 
@@ -124,11 +156,11 @@ function ValidateWord({ dictionaryAll, navigation }) {
               styles.itemStatus,
               {
                 backgroundColor:
-                  item.status === "Pending"
+                  item.status == "0"
                     ? "#FFEFC5"
-                    : "#B5F5D1" && item.status === "Declined"
-                    ? "#FFEFEE"
-                    : "#B5F5D1",
+                    : "#B5F5D1" && item.status == "2"
+                      ? "#FFEFEE"
+                      : "#B5F5D1",
               },
             ]}
           >
@@ -137,16 +169,16 @@ function ValidateWord({ dictionaryAll, navigation }) {
                 styles.statusFont,
                 {
                   color:
-                    item.status === "Pending"
+                    item.status == "0"
                       ? "#CEA032"
-                      : "#63C579" && item.status === "Declined"
-                      ? "#FF9797"
-                      : "#63C579",
+                      : "#63C579" && item.status == "2"
+                        ? "#FF9797"
+                        : "#63C579",
                 },
               ]}
             >
               {" "}
-              {item.status}
+              {item.status == "0" ? "Pending" : item.status === "1" ? "Confirmed" : "Declined"}
             </Text>
           </View>
           <View style={[styles.arrowRight]}>
