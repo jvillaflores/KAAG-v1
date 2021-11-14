@@ -25,63 +25,157 @@ const onLogout = () => {
   firebase.auth().signOut();
 };
 
- function Settings({ currentUser, navigation }) {
-  return (
-    <SafeAreaView style={styles.container}>
-      <View>
-        <View style={styles.userInfoSelection}>
-          <Avatar.Image source={require("../../assets/jam.jpeg")} size={80} />
+function Settings({ currentUser, navigation }) {
+  if (currentUser.type == "2") {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View>
+          <View style={styles.userInfoSelection}>
+            <Avatar.Image source={require("../../assets/jam.jpeg")} size={80} />
 
-          <View>
-            <Title style={[styles.title, {marginTop: 15,marginBottom: 5, }, ]} >
-              {currentUser.name}
-             
-            </Title>
+            <View>
+              <Title style={[styles.title, { marginTop: 15, marginBottom: 5 }]}>
+                {currentUser.name}
+              </Title>
+            </View>
           </View>
         </View>
-      </View>
 
-      <View style={styles.menuWrapper}>
-        <TouchableRipple onPress={() => navigation.navigate("MyContribution")}>
-          <View style={styles.menuItem}>
-            <Icon name="folder-outline" color="#777777" size={25} />
-            <Text style={styles.menuItemText}>My Contributions</Text>
-          </View>
-        </TouchableRipple>
-        <TouchableRipple onPress={() => navigation.navigate("ApplicationScreen")}>
-          <View style={styles.menuItem}>
-            <Icon name="folder-account" color="#777777" size={25} />
-            <Text style={styles.menuItemText}>Applications</Text>
-          </View>
-        </TouchableRipple>
-        <TouchableRipple onPress={() => navigation.navigate("Validate")}>
-          <View style={styles.menuItem}>
-            <Icon name="checkbox-marked-circle-outline" color="#777777" size={25} />
-            <Text style={styles.menuItemText}>Check Submissions</Text>
-          </View>
-        </TouchableRipple>
-        <TouchableRipple onPress={() => navigation.navigate("ValidatorScreen")}>
-          <View style={styles.menuItem}>
-            <Icon name="account-tie" color="#777777" size={25} />
-            <Text style={styles.menuItemText}>Be A Validator</Text>
-          </View>
-        </TouchableRipple>
+        <View style={styles.menuWrapper}>
+          <TouchableRipple
+            onPress={() => navigation.navigate("MyContribution")}
+          >
+            <View style={styles.menuItem}>
+              <Icon name="folder-outline" color="#777777" size={25} />
+              <Text style={styles.menuItemText}>My Contributions</Text>
+            </View>
+          </TouchableRipple>
+          <TouchableRipple
+            onPress={() => navigation.navigate("ApplicationScreen")}
+          >
+            <View style={styles.menuItem}>
+              <Icon name="folder-account" color="#777777" size={25} />
+              <Text style={styles.menuItemText}>Applications</Text>
+            </View>
+          </TouchableRipple>
+          <TouchableRipple onPress={() => navigation.navigate("Validate")}>
+            <View style={styles.menuItem}>
+              <Icon
+                name="checkbox-marked-circle-outline"
+                color="#777777"
+                size={25}
+              />
+              <Text style={styles.menuItemText}>Check Submissions</Text>
+            </View>
+          </TouchableRipple>
+          <TouchableRipple
+            onPress={() => navigation.navigate("ValidatorScreen")}
+          >
+            <View style={styles.menuItem}>
+              <Icon name="account-tie" color="#777777" size={25} />
+              <Text style={styles.menuItemText}>Be A Validator</Text>
+            </View>
+          </TouchableRipple>
 
-        <TouchableRipple onPress={() => onLogout()}>
-          <View style={styles.menuItem}>
-            <Icon name="logout" color="#777777" size={25} />
-            <Text style={styles.menuItemText}>Logout</Text>
+          <TouchableRipple onPress={() => onLogout()}>
+            <View style={styles.menuItem}>
+              <Icon name="logout" color="#777777" size={25} />
+              <Text style={styles.menuItemText}>Logout</Text>
+            </View>
+          </TouchableRipple>
+        </View>
+      </SafeAreaView>
+    );
+  } else if (currentUser.type == "1") {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View>
+          <View style={styles.userInfoSelection}>
+            <Avatar.Image source={require("../../assets/jam.jpeg")} size={80} />
+
+            <View>
+              <Title style={[styles.title, { marginTop: 15, marginBottom: 5 }]}>
+                {currentUser.name}
+              </Title>
+            </View>
           </View>
-        </TouchableRipple>
-      </View>
-    </SafeAreaView>
-  );
+        </View>
+
+        <View style={styles.menuWrapper}>
+          <TouchableRipple
+            onPress={() => navigation.navigate("MyContribution")}
+          >
+            <View style={styles.menuItem}>
+              <Icon name="folder-outline" color="#777777" size={25} />
+              <Text style={styles.menuItemText}>My Contributions</Text>
+            </View>
+          </TouchableRipple>
+          <TouchableRipple onPress={() => navigation.navigate("Validate")}>
+            <View style={styles.menuItem}>
+              <Icon
+                name="checkbox-marked-circle-outline"
+                color="#777777"
+                size={25}
+              />
+              <Text style={styles.menuItemText}>Check Submissions</Text>
+            </View>
+          </TouchableRipple>
+          <TouchableRipple onPress={() => onLogout()}>
+            <View style={styles.menuItem}>
+              <Icon name="logout" color="#777777" size={25} />
+              <Text style={styles.menuItemText}>Logout</Text>
+            </View>
+          </TouchableRipple>
+        </View>
+      </SafeAreaView>
+    );
+  } else {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View>
+          <View style={styles.userInfoSelection}>
+            <Avatar.Image source={require("../../assets/jam.jpeg")} size={80} />
+
+            <View>
+              <Title style={[styles.title, { marginTop: 15, marginBottom: 5 }]}>
+                {currentUser.name}
+              </Title>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.menuWrapper}>
+          <TouchableRipple
+            onPress={() => navigation.navigate("MyContribution")}
+          >
+            <View style={styles.menuItem}>
+              <Icon name="folder-outline" color="#777777" size={25} />
+              <Text style={styles.menuItemText}>My Contributions</Text>
+            </View>
+          </TouchableRipple>
+          <TouchableRipple
+            onPress={() => navigation.navigate("ValidatorScreen")}
+          >
+            <View style={styles.menuItem}>
+              <Icon name="account-tie" color="#777777" size={25} />
+              <Text style={styles.menuItemText}>Be A Validator</Text>
+            </View>
+          </TouchableRipple>
+
+          <TouchableRipple onPress={() => onLogout()}>
+            <View style={styles.menuItem}>
+              <Icon name="logout" color="#777777" size={25} />
+              <Text style={styles.menuItemText}>Logout</Text>
+            </View>
+          </TouchableRipple>
+        </View>
+      </SafeAreaView>
+    );
+  }
 }
 const mapStateToProps = (store) => ({
-  
   currentUser: store.userState.currentUser,
 });
-
 
 export default connect(mapStateToProps, null)(Settings);
 
@@ -95,7 +189,7 @@ const styles = StyleSheet.create({
     // marginBottom: 25,
     flexDirection: "column",
     alignItems: "center",
-    justifyContent:"center"
+    justifyContent: "center",
   },
   title: {
     fontSize: 24,
