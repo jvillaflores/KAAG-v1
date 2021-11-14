@@ -83,8 +83,8 @@ function Dictionary({ dictionaryAll, navigation }) {
     <NavigationContainer independent={true}>
       <View style={styles.headLine}>
         <View style={styles.title}>
-          <Text style={styles.textHead}> Kaag</Text>
-          <Text style={styles.textSubHead}> Dictionary</Text>
+          <Text style={styles.textHead}>KAAG</Text>
+          <Text style={styles.textSubHead}>Dictionary</Text>
           <TextInput
             style={styles.input}
             placeholder="Search for words..."
@@ -102,25 +102,16 @@ function Dictionary({ dictionaryAll, navigation }) {
         style={{ flex: 1 }}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity
-              style={styles.Kagan}
-              onPress={() => navigation.navigate("Word", { data: item })}
-            >
-              <View>
-                <Text style={styles.textVocab}> {item.kagan} </Text>
-                <Text style={styles.textVocabSubSub}>/{item.filipino}/</Text>
-                <Text style={styles.textVocabSub}>{item.meaning}</Text>
-              </View>
+            <TouchableOpacity 
+                style = {styles.container}
+                onPress={() => navigation.navigate("Word", { data: item })}
+                >
+                  <View style={styles.bodycontainer}>
+                      <Text style = {styles.inKagan}>{item.kagan} </Text>
+                      <Text style = {styles.inFilipino}>{item.filipino} (in filipino)</Text>
+                      <Text style = {styles.meaning}>{item.meaning}</Text>
+                  </View>
 
-              <View style={styles.audioButton}>
-                <TouchableOpacity style={styles.audioButton}>
-                  <MaterialCommunityIcons
-                    name="volume-high"
-                    color={"#707070"}
-                    size={26}
-                  />
-                </TouchableOpacity>
-              </View>
             </TouchableOpacity>
           );
         }}
@@ -136,231 +127,75 @@ const mapStateToProps = (store) => ({
 export default connect(mapStateToProps, null)(Dictionary);
 
 const styles = StyleSheet.create({
-  searchSection: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
+  container:{
+    alignContent: "center",
+    top: 1,
+    paddingVertical:20,
+    paddingHorizontal:20,
+    
   },
-  searchIcon: {
-    position: "absolute",
-    //padding: 10,
-  },
-  input: {
-    flex: 1,
-    paddingTop: 10,
-    paddingRight: 10,
-    paddingBottom: 10,
-    paddingLeft: 0,
-    backgroundColor: "#fff",
-    color: "#424242",
-  },
-  header: {
-    flexDirection: "row",
-    width: "100%",
-    height: 170,
-    backgroundColor: "#8E2835",
-  },
-  headline: {
-    width: "78%",
-    height: 200,
-    backgroundColor: "#dadada",
-    top: 70,
-    left: 40,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
-  },
-  title: {
-    top: 40,
-    bottom: 40,
-    left: 5,
-  },
-  subtitle: {
-    top: 65,
-    left: -30,
-  },
-  audioButton: {
-    position: "relative",
-    flex: 1,
-    alignSelf: "flex-end",
-    bottom: 10,
-  },
-  textHead: {
-    flexDirection: "row",
-    fontSize: 20,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "white",
-    marginLeft: 11,
-  },
-  textSubHead: {
-    flexDirection: "row",
-    fontSize: 15,
-    // fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "white",
-    marginLeft: 12,
-  },
-  headLine: {
-    flexDirection: "column",
-    width: "100%",
-    height: 200,
-    backgroundColor: "#8E2835",
-    padding: 10,
-  },
-  textHeadline: {
-    flexDirection: "row",
-    fontSize: 20,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
-  searchBar: {
-    top: 85,
-    left: -120,
-    width: "100%",
-  },
-  Kagan: {
-    flex: 1,
-    marginTop: 10,
-    marginLeft: 25,
-    marginRight: 20,
-    padding: 10,
-    //backgroundColor:"#fafafa",
-    flexDirection: "row",
-  },
-  grammar: {
-    top: 70,
-    left: 40,
-  },
-  pronun: {
-    top: 100,
-    left: 40,
-  },
-  textKagan: {
-    flexDirection: "row",
-    fontSize: 18,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
-  button: {
-    justifyContent: "center",
-    paddingVertical: 8,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: 150,
-    top: -120,
-    backgroundColor: "#8E2835",
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
-  },
-  buttonVocab: {
-    alignSelf: "center",
-    //elevation: 2,
-    width: "90%",
-    //backgroundColor: "#dadada",
-    top: -70,
-    left: -40,
-    padding: 20,
-    paddingTop: 10,
-    paddingBottom: 10,
-    margin: 5,
-  },
-  buttonGrammar: {
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: "90%",
-    backgroundColor: "#dadada",
-    top: -30,
-    left: -40,
-    height: 105,
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    borderBottomRightRadius: 7,
-    borderBottomLeftRadius: 7,
-    borderColor: "black",
-  },
-  buttonPronun: {
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: "90%",
-    backgroundColor: "#dadada",
-    top: -40,
-    left: -40,
-    height: 105,
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    borderBottomRightRadius: 7,
-    borderBottomLeftRadius: 7,
-    borderColor: "black",
-  },
-  Vocab: {
-    top: 0,
-    left: -20,
-  },
-  VocabSubSub: {
-    top: 5,
-    left: -10,
-  },
-  VocabSub: {
-    top: 5,
-    left: -10,
-  },
-  textVocab: {
-    fontSize: 20,
-    fontWeight: "bold",
-    letterSpacing: 0.3,
-    color: "black",
-    //left: -6,
-  },
-  textVocabSub: {
-    fontSize: 11,
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-    textAlign: "justify",
-  },
-  textVocabSubSub: {
-    fontSize: 11,
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "#8E2835",
-  },
-  text: {
-    fontSize: 15,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "white",
-  },
-  input: {
-    height: 45,
-    width: "90%",
-    backgroundColor: "white",
-    margin: 12,
-    paddingLeft: 20,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
-  },
+  bodycontainer:{
+    paddingVertical:3,
+    paddingHorizontal:15,
+},
+    headLine: {
+      flexDirection: "column",
+      width: "100%",
+      height: 200,
+      backgroundColor: "#8E2835",
+      padding: 10,
+    },
+
+    title: {
+      paddingHorizontal:20,
+      paddingVertical:50,
+      alignItems:"center",
+    },
+    textHead: {
+      flexDirection: "row",
+      fontSize: 20,
+      fontWeight: "bold",
+      lineHeight: 21,
+      letterSpacing: 0.25,
+      color: "white",
+    },
+    textSubHead: {
+      flexDirection: "row",
+      fontSize: 15,
+      lineHeight: 21,
+      letterSpacing: 0,
+      color: "white",
+    },
+    input: {
+      height: 45,
+      width: "90%",
+      backgroundColor: "white",
+      margin: 12,
+      paddingLeft: 20,
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10,
+      borderBottomRightRadius: 10,
+      borderBottomLeftRadius: 10,
+    },
+    inKagan:{
+      fontSize:20,
+      fontWeight:'bold',
+      letterSpacing: 0.3,
+    },
+    inFilipino:{
+      fontSize:11,
+      color: "#8E2835",
+      fontStyle:"italic",
+    },
+    meaning:{
+      fontSize: 13,
+      letterSpacing: 0.25,
+      color: "black",
+      textAlign: "justify",
+    }
+    
+ 
+   
+
+  
 });
