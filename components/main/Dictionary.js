@@ -24,6 +24,9 @@ var head = require("../../assets/learning.svg");
 function Dictionary({ dictionaryAll, navigation }) {
   const [playing, setPlaying] = useState(false);
   const [datalist, setDatalist] = useState(dictionaryAll);
+  const [search, setSearch] = useState("");
+  const [filteredDataSource, setFilteredDataSource] = useState(dictionaryAll);
+  const [masterDataSource, setMasterDataSource] = useState(dictionaryAll);
 
   useEffect(() => {
     setDatalist(dictionaryAll);
@@ -43,14 +46,38 @@ function Dictionary({ dictionaryAll, navigation }) {
             const id = doc.id;
             return { id, ...data };
           });
+
           setDatalist(dictionaryAll);
+          setFilteredDataSource(dictionaryAll);
+          setMasterDataSource(dictionaryAll);
         });
     });
 
     return unsubscribe;
   }, [navigation]);
 
-  console.log(dictionaryAll);
+  const searchFilterFunction = (text) => {
+    // Check if searched text is not blank
+    if (text) {
+      // Inserted text is not blank
+      // Filter the masterDataSource
+      // Update FilteredDataSource
+      const newData = masterDataSource.filter(function (item) {
+        const itemData = item.kagan
+          ? item.kagan.toUpperCase()
+          : "".toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredDataSource(newData);
+      setSearch(text);
+    } else {
+      // Inserted text is blank
+      // Update FilteredDataSource with masterDataSource
+      setFilteredDataSource(masterDataSource);
+      setSearch(text);
+    }
+  };
 
   return (
     <NavigationContainer independent={true}>
@@ -61,14 +88,17 @@ function Dictionary({ dictionaryAll, navigation }) {
           <TextInput
             style={styles.input}
             placeholder="Search for words..."
+            onChangeText={(text) => searchFilterFunction(text)}
+            value={search}
           ></TextInput>
         </View>
       </View>
       <FlatList
         nestedScrollEnabled
+        keyExtractor={(item, index) => index.toString()}
         numColumns={1}
         horizontal={false}
-        data={datalist}
+        data={filteredDataSource}
         style={{ flex: 1 }}
         renderItem={({ item }) => {
           return (

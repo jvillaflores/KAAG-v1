@@ -246,7 +246,7 @@ export class App extends Component {
               name="Validate"
               component={ValidateWordScreen}
               options={{
-                title: "",
+                title: "Validate Submissions",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {

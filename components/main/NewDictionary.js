@@ -19,7 +19,7 @@ require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { NavigationEvents } from "react-navigation";
 import * as DocumentPicker from "expo-document-picker";
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from "expo-file-system";
 
 function NewDictionary({ currentUser, route, navigation }) {
   const [kagan, setKagan] = useState("Test");
@@ -28,17 +28,19 @@ function NewDictionary({ currentUser, route, navigation }) {
   const [filipinoSentence, setFilipinoSentence] = useState("HOLA TOSTA");
   const [meaning, setMeaning] = useState("Test test test");
   const [audio, setAudio] = useState(null);
-  const [loading, setLoading] = useState(null)
+  const [loading, setLoading] = useState(null);
 
   const chooseFile = async () => {
-    let result = await DocumentPicker.getDocumentAsync({ type: "audio/*", copyToCacheDirectory: false, });
+    let result = await DocumentPicker.getDocumentAsync({
+      type: "audio/*",
+      copyToCacheDirectory: false,
+    });
     // Alert.alert("Audio File", result.name);
     console.log(result);
     if (result.type === "success") {
       setAudio(result);
-    }
-    else {
-      alert("something went wrong!!")
+    } else {
+      alert("something went wrong!!");
     }
   };
 
@@ -48,8 +50,8 @@ function NewDictionary({ currentUser, route, navigation }) {
 
     await FileSystem.copyAsync({
       from: audio.uri,
-      to: uri
-    })
+      to: uri,
+    });
 
     try {
       // const blob = await new Promise((resolve, reject) => {
@@ -76,7 +78,7 @@ function NewDictionary({ currentUser, route, navigation }) {
       if (blobs != null) {
         const uriParts = audio?.uri.split(".");
         const fileType = uriParts[uriParts.length - 1];
-        console.log(uriParts, '0-0-0', fileType)
+        console.log(uriParts, "0-0-0", fileType);
         // firebase
         //   .storage()
         //   .ref()
@@ -97,15 +99,16 @@ function NewDictionary({ currentUser, route, navigation }) {
   };
 
   const uploadAudio = async () => {
-    const childPath = `audio/${firebase.auth().currentUser.uid
-      }/${Math.random().toString(36)}`;
+    const childPath = `audio/${
+      firebase.auth().currentUser.uid
+    }/${Math.random().toString(36)}`;
     console.log(childPath);
     const uri = FileSystem.documentDirectory + audio.name;
 
     await FileSystem.copyAsync({
       from: audio.uri,
-      to: uri
-    })
+      to: uri,
+    });
 
     let res = await fetch(uri);
     let blob = await res.blob();
@@ -113,7 +116,7 @@ function NewDictionary({ currentUser, route, navigation }) {
     const task = firebase.storage().ref().child(childPath).put(blob);
 
     const taskProgress = (snapshot) => {
-      setLoading(snapshot.bytesTransferred / audio?.size * 100)
+      setLoading((snapshot.bytesTransferred / audio?.size) * 100);
       console.log(`transferred: ${snapshot.bytesTransferred}`);
     };
 
@@ -121,14 +124,14 @@ function NewDictionary({ currentUser, route, navigation }) {
       task.snapshot.ref.getDownloadURL().then((snapshot) => {
         savePostData(snapshot);
         saveAllPostData(snapshot);
-        setLoading(null)
+        setLoading(null);
         console.log(snapshot);
       });
     };
 
     const taskError = (snapshot) => {
       setLoading(null);
-      alert(snapshot)
+      alert(snapshot);
       console.log(snapshot);
     };
 
@@ -164,11 +167,12 @@ function NewDictionary({ currentUser, route, navigation }) {
         filipinoSentence,
         meaning,
         status: 0,
+        upload: 1,
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
-        alert('Thanks for contribution!!')
-        setLoading(null)
+        alert("Thanks for contribution!!");
+        setLoading(null);
         navigation.popToTop();
       });
   };
@@ -185,7 +189,6 @@ function NewDictionary({ currentUser, route, navigation }) {
           <TextInput
             style={styles.input}
             multiline={true}
-            value={kagan}
             onChangeText={(kagan) => setKagan(kagan)}
           />
         </View>
@@ -198,7 +201,6 @@ function NewDictionary({ currentUser, route, navigation }) {
           <TextInput
             style={styles.input}
             multiline={true}
-            value={filipino}
             onChangeText={(filipino) => setFilipino(filipino)}
           />
         </View>
@@ -211,7 +213,6 @@ function NewDictionary({ currentUser, route, navigation }) {
           <TextInput
             style={styles.input}
             multiline={true}
-            value={sentence}
             onChangeText={(sentence) => setSentence(sentence)}
           />
         </View>
@@ -224,7 +225,6 @@ function NewDictionary({ currentUser, route, navigation }) {
           <TextInput
             style={styles.input}
             multiline={true}
-            value={filipinoSentence}
             onChangeText={(filipinoSentence) =>
               setFilipinoSentence(filipinoSentence)
             }
@@ -239,7 +239,6 @@ function NewDictionary({ currentUser, route, navigation }) {
           <TextInput
             style={styles.description_input}
             multiline={true}
-            value={meaning}
             onChangeText={(meaning) => setMeaning(meaning)}
           />
         </View>
@@ -254,24 +253,24 @@ function NewDictionary({ currentUser, route, navigation }) {
             onPress={() => chooseFile()}
           >
             <View>
-              {audio ?
-                <Text>
-                  {audio?.name}
-                </Text>
-                :
+              {audio ? (
+                <Text>{audio?.name}</Text>
+              ) : (
                 <MaterialCommunityIcons
                   style={styles.addAudio}
                   name="plus-box"
                   color={"#707070"}
                   size={26}
                 />
-              }
+              )}
             </View>
           </TouchableOpacity>
         </View>
       </View>
       <Pressable style={styles.button} onPress={() => uploadAudio()}>
-        <Text style={styles.subtitle}>{loading ? `Sharing...  ${parseInt(loading)}%` : 'Share'}</Text>
+        <Text style={styles.subtitle}>
+          {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
+        </Text>
       </Pressable>
     </ScrollView>
   );

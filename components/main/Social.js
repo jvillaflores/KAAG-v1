@@ -16,7 +16,7 @@ import AddButton from "./AddButton";
 import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
-import SeeMore from "react-native-see-more-inline";
+// import SeeMore from "react-native-see-more-inline";
 
 import { Dimensions } from "react-native";
 
@@ -73,10 +73,7 @@ function Community({ postsAll, navigation }) {
             {item.title}
           </Text>
           <View style={{ padding: 30 }}>
-            <SeeMore numberOfLines={2} style={styles.textVocab}>
-              {" "}
-              {item.description}
-            </SeeMore>
+            <Text style={styles.textVocab}> {item.description}</Text>
           </View>
           <Image
             style={{ width: imageWidth, height: imageWidth }}

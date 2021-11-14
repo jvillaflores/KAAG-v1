@@ -97,32 +97,29 @@ function ValidateWord({ dictionaryAll, navigation }) {
   const [datalist, setDatalist] = useState(dictionaryAll);
 
   useEffect(() => {
-    setDatalist(dictionaryAll)
+    setDatalist(dictionaryAll);
   }, [dictionaryAll]);
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
+    const unsubscribe = navigation.addListener("focus", () => {
       firebase
         .firestore()
         .collection("dictionaryAll")
-        .orderBy("kagan", "asc")
+        .where("upload", "==", "1")
         .get()
         .then((snapshot) => {
-          console.log(snapshot, '-=-=-=-=-=-=-=-=')
+          console.log(snapshot, "-=-=-=-=-=-=-=-=");
           let dictionaryAll = snapshot.docs.map((doc) => {
             const data = doc.data();
             const id = doc.id;
             return { id, ...data };
           });
-          setDatalist(dictionaryAll)
+          setDatalist(dictionaryAll);
         });
-
     });
 
     return unsubscribe;
   }, [navigation]);
-
-
 
   const setStatusFilter = (status) => {
     if (status !== "All") {
@@ -159,8 +156,8 @@ function ValidateWord({ dictionaryAll, navigation }) {
                   item.status == "0"
                     ? "#FFEFC5"
                     : "#B5F5D1" && item.status == "2"
-                      ? "#FFEFEE"
-                      : "#B5F5D1",
+                    ? "#FFEFEE"
+                    : "#B5F5D1",
               },
             ]}
           >
@@ -172,13 +169,17 @@ function ValidateWord({ dictionaryAll, navigation }) {
                     item.status == "0"
                       ? "#CEA032"
                       : "#63C579" && item.status == "2"
-                        ? "#FF9797"
-                        : "#63C579",
+                      ? "#FF9797"
+                      : "#63C579",
                 },
               ]}
             >
               {" "}
-              {item.status == "0" ? "Pending" : item.status === "1" ? "Confirmed" : "Declined"}
+              {item.status == "0"
+                ? "Pending"
+                : item.status === "1"
+                ? "Confirmed"
+                : "Declined"}
             </Text>
           </View>
           <View style={[styles.arrowRight]}>
@@ -199,12 +200,6 @@ function ValidateWord({ dictionaryAll, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headLine}>
-        <View style={styles.title}>
-          <Text style={styles.textHead}>Validating</Text>
-          <Text style={styles.textSubHead}> Dictionary</Text>
-        </View>
-      </View>
       <View style={styles.listTab}>
         {listTab.map((e) => (
           <TouchableOpacity
