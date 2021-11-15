@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import Svg, {Path, G, Rect, Polygon, Title} from 'react-native-svg';
+import Svg, { Path, G, Rect, Polygon, Title } from "react-native-svg";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -24,12 +24,13 @@ export default class Register extends Component {
       email: "",
       password: "",
       name: "",
+      type: "",
     };
     this.onSignUp = this.onSignUp.bind(this);
   }
 
   onSignUp() {
-    const { email, password, name } = this.state;
+    const { email, password, name, type } = this.state;
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -41,11 +42,12 @@ export default class Register extends Component {
           .set({
             name,
             email,
+            type: 0,
           });
         console.log(result);
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
   }
 
@@ -54,35 +56,33 @@ export default class Register extends Component {
       <View>
         <View style={styles.banner}>
           <View style={styles.bottom}>
-              <Text style={styles.welcome}>Welcome to KAAG,</Text>
-              <Text style={styles.subtitle}>Create account to get started!</Text>
+            <Text style={styles.welcome}>Welcome to KAAG,</Text>
+            <Text style={styles.subtitle}>Create account to get started!</Text>
           </View>
           <View style={styles.loginGroup}>
-          <Text style={styles.textGrey}>Name</Text>
-              <TextInput
+            <Text style={styles.textGrey}>Name</Text>
+            <TextInput
               onChangeText={(name) => this.setState({ name })}
               style={styles.input}
-              />
-              <Text style={styles.textGrey}>Email</Text>
-              <TextInput
-                
-                onChangeText={(email) => this.setState({ email })}
-                style={styles.input}
-              />
-              <Text style={styles.textGrey}>Password</Text>
-              <TextInput
-                
-                secureTextEntry={true}
-                onChangeText={(password) => this.setState({ password })}
-                style={styles.input}
-              />
-               <Text style={styles.textMini}>Forgot password?</Text>
-           </View>
-           
-           <Pressable style={styles.button} onPress={() => this.onSignUp()}>
-              <Text style={styles.text}>Sign Up</Text>
-           </Pressable>
-           {/* <Pressable style={styles.buttonGoogle} onPress={() => this.onSignUp()}>
+            />
+            <Text style={styles.textGrey}>Email</Text>
+            <TextInput
+              onChangeText={(email) => this.setState({ email })}
+              style={styles.input}
+            />
+            <Text style={styles.textGrey}>Password</Text>
+            <TextInput
+              secureTextEntry={true}
+              onChangeText={(password) => this.setState({ password })}
+              style={styles.input}
+            />
+            <Text style={styles.textMini}>Forgot password?</Text>
+          </View>
+
+          <Pressable style={styles.button} onPress={() => this.onSignUp()}>
+            <Text style={styles.text}>Sign Up</Text>
+          </Pressable>
+          {/* <Pressable style={styles.buttonGoogle} onPress={() => this.onSignUp()}>
                   <Svg id="search" xmlns="http://www.w3.org/2000/svg" width="22.845" height="22.845" viewBox="0 0 22.845 22.845">
                     <Path id="Path_382" data-name="Path 382" d="M5.063,145.9l-.8,2.969-2.906.061a11.442,11.442,0,0,1-.084-10.666h0l2.588.474L5,141.314a6.817,6.817,0,0,0,.064,4.59Z" transform="translate(0 -132.099)" fill="#fbbb00"/>
                     <Path id="Path_383" data-name="Path 383" d="M272.6,208.176a11.418,11.418,0,0,1-4.072,11.041h0l-3.259-.166-.461-2.879a6.808,6.808,0,0,0,2.929-3.476h-6.108v-4.519H272.6Z" transform="translate(-249.954 -198.887)" fill="#518ef8"/>
@@ -93,16 +93,18 @@ export default class Register extends Component {
                 
                     Connect with Google </Text>
          </Pressable> */}
-         <View style={styles.signInGroup}>
-          <TouchableOpacity onPress={() => navigation.navigate("RegisterScreen")}>
-            <Text>
-                I'm already a member {" "}. <Text style={styles.textSignUp}>Sign In</Text>
-             </Text>
-           </TouchableOpacity>
-         </View>
+          <View style={styles.signInGroup}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("RegisterScreen")}
+            >
+              <Text>
+                I'm already a member .{" "}
+                <Text style={styles.textSignUp}>Sign In</Text>
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-      
     );
   }
 }
@@ -122,7 +124,6 @@ const styles = StyleSheet.create({
     left: 40,
   },
   bottom: {
-    
     bottom: 20,
     marginBottom: 45,
   },
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
     //alignItems:"center",
     alignContent: "center",
     justifyContent: "center",
-    top:175,
+    top: 175,
     //top: 300,
     left: 70,
   },
@@ -181,12 +182,11 @@ const styles = StyleSheet.create({
     width: "80%",
     backgroundColor: "#dadada",
     top: 165,
-    
   },
   text: {
     alignSelf: "center",
-    fontSize:18,
-    
+    fontSize: 18,
+
     letterSpacing: 0.25,
     color: "white",
   },
@@ -197,15 +197,14 @@ const styles = StyleSheet.create({
   },
   textGoogle: {
     alignSelf: "center",
-    paddingLeft:40,
-    paddingTop:15,
+    paddingLeft: 40,
+    paddingTop: 15,
     fontSize: 18,
-    
+
     lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
-    position:"absolute",
-    
+    position: "absolute",
   },
   textGrey: {
     fontSize: 15,

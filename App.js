@@ -286,10 +286,10 @@ export class App extends Component {
               }}
             />
             <Stack.Screen
-              name="ConfrimationScreen"
+              name="ConfirmationScreen"
               component={ApplicationConfScreen}
               options={{
-                title: " ",
+                title: "Validator Confirmation",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {

@@ -22,6 +22,7 @@
     "expo-document-picker": "~9.2.4",
     "expo-image-picker": "~10.2.2",
     "expo-status-bar": "~1.0.4",
+    "fbjs": "^0.8.18",
     "firebase": "8.2.3",
     "link": "^0.1.5",
     "react": "16.13.1",
@@ -45,11 +46,13 @@
     "react-native-unordered-list": "^1.0.4",
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "^0.13.18",
+    "react-native-webview": "^11.14.3",
     "react-navigation": "^4.4.4",
     "react-redux": "^7.2.5",
     "reanimated-bottom-sheet": "*",
     "redux": "^4.1.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "rn-pdf-reader-js": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

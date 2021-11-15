@@ -29,8 +29,7 @@ function Community({ currentUser, navigation }) {
           <Text style={styles.textHead}>Welcome, {currentUser.name} </Text>
           <Text style={styles.textSubHead}>Engage in Community</Text>
           <Text style={styles.textreg}>
-            Create and share your photos, stories, and videos with the friends
-            you care about.
+            Create and share your photos and stories with the community.
           </Text>
         </View>
       </View>
