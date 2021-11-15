@@ -43,7 +43,7 @@ const Word = ({ route }) => {
       <View style={styles.headLine}>
         <View style={styles.header_line}>
           <Text style = {styles.inKagan}> {data?.kagan} </Text>
-          <Text style = {styles.inPronounciation}> /{data?.pronounciation}/ </Text>
+          <Text style = {styles.inPronounciation}> /{data?.pronunciation}/ </Text>
           
           <TouchableOpacity 
             style={styles.buttonAudio} 
