@@ -105,6 +105,7 @@ function ValidateWord({ dictionaryAll, navigation }) {
       firebase
         .firestore()
         .collection("dictionaryAll")
+        .orderBy("kagan", "asc")
         .where("upload", "==", "1")
         .get()
         .then((snapshot) => {

@@ -37,6 +37,7 @@ function Dictionary({ dictionaryAll, navigation }) {
       firebase
         .firestore()
         .collection("dictionaryAll")
+        .orderBy("kagan", "asc")
         .where("status", "==", "1")
         .get()
         .then((snapshot) => {
@@ -102,16 +103,17 @@ function Dictionary({ dictionaryAll, navigation }) {
         style={{ flex: 1 }}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity 
-                style = {styles.container}
-                onPress={() => navigation.navigate("Word", { data: item })}
-                >
-                  <View style={styles.bodycontainer}>
-                      <Text style = {styles.inKagan}>{item.kagan} </Text>
-                      <Text style = {styles.inFilipino}>{item.filipino} (in filipino)</Text>
-                      <Text style = {styles.meaning}>{item.meaning}</Text>
-                  </View>
-
+            <TouchableOpacity
+              style={styles.container}
+              onPress={() => navigation.navigate("Word", { data: item })}
+            >
+              <View style={styles.bodycontainer}>
+                <Text style={styles.inKagan}>{item.kagan} </Text>
+                <Text style={styles.inFilipino}>
+                  {item.filipino} (in filipino)
+                </Text>
+                <Text style={styles.meaning}>{item.meaning}</Text>
+              </View>
             </TouchableOpacity>
           );
         }}
@@ -127,75 +129,69 @@ const mapStateToProps = (store) => ({
 export default connect(mapStateToProps, null)(Dictionary);
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     alignContent: "center",
     top: 1,
-    paddingVertical:20,
-    paddingHorizontal:20,
-    
+    paddingVertical: 20,
+    paddingHorizontal: 20,
   },
-  bodycontainer:{
-    paddingVertical:3,
-    paddingHorizontal:15,
-},
-    headLine: {
-      flexDirection: "column",
-      width: "100%",
-      height: 200,
-      backgroundColor: "#8E2835",
-      padding: 10,
-    },
+  bodycontainer: {
+    paddingVertical: 3,
+    paddingHorizontal: 15,
+  },
+  headLine: {
+    flexDirection: "column",
+    width: "100%",
+    height: 200,
+    backgroundColor: "#8E2835",
+    padding: 10,
+  },
 
-    title: {
-      paddingHorizontal:20,
-      paddingVertical:50,
-      alignItems:"center",
-    },
-    textHead: {
-      flexDirection: "row",
-      fontSize: 20,
-      fontWeight: "bold",
-      lineHeight: 21,
-      letterSpacing: 0.25,
-      color: "white",
-    },
-    textSubHead: {
-      flexDirection: "row",
-      fontSize: 15,
-      lineHeight: 21,
-      letterSpacing: 0,
-      color: "white",
-    },
-    input: {
-      height: 45,
-      width: "90%",
-      backgroundColor: "white",
-      margin: 12,
-      paddingLeft: 20,
-      borderTopLeftRadius: 10,
-      borderTopRightRadius: 10,
-      borderBottomRightRadius: 10,
-      borderBottomLeftRadius: 10,
-    },
-    inKagan:{
-      fontSize:20,
-      fontWeight:'bold',
-      letterSpacing: 0.3,
-    },
-    inFilipino:{
-      fontSize:11,
-      color: "#8E2835",
-      fontStyle:"italic",
-    },
-    meaning:{
-      fontSize: 13,
-      letterSpacing: 0.25,
-      color: "black",
-      textAlign: "justify",
-    }
-    
- 
-   
-
-  
+  title: {
+    paddingHorizontal: 20,
+    paddingVertical: 50,
+    alignItems: "center",
+  },
+  textHead: {
+    flexDirection: "row",
+    fontSize: 20,
+    fontWeight: "bold",
+    lineHeight: 21,
+    letterSpacing: 0.25,
+    color: "white",
+  },
+  textSubHead: {
+    flexDirection: "row",
+    fontSize: 15,
+    lineHeight: 21,
+    letterSpacing: 0,
+    color: "white",
+  },
+  input: {
+    height: 45,
+    width: "90%",
+    backgroundColor: "white",
+    margin: 12,
+    paddingLeft: 20,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+  },
+  inKagan: {
+    fontSize: 20,
+    fontWeight: "bold",
+    letterSpacing: 0.3,
+  },
+  inFilipino: {
+    fontSize: 11,
+    color: "#8E2835",
+    fontStyle: "italic",
+  },
+  meaning: {
+    fontSize: 13,
+    letterSpacing: 0.25,
+    color: "black",
+    textAlign: "justify",
+  },
 });

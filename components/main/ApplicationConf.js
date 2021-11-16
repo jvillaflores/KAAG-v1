@@ -39,6 +39,21 @@ function ApplicationConf({ currentUser, route, navigation }) {
         console.error(error);
       });
   };
+  const Accept = () => {
+    setLoading(true);
+    firebase
+      .firestore()
+      .doc(`users/${data?.id}`)
+      .update({
+        status: "1",
+        type: "1",
+      })
+      .then((result) => {
+        navigation.goBack();
+        setLoading(false);
+      })
+      .catch((err) => console.log(err, "-=error"));
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -79,7 +94,10 @@ function ApplicationConf({ currentUser, route, navigation }) {
       </View>
 
       <View style={{ flexDirection: "row", flex: 1, justifyContent: "center" }}>
-        <Pressable style={[styles.button, { backgroundColor: "#288E4D" }]}>
+        <Pressable
+          style={[styles.button, { backgroundColor: "#288E4D" }]}
+          onPress={() => Accept()}
+        >
           <Text style={[styles.text, { fontSize: 16, color: "white" }]}>
             Accept
           </Text>

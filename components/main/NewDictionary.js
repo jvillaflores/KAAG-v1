@@ -166,8 +166,8 @@ function NewDictionary({ currentUser, route, navigation }) {
         sentence,
         filipinoSentence,
         meaning,
-        status: 0,
-        upload: 1,
+        status: "0",
+        upload: "1",
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {

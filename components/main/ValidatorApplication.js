@@ -90,7 +90,8 @@ function ValidatorApplication({ currentUser, route, navigation }) {
       .update({
         downloadURL,
         note,
-        applicant: 1,
+        applicant: "1",
+        status: "0",
       })
       .then(function () {
         alert("Thanks for contribution!!");

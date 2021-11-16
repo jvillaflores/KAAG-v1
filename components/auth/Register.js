@@ -43,6 +43,7 @@ export default class Register extends Component {
             name,
             email,
             type: 0,
+            status: "0",
           });
         console.log(result);
       })
