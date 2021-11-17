@@ -21,6 +21,7 @@
     "expo-camera": "~11.2.2",
     "expo-document-picker": "~9.2.4",
     "expo-image-picker": "~10.2.2",
+    "expo-media-library": "~12.1.2",
     "expo-status-bar": "~1.0.4",
     "fbjs": "^0.8.18",
     "firebase": "8.2.3",

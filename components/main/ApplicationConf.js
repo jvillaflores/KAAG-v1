@@ -17,28 +17,16 @@ import { NavigationContainer } from "@react-navigation/native";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { NavigationEvents } from "react-navigation";
-import { Audio } from "expo-av";
 import * as FileSystem from "expo-file-system";
-import PDFReader from "rn-pdf-reader-js";
-import { Constants } from "expo";
+import Hyperlink from "react-native-hyperlink";
 
 function ApplicationConf({ currentUser, route, navigation }) {
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
 
-  const makeDownload = async () => {
-    FileSystem.downloadAsync(
-      data?.downloadURL,
-      FileSystem.documentDirectory + "small.pdf"
-    )
-      .then(({ uri }) => {
-        console.log("Finished downloading to ", uri);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  // const makeDownload = () => {
+
+  // };
   const Accept = () => {
     setLoading(true);
     firebase
@@ -57,30 +45,24 @@ function ApplicationConf({ currentUser, route, navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <PDFReader
-        source={{
-          uri: "http://gahp.net/wp-content/uploads/2017/09/sample.pdf",
-        }}
-      />
       <View>
         <Text style={[styles.text, { color: "#8E2835" }]}> {data?.name} </Text>
       </View>
 
       <View style={styles.bodycontainer}>
         <Text style={[styles.text, { fontSize: 16 }]}>Resume</Text>
-        <TouchableOpacity
-          style={[styles.addButton, { height: 90 }]}
-          onPress={() => makeDownload()}
-        >
-          <MaterialCommunityIcons
-            name="file-pdf-box"
-            size={35}
-            color="#70707033"
-          />
-          <Text style={{ color: "#B1B1B1", fontSize: 12 }}>
-            {" "}
-            Tap to view file
-          </Text>
+        <TouchableOpacity style={[styles.addButton, { height: 90 }]}>
+          <Hyperlink linkDefault={true}>
+            <MaterialCommunityIcons
+              name="file-pdf-box"
+              size={35}
+              color="#70707033"
+            />
+            <Text style={{ color: "#B1B1B1", fontSize: 12 }}>
+              {" "}
+              {data?.downloadURL}
+            </Text>
+          </Hyperlink>
         </TouchableOpacity>
 
         <Text style={[styles.text, { fontSize: 16 }]}>
