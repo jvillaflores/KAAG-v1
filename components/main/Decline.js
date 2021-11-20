@@ -20,9 +20,30 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { NavigationEvents } from "react-navigation";
 import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system";
+import { updateDictionary } from "../../redux/actions";
 
 function Decline({ route, navigation }) {
   const [note, setNote] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { data } = route?.params ?? {};
+  console.log(data);
+
+  const Reject = () => {
+    setLoading(true);
+    firebase
+      .firestore()
+      .doc(`dictionaryAll/${data?.id}`)
+      .update({
+        status: "2",
+        note,
+      })
+      .then((result) => {
+        navigation.replace("Validate");
+        setLoading(false);
+      })
+      .catch((err) => console.log(err, "-=error"));
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.center}>
@@ -34,13 +55,16 @@ function Decline({ route, navigation }) {
           <TextInput
             style={styles.description_input}
             multiline={true}
+            value={note}
             onChangeText={(note) => setNote(note)}
           />
         </View>
       </View>
-      <Pressable style={styles.button}>
-        <Text style={styles.subtitle}>Submit</Text>
-      </Pressable>
+      <TouchableOpacity style={styles.button} onPress={() => Reject()}>
+        <Text style={styles.subtitle}>
+          {loading ? "Submitting..." : "Submit"}
+        </Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }

@@ -1,5 +1,6 @@
 import {
   USER_STATE_CHANGE,
+  USER_ALL_STATE_CHANGE,
   USER_POSTS_STATE_CHANGE,
   USER_ALL_POSTS_STATE_CHANGE,
   DICTIONARY_STATE_CHANGE,
@@ -17,6 +18,20 @@ export function fetchUser() {
       .then((snapshot) => {
         if (snapshot.exists) {
           dispatch({ type: USER_STATE_CHANGE, currentUser: snapshot.data() });
+        } else {
+        }
+      });
+  };
+}
+export function fetchAllUser() {
+  return (dispatch) => {
+    firebase
+      .firestore()
+      .collection("users")
+      .get()
+      .then((snapshot) => {
+        if (snapshot.exists) {
+          dispatch({ type: USER_ALL_STATE_CHANGE, usersAll: snapshot.data() });
         } else {
         }
       });

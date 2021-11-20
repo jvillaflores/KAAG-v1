@@ -1,5 +1,6 @@
 import {
   USER_STATE_CHANGE,
+  USER_ALL_STATE_CHANGE,
   USER_POSTS_STATE_CHANGE,
   USER_ALL_POSTS_STATE_CHANGE,
   DICTIONARY_STATE_CHANGE,
@@ -7,6 +8,7 @@ import {
 
 const initialState = {
   currentUser: [],
+  usersAll: [],
   posts: [],
   postsAll: [],
   dictionaryAll: [],
@@ -19,7 +21,11 @@ export const user = (state = initialState, action) => {
         ...state,
         currentUser: action.currentUser,
       };
-
+    case USER_ALL_STATE_CHANGE:
+      return {
+        ...state,
+        usersAll: action.usersAll,
+      };
     case USER_POSTS_STATE_CHANGE:
       return {
         ...state,

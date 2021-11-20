@@ -23,7 +23,7 @@ export default function Contribution({ navigation }) {
   // const [cameraRef, setCameraRef] = useState(null)
   // const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
   // const [cameraFlash, setCameraFlash] = useState(Camera.Constants.FlashMode.off)
-  // const [isCameraReady, setIsCameraReady] = useState(false)
+  const [isCameraReady, setIsCameraReady] = useState(false);
 
   useEffect(() => {
     (async () => {

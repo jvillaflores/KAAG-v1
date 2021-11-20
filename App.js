@@ -60,6 +60,7 @@ import ValidateWordScreen from "./components/main/ValidateWord";
 import DeclineScreen from "./components/main/Decline";
 import ApplicationsScreen from "./components/main/Applications";
 import ApplicationConfScreen from "./components/main/ApplicationConf";
+import UserContributionScreen from "./components/main/UserContribution";
 
 const Stack = createStackNavigator();
 
@@ -231,7 +232,7 @@ export class App extends Component {
               name="MyContribution"
               component={MyContributionsScreen}
               options={{
-                title: "",
+                title: "My Contributions",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {
@@ -275,7 +276,7 @@ export class App extends Component {
               name="ApplicationScreen"
               component={ApplicationsScreen}
               options={{
-                title: " ",
+                title: "Validator Applicants",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {
@@ -334,6 +335,20 @@ export class App extends Component {
               component={ValidatorAppScreen}
               options={{
                 title: " ",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="UserContribution"
+              component={UserContributionScreen}
+              options={{
+                title: "My Contribution",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {

@@ -122,7 +122,6 @@ function NewDictionary({ currentUser, route, navigation }) {
 
     const taskCompleted = () => {
       task.snapshot.ref.getDownloadURL().then((snapshot) => {
-        savePostData(snapshot);
         saveAllPostData(snapshot);
         setLoading(null);
         console.log(snapshot);
@@ -138,27 +137,12 @@ function NewDictionary({ currentUser, route, navigation }) {
     task.on("state_changed", taskProgress, taskError, taskCompleted);
   };
 
-  const savePostData = (downloadURL) => {
-    firebase
-      .firestore()
-      .collection("dictionary")
-      .doc(firebase.auth().currentUser.uid)
-      .collection("userPosts")
-      .add({
-        downloadURL,
-        kagan,
-        filipino,
-        sentence,
-        filipinoSentence,
-        meaning,
-        creation: firebase.firestore.FieldValue.serverTimestamp(),
-      });
-  };
   const saveAllPostData = (downloadURL) => {
     firebase
       .firestore()
       .collection("dictionaryAll")
       .add({
+        email: currentUser.email,
         username: currentUser.name,
         downloadURL,
         kagan,

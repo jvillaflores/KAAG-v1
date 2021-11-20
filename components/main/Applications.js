@@ -36,13 +36,13 @@ const listTab = [
   },
 ];
 
-function Applications({ currentUser, navigation }) {
+function Applications({ usersAll, navigation }) {
   const [status, setStatus] = useState("All");
-  const [datalist, setDatalist] = useState(currentUser);
+  const [datalist, setDatalist] = useState(usersAll);
 
   useEffect(() => {
-    setDatalist(currentUser);
-  }, [currentUser]);
+    setDatalist(usersAll);
+  }, [usersAll]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
@@ -53,12 +53,12 @@ function Applications({ currentUser, navigation }) {
         .get()
         .then((snapshot) => {
           console.log(snapshot, "-=-=-=-=-=-=-=-=");
-          let currentUser = snapshot.docs.map((doc) => {
+          let usersAll = snapshot.docs.map((doc) => {
             const data = doc.data();
             const id = doc.id;
             return { id, ...data };
           });
-          setDatalist(currentUser);
+          setDatalist(usersAll);
         });
     });
 
@@ -170,7 +170,7 @@ function Applications({ currentUser, navigation }) {
   );
 }
 const mapStateToProps = (store) => ({
-  dictionaryAll: store.userState.dictionaryAll,
+  usersAll: store.userState.usersAll,
 });
 
 export default connect(mapStateToProps, null)(Applications);

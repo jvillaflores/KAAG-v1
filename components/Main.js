@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   fetchUser,
+  fetchAllUser,
   fetchUserPosts,
   fetchAllUserPosts,
   fetchDictionary,
@@ -43,6 +44,7 @@ import ProfileScreen from "./main/Settings";
 export class Main extends Component {
   componentDidMount() {
     this.props.fetchUser();
+    this.props.fetchAllUser();
     this.props.fetchUserPosts();
     this.props.fetchAllUserPosts();
     this.props.fetchDictionary();
@@ -178,9 +180,9 @@ const ProfileStackScreen = ({ navigation }) => {
       <ProfileStack.Screen
         name="EditProfile"
         options={{
-          title: 'Edit Profile',
+          title: "Edit Profile",
           headerStyle: {
-            backgroundColor: '#f2f2f2',
+            backgroundColor: "#f2f2f2",
             elevation: 0,
             borderBottomWidth: 0,
           },
@@ -197,7 +199,13 @@ const mapStateToProps = (store) => ({
 
 const mapDispatchProps = (dispatch) =>
   bindActionCreators(
-    { fetchUser, fetchUserPosts, fetchAllUserPosts, fetchDictionary },
+    {
+      fetchUser,
+      fetchUserPosts,
+      fetchAllUserPosts,
+      fetchDictionary,
+      fetchAllUser,
+    },
     dispatch
   );
 
