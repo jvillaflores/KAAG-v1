@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -7,55 +7,102 @@ import {
   Pressable,
   TextInput,
   FlatList,
-  SafeAreaView,
-  Button,
-  Alert,
+  RefreshControl,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import AddButton from "./AddButton";
 
-import AllScreen from "./ApplyAll";
-import ConfirmedScreen from "./ApplyConf";
-import PendingScreen from "./ApplyPend";
-import DeclineScreen from "./ApplyDecl";
-import { NavigationContainer } from "@react-navigation/native";
-import ApplyAll from "./ApplyAll";
+import { Dimensions } from "react-native";
+import firebase from "firebase";
+require("firebase/firestore");
+require("firebase/firebase-storage");
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const Tab = createMaterialTopTabNavigator();
 
-function Community({ currentUser, navigation }) {
+
+
+function Community({ currentUser, posts, navigation,props }) {
+  
+  const dimensions = Dimensions.get("window");
+  const imageHeight = Math.round((dimensions.width * 1) / 1);
+  const imageWidth = dimensions.width;
+
+  const [datalist, setDatalist] = useState(posts);
+
+
+  
+  useEffect(() => {
+    setDatalist(posts);
+  }, [posts]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      firebase
+        .firestore()
+        .collection("posts")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("userPosts")
+        .orderBy("creation", "desc")
+        .get()
+        .then((snapshot) => {
+          console.log(snapshot, "-=-=-=-=-=-=-=-=");
+          let posts = snapshot.docs.map((doc) => {
+            const data = doc.data();
+            const id = doc.id;
+            return { id, ...data };
+          });
+          setDatalist(posts);
+        });
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+ 
+    
   return (
-    <NavigationContainer independent={true}>
-      
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarContentContainerStyle: {
-            backgroundColor: "#f2f2f2",
-          },
-          tabBarActiveTintColor: "#8E2835",
-          tabBarInactiveTintColor: "#B2B2B2",
-
-          tabBarPressColor: "#8E2835",
-          tabBarLabelStyle: {
-            fontSize: 12,
-            fontWeight: "bold",
-          },
-        })}
-      >
-        <Tab.Screen name="ALL" component={AllScreen} />
-        <Tab.Screen name="CONFIRMED" component={ConfirmedScreen} />
-        <Tab.Screen name="PENDING" component={PendingScreen} />
-        <Tab.Screen name="DECLINED" component={DeclineScreen} />
-      </Tab.Navigator>
-
-    </NavigationContainer>
+    //no button stylesheet
+    <FlatList
+      nestedScrollEnabled
+      numColumns={1}
+      horizontal={false}
+      data={datalist}
+      style={{ flex: 1 }}
+      renderItem={({ item }) => (
+        <View style={styles.container}>
+            <Text>Declined</Text>
+          <View style={styles.profile}>
+            <Image
+              style={styles.imageprofile}
+              source={require("../../assets/jam.jpeg")}
+            />
+            <Text style={styles.profilename}> {currentUser.name}</Text>
+          </View>
+          <Text style={{ fontWeight: "bold", marginLeft: 10 }}>
+            {" "}
+            {item.title}
+          </Text>
+          <View style={{ padding: 30 }}>
+            <Text numberOfLines={2} style={styles.textVocab}>
+              {" "}
+              {item.description}
+           
+            </Text>
+            
+          </View>
+          <Image
+            style={{ height: imageWidth, width: imageWidth }}
+            source={{ uri: item.downloadURL }}
+          />
+        </View>
+      )}
+    />
   );
 }
 
 const mapStateToProps = (store) => ({
-  postsAll: store.userState.postsAll,
-  users: store.userState.users,
+  posts: store.userState.posts,
   currentUser: store.userState.currentUser,
 });
 
@@ -67,22 +114,16 @@ const styles = StyleSheet.create({
     left: 10,
   },
   container: {
-    alignItems: "center",
-    marginTop: 20,
-    marginBottom: 70,
-  },
-  innercontainer: {
-    flex: 1,
-    alignItems: "flex-start",
+    paddingTop: 20,
     justifyContent: "flex-start",
-    margin: 50,
-    //backgroundColor: '#FFFFFF',
+
+    marginBottom: 20,
   },
   button: {
     position: "absolute",
-    width: 70,
-    height: 70,
-    borderRadius: 70 / 2,
+    width: 60,
+    height: 60,
+    borderRadius: 60 / 2,
     alignItems: "center",
     justifyContent: "center",
     shadowRadius: 10,
@@ -90,34 +131,35 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowOffset: { height: 10 },
     backgroundColor: "#8E2835",
-    bottom: 30,
-    right: 30,
-    elevation: 9,
   },
-
+  imageprofile: {
+    height: 45,
+    width: 45,
+    borderRadius: 100,
+    margin: 10,
+  },
+  profile: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  profilename: {
+    fontWeight: "bold",
+  },
   textHead: {
     flexDirection: "row",
     fontSize: 21,
     fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.25,
-    color: "#8E2835",
+    color: "white",
   },
   textSubHead: {
-    flexDirection: "row",
-    fontSize: 15,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    //color: "white",
-  },
-  textreg: {
     flexDirection: "row",
     fontSize: 15,
     // fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.25,
-    //color: "white",
+    color: "white",
   },
   headLine: {
     flexDirection: "row",
@@ -158,7 +200,20 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: "black",
   },
-
+  Abutton: {
+    justifyContent: "center",
+    paddingVertical: 8,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    width: 150,
+    top: -120,
+    backgroundColor: "#8E2835",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+  },
   buttonVocab: {
     alignSelf: "center",
     justifyContent: "center",
@@ -227,11 +282,13 @@ const styles = StyleSheet.create({
     left: -10,
   },
   textVocab: {
-    fontSize: 20,
-    fontWeight: "bold",
-    lineHeight: 21,
+    fontSize: 13,
+
+    fontStyle: "italic",
+    //lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
+    //alignContent:"flex-start",
   },
   textVocabSub: {
     fontSize: 11,
