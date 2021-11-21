@@ -1,73 +1,80 @@
 import React, { useEffect, useState } from "react";
 import {
   View,
-  TextInput,
-  Image,
-  Button,
-  TouchableOpacity,
   Text,
   StyleSheet,
+  Image,
   Pressable,
-  ScrollView,
-  Alert,
-  Dimensions,
-  SafeAreaView,
+  TextInput,
   FlatList,
+  RefreshControl,
+  SafeAreaView
 } from "react-native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
+import AddButton from "./AddButton";
+
+import { Dimensions } from "react-native";
 import firebase from "firebase";
-import { NavigationContainer } from "@react-navigation/native";
 require("firebase/firestore");
 require("firebase/firebase-storage");
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 
-function Applications({ usersAll, navigation }) {
+
+function ApplyAll({ dictionaryAll, navigation }) {
   const [status, setStatus] = useState("All");
-  const [datalist, setDatalist] = useState(usersAll);
+  const [datalist, setDatalist] = useState(dictionaryAll);
 
   useEffect(() => {
-    setDatalist(usersAll);
-  }, [usersAll]);
+    setDatalist(dictionaryAll);
+  }, [dictionaryAll]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
       firebase
         .firestore()
-        .collection("users")
-        .where("applicant", "==", "1")
+        .collection("dictionaryAll")
+        .orderBy("kagan", "asc")
+        .where("upload", "==", "1")
         .get()
         .then((snapshot) => {
           console.log(snapshot, "-=-=-=-=-=-=-=-=");
-          let usersAll = snapshot.docs.map((doc) => {
+          let dictionaryAll = snapshot.docs.map((doc) => {
             const data = doc.data();
             const id = doc.id;
             return { id, ...data };
           });
-          setDatalist(usersAll);
+          setDatalist(dictionaryAll);
         });
     });
 
     return unsubscribe;
   }, [navigation]);
 
-  
-  
+  const setStatusFilter = (status) => {
+    if (status !== "All") {
+      //purple and green
+      setDatalist([...data.filter((e) => e.status === status)]);
+    } else {
+      setDatalist(data);
+    }
+    setStatus(status);
+  };
+
   const renderItem = ({ item, index }) => {
     return (
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}
-        onPress={() =>
-          navigation.navigate("ConfirmationScreen", { data: item })
-        }
+        onPress={() => navigation.navigate("Validation", { data: item })}
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
-            <Text style={styles.itemsName}> {item?.name}</Text>
+            <Text style={styles.itemsName}> {item?.kagan}</Text>
           </View>
           <View style={styles.itemBody}>
-            <Text> {item?.note}</Text>
+            <Text> {item?.meaning}</Text>
           </View>
         </View>
 
@@ -77,7 +84,7 @@ function Applications({ usersAll, navigation }) {
               styles.itemStatus,
               {
                 backgroundColor:
-                  item.status == "Pending"
+                  item.status == "0"
                     ? "#FFEFC5"
                     : "#B5F5D1" && item.status == "2"
                     ? "#FFEFEE"
@@ -90,7 +97,7 @@ function Applications({ usersAll, navigation }) {
                 styles.statusFont,
                 {
                   color:
-                    item.status == "Pending"
+                    item.status == "0"
                       ? "#CEA032"
                       : "#63C579" && item.status == "2"
                       ? "#FF9797"
@@ -99,9 +106,9 @@ function Applications({ usersAll, navigation }) {
               ]}
             >
               {" "}
-              {item.status == "Pending"
+              {item.status == "0"
                 ? "Pending"
-                : item.status === "Confirmed"
+                : item.status === "1"
                 ? "Confirmed"
                 : "Declined"}
             </Text>
@@ -124,8 +131,7 @@ function Applications({ usersAll, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      
-
+       
       <FlatList
         data={datalist}
         keyExtractor={(e, i) => i.toString()}
@@ -136,17 +142,16 @@ function Applications({ usersAll, navigation }) {
   );
 }
 const mapStateToProps = (store) => ({
-  usersAll: store.userState.usersAll,
+  dictionaryAll: store.userState.dictionaryAll,
 });
 
-export default connect(mapStateToProps, null)(Applications);
+export default connect(mapStateToProps, null)(ApplyAll);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20,
+    //paddingHorizontal:10,
     justifyContent: "center",
-    paddingVertical: 20,
   },
   listTab: {
     alignSelf: "center",
@@ -183,6 +188,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: "row",
     paddingVertical: 15,
+    paddingHorizontal: 20,
   },
   itemLogo: {
     padding: 10,
@@ -225,10 +231,20 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     letterSpacing: 0.25,
-    color: "#8E2835",
-    paddingVertical: 15,
+    position: "relative",
+    alignSelf: "center",
+    color: "white",
   },
-
+  textSubHead: {
+    flexDirection: "row",
+    fontSize: 13,
+    letterSpacing: 0.25,
+    color: "white",
+  },
+  title: {
+    top: 40,
+    //left: 110,
+  },
   statusFont: {
     fontWeight: "bold",
   },
