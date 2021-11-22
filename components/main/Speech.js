@@ -9,7 +9,7 @@ const Speech = ({ navigation }) => {
       <View>
         <Pressable
           style={styles.buttonVocab}
-          onPress={() => navigation.navigate("Speech1")}
+          onPress={() => navigation.navigate("Pronunciation1")}
         >
           <View style={styles.contextButton}>
             <Image
