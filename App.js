@@ -63,6 +63,8 @@ import ValidateWordScreen from "./components/main/ValidateWord";
 import DeclineScreen from "./components/main/Decline";
 import ApplicationsScreen from "./components/main/Applications";
 import ApplicationConfScreen from "./components/main/ApplicationConf";
+import SpeechScreen from "./components/main/Speech";
+import SpeechScreen1 from "./components/main/coursepacks/screens/Speech/Speech1"
 import UserContributionScreen from "./components/main/UserContribution";
 import PronunciationScreen from "./components/main/coursepacks/screens/Pronunciation";
 import PhrasesScreen1 from "./components/main/coursepacks/screens/Phrases/Phrases1";
@@ -150,6 +152,18 @@ export class App extends Component {
                 },
               }}
             />
+           <Stack.Screen
+              name="Speech"
+              component={SpeechScreen}
+              options={{
+                title: "Speech",
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                },
+              }}
+            />
+            
             <Stack.Screen
               name="Grammar"
               component={GrammarScreen}
@@ -421,6 +435,21 @@ export class App extends Component {
                 },
               }}
             />
+            <Stack.Screen
+              name="Speach1"
+              component={SpeechScreen1}
+              options={{
+                title: "Introduction",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+
             <Stack.Screen
               name="Phrases1"
               component={PhrasesScreen1}

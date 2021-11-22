@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -7,26 +7,32 @@ import {
   Pressable,
   TextInput,
   FlatList,
+  Picker,
   SafeAreaView,
-  Button,
-  Alert,
+  TouchableOpacity,
+  Dimensions,
 } from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import firebase from "firebase";
+require("firebase/firestore");
+require("firebase/firebase-storage");
+
 import { connect } from "react-redux";
+import { NavigationContainer } from "@react-navigation/native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { fetchDictionary } from "../../redux/actions";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import AllScreen from "./ApplyAll";
-import ConfirmedScreen from "./ApplyConf";
+import ConfirmScreen from "./ApplyConf";
 import PendingScreen from "./ApplyPend";
 import DeclineScreen from "./ApplyDecl";
-import { NavigationContainer } from "@react-navigation/native";
-import ApplyAll from "./ApplyAll";
+var head = require("../../assets/learning.svg");
 
 const Tab = createMaterialTopTabNavigator();
 
 function Applications() {
   return (
-    <NavigationContainer independent={true}>
+    <SafeAreaView style={styles.container}>
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarContentContainerStyle: {
@@ -42,238 +48,133 @@ function Applications() {
           },
         })}
       >
-        <Tab.Screen name="ALL" component={AllScreen} />
-        <Tab.Screen name="CONFIRMED" component={ConfirmedScreen} />
-        <Tab.Screen name="PENDING" component={PendingScreen} />
-        <Tab.Screen name="DECLINED" component={DeclineScreen} />
+        <Tab.Screen name="all" component={AllScreen} />
+        <Tab.Screen name="confirmed" component={ConfirmScreen} />
+        <Tab.Screen name="pending" component={PendingScreen} />
+        <Tab.Screen name="declined" component={DeclineScreen} />
       </Tab.Navigator>
-    </NavigationContainer>
+    </SafeAreaView>
   );
 }
-
 const mapStateToProps = (store) => ({
-  postsAll: store.userState.postsAll,
-  usersAll: store.userState.usersAll,
-  currentUser: store.userState.currentUser,
+  dictionaryAll: store.userState.dictionaryAll,
 });
 
 export default connect(mapStateToProps, null)(Applications);
 
 const styles = StyleSheet.create({
-  title: {
-    top: 20,
-    left: 10,
-  },
   container: {
-    alignItems: "center",
-    marginTop: 20,
-    marginBottom: 70,
-  },
-  innercontainer: {
     flex: 1,
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
-    margin: 50,
-    //backgroundColor: '#FFFFFF',
-  },
-  button: {
-    position: "absolute",
-    width: 70,
-    height: 70,
-    borderRadius: 70 / 2,
-    alignItems: "center",
+    //paddingHorizontal:10,
     justifyContent: "center",
-    shadowRadius: 10,
-    shadowColor: "#F02A4B",
-    shadowOpacity: 0.3,
-    shadowOffset: { height: 10 },
-    backgroundColor: "#8E2835",
-    bottom: 30,
-    right: 30,
-    elevation: 9,
+  },
+  listTab: {
+    alignSelf: "center",
+    marginBottom: 20,
+    flexDirection: "row",
+    paddingHorizontal: 2,
+    backgroundColor: "#ebebeb",
+    borderRadius: 10,
   },
 
-  textHead: {
+  btnTab: {
+    width: Dimensions.get("window").width / 4.5,
     flexDirection: "row",
-    fontSize: 21,
+    borderWidth: 0.5,
+    borderColor: "#ebebeb",
+    padding: 10,
+    justifyContent: "center",
+  },
+  textTab: {
+    fontSize: 12,
     fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
+    color: "#000000",
+    //lineHeight: 1,
+  },
+  brnTabActive: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+  },
+  textTabActive: {
     color: "#8E2835",
+    fontWeight: "bold",
+    fontSize: 13,
+  },
+  itemContainer: {
+    flexDirection: "row",
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+  },
+  itemLogo: {
+    padding: 10,
+  },
+  itemImage: {
+    width: 50,
+    height: 50,
+  },
+
+  itemBody: {
+    flex: 1,
+    paddingHorizontal: 10,
+    justifyContent: "center",
+  },
+
+  itemsName: {
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  itemStatus: {
+    backgroundColor: "#69C080",
+    paddingHorizontal: 17,
+    height: 30,
+    justifyContent: "center",
+    right: 14,
+    borderRadius: 5,
+  },
+  headLine: {
+    flexDirection: "column",
+    width: "100%",
+    padding: 30,
+    top: -20,
+    height: 150,
+    backgroundColor: "#8E2835",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    position: "relative",
+  },
+  textHead: {
+    fontSize: 20,
+    fontWeight: "bold",
+    letterSpacing: 0.25,
+    position: "relative",
+    alignSelf: "center",
+    color: "white",
   },
   textSubHead: {
     flexDirection: "row",
-    fontSize: 15,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    //color: "white",
-  },
-  textreg: {
-    flexDirection: "row",
-    fontSize: 15,
-    // fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    //color: "white",
-  },
-  headLine: {
-    flexDirection: "row",
-    width: "100%",
-    height: 110,
-    backgroundColor: "#8E2835",
-  },
-  textHeadline: {
-    flexDirection: "row",
-    fontSize: 20,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
-  searchBar: {
-    top: 40,
-    left: -120,
-    width: "100%",
-  },
-  Kagan: {
-    top: 90,
-    left: 40,
-  },
-  grammar: {
-    top: 70,
-    left: 40,
-  },
-  pronun: {
-    top: 100,
-    left: 40,
-  },
-  textKagan: {
-    flexDirection: "row",
-    fontSize: 15,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
-
-  buttonVocab: {
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: "90%",
-    backgroundColor: "#dadada",
-    top: -70,
-    left: -40,
-    height: 280,
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    borderBottomRightRadius: 7,
-    borderBottomLeftRadius: 7,
-    borderColor: "black",
-  },
-  buttonGrammar: {
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: "90%",
-    backgroundColor: "#dadada",
-    top: -30,
-    left: -40,
-    height: 300,
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    borderBottomRightRadius: 7,
-    borderBottomLeftRadius: 7,
-    borderColor: "black",
-  },
-  buttonPronun: {
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: "90%",
-    backgroundColor: "#dadada",
-    top: -40,
-    left: -40,
-    height: 105,
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    borderBottomRightRadius: 7,
-    borderBottomLeftRadius: 7,
-    borderColor: "black",
-  },
-  Vocab: {
-    top: 10,
-    left: -20,
-    paddingBottom: 20,
-  },
-  VocabSubSub: {
-    top: 5,
-    left: -10,
-  },
-  VocabSub: {
-    top: 5,
-    left: -10,
-  },
-  textVocab: {
-    fontSize: 20,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
-  textVocabSub: {
-    fontSize: 11,
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
-  textVocabSubSub: {
-    fontSize: 11,
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "#8E2835",
-  },
-  text: {
-    fontSize: 15,
-    fontWeight: "bold",
-    lineHeight: 21,
+    fontSize: 13,
     letterSpacing: 0.25,
     color: "white",
   },
-  input: {
-    height: 45,
-    width: "90%",
-    backgroundColor: "white",
-    margin: 12,
-    borderWidth: 1,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
+  title: {
+    top: 40,
+    //left: 110,
   },
-  buttonAudio: {
-    alignSelf: "center",
+  statusFont: {
+    fontWeight: "bold",
+  },
+  arrowRight: {
+    backgroundColor: "#ebebeb",
+    paddingHorizontal: 5,
+    width: 30,
+    height: 30,
     justifyContent: "center",
-    borderRadius: 50,
-    elevation: 3,
-    width: 50,
-    backgroundColor: "#79222D",
-    top: 300,
-    left: 130,
-    height: 50,
-    borderColor: "black",
+    right: 2,
+    borderRadius: 5,
+    margin: 10,
   },
-  Icon: {
-    left: 7,
+  buttonContainer: {
+    alignItems: "flex-end",
+    alignSelf: "center",
   },
 });

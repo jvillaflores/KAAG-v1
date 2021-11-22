@@ -567,7 +567,7 @@ function Course({ currentUser, navigation }) {
         </Pressable>
         <Pressable
           style={styles.buttonVocab}
-          onPress={() => navigation.navigate("Vocabulary")}
+          onPress={() => navigation.navigate("Speech")}
         >
           <View style={styles.contextButton}>
             <Image
