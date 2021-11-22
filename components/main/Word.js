@@ -42,40 +42,38 @@ const Word = ({ route }) => {
     <ScrollView>
       <View style={styles.headLine}>
         <View style={styles.header_line}>
-          <Text style = {styles.inKagan}> {data?.kagan} </Text>
-          <Text style = {styles.inPronounciation}> /{data?.pronunciation}/ </Text>
-          
-          <TouchableOpacity 
-            style={styles.buttonAudio} 
-            onPress={() => downloadAudio()}>
-          <View>
-            <MaterialCommunityIcons
-              name="volume-high"
-              size={26}
-              color="white"
-            />
-          </View>
-        </TouchableOpacity>
-        </View>
+          <Text style={styles.inKagan}> {data?.kagan} </Text>
+          <Text style={styles.inPronounciation}> /{data?.pronunciation}/ </Text>
 
-       
+          <TouchableOpacity
+            style={styles.buttonAudio}
+            onPress={() => downloadAudio()}
+          >
+            <View>
+              <MaterialCommunityIcons
+                name="volume-high"
+                size={26}
+                color="white"
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
 
-      <View style = {styles.container}>
-        <View style = {{paddingVertical:8}}>
-          <Text style = {styles.boldText}>Definition </Text>
-          <Text style = {styles.contextText}>{data?.meaning} </Text>
+      <View style={styles.container}>
+        <View style={{ paddingVertical: 8 }}>
+          <Text style={styles.boldText}>Definition </Text>
+          <Text style={styles.contextText}>{data?.meaning} </Text>
         </View>
-        <View style = {{paddingVertical:8}}>
-            <Text style = {styles.boldText}>Additional Information </Text>
-            <View style = {{paddingHorizontal:10}}>
-              <Text style = {{color:"#8E2835"}}>Translation in Filipino</Text>
-              <Text style = {[styles.contextText]}>{data?.filipino} </Text>
-              <Text style = {{color:"#8E2835"}}>Definition</Text>
-              <Text style = {[styles.contextText]}>{data?.sentence}</Text>
-              
-            </View>
+        <View style={{ paddingVertical: 8 }}>
+          <Text style={styles.boldText}>Additional Information </Text>
+          <View style={{ paddingHorizontal: 10 }}>
+            <Text style={{ color: "#8E2835" }}>Translation in Filipino</Text>
+            <Text style={[styles.contextText]}>{data?.filipino} </Text>
+            <Text style={{ color: "#8E2835" }}>Definition</Text>
+            <Text style={[styles.contextText]}>{data?.sentence}</Text>
           </View>
+        </View>
       </View>
     </ScrollView>
   );
@@ -88,37 +86,35 @@ const mapStateToProps = (store) => ({
 export default connect(mapStateToProps, null)(Word);
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     alignContent: "center",
     top: 1,
-    paddingVertical:20,
-    paddingHorizontal:20,
-    
+    paddingVertical: 20,
+    paddingHorizontal: 20,
   },
   headLine: {
     flexDirection: "column",
     width: "100%",
     height: 150,
     backgroundColor: "#8E2835",
-    
   },
   header_line: {
     flexDirection: "column",
-    paddingVertical:5,
+    paddingVertical: 5,
     //padding: 30,
     //top: 20,
     //height: 150,
     alignItems: "center",
     //justifyContent: "center",
   },
-  inKagan:{
-    fontSize:25,
+  inKagan: {
+    fontSize: 25,
     color: "white",
-    fontWeight:"bold",
-    letterSpacing:0.25,
+    fontWeight: "bold",
+    letterSpacing: 0.25,
   },
-  inPronounciation:{
-    color:"white",
+  inPronounciation: {
+    color: "white",
   },
   buttonAudio: {
     alignSelf: "center",
@@ -127,11 +123,11 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     backgroundColor: "#79222D",
   },
-  boldText:{
-    fontWeight:"bold",
-    fontSize:16,
+  boldText: {
+    fontWeight: "bold",
+    fontSize: 16,
   },
-  contextText:{
-    paddingHorizontal:10,
-  }
+  contextText: {
+    paddingHorizontal: 10,
+  },
 });

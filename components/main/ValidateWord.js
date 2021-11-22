@@ -22,22 +22,18 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { fetchDictionary } from "../../redux/actions";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-
 import AllScreen from "./VWAll";
 import ConfirmScreen from "./VWConf";
 import PendingScreen from "./VWPend";
 import DeclineScreen from "./VWDec";
 var head = require("../../assets/learning.svg");
 
-
 const Tab = createMaterialTopTabNavigator();
 
 function ValidateWord() {
-  
-
   return (
     <SafeAreaView style={styles.container}>
-       <Tab.Navigator
+      <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarContentContainerStyle: {
             backgroundColor: "#f2f2f2",
@@ -57,7 +53,6 @@ function ValidateWord() {
         <Tab.Screen name="pending" component={PendingScreen} />
         <Tab.Screen name="declined" component={DeclineScreen} />
       </Tab.Navigator>
-
     </SafeAreaView>
   );
 }

@@ -24,10 +24,9 @@ import ApplyAll from "./ApplyAll";
 
 const Tab = createMaterialTopTabNavigator();
 
-function Community({ currentUser, navigation }) {
+function Applications() {
   return (
     <NavigationContainer independent={true}>
-      
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarContentContainerStyle: {
@@ -48,18 +47,17 @@ function Community({ currentUser, navigation }) {
         <Tab.Screen name="PENDING" component={PendingScreen} />
         <Tab.Screen name="DECLINED" component={DeclineScreen} />
       </Tab.Navigator>
-
     </NavigationContainer>
   );
 }
 
 const mapStateToProps = (store) => ({
   postsAll: store.userState.postsAll,
-  users: store.userState.users,
+  usersAll: store.userState.usersAll,
   currentUser: store.userState.currentUser,
 });
 
-export default connect(mapStateToProps, null)(Community);
+export default connect(mapStateToProps, null)(Applications);
 
 const styles = StyleSheet.create({
   title: {

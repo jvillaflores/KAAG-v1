@@ -9,11 +9,11 @@ import {
   Modal,
   Animated,
 } from "react-native";
-import { COLORS, SIZES } from "../constants";
-import data from "../quizdata/QuizData";
+import { COLORS, SIZES } from "../../constants";
+import data from "../../quizdata/Phrases/QuizPhrases";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-const Vocabulary1 = () => {
+function Phrases1({ navigation }) {
   const allQuestions = data;
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
@@ -330,12 +330,32 @@ const Vocabulary1 = () => {
               </View>
               {/* Retry Quiz button */}
               <TouchableOpacity
+                onPress={() => navigation.navigate("Grammar")}
+                style={{
+                  backgroundColor: COLORS.accent,
+                  padding: 20,
+                  width: "40%",
+                  borderRadius: 20,
+                }}
+              >
+                <Text
+                  style={{
+                    textAlign: "center",
+                    color: COLORS.white,
+                    fontSize: 20,
+                  }}
+                >
+                  Go Back
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
                 onPress={restartQuiz}
                 style={{
                   backgroundColor: COLORS.accent,
                   padding: 20,
-                  width: "100%",
+                  width: "50%",
                   borderRadius: 20,
+                  marginTop: 10,
                 }}
               >
                 <Text
@@ -370,6 +390,6 @@ const Vocabulary1 = () => {
       </View>
     </SafeAreaView>
   );
-};
+}
 
-export default Vocabulary1;
+export default Phrases1;

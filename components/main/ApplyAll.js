@@ -21,7 +21,6 @@ require("firebase/firestore");
 require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-
 function Applications({ usersAll, navigation }) {
   const [status, setStatus] = useState("All");
   const [datalist, setDatalist] = useState(usersAll);
@@ -51,16 +50,12 @@ function Applications({ usersAll, navigation }) {
     return unsubscribe;
   }, [navigation]);
 
-  
-  
   const renderItem = ({ item, index }) => {
     return (
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}
-        onPress={() =>
-          navigation.navigate("ConfirmationScreen", { data: item })
-        }
+        onPress={() => navigation.navigate("ConfirmScreen", { data: item })}
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
@@ -77,7 +72,7 @@ function Applications({ usersAll, navigation }) {
               styles.itemStatus,
               {
                 backgroundColor:
-                  item.status == "Pending"
+                  item.status == "0"
                     ? "#FFEFC5"
                     : "#B5F5D1" && item.status == "2"
                     ? "#FFEFEE"
@@ -90,7 +85,7 @@ function Applications({ usersAll, navigation }) {
                 styles.statusFont,
                 {
                   color:
-                    item.status == "Pending"
+                    item.status == "0"
                       ? "#CEA032"
                       : "#63C579" && item.status == "2"
                       ? "#FF9797"
@@ -99,9 +94,9 @@ function Applications({ usersAll, navigation }) {
               ]}
             >
               {" "}
-              {item.status == "Pending"
+              {item.status == "0"
                 ? "Pending"
-                : item.status === "Confirmed"
+                : item.status === "1"
                 ? "Confirmed"
                 : "Declined"}
             </Text>
@@ -124,8 +119,6 @@ function Applications({ usersAll, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      
-
       <FlatList
         data={datalist}
         keyExtractor={(e, i) => i.toString()}

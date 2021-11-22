@@ -16,7 +16,7 @@ const data = [
   },
   {
     question: "TRANSLATE: 'yan na usog'",
-    options: ["para sa", "noon ay", "sa", "ako" ],
+    options: ["para sa", "noon ay", "sa", "ako"],
     correct_option: "noon ay",
   },
   {

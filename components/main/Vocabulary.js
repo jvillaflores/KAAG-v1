@@ -1,11 +1,5 @@
 import React from "react";
-import { 
-  View, 
-  Text, 
-  StyleSheet, 
-  Image, 
-  Pressable 
-} from "react-native";
+import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 
 const Vocabulary = ({ navigation }) => {
   return (
@@ -23,8 +17,8 @@ const Vocabulary = ({ navigation }) => {
               source={require("../../assets/Learning-cuate.png")}
             />
             <View style={styles.text_Context}>
-              <Text style={styles.textVocab}> Lesson 1</Text>
-              <Text style={styles.textVocabSub}> 15 words - 20 minutes</Text>
+              <Text style={styles.textVocab}> Pronouns</Text>
+              <Text style={styles.textVocabSub}> Translate the words</Text>
             </View>
           </View>
         </Pressable>
@@ -32,7 +26,7 @@ const Vocabulary = ({ navigation }) => {
       <View>
         <Pressable
           style={styles.buttonVocab}
-          onPress={() => navigation.navigate("MainContribution")}
+          onPress={() => navigation.navigate("Vocabulary2")}
         >
           <View style={styles.contextButton}>
             <Image
@@ -40,8 +34,8 @@ const Vocabulary = ({ navigation }) => {
               source={require("../../assets/Learning-cuate.png")}
             />
             <View style={styles.text_Context}>
-              <Text style={styles.textVocab}> Lesson 2</Text>
-              <Text style={styles.textVocabSub}> 10 words - 15 minutes</Text>
+              <Text style={styles.textVocab}> Adjective</Text>
+              <Text style={styles.textVocabSub}> Translate the words</Text>
             </View>
           </View>
         </Pressable>
@@ -49,7 +43,7 @@ const Vocabulary = ({ navigation }) => {
       <View>
         <Pressable
           style={styles.buttonVocab}
-          onPress={() => navigation.navigate("MainContribution")}
+          onPress={() => navigation.navigate("Vocabulary3")}
         >
           <View style={styles.contextButton}>
             <Image
@@ -57,8 +51,8 @@ const Vocabulary = ({ navigation }) => {
               source={require("../../assets/Learning-cuate.png")}
             />
             <View style={styles.text_Context}>
-              <Text style={styles.textVocab}> Lesson 3</Text>
-              <Text style={styles.textVocabSub}> 10 words - 15 minutes</Text>
+              <Text style={styles.textVocab}> Verbs</Text>
+              <Text style={styles.textVocabSub}> Translate the words</Text>
             </View>
           </View>
         </Pressable>
@@ -104,17 +98,17 @@ const styles = StyleSheet.create({
   },
   contextButton: {
     padding: 20,
-    flexDirection:"row",
+    flexDirection: "row",
     left: 20,
-    alignItems:"center"
+    alignItems: "center",
   },
-  text_Context:{
-    flexDirection:"column",
+  text_Context: {
+    flexDirection: "column",
     marginLeft: 30,
   },
   buttonVocab: {
     alignSelf: "center",
-    alignItems:"flex-start",
+    alignItems: "flex-start",
     marginTop: 10,
     elevation: 0.7,
     width: 300,

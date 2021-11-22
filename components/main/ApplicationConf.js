@@ -99,6 +99,7 @@ function ApplicationConf({ currentUser, route, navigation }) {
 
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
+  usersAll: store.userState.usersAll,
 });
 
 export default connect(mapStateToProps, null)(ApplicationConf);

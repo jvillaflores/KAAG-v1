@@ -8,7 +8,7 @@ import {
   TextInput,
   FlatList,
   RefreshControl,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
@@ -20,9 +20,7 @@ require("firebase/firestore");
 require("firebase/firebase-storage");
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-
-
-function ApplyAll({ dictionaryAll, navigation }) {
+function VWAll({ dictionaryAll, navigation }) {
   const [status, setStatus] = useState("All");
   const [datalist, setDatalist] = useState(dictionaryAll);
 
@@ -131,7 +129,6 @@ function ApplyAll({ dictionaryAll, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-       
       <FlatList
         data={datalist}
         keyExtractor={(e, i) => i.toString()}
@@ -145,7 +142,7 @@ const mapStateToProps = (store) => ({
   dictionaryAll: store.userState.dictionaryAll,
 });
 
-export default connect(mapStateToProps, null)(ApplyAll);
+export default connect(mapStateToProps, null)(VWAll);
 
 const styles = StyleSheet.create({
   container: {
