@@ -105,24 +105,26 @@ const Pronunciation = () => {
           <Text
             style={{
               color: COLORS.black,
-              fontSize: 20,
+              fontSize: 18,
               opacity: 0.6,
               marginRight: 2,
             }}
           >
             {currentQuestionIndex + 1}
           </Text>
-          <Text style={{ color: COLORS.black, fontSize: 18, opacity: 0.6 }}>
+          <Text style={{ color: COLORS.black, fontSize: 15, opacity: 0.6 }}>
             / {allQuestions.length}
           </Text>
         </View>
-
+            <Text style = {{fontSize: 15,marginBottom: 15}}>Select the correct word for the audio </Text>
         {/* Question */}
         <TouchableOpacity
           style={{
             alignSelf: "center",
-            padding: 8,
-            margin: 10,
+            paddingHorizontal:20,
+            paddingVertical:15,
+            //padding: 8,
+            //margin: 10,
             borderRadius: 7,
             backgroundColor: "#79222D",
           }}
@@ -167,7 +169,7 @@ const Pronunciation = () => {
               alignItems: "center",
               justifyContent: "space-between",
               paddingHorizontal: 20,
-              marginVertical: 10,
+              marginVertical: 7,
             }}
           >
             <Text style={{ fontSize: 20, color: COLORS.black }}>{option}</Text>
