@@ -29,7 +29,10 @@ function Validation({ currentUser, route, navigation }) {
     let SoundObject = new Audio.Sound();
     try {
       await SoundObject.loadAsync({ uri: data.downloadURL });
-      await SoundObject.playAsync();
+      const status = await SoundObject.playAsync();
+      setTimeout(() => {
+        SoundObject.unloadAsync();
+      }, status.playableDurationMillis + 1000);
     } catch (error) {
       console.log(error);
       await SoundObject.unloadAsync(); // Unload any sound loaded

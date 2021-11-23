@@ -60,7 +60,7 @@ const Vocabulary = ({ navigation }) => {
       <View>
         <Pressable
           style={styles.buttonVocab}
-          onPress={() => navigation.navigate("MainContribution")}
+          onPress={() => navigation.navigate("Vocabulary4")}
         >
           <View style={styles.contextButton}>
             <Image
@@ -68,8 +68,11 @@ const Vocabulary = ({ navigation }) => {
               source={require("../../assets/Learning-cuate.png")}
             />
             <View style={styles.text_Context}>
-              <Text style={styles.textVocab}> Lesson 4</Text>
-              <Text style={styles.textVocabSub}> 15 words - 20 minutes</Text>
+              <Text style={styles.textVocab}>
+                {" "}
+                Conjuctions and Prepositions
+              </Text>
+              <Text style={styles.textVocabSub}> Translate the words</Text>
             </View>
           </View>
         </Pressable>

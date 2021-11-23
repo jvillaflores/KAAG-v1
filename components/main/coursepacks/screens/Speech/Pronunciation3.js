@@ -10,11 +10,11 @@ import {
   Animated,
 } from "react-native";
 import { COLORS, SIZES } from "../../constants";
-import data from "../../quizdata/Vocabulary/QuizData";
+import data from "../../quizdata/Speech/QuizPronunciation3";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Vocabulary from "../../../Vocabulary";
+import { Audio } from "expo-av";
 
-function Vocabulary1({ navigation }) {
+function Pronunciation2({ navigation }) {
   const allQuestions = data;
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
@@ -72,6 +72,26 @@ function Vocabulary1({ navigation }) {
   };
 
   const renderQuestion = () => {
+    console.log(allQuestions[currentQuestionIndex]?.question);
+    const downloadAudio = async () => {
+      let SoundObject = new Audio.Sound();
+      try {
+        await SoundObject.loadAsync({
+          uri: allQuestions[currentQuestionIndex]?.question,
+        });
+        const status = await SoundObject.playAsync();
+        setTimeout(() => {
+          SoundObject.unloadAsync();
+        }, status.playableDurationMillis + 1000);
+      } catch (error) {
+        console.log(error);
+        await SoundObject.unloadAsync(); // Unload any sound loaded
+        SoundObject.setOnPlaybackStatusUpdate(null); // Unset all playback status loaded
+        retryPlaySound();
+      }
+    };
+
+    const retryPlaySound = () => downloadAudio();
     return (
       <View
         style={{
@@ -88,27 +108,41 @@ function Vocabulary1({ navigation }) {
           <Text
             style={{
               color: COLORS.black,
-              fontSize: 20,
+              fontSize: 18,
               opacity: 0.6,
               marginRight: 2,
             }}
           >
             {currentQuestionIndex + 1}
           </Text>
-          <Text style={{ color: COLORS.black, fontSize: 18, opacity: 0.6 }}>
+          <Text style={{ color: COLORS.black, fontSize: 15, opacity: 0.6 }}>
             / {allQuestions.length}
           </Text>
         </View>
-
-        {/* Question */}
-        <Text
-          style={{
-            color: COLORS.black,
-            fontSize: 30,
-          }}
-        >
-          {allQuestions[currentQuestionIndex]?.question}
+        <Text style={{ fontSize: 15, marginBottom: 15 }}>
+          Select the correct word for the audio{" "}
         </Text>
+        {/* Question */}
+        <TouchableOpacity
+          style={{
+            alignSelf: "center",
+            paddingHorizontal: 20,
+            paddingVertical: 15,
+            //padding: 8,
+            //margin: 10,
+            borderRadius: 7,
+            backgroundColor: "#79222D",
+          }}
+          onPress={() => downloadAudio()}
+        >
+          <View>
+            <MaterialCommunityIcons
+              name="volume-high"
+              size={26}
+              color="white"
+            />
+          </View>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -140,7 +174,7 @@ function Vocabulary1({ navigation }) {
               alignItems: "center",
               justifyContent: "space-between",
               paddingHorizontal: 20,
-              marginVertical: 10,
+              marginVertical: 7,
             }}
           >
             <Text style={{ fontSize: 20, color: COLORS.black }}>{option}</Text>
@@ -331,7 +365,7 @@ function Vocabulary1({ navigation }) {
               </View>
               {/* Retry Quiz button */}
               <TouchableOpacity
-                onPress={() => navigation.navigate("Vocabulary")}
+                onPress={() => navigation.navigate("Speech")}
                 style={{
                   backgroundColor: COLORS.accent,
                   padding: 20,
@@ -393,4 +427,4 @@ function Vocabulary1({ navigation }) {
   );
 }
 
-export default Vocabulary1;
+export default Pronunciation2;

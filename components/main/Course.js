@@ -546,7 +546,7 @@ function Course({ currentUser, navigation }) {
 
             <View style={styles.text_Context}>
               <Text style={styles.textVocab}> Vocabulary</Text>
-              <Text style={styles.textVocabSub}> 70 words to study</Text>
+              <Text style={styles.textVocabSub}> Translate words</Text>
             </View>
           </View>
         </Pressable>
@@ -561,7 +561,10 @@ function Course({ currentUser, navigation }) {
             />
             <View style={styles.text_Context}>
               <Text style={styles.textVocab}> Phrases</Text>
-              <Text style={styles.textVocabSub}> 7 topics to study</Text>
+              <Text style={styles.textVocabSub}>
+                {" "}
+                Select and Translate Phrases
+              </Text>
             </View>
           </View>
         </Pressable>
@@ -576,7 +579,10 @@ function Course({ currentUser, navigation }) {
             />
             <View style={styles.text_Context}>
               <Text style={styles.textVocab}> Speech</Text>
-              <Text style={styles.textVocabSub}> 70 words to study</Text>
+              <Text style={styles.textVocabSub}>
+                {" "}
+                Select the correct pronunciation
+              </Text>
             </View>
           </View>
         </Pressable>

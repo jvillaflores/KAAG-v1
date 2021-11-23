@@ -26,7 +26,7 @@ const Speech = ({ navigation }) => {
       <View>
         <Pressable
           style={styles.buttonVocab}
-          onPress={() => navigation.navigate("Vocabulary2")}
+          onPress={() => navigation.navigate("Pronunciation2")}
         >
           <View style={styles.contextButton}>
             <Image
@@ -43,7 +43,7 @@ const Speech = ({ navigation }) => {
       <View>
         <Pressable
           style={styles.buttonVocab}
-          onPress={() => navigation.navigate("Vocabulary3")}
+          onPress={() => navigation.navigate("Pronunciation3")}
         >
           <View style={styles.contextButton}>
             <Image
@@ -60,7 +60,7 @@ const Speech = ({ navigation }) => {
       <View>
         <Pressable
           style={styles.buttonVocab}
-          onPress={() => navigation.navigate("MainContribution")}
+          onPress={() => navigation.navigate("Pronunciation4")}
         >
           <View style={styles.contextButton}>
             <Image
@@ -68,8 +68,11 @@ const Speech = ({ navigation }) => {
               source={require("../../assets/Learning-cuate.png")}
             />
             <View style={styles.text_Context}>
-              <Text style={styles.textVocab}> Lesson 4</Text>
-              <Text style={styles.textVocabSub}> 15 words - 20 minutes</Text>
+              <Text style={styles.textVocab}>
+                {" "}
+                Conjuctions and Prepositions
+              </Text>
+              <Text style={styles.textVocabSub}> Translate the words</Text>
             </View>
           </View>
         </Pressable>

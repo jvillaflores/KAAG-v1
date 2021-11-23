@@ -53,7 +53,7 @@ import NewDictionaryScreen from "./components/main/NewDictionary";
 import Vocabulary1Screen from "./components/main/coursepacks/screens/Vocabulary/Vocabulary1";
 import Vocabulary2Screen from "./components/main/coursepacks/screens/Vocabulary/Vocabulary2";
 import Vocabulary3Screen from "./components/main/coursepacks/screens/Vocabulary/Vocabulary3";
-// import Vocabulary4Screen from "./components/main/coursepacks/screens/Vocabulary/Vocabulary4";
+import Vocabulary4Screen from "./components/main/coursepacks/screens/Vocabulary/Vocabulary4";
 import newDReviewScreen from "./components/main/newDReview";
 import MyContributionsScreen from "./components/main/MyContributions";
 import BeAValidatorScreen from "./components/main/BeAValidator";
@@ -64,9 +64,12 @@ import DeclineScreen from "./components/main/Decline";
 import ApplicationsScreen from "./components/main/Applications";
 import ApplicationConfScreen from "./components/main/ApplicationConf";
 import SpeechScreen from "./components/main/Speech";
-import SpeechScreen1 from "./components/main/coursepacks/screens/Speech/Speech1"
+// import SpeechScreen1 from "./components/main/coursepacks/screens/Speech/Speech1";
 import UserContributionScreen from "./components/main/UserContribution";
-import PronunciationScreen from "./components/main/coursepacks/screens/Pronunciation";
+import PronunciationScreen from "./components/main/coursepacks/screens/Speech/Pronunciation";
+import Pronunciation2Screen from "./components/main/coursepacks/screens/Speech/Pronunciation2";
+import Pronunciation3Screen from "./components/main/coursepacks/screens/Speech/Pronunciation3";
+import Pronunciation4Screen from "./components/main/coursepacks/screens/Speech/Pronunciation4";
 import PhrasesScreen1 from "./components/main/coursepacks/screens/Phrases/Phrases1";
 import PhrasesScreen2 from "./components/main/coursepacks/screens/Phrases/Phrases2";
 import PhrasesScreen3 from "./components/main/coursepacks/screens/Phrases/Phrases3";
@@ -152,7 +155,7 @@ export class App extends Component {
                 },
               }}
             />
-           <Stack.Screen
+            <Stack.Screen
               name="Speech"
               component={SpeechScreen}
               options={{
@@ -163,7 +166,7 @@ export class App extends Component {
                 },
               }}
             />
-            
+
             <Stack.Screen
               name="Grammar"
               component={GrammarScreen}
@@ -277,11 +280,11 @@ export class App extends Component {
                 },
               }}
             />
-            {/* <Stack.Screen
+            <Stack.Screen
               name="Vocabulary4"
               component={Vocabulary4Screen}
               options={{
-                title: "",
+                title: "Conjuctions & Prepositions",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {
@@ -290,7 +293,7 @@ export class App extends Component {
                   borderBottomWidth: 0,
                 },
               }}
-            /> */}
+            />
             <Stack.Screen
               name="MyContribution"
               component={MyContributionsScreen}
@@ -436,6 +439,48 @@ export class App extends Component {
               }}
             />
             <Stack.Screen
+              name="Pronunciation2"
+              component={Pronunciation2Screen}
+              options={{
+                title: "Pronunciation",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="Pronunciation3"
+              component={Pronunciation3Screen}
+              options={{
+                title: "Pronunciation",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="Pronunciation4"
+              component={Pronunciation4Screen}
+              options={{
+                title: "Pronunciation",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            {/* <Stack.Screen
               name="Speach1"
               component={SpeechScreen1}
               options={{
@@ -448,7 +493,7 @@ export class App extends Component {
                   borderBottomWidth: 0,
                 },
               }}
-            />
+            /> */}
 
             <Stack.Screen
               name="Phrases1"

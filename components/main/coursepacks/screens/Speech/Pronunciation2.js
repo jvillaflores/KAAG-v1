@@ -9,12 +9,12 @@ import {
   Modal,
   Animated,
 } from "react-native";
-import { COLORS, SIZES } from "../constants";
-import data from "../quizdata/QuizPronunciation";
+import { COLORS, SIZES } from "../../constants";
+import data from "../../quizdata/Speech/QuizPronunciation2";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Audio } from "expo-av";
 
-const Pronunciation = () => {
+function Pronunciation2({ navigation }) {
   const allQuestions = data;
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
@@ -79,7 +79,10 @@ const Pronunciation = () => {
         await SoundObject.loadAsync({
           uri: allQuestions[currentQuestionIndex]?.question,
         });
-        await SoundObject.playAsync();
+        const status = await SoundObject.playAsync();
+        setTimeout(() => {
+          SoundObject.unloadAsync();
+        }, status.playableDurationMillis + 1000);
       } catch (error) {
         console.log(error);
         await SoundObject.unloadAsync(); // Unload any sound loaded
@@ -116,13 +119,15 @@ const Pronunciation = () => {
             / {allQuestions.length}
           </Text>
         </View>
-            <Text style = {{fontSize: 15,marginBottom: 15}}>Select the correct word for the audio </Text>
+        <Text style={{ fontSize: 15, marginBottom: 15 }}>
+          Select the correct word for the audio{" "}
+        </Text>
         {/* Question */}
         <TouchableOpacity
           style={{
             alignSelf: "center",
-            paddingHorizontal:20,
-            paddingVertical:15,
+            paddingHorizontal: 20,
+            paddingVertical: 15,
             //padding: 8,
             //margin: 10,
             borderRadius: 7,
@@ -360,12 +365,32 @@ const Pronunciation = () => {
               </View>
               {/* Retry Quiz button */}
               <TouchableOpacity
+                onPress={() => navigation.navigate("Speech")}
+                style={{
+                  backgroundColor: COLORS.accent,
+                  padding: 20,
+                  width: "40%",
+                  borderRadius: 20,
+                }}
+              >
+                <Text
+                  style={{
+                    textAlign: "center",
+                    color: COLORS.white,
+                    fontSize: 20,
+                  }}
+                >
+                  Go Back
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
                 onPress={restartQuiz}
                 style={{
                   backgroundColor: COLORS.accent,
                   padding: 20,
-                  width: "100%",
+                  width: "50%",
                   borderRadius: 20,
+                  marginTop: 10,
                 }}
               >
                 <Text
@@ -400,6 +425,6 @@ const Pronunciation = () => {
       </View>
     </SafeAreaView>
   );
-};
+}
 
-export default Pronunciation;
+export default Pronunciation2;
