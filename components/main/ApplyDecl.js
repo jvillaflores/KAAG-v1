@@ -21,7 +21,6 @@ require("firebase/firestore");
 require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-
 function Applications({ usersAll, navigation }) {
   const [status, setStatus] = useState("All");
   const [datalist, setDatalist] = useState(usersAll);
@@ -36,6 +35,7 @@ function Applications({ usersAll, navigation }) {
         .firestore()
         .collection("users")
         .where("applicant", "==", "1")
+        .where("status", "==", "2")
         .get()
         .then((snapshot) => {
           console.log(snapshot, "-=-=-=-=-=-=-=-=");
@@ -51,8 +51,6 @@ function Applications({ usersAll, navigation }) {
     return unsubscribe;
   }, [navigation]);
 
-  
-  
   const renderItem = ({ item, index }) => {
     return (
       <TouchableOpacity
@@ -124,8 +122,6 @@ function Applications({ usersAll, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      
-
       <FlatList
         data={datalist}
         keyExtractor={(e, i) => i.toString()}
