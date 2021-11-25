@@ -49,7 +49,7 @@ function Applications() {
         })}
       >
         <Tab.Screen name="all" component={AllScreen} />
-        <Tab.Screen name="confirmed" component={ConfirmScreen} />
+        <Tab.Screen name="confirm" component={ConfirmScreen} />
         <Tab.Screen name="pending" component={PendingScreen} />
         <Tab.Screen name="declined" component={DeclineScreen} />
       </Tab.Navigator>

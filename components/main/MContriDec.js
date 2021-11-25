@@ -35,6 +35,7 @@ function MContriDec({ dictionaryAll, currentUser, posts, navigation, props }) {
         .collection("dictionaryAll")
         .orderBy("kagan", "asc")
         .where("email", "==", `${currentUser.email}`)
+        .where("status", "==", "2")
         .get()
         .then((snapshot) => {
           console.log(snapshot, "-=-=-=-=-=-=-=-=");
