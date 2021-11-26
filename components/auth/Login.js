@@ -47,35 +47,39 @@ export default class Login extends Component {
   render() {
     const { navigation } = this.props;
     return (
-      <View>
-        <View style={styles.banner}>
-          <View style={styles.bottom}>
-            <Text style={styles.welcome}>Welcome to KAAG,</Text>
-            <Text style={styles.subtitle}>Sign in to continue!</Text>
-          </View>
-          <View style={styles.loginGroup}>
-            <Text style={styles.textGrey}>Email</Text>
-            <TextInput
-              onChangeText={(email) => this.setState({ email })}
-              style={styles.input}
-            />
-            <Text style={styles.textGrey}>Password</Text>
-            <TextInput
-              secureTextEntry={true}
-              onChangeText={(password) => this.setState({ password })}
-              style={styles.input}
-            />
-            <TouchableOpacity
-              onPress={() => navigation.navigate("ForgotPassword")}
-            >
-              <Text style={styles.textMini}>Forgot password?</Text>
-            </TouchableOpacity>
-          </View>
+      <ScrollView style = {styles.container}>
+              <View>
+                  <Text style={styles.welcome}>Welcome to KAAG,</Text>
+                  <Text style={styles.subtitle}>Sign in to continue!</Text>
+              </View>
+              <View style={styles.loginGroup}>
+                    <Text  style={styles.textGrey}>Email</Text>
+                    <TextInput
+                      onChangeText={(email) => this.setState({ email })}
+                      style={styles.input}
+                    />
+                    <Text style={styles.textGrey}>Password</Text>
+                    <TextInput
+                      secureTextEntry={true}
+                      onChangeText={(password) => this.setState({ password })}
+                      style={styles.input}
+                    />
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate("ForgotPassword")}
+                    >
+                      <Text style={styles.textMini}>Forgot password?</Text>
+                    </TouchableOpacity>
+              </View>
+              <View style = {{paddingVertical:30}}>
+                  <Pressable 
+                      style={styles.button}
+                      onPress={() => this.onSignUp()}>
+                    <Text style={styles.text}>Login</Text>
+                  </Pressable>
+              </View>
 
-          <Pressable style={styles.button} onPress={() => this.onSignUp()}>
-            <Text style={styles.text}>Login</Text>
-          </Pressable>
-          {/* <Pressable style={styles.buttonGoogle} onPress={() => this.onSignUp()}>
+
+              {/* <Pressable style={styles.buttonGoogle} onPress={() => this.onSignUp()}>
                   <Svg id="search" xmlns="http://www.w3.org/2000/svg" width="22.845" height="22.845" viewBox="0 0 22.845 22.845">
                     <Path id="Path_382" data-name="Path 382" d="M5.063,145.9l-.8,2.969-2.906.061a11.442,11.442,0,0,1-.084-10.666h0l2.588.474L5,141.314a6.817,6.817,0,0,0,.064,4.59Z" transform="translate(0 -132.099)" fill="#fbbb00"/>
                     <Path id="Path_383" data-name="Path 383" d="M272.6,208.176a11.418,11.418,0,0,1-4.072,11.041h0l-3.259-.166-.461-2.879a6.808,6.808,0,0,0,2.929-3.476h-6.108v-4.519H272.6Z" transform="translate(-249.954 -198.887)" fill="#518ef8"/>
@@ -86,15 +90,16 @@ export default class Login extends Component {
                 
                     Connect with Google </Text>
          </Pressable> */}
-          <View style={styles.signInGroup}>
-            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-              <Text>
-                I'm a new user. <Text style={styles.textSignUp}>Sign Up</Text>
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
+              <View style = {{alignItems:"center"}}>
+                <TouchableOpacity 
+                    onPress={() => navigation.navigate("Register")}>
+                  <Text>
+                    I'm a new user. <Text style={styles.textSignUp}>Sign Up</Text>
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
+      </ScrollView>
     );
   }
 }
@@ -106,6 +111,13 @@ export default class Login extends Component {
 // }
 
 const styles = StyleSheet.create({
+  container: {
+    flex:1,
+    paddingHorizontal:30,
+    paddingVertical:50,
+    alignContent:"center"
+
+  },
   banner: {
     //flex: 1,
     alignContent: "center",
@@ -118,11 +130,7 @@ const styles = StyleSheet.create({
     marginBottom: 45,
   },
   loginGroup: {
-    flex: 1,
-    alignContent: "center",
-    justifyContent: "center",
-    marginTop: 100,
-    //left: 30,
+    paddingTop:80
   },
   miniGroup: {
     flex: 1,
@@ -131,48 +139,25 @@ const styles = StyleSheet.create({
     top: 200,
     left: 240,
   },
-  signInGroup: {
-    flex: 1,
-    //alignItems:"center",
-    alignContent: "center",
-    justifyContent: "center",
-    top: 150,
-    //top: 300,
-    left: 80,
-  },
+  
   welcome: {
-    // flex: 1,
-    // left: 20,
     fontSize: 30,
     fontWeight: "bold",
+    
   },
   subtitle: {
-    // flex: 1,
-    // left: 20,
     fontSize: 22,
     fontWeight: "bold",
     color: "grey",
   },
   button: {
-    alignSelf: "flex-start",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
+    paddingVertical: 16,
     borderRadius: 10,
     elevation: 1,
-    width: "80%",
+    width: "100%",
     backgroundColor: "#8E2835",
-    top: 130,
   },
-  buttonGoogle: {
-    alignSelf: "flex-start",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 10,
-    elevation: 1,
-    width: "80%",
-    backgroundColor: "#dadada",
-    top: 140,
-  },
+  
   text: {
     alignSelf: "center",
     fontSize: 18,
@@ -199,14 +184,14 @@ const styles = StyleSheet.create({
   textGrey: {
     fontSize: 15,
     color: "grey",
-    //fontWeight: "bold",
-    //left: 50,
   },
   textMini: {
+    flex:1,
     fontSize: 12,
     color: "gray",
     fontWeight: "bold",
-    left: 200,
+    alignSelf:"flex-end"
+
   },
   textSignUp: {
     fontSize: 14,
@@ -216,7 +201,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 45,
-    width: "80%",
+    width: "100%",
     marginTop: 12,
     marginBottom: 15,
     borderWidth: 1,
