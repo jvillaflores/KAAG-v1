@@ -8,50 +8,44 @@ import {
   Pressable,
   Image,
   TouchableOpacity,
-  ScrollView,
 } from "react-native";
+
 import Svg, { Path, G, Rect, Polygon, Title } from "react-native-svg";
-import RegisterScreen from "./Register";
+
 import firebase from "firebase/app";
-import Register from "./Register";
+import "firebase/firestore";
 require("firebase/auth");
 
-// import { LogBox } from "react-native";
-
-// LogBox.ignoreLogs(["Setting a timer"]);
-
-export default class Login extends Component {
+export default class ForgotPassword extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       email: "",
-      password: "",
     };
-    this.onSignUp = this.onSignUp.bind(this);
+    this.onReset = this.onReset.bind(this);
   }
 
-  onSignUp() {
-    const { email, password, name } = this.state;
+  onReset() {
+    const { email } = this.state;
     firebase
       .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        console.log(result);
+      .sendPasswordResetEmail(email)
+      .then(function (user) {
+        alert("Please check your email...");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(function (e) {
+        console.log(e);
       });
   }
 
   render() {
-    const { navigation } = this.props;
     return (
       <View>
         <View style={styles.banner}>
           <View style={styles.bottom}>
             <Text style={styles.welcome}>Welcome to KAAG,</Text>
-            <Text style={styles.subtitle}>Sign in to continue!</Text>
+            <Text style={styles.subtitle}>Create account to get started!</Text>
           </View>
           <View style={styles.loginGroup}>
             <Text style={styles.textGrey}>Email</Text>
@@ -59,21 +53,9 @@ export default class Login extends Component {
               onChangeText={(email) => this.setState({ email })}
               style={styles.input}
             />
-            <Text style={styles.textGrey}>Password</Text>
-            <TextInput
-              secureTextEntry={true}
-              onChangeText={(password) => this.setState({ password })}
-              style={styles.input}
-            />
-            <TouchableOpacity
-              onPress={() => navigation.navigate("ForgotPassword")}
-            >
-              <Text style={styles.textMini}>Forgot password?</Text>
-            </TouchableOpacity>
           </View>
-
-          <Pressable style={styles.button} onPress={() => this.onSignUp()}>
-            <Text style={styles.text}>Login</Text>
+          <Pressable style={styles.button} onPress={() => this.onReset()}>
+            <Text style={styles.text}>Reset Email</Text>
           </Pressable>
           {/* <Pressable style={styles.buttonGoogle} onPress={() => this.onSignUp()}>
                   <Svg id="search" xmlns="http://www.w3.org/2000/svg" width="22.845" height="22.845" viewBox="0 0 22.845 22.845">
@@ -86,13 +68,6 @@ export default class Login extends Component {
                 
                     Connect with Google </Text>
          </Pressable> */}
-          <View style={styles.signInGroup}>
-            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-              <Text>
-                I'm a new user. <Text style={styles.textSignUp}>Sign Up</Text>
-              </Text>
-            </TouchableOpacity>
-          </View>
         </View>
       </View>
     );
@@ -136,9 +111,9 @@ const styles = StyleSheet.create({
     //alignItems:"center",
     alignContent: "center",
     justifyContent: "center",
-    top: 150,
+    top: 175,
     //top: 300,
-    left: 80,
+    left: 70,
   },
   welcome: {
     // flex: 1,
@@ -161,7 +136,7 @@ const styles = StyleSheet.create({
     elevation: 1,
     width: "80%",
     backgroundColor: "#8E2835",
-    top: 130,
+    top: 155,
   },
   buttonGoogle: {
     alignSelf: "flex-start",
@@ -171,7 +146,7 @@ const styles = StyleSheet.create({
     elevation: 1,
     width: "80%",
     backgroundColor: "#dadada",
-    top: 140,
+    top: 165,
   },
   text: {
     alignSelf: "center",
@@ -217,8 +192,8 @@ const styles = StyleSheet.create({
   input: {
     height: 45,
     width: "80%",
-    marginTop: 12,
-    marginBottom: 15,
+    marginTop: 8,
+    marginBottom: 10,
     borderWidth: 1,
     borderRadius: 10,
     borderColor: "gray",

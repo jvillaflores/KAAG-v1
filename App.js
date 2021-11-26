@@ -38,9 +38,9 @@ if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
 
-import SplashScreen from "./Splash";
 import LandingScreen from "./components/auth/Landing";
 import RegisterScreen from "./components/auth/Register";
+import ForgotPasswordScreen from "./components/auth/ForgotPassword";
 import LoginScreen from "./components/auth/Login";
 import MainScreen from "./components/Main";
 import Landing from "./components/auth/Landing";
@@ -117,6 +117,10 @@ export class App extends Component {
               options={{ headerShown: false }}
             />
             <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen
+              name="ForgotPassword"
+              component={ForgotPasswordScreen}
+            />
             <Stack.Screen name="Login" component={LoginScreen} />
           </Stack.Navigator>
         </NavigationContainer>

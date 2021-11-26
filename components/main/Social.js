@@ -63,7 +63,7 @@ function Community({ postsAll, navigation }) {
           <View style={styles.profile}>
             <Image
               style={styles.imageprofile}
-              source={require("../../assets/jam.jpeg")}
+              source={{ uri: item.userImage }}
             />
             <Text style={styles.profilename}>{item.username} </Text>
           </View>

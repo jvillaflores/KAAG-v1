@@ -19,6 +19,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { Audio } from "expo-av";
 import { Value } from "react-native-reanimated";
 import { Sound } from "expo-av/build/Audio";
+
 var head = require("../../assets/learning.svg");
 
 function Dictionary({ dictionaryAll, navigation }) {

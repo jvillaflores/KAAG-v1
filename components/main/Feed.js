@@ -19,19 +19,13 @@ require("firebase/firestore");
 require("firebase/firebase-storage");
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-
-
-
-function Community({ currentUser, posts, navigation,props }) {
-  
+function Community({ currentUser, posts, navigation, props }) {
   const dimensions = Dimensions.get("window");
   const imageHeight = Math.round((dimensions.width * 1) / 1);
   const imageWidth = dimensions.width;
 
   const [datalist, setDatalist] = useState(posts);
 
-
-  
   useEffect(() => {
     setDatalist(posts);
   }, [posts]);
@@ -59,8 +53,6 @@ function Community({ currentUser, posts, navigation,props }) {
     return unsubscribe;
   }, [navigation]);
 
- 
-    
   return (
     //no button stylesheet
     <FlatList
@@ -74,7 +66,7 @@ function Community({ currentUser, posts, navigation,props }) {
           <View style={styles.profile}>
             <Image
               style={styles.imageprofile}
-              source={require("../../assets/jam.jpeg")}
+              source={{ uri: currentUser.image }}
             />
             <Text style={styles.profilename}> {currentUser.name}</Text>
           </View>
@@ -86,9 +78,7 @@ function Community({ currentUser, posts, navigation,props }) {
             <Text numberOfLines={2} style={styles.textVocab}>
               {" "}
               {item.description}
-           
             </Text>
-            
           </View>
           <Image
             style={{ height: imageWidth, width: imageWidth }}

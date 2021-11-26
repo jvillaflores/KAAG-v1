@@ -31,7 +31,7 @@ function Settings({ currentUser, navigation }) {
       <SafeAreaView style={styles.container}>
         <View>
           <View style={styles.userInfoSelection}>
-            <Avatar.Image source={require("../../assets/jam.jpeg")} size={80} />
+            <Avatar.Image source={{ uri: currentUser.image }} size={80} />
 
             <View>
               <Title style={[styles.title, { marginTop: 15, marginBottom: 5 }]}>
@@ -83,7 +83,7 @@ function Settings({ currentUser, navigation }) {
       <SafeAreaView style={styles.container}>
         <View>
           <View style={styles.userInfoSelection}>
-            <Avatar.Image source={require("../../assets/jam.jpeg")} size={80} />
+            <Avatar.Image source={{ uri: currentUser.image }} size={80} />
 
             <View>
               <Title style={[styles.title, { marginTop: 15, marginBottom: 5 }]}>
@@ -126,7 +126,7 @@ function Settings({ currentUser, navigation }) {
       <SafeAreaView style={styles.container}>
         <View>
           <View style={styles.userInfoSelection}>
-            <Avatar.Image source={require("../../assets/jam.jpeg")} size={80} />
+            <Avatar.Image source={{ uri: currentUser.image }} size={80} />
 
             <View>
               <Title style={[styles.title, { marginTop: 15, marginBottom: 5 }]}>
