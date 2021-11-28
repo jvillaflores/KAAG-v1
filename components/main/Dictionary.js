@@ -28,6 +28,9 @@ function Dictionary({ dictionaryAll, navigation }) {
   const [search, setSearch] = useState("");
   const [filteredDataSource, setFilteredDataSource] = useState(dictionaryAll);
   const [masterDataSource, setMasterDataSource] = useState(dictionaryAll);
+  const [search1, setSearch1] = useState("");
+  const [filteredDataSource1, setFilteredDataSource1] = useState(dictionaryAll);
+  const [masterDataSource1, setMasterDataSource1] = useState(dictionaryAll);
 
   useEffect(() => {
     setDatalist(dictionaryAll);
@@ -80,6 +83,28 @@ function Dictionary({ dictionaryAll, navigation }) {
       setSearch(text);
     }
   };
+  const searchFilterFunction1 = (text1) => {
+    // Check if searched text is not blank
+    if (text1) {
+      // Inserted text is not blank
+      // Filter the masterDataSource
+      // Update FilteredDataSource
+      const newData1 = masterDataSource1.filter(function (item) {
+        const itemData1 = item.filipino
+          ? item.filipino.toUpperCase()
+          : "".toUpperCase();
+        const textData1 = text1.toUpperCase();
+        return itemData1.indexOf(textData1) > -1;
+      });
+      setFilteredDataSource1(newData1);
+      setSearch1(text1);
+    } else {
+      // Inserted text is blank
+      // Update FilteredDataSource with masterDataSource
+      setFilteredDataSource1(masterDataSource1);
+      setSearch1(text1);
+    }
+  };
 
   return (
     <NavigationContainer independent={true}>
@@ -95,9 +120,9 @@ function Dictionary({ dictionaryAll, navigation }) {
           ></TextInput>
           <TextInput
             style={styles.input1}
-            placeholder="Search for Filipino words..."
-            onChangeText={(text) => searchFilterFunction(text)}
-            value={search}
+            placeholder="Search for filipino words..."
+            onChangeText={(text1) => searchFilterFunction1(text1)}
+            value={search1}
           ></TextInput>
         </View>
       </View>
@@ -106,7 +131,7 @@ function Dictionary({ dictionaryAll, navigation }) {
         keyExtractor={(item, index) => index.toString()}
         numColumns={1}
         horizontal={false}
-        data={filteredDataSource}
+        data={(filteredDataSource, filteredDataSource1)}
         style={{ flex: 1 }}
         renderItem={({ item }) => {
           return (
