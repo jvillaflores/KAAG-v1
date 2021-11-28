@@ -40,46 +40,43 @@ export default class Login extends Component {
         console.log(result);
       })
       .catch((error) => {
-        console.log(error);
+        alert("Email or password is incorrect");
       });
   }
 
   render() {
     const { navigation } = this.props;
     return (
-      <ScrollView style = {styles.container}>
-              <View>
-                  <Text style={styles.welcome}>Welcome to KAAG,</Text>
-                  <Text style={styles.subtitle}>Sign in to continue!</Text>
-              </View>
-              <View style={styles.loginGroup}>
-                    <Text  style={styles.textGrey}>Email</Text>
-                    <TextInput
-                      onChangeText={(email) => this.setState({ email })}
-                      style={styles.input}
-                    />
-                    <Text style={styles.textGrey}>Password</Text>
-                    <TextInput
-                      secureTextEntry={true}
-                      onChangeText={(password) => this.setState({ password })}
-                      style={styles.input}
-                    />
-                    <TouchableOpacity
-                      onPress={() => navigation.navigate("ForgotPassword")}
-                    >
-                      <Text style={styles.textMini}>Forgot password?</Text>
-                    </TouchableOpacity>
-              </View>
-              <View style = {{paddingVertical:30}}>
-                  <Pressable 
-                      style={styles.button}
-                      onPress={() => this.onSignUp()}>
-                    <Text style={styles.text}>Login</Text>
-                  </Pressable>
-              </View>
+      <ScrollView style={styles.container}>
+        <View>
+          <Text style={styles.welcome}>Welcome to KAAG,</Text>
+          <Text style={styles.subtitle}>Sign in to continue!</Text>
+        </View>
+        <View style={styles.loginGroup}>
+          <Text style={styles.textGrey}>Email</Text>
+          <TextInput
+            onChangeText={(email) => this.setState({ email })}
+            style={styles.input}
+          />
+          <Text style={styles.textGrey}>Password</Text>
+          <TextInput
+            secureTextEntry={true}
+            onChangeText={(password) => this.setState({ password })}
+            style={styles.input}
+          />
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ForgotPassword")}
+          >
+            <Text style={styles.textMini}>Forgot password?</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ paddingVertical: 30 }}>
+          <Pressable style={styles.button} onPress={() => this.onSignUp()}>
+            <Text style={styles.text}>Login</Text>
+          </Pressable>
+        </View>
 
-
-              {/* <Pressable style={styles.buttonGoogle} onPress={() => this.onSignUp()}>
+        {/* <Pressable style={styles.buttonGoogle} onPress={() => this.onSignUp()}>
                   <Svg id="search" xmlns="http://www.w3.org/2000/svg" width="22.845" height="22.845" viewBox="0 0 22.845 22.845">
                     <Path id="Path_382" data-name="Path 382" d="M5.063,145.9l-.8,2.969-2.906.061a11.442,11.442,0,0,1-.084-10.666h0l2.588.474L5,141.314a6.817,6.817,0,0,0,.064,4.59Z" transform="translate(0 -132.099)" fill="#fbbb00"/>
                     <Path id="Path_383" data-name="Path 383" d="M272.6,208.176a11.418,11.418,0,0,1-4.072,11.041h0l-3.259-.166-.461-2.879a6.808,6.808,0,0,0,2.929-3.476h-6.108v-4.519H272.6Z" transform="translate(-249.954 -198.887)" fill="#518ef8"/>
@@ -90,15 +87,13 @@ export default class Login extends Component {
                 
                     Connect with Google </Text>
          </Pressable> */}
-              <View style = {{alignItems:"center"}}>
-                <TouchableOpacity 
-                    onPress={() => navigation.navigate("Register")}>
-                  <Text>
-                    I'm a new user. <Text style={styles.textSignUp}>Sign Up</Text>
-                  </Text>
-                </TouchableOpacity>
-              </View>
-
+        <View style={{ alignItems: "center" }}>
+          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+            <Text>
+              I'm a new user. <Text style={styles.textSignUp}>Sign Up</Text>
+            </Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     );
   }
@@ -112,11 +107,10 @@ export default class Login extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
-    paddingHorizontal:30,
-    paddingVertical:50,
-    alignContent:"center"
-
+    flex: 1,
+    paddingHorizontal: 30,
+    paddingVertical: 50,
+    alignContent: "center",
   },
   banner: {
     //flex: 1,
@@ -130,7 +124,7 @@ const styles = StyleSheet.create({
     marginBottom: 45,
   },
   loginGroup: {
-    paddingTop:80
+    paddingTop: 80,
   },
   miniGroup: {
     flex: 1,
@@ -139,11 +133,10 @@ const styles = StyleSheet.create({
     top: 200,
     left: 240,
   },
-  
+
   welcome: {
     fontSize: 30,
     fontWeight: "bold",
-    
   },
   subtitle: {
     fontSize: 22,
@@ -157,7 +150,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#8E2835",
   },
-  
+
   text: {
     alignSelf: "center",
     fontSize: 18,
@@ -186,12 +179,11 @@ const styles = StyleSheet.create({
     color: "grey",
   },
   textMini: {
-    flex:1,
+    flex: 1,
     fontSize: 12,
     color: "gray",
     fontWeight: "bold",
-    alignSelf:"flex-end"
-
+    alignSelf: "flex-end",
   },
   textSignUp: {
     fontSize: 14,

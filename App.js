@@ -120,9 +120,9 @@ export class App extends Component {
             <Stack.Screen
               name="ForgotPassword"
               component={ForgotPasswordScreen}
-              options={{ 
-                  title: "Forgot Password",
-                  headerShown: false
+              options={{
+                title: "Forgot Password",
+                headerShown: false,
               }}
             />
             <Stack.Screen name="Login" component={LoginScreen} />

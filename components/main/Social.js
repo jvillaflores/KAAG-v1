@@ -61,10 +61,18 @@ function Community({ postsAll, navigation }) {
       renderItem={({ item }) => (
         <View style={styles.container}>
           <View style={styles.profile}>
-            <Image
-              style={styles.imageprofile}
-              source={{ uri: item.userImage }}
-            />
+            {item.userImage != " " ? (
+              <Image
+                style={styles.imageprofile}
+                source={{ uri: item.userImage }}
+              />
+            ) : null}
+            {item.userImage == " " ? (
+              <Image
+                style={styles.imageprofile}
+                source={require("../../assets/blank.png")}
+              />
+            ) : null}
             <Text style={styles.profilename}>{item.username} </Text>
           </View>
 

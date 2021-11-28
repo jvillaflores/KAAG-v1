@@ -89,7 +89,13 @@ function Dictionary({ dictionaryAll, navigation }) {
           <Text style={styles.textSubHead}>Dictionary</Text>
           <TextInput
             style={styles.input}
-            placeholder="Search for words..."
+            placeholder="Search for Kagan words..."
+            onChangeText={(text) => searchFilterFunction(text)}
+            value={search}
+          ></TextInput>
+          <TextInput
+            style={styles.input1}
+            placeholder="Search for Filipino words..."
             onChangeText={(text) => searchFilterFunction(text)}
             value={search}
           ></TextInput>
@@ -168,9 +174,21 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     color: "white",
   },
+
   input: {
     height: 45,
-    width: "90%",
+    width: "50%",
+    backgroundColor: "white",
+    margin: 12,
+    paddingLeft: 20,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+  },
+  input1: {
+    height: 45,
+    width: "50%",
     backgroundColor: "white",
     margin: 12,
     paddingLeft: 20,

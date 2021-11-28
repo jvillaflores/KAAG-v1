@@ -31,8 +31,15 @@ function Settings({ currentUser, navigation }) {
       <SafeAreaView style={styles.container}>
         <View>
           <View style={styles.userInfoSelection}>
-            <Avatar.Image source={{ uri: currentUser.image }} size={80} />
-
+            {currentUser.userImage != " " ? (
+              <Avatar.Image source={{ uri: currentUser.image }} size={80} />
+            ) : null}
+            {currentUser.userImage == " " ? (
+              <Avatar.Image
+                source={require("../../assets/blank.png")}
+                size={80}
+              />
+            ) : null}
             <View>
               <Title style={[styles.title, { marginTop: 15, marginBottom: 5 }]}>
                 {currentUser.name}
@@ -83,7 +90,15 @@ function Settings({ currentUser, navigation }) {
       <SafeAreaView style={styles.container}>
         <View>
           <View style={styles.userInfoSelection}>
-            <Avatar.Image source={{ uri: currentUser.image }} size={80} />
+            {currentUser.userImage != " " ? (
+              <Avatar.Image source={{ uri: currentUser.image }} size={80} />
+            ) : null}
+            {currentUser.userImage == " " ? (
+              <Avatar.Image
+                source={require("../../assets/blank.png")}
+                size={80}
+              />
+            ) : null}
 
             <View>
               <Title style={[styles.title, { marginTop: 15, marginBottom: 5 }]}>
@@ -126,7 +141,15 @@ function Settings({ currentUser, navigation }) {
       <SafeAreaView style={styles.container}>
         <View>
           <View style={styles.userInfoSelection}>
-            <Avatar.Image source={{ uri: currentUser.image }} size={80} />
+            {currentUser.userImage != " " ? (
+              <Avatar.Image source={{ uri: currentUser.image }} size={80} />
+            ) : null}
+            {currentUser.userImage == " " ? (
+              <Avatar.Image
+                source={require("../../assets/blank.png")}
+                size={80}
+              />
+            ) : null}
 
             <View>
               <Title style={[styles.title, { marginTop: 15, marginBottom: 5 }]}>
