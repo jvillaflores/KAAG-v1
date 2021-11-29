@@ -41,6 +41,18 @@ const EditProfileScreen = ({ currentUser, navigation }) => {
     }
   };
 
+  const onReset = () => {
+    firebase
+      .auth()
+      .sendPasswordResetEmail(`${currentUser.email}`)
+      .then(function (user) {
+        alert("Please check your email...");
+      })
+      .catch(function (e) {
+        console.log(e);
+      });
+  };
+
   const uploadImage = async () => {
     const uri = image;
     const childPath = `userpictures/${
@@ -198,21 +210,17 @@ const EditProfileScreen = ({ currentUser, navigation }) => {
             editable={false}
           />
         </View>
-        <View style={styles.action}>
-          <FontAwesome name="unlock" size={20} />
-          <TextInput
-            secureTextEntry={true}
-            placeholder="Password"
-            placeholderTextColor="#666666"
-            style={styles.textInput}
-            autoCorrect={false}
-          />
-        </View>
         <TouchableOpacity
           style={styles.commandButton}
           onPress={() => uploadImage()}
         >
           <Text style={styles.panelButtonTitle}>Submit</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.commandButton}
+          onPress={() => onReset()}
+        >
+          <Text style={styles.panelButtonTitle}>Reset Password</Text>
         </TouchableOpacity>
       </Animated.View>
     </View>

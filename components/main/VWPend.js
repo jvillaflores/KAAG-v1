@@ -20,13 +20,13 @@ require("firebase/firestore");
 require("firebase/firebase-storage");
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-function VWPend({ dictionaryAll, navigation }) {
+function VWPend({ validatedDictionary, navigation }) {
   const [status, setStatus] = useState("All");
-  const [datalist, setDatalist] = useState(dictionaryAll);
+  const [datalist, setDatalist] = useState(validatedDictionary);
 
   useEffect(() => {
-    setDatalist(dictionaryAll);
-  }, [dictionaryAll]);
+    setDatalist(validatedDictionary);
+  }, [validatedDictionary]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
@@ -39,12 +39,12 @@ function VWPend({ dictionaryAll, navigation }) {
         .get()
         .then((snapshot) => {
           console.log(snapshot, "-=-=-=-=-=-=-=-=");
-          let dictionaryAll = snapshot.docs.map((doc) => {
+          let validatedDictionary = snapshot.docs.map((doc) => {
             const data = doc.data();
             const id = doc.id;
             return { id, ...data };
           });
-          setDatalist(dictionaryAll);
+          setDatalist(validatedDictionary);
         });
     });
 

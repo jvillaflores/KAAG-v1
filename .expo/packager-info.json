@@ -2,9 +2,9 @@
   "expoServerPort": 19000,
   "packagerPort": 19000,
   "packagerPid": null,
-  "expoServerNgrokUrl": "https://cx-23v.anonymous.kaag-1.exp.direct",
-  "packagerNgrokUrl": "https://packager.cx-23v.anonymous.kaag-1.exp.direct",
-  "ngrokPid": 20820,
-  "webpackServerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "webpackServerPort": 19006,
   "devToolsPort": 19002
 }

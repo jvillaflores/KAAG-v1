@@ -9,6 +9,8 @@ import {
   fetchUserPosts,
   fetchAllUserPosts,
   fetchDictionary,
+  fetchFilteredDictionary,
+  fetchValidatedDictionary,
 } from "../redux/actions/index";
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -48,6 +50,8 @@ export class Main extends Component {
     this.props.fetchUserPosts();
     this.props.fetchAllUserPosts();
     this.props.fetchDictionary();
+    this.props.fetchFilteredDictionary();
+    this.props.fetchValidatedDictionary();
   }
   render() {
     return (
@@ -204,7 +208,9 @@ const mapDispatchProps = (dispatch) =>
       fetchUserPosts,
       fetchAllUserPosts,
       fetchDictionary,
+      fetchFilteredDictionary,
       fetchAllUser,
+      fetchValidatedDictionary,
     },
     dispatch
   );

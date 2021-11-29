@@ -20,13 +20,13 @@ require("firebase/firestore");
 require("firebase/firebase-storage");
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-function VWAll({ dictionaryAll, navigation }) {
+function VWAll({ validatedDictionary, navigation }) {
   const [status, setStatus] = useState("All");
-  const [datalist, setDatalist] = useState(dictionaryAll);
+  const [datalist, setDatalist] = useState(validatedDictionary);
 
   useEffect(() => {
-    setDatalist(dictionaryAll);
-  }, [dictionaryAll]);
+    setDatalist(validatedDictionary);
+  }, [validatedDictionary]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
@@ -38,12 +38,12 @@ function VWAll({ dictionaryAll, navigation }) {
         .get()
         .then((snapshot) => {
           console.log(snapshot, "-=-=-=-=-=-=-=-=");
-          let dictionaryAll = snapshot.docs.map((doc) => {
+          let validatedDictionary = snapshot.docs.map((doc) => {
             const data = doc.data();
             const id = doc.id;
             return { id, ...data };
           });
-          setDatalist(dictionaryAll);
+          setDatalist(validatedDictionary);
         });
     });
 
@@ -139,7 +139,7 @@ function VWAll({ dictionaryAll, navigation }) {
   );
 }
 const mapStateToProps = (store) => ({
-  dictionaryAll: store.userState.dictionaryAll,
+  validatedDictionary: store.userState.validatedDictionary,
 });
 
 export default connect(mapStateToProps, null)(VWAll);

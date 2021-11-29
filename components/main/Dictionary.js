@@ -22,16 +22,24 @@ import { Sound } from "expo-av/build/Audio";
 
 var head = require("../../assets/learning.svg");
 
-function Dictionary({ dictionaryAll, navigation }) {
+function Dictionary({ filteredDictionary, navigation }) {
   const [playing, setPlaying] = useState(false);
-  const [datalist, setDatalist] = useState(dictionaryAll);
+  const [datalist, setDatalist] = useState(filteredDictionary);
   const [search, setSearch] = useState("");
-  const [filteredDataSource, setFilteredDataSource] = useState(dictionaryAll);
-  const [masterDataSource, setMasterDataSource] = useState(dictionaryAll);
+  const [filteredDataSource, setFilteredDataSource] =
+    useState(filteredDictionary);
+  const [masterDataSource, setMasterDataSource] = useState(filteredDictionary);
+  const [loading, setLoading] = useState(false);
 
+  const startLoading = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  };
   useEffect(() => {
-    setDatalist(dictionaryAll);
-  }, [dictionaryAll]);
+    setDatalist(filteredDictionary);
+  }, [filteredDictionary]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
@@ -43,15 +51,15 @@ function Dictionary({ dictionaryAll, navigation }) {
         .get()
         .then((snapshot) => {
           console.log(snapshot, "-=-=-=-=-=-=-=-=");
-          let dictionaryAll = snapshot.docs.map((doc) => {
+          let filteredDictionary = snapshot.docs.map((doc) => {
             const data = doc.data();
             const id = doc.id;
             return { id, ...data };
           });
 
-          setDatalist(dictionaryAll);
-          setFilteredDataSource(dictionaryAll);
-          setMasterDataSource(dictionaryAll);
+          setDatalist(filteredDictionary);
+          setFilteredDataSource(filteredDictionary);
+          setMasterDataSource(filteredDictionary);
         });
     });
 
@@ -124,7 +132,7 @@ function Dictionary({ dictionaryAll, navigation }) {
 }
 
 const mapStateToProps = (store) => ({
-  dictionaryAll: store.userState.dictionaryAll,
+  filteredDictionary: store.userState.filteredDictionary,
 });
 
 export default connect(mapStateToProps, null)(Dictionary);

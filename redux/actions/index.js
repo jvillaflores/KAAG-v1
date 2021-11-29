@@ -4,6 +4,8 @@ import {
   USER_POSTS_STATE_CHANGE,
   USER_ALL_POSTS_STATE_CHANGE,
   DICTIONARY_STATE_CHANGE,
+  FILTERED_DICTIONARY_STATE_CHANGE,
+  VALIDATE_DICTIONARY_STATE_CHANGE,
 } from "../constants/index";
 import firebase from "firebase";
 require("firebase/firestore");
@@ -80,6 +82,7 @@ export function fetchDictionary() {
     firebase
       .firestore()
       .collection("dictionaryAll")
+      .orderBy("kagan", "asc")
       .get()
       .then((snapshot) => {
         let dictionaryAll = snapshot.docs.map((doc) => {
@@ -89,6 +92,51 @@ export function fetchDictionary() {
         });
         // console.log(dictionaryAll);
         dispatch({ type: DICTIONARY_STATE_CHANGE, dictionaryAll });
+      });
+  };
+}
+export function fetchFilteredDictionary() {
+  return (dispatch) => {
+    firebase
+      .firestore()
+      .collection("dictionaryAll")
+      .orderBy("kagan", "asc")
+      .where("status", "==", "1")
+      .get()
+      .then((snapshot) => {
+        let filteredDictionary = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          const id = doc.id;
+          return { id, ...data };
+        });
+        // console.log(dictionaryAll);
+        dispatch({
+          type: FILTERED_DICTIONARY_STATE_CHANGE,
+          filteredDictionary,
+        });
+      });
+  };
+}
+export function fetchValidatedDictionary() {
+  return (dispatch) => {
+    firebase
+      .firestore()
+      .collection("dictionaryAll")
+      .orderBy("kagan", "asc")
+      .where("upload", "==", "1")
+      .get()
+      .then((snapshot) => {
+        console.log(snapshot, "-=-=-=-=-=-=-=-=");
+        let validatedDictionary = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          const id = doc.id;
+          return { id, ...data };
+        });
+        // console.log(dictionaryAll);
+        dispatch({
+          type: VALIDATE_DICTIONARY_STATE_CHANGE,
+          validatedDictionary,
+        });
       });
   };
 }
