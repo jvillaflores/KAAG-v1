@@ -140,7 +140,7 @@ function VWPend({ validatedDictionary, navigation }) {
   );
 }
 const mapStateToProps = (store) => ({
-  dictionaryAll: store.userState.dictionaryAll,
+  validatedDictionary: store.userState.validatedDictionary,
 });
 
 export default connect(mapStateToProps, null)(VWPend);

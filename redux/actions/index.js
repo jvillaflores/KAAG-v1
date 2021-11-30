@@ -77,24 +77,24 @@ export function fetchAllUserPosts() {
       });
   };
 }
-export function fetchDictionary() {
-  return (dispatch) => {
-    firebase
-      .firestore()
-      .collection("dictionaryAll")
-      .orderBy("kagan", "asc")
-      .get()
-      .then((snapshot) => {
-        let dictionaryAll = snapshot.docs.map((doc) => {
-          const data = doc.data();
-          const id = doc.id;
-          return { id, ...data };
-        });
-        // console.log(dictionaryAll);
-        dispatch({ type: DICTIONARY_STATE_CHANGE, dictionaryAll });
-      });
-  };
-}
+// export function fetchDictionary() {
+//   return (dispatch) => {
+//     firebase
+//       .firestore()
+//       .collection("dictionaryAll")
+//       .orderBy("kagan", "asc")
+//       .get()
+//       .then((snapshot) => {
+//         let dictionaryAll = snapshot.docs.map((doc) => {
+//           const data = doc.data();
+//           const id = doc.id;
+//           return { id, ...data };
+//         });
+//         // console.log(dictionaryAll);
+//         dispatch({ type: DICTIONARY_STATE_CHANGE, dictionaryAll });
+//       });
+//   };
+// }
 export function fetchFilteredDictionary() {
   return (dispatch) => {
     firebase

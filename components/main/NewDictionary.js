@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   TextInput,
@@ -29,13 +29,26 @@ function NewDictionary({ currentUser, route, navigation }) {
   const [meaning, setMeaning] = useState("Test test test");
   const [audio, setAudio] = useState(null);
   const [loading, setLoading] = useState(null);
+  const [wordID, setWordID] = useState(makeid());
+  function makeid() {
+    var randomText = "";
+    var possible =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+    for (var i = 0; i < 15; i++)
+      randomText += possible.charAt(
+        Math.floor(Math.random() * possible.length)
+      );
+
+    return randomText;
+  }
   const chooseFile = async () => {
     let result = await DocumentPicker.getDocumentAsync({
       type: "audio/*",
       copyToCacheDirectory: false,
     });
     // Alert.alert("Audio File", result.name);
+
     console.log(result);
     if (result.type === "success") {
       setAudio(result);
@@ -122,6 +135,7 @@ function NewDictionary({ currentUser, route, navigation }) {
 
     const taskCompleted = () => {
       task.snapshot.ref.getDownloadURL().then((snapshot) => {
+        SavePostData(snapshot);
         saveAllPostData(snapshot);
         setLoading(null);
         console.log(snapshot);
@@ -136,12 +150,34 @@ function NewDictionary({ currentUser, route, navigation }) {
 
     task.on("state_changed", taskProgress, taskError, taskCompleted);
   };
-
+  const SavePostData = (downloadURL) => {
+    firebase
+      .firestore()
+      .collection("userDictionary")
+      .doc(firebase.auth().currentUser.uid)
+      .collection("userDictionary")
+      .doc(wordID)
+      .set({
+        wordId: wordID,
+        email: currentUser.email,
+        downloadURL,
+        kagan,
+        filipino,
+        sentence,
+        filipinoSentence,
+        meaning,
+        status: "0",
+        upload: "1",
+        creation: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+  };
   const saveAllPostData = (downloadURL) => {
     firebase
       .firestore()
       .collection("dictionaryAll")
       .add({
+        uid: firebase.auth().currentUser.uid,
+        wordId: wordID,
         email: currentUser.email,
         username: currentUser.name,
         downloadURL,
@@ -173,6 +209,7 @@ function NewDictionary({ currentUser, route, navigation }) {
           <TextInput
             style={styles.input}
             multiline={true}
+            autoCapitalize="none"
             onChangeText={(kagan) => setKagan(kagan)}
           />
         </View>
