@@ -154,14 +154,14 @@ function ValidatorApplication({ currentUser, route, navigation }) {
             marginVertical: 25,
           }}
         >
-          <Pressable
+          <TouchableOpacity
             style={[styles.button, { backgroundColor: "#8E2835" }]}
             onPress={() => uploadPDF()}
           >
             <Text style={[styles.text, { fontSize: 16, color: "white" }]}>
               Submit Application
             </Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>

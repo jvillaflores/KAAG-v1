@@ -129,15 +129,17 @@ export default function Contribution({ navigation }) {
           style={{ bottom: 100, aspectRatio: 1 }}
         />
       )}
-      {image && (
-        <TouchableOpacity
-          //title="Save"
-          style={styles.checkButton}
-          onPress={() => navigation.navigate("Save", { image })}
-        >
-          <MaterialCommunityIcons name="check" color="#263238" size={100} />
-        </TouchableOpacity>
-      )}
+      <View style = {{alignItems:"center"}}>
+        {image && (
+          <TouchableOpacity
+            //title="Save"
+            style={styles.checkButton}
+            onPress={() => navigation.navigate("Save", { image })}
+          >
+            <MaterialCommunityIcons name="check" color="#263238" size={100} />
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 }
@@ -189,18 +191,13 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
   },
   checkButton: {
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-    //top: 50,
-    //bottom: -10,
+    alignItems:"center",
     borderWidth: 3,
     borderRadius: 100,
     borderColor: "#263238",
     borderWidth: 6,
     width: 120,
     height: 120,
-    left: 130,
   },
   container: {
     flex: 1,

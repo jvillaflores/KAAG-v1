@@ -150,21 +150,7 @@ function Save({ currentUser, route, navigation }) {
             }}
           />
         </View>
-        <View style={{ marginVertical: 10 }}>
-          <Text style={[styles.text, { fontSize: 16 }]}>Tags </Text>
-          <Text
-            style={[styles.textItalized, { fontSize: 14, color: "#707070" }]}
-          >
-            {" "}
-            Add tags that are related to your image.
-          </Text>
-          <TextInput
-            style={[styles.addButton, { height: 50 }]}
-            multiline={true}
-            autoCorrect={false}
-            onChangeText={(tags) => setTags(tags)}
-          />
-        </View>
+        
         <View
           style={{
             flexDirection: "row",

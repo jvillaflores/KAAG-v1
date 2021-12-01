@@ -238,10 +238,9 @@ function NewDictionary({ currentUser, route, navigation }) {
           />
         </View>
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Example Translation </Text>
+          <Text style={styles.title_text}>English Meaning </Text>
           <Text style={styles.guidelines}>
-            Translate in Filipino the example of the word you have suggested in
-            Kinagan.
+           Define the Kinagan word you have suggested in English.
           </Text>
           <TextInput
             style={styles.input}
