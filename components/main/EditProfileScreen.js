@@ -89,6 +89,13 @@ const EditProfileScreen = ({ currentUser, navigation }) => {
       .update({
         name: fullname,
         image: downloadURL,
+      })
+      .then(function () {
+        alert("Profile edited! ");
+        navigation.popToTop();
+        alert(
+          "Profile photo might not yet be available after, please restart application if it occurs. Thank you!"
+        );
       });
   };
 
