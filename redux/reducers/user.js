@@ -3,7 +3,6 @@ import {
   USER_ALL_STATE_CHANGE,
   USER_POSTS_STATE_CHANGE,
   USER_ALL_POSTS_STATE_CHANGE,
-  DICTIONARY_STATE_CHANGE,
   FILTERED_DICTIONARY_STATE_CHANGE,
   VALIDATE_DICTIONARY_STATE_CHANGE,
 } from "../constants";
@@ -13,7 +12,6 @@ const initialState = {
   usersAll: [],
   posts: [],
   postsAll: [],
-  dictionaryAll: [],
   filteredDictionary: [],
   validatedDictionary: [],
 };
@@ -39,11 +37,6 @@ export const user = (state = initialState, action) => {
       return {
         ...state,
         postsAll: action.postsAll,
-      };
-    case DICTIONARY_STATE_CHANGE:
-      return {
-        ...state,
-        dictionaryAll: action.dictionaryAll,
       };
     case FILTERED_DICTIONARY_STATE_CHANGE:
       return {

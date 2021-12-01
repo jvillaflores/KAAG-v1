@@ -8,7 +8,6 @@ import {
   fetchAllUser,
   fetchUserPosts,
   fetchAllUserPosts,
-  fetchDictionary,
   fetchFilteredDictionary,
   fetchValidatedDictionary,
 } from "../redux/actions/index";
@@ -49,7 +48,6 @@ export class Main extends Component {
     this.props.fetchAllUser();
     this.props.fetchUserPosts();
     this.props.fetchAllUserPosts();
-    this.props.fetchDictionary();
     this.props.fetchFilteredDictionary();
     this.props.fetchValidatedDictionary();
   }
@@ -207,7 +205,6 @@ const mapDispatchProps = (dispatch) =>
       fetchUser,
       fetchUserPosts,
       fetchAllUserPosts,
-      fetchDictionary,
       fetchFilteredDictionary,
       fetchAllUser,
       fetchValidatedDictionary,

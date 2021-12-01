@@ -136,6 +136,148 @@ function Validation({ currentUser, route, navigation }) {
         </View>
       </ScrollView>
     );
+  } else if (data?.status == "1") {
+    return (
+      <ScrollView style={styles.container}>
+        <View style={styles.center}>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Word </Text>
+
+            <TextInput
+              style={styles.input}
+              value={data?.kagan}
+              multiline={true}
+            />
+          </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>In Filipino </Text>
+
+            <TextInput
+              style={styles.input}
+              value={data?.filipino}
+              multiline={true}
+            />
+          </View>
+
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Kagan Sentence Example </Text>
+
+            <TextInput
+              style={styles.input}
+              value={data?.sentence}
+              multiline={true}
+            />
+          </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>
+              Filipino Sentence Transalation{" "}
+            </Text>
+            <TextInput
+              style={styles.input}
+              value={data?.filipinoSentence}
+              multiline={true}
+            />
+          </View>
+
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Filipino Meaning </Text>
+            <TextInput
+              style={styles.description_input}
+              value={data?.meaning}
+              multiline={true}
+            />
+          </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Audio </Text>
+            <Text style={styles.guidelines}></Text>
+            <TouchableOpacity
+              style={styles.audioButton}
+              onPress={() => downloadAudio()}
+            >
+              <View>
+                <MaterialCommunityIcons
+                  style={styles.addAudio}
+                  name="volume-high"
+                  color={"#707070"}
+                  size={26}
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
+    );
+  } else {
+    return (
+      <ScrollView style={styles.container}>
+        <View style={styles.center}>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Word </Text>
+
+            <TextInput
+              style={styles.input}
+              value={data?.kagan}
+              multiline={true}
+            />
+          </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>In Filipino </Text>
+
+            <TextInput
+              style={styles.input}
+              value={data?.filipino}
+              multiline={true}
+            />
+          </View>
+
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Kagan Sentence Example </Text>
+
+            <TextInput
+              style={styles.input}
+              value={data?.sentence}
+              multiline={true}
+            />
+          </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>
+              Filipino Sentence Transalation{" "}
+            </Text>
+            <TextInput
+              style={styles.input}
+              value={data?.filipinoSentence}
+              multiline={true}
+            />
+          </View>
+
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Filipino Meaning </Text>
+            <TextInput
+              style={styles.description_input}
+              value={data?.meaning}
+              multiline={true}
+            />
+          </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Audio </Text>
+            <Text style={styles.guidelines}></Text>
+            <TouchableOpacity
+              style={styles.audioButton}
+              onPress={() => downloadAudio()}
+            >
+              <View>
+                <MaterialCommunityIcons
+                  style={styles.addAudio}
+                  name="volume-high"
+                  color={"#707070"}
+                  size={26}
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
+    );
   }
 }
 

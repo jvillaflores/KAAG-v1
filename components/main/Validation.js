@@ -45,6 +45,11 @@ function Validation({ currentUser, route, navigation }) {
 
   const Accept = () => {
     setLoading(true);
+    updateDictionaryAll();
+    updateUserDictionary();
+  };
+
+  const updateDictionaryAll = () => {
     firebase
       .firestore()
       .doc(`dictionaryAll/${data?.id}`)
@@ -58,6 +63,17 @@ function Validation({ currentUser, route, navigation }) {
       .catch((err) => console.log(err, "-=error"));
   };
 
+  const updateUserDictionary = () => {
+    firebase
+      .firestore()
+      .doc(`userDictionary/${data?.uid}`)
+      .collection("userDictionary")
+      .doc(`${data?.wordId}`)
+      .update({
+        status: "1",
+      })
+      .catch((err) => console.log(err, "-=error"));
+  };
   return (
     <ScrollView style={styles.container}>
       <View style={styles.center}>
@@ -66,18 +82,14 @@ function Validation({ currentUser, route, navigation }) {
 
           <TextInput
             style={styles.input}
-            value={data?.kagan}
+            value={data?.wordId}
             multiline={true}
           />
         </View>
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>In Filipino </Text>
 
-          <TextInput
-            style={styles.input}
-            value={data?.filipino}
-            multiline={true}
-          />
+          <TextInput style={styles.input} value={data?.uid} multiline={true} />
         </View>
 
         <View style={styles.paddingLeft}>

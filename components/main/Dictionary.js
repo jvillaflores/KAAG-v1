@@ -30,41 +30,44 @@ function Dictionary({ filteredDictionary, navigation }) {
     useState(filteredDictionary);
   const [masterDataSource, setMasterDataSource] = useState(filteredDictionary);
   const [loading, setLoading] = useState(false);
+  console.log(filteredDictionary);
 
-  const startLoading = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  };
-  useEffect(() => {
-    setDatalist(filteredDictionary);
-  }, [filteredDictionary]);
+  // const startLoading = () => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 3000);
+  // };
+  // useEffect(() => {
+  //   setDatalist(filteredDictionary);
+  //   setMasterDataSource(filteredDictionary);
+  //   setFilteredDataSource(filteredDictionary);
+  // }, [filteredDictionary]);
 
-  useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
-      firebase
-        .firestore()
-        .collection("dictionaryAll")
-        .orderBy("kagan", "asc")
-        .where("status", "==", "1")
-        .get()
-        .then((snapshot) => {
-          console.log(snapshot, "-=-=-=-=-=-=-=-=");
-          let filteredDictionary = snapshot.docs.map((doc) => {
-            const data = doc.data();
-            const id = doc.id;
-            return { id, ...data };
-          });
+  // useEffect(() => {
+  //   const unsubscribe = navigation.addListener("focus", () => {
+  //     firebase
+  //       .firestore()
+  //       .collection("dictionaryAll")
+  //       .orderBy("kagan", "asc")
+  //       .where("status", "==", "1")
+  //       .get()
+  //       .then((snapshot) => {
+  //         console.log(snapshot, "-=-=-=-=-=-=-=-=");
+  //         let filteredDictionary = snapshot.docs.map((doc) => {
+  //           const data = doc.data();
+  //           const id = doc.id;
+  //           return { id, ...data };
+  //         });
 
-          setDatalist(filteredDictionary);
-          setFilteredDataSource(filteredDictionary);
-          setMasterDataSource(filteredDictionary);
-        });
-    });
+  //         setDatalist(filteredDictionary);
+  //         setFilteredDataSource(filteredDictionary);
+  //         setMasterDataSource(filteredDictionary);
+  //       });
+  //   });
 
-    return unsubscribe;
-  }, [navigation]);
+  //   return unsubscribe;
+  // }, [navigation]);
 
   const searchFilterFunction = (text) => {
     // Check if searched text is not blank

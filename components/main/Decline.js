@@ -30,6 +30,11 @@ function Decline({ route, navigation }) {
 
   const Reject = () => {
     setLoading(true);
+    rejectUserDictionary();
+    rejectDictionaryAll();
+  };
+
+  const rejectDictionaryAll = () => {
     firebase
       .firestore()
       .doc(`dictionaryAll/${data?.id}`)
@@ -38,8 +43,20 @@ function Decline({ route, navigation }) {
         note,
       })
       .then((result) => {
-        navigation.replace("Validate");
+        navigation.goBack();
         setLoading(false);
+      })
+      .catch((err) => console.log(err, "-=error"));
+  };
+  const rejectUserDictionary = () => {
+    firebase
+      .firestore()
+      .doc(`userDictionary/${data?.uid}`)
+      .collection("userDictionary")
+      .doc(`${data?.wordId}`)
+      .update({
+        status: "2",
+        note,
       })
       .catch((err) => console.log(err, "-=error"));
   };

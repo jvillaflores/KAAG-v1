@@ -20,21 +20,21 @@ require("firebase/firestore");
 require("firebase/firebase-storage");
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-function MContriAll({ dictionaryAll, currentUser, posts, navigation, props }) {
+function MContriAll({ currentUser, navigation, props }) {
   const [status, setStatus] = useState("All");
-  const [datalist, setDatalist] = useState(dictionaryAll);
+  const [datalist, setDatalist] = useState("");
 
-  useEffect(() => {
-    setDatalist(dictionaryAll);
-  }, [dictionaryAll]);
+  // useEffect(() => {
+  //   setDatalist(dictionaryAll);
+  // }, [dictionaryAll]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
       firebase
         .firestore()
-        .collection("dictionaryAll")
-        .orderBy("kagan", "asc")
-        .where("email", "==", `${currentUser.email}`)
+        .collection("userDictionary")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("userDictionary")
         .get()
         .then((snapshot) => {
           console.log(snapshot, "-=-=-=-=-=-=-=-=");
@@ -128,7 +128,6 @@ function MContriAll({ dictionaryAll, currentUser, posts, navigation, props }) {
   );
 }
 const mapStateToProps = (store) => ({
-  posts: store.userState.posts,
   currentUser: store.userState.currentUser,
 });
 
