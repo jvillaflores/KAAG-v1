@@ -94,7 +94,7 @@ function ValidatorApplication({ currentUser, route, navigation }) {
         status: "0",
       })
       .then(function () {
-        alert("Thanks for contribution!!");
+        alert("Thanks for applying as a validator");
         setLoading(null);
         navigation.popToTop();
       });
@@ -159,7 +159,7 @@ function ValidatorApplication({ currentUser, route, navigation }) {
             onPress={() => uploadPDF()}
           >
             <Text style={[styles.text, { fontSize: 16, color: "white" }]}>
-              Submit Application
+              {loading ? `Submitting ...  ${parseInt(loading)}%` : "Submit"}
             </Text>
           </TouchableOpacity>
         </View>
