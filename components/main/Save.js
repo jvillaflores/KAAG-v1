@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Pressable,
   ScrollView,
+  Alert,
 } from "react-native";
 import { connect } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
@@ -16,7 +17,7 @@ import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
+import { useValidation } from "react-native-form-validator";
 import { FloatingLabelInput } from "react-native-floating-label-input";
 
 function Save({ currentUser, route, navigation }) {
@@ -25,6 +26,20 @@ function Save({ currentUser, route, navigation }) {
   const [tags, setTags] = useState("");
   const [image, setImage] = useState(null);
   const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(null);
+
+  const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
+    useValidation({
+      state: { title, description },
+    });
+
+  const onSubmit = () => {
+    validate({
+      title: { required: true },
+      description: { required: true },
+    });
+    uploadImage();
+  };
   const uploadImage = async () => {
     const uri = route.params.image;
     const childPath = `post/${
@@ -37,6 +52,7 @@ function Save({ currentUser, route, navigation }) {
     const task = firebase.storage().ref().child(childPath).put(blob);
 
     const taskProgress = (snapshot) => {
+      setLoading((snapshot.bytesTransferred / uri.size) * 100);
       console.log(`transferred: ${snapshot.bytesTransferred}`);
     };
 
@@ -44,12 +60,14 @@ function Save({ currentUser, route, navigation }) {
       task.snapshot.ref.getDownloadURL().then((snapshot) => {
         savePostData(snapshot);
         saveAllPostData(snapshot);
+        setLoading(null);
         console.log(snapshot);
       });
     };
 
     const taskError = (snapshot) => {
       console.log(snapshot);
+      setLoading(null);
     };
 
     task.on("state_changed", taskProgress, taskError, taskCompleted);
@@ -83,6 +101,8 @@ function Save({ currentUser, route, navigation }) {
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
+        alert("Image Posted");
+        setLoading(null);
         navigation.popToTop();
       });
   };
@@ -102,6 +122,10 @@ function Save({ currentUser, route, navigation }) {
             {" "}
             Type the title of your image.
           </Text>
+          {isFieldInError("title") &&
+            getErrorsInField("title").map((errorMessage) => (
+              <Text style={{ color: "red" }}>Required</Text>
+            ))}
           <TextInput
             style={[styles.addButton, { height: 50 }]}
             multiline={true}
@@ -118,6 +142,10 @@ function Save({ currentUser, route, navigation }) {
           >
             Describe the image you have added.
           </Text>
+          {isFieldInError("description") &&
+            getErrorsInField("description").map((errorMessage) => (
+              <Text style={{ color: "red" }}>Required</Text>
+            ))}
           <FloatingLabelInput
             value={description}
             blurOnSubmit={false}
@@ -150,7 +178,7 @@ function Save({ currentUser, route, navigation }) {
             }}
           />
         </View>
-        
+
         <View
           style={{
             flexDirection: "row",
@@ -159,14 +187,14 @@ function Save({ currentUser, route, navigation }) {
             marginVertical: 10,
           }}
         >
-          <Pressable
+          <TouchableOpacity
             style={[styles.button, { backgroundColor: "#8E2835" }]}
-            onPress={() => uploadImage()}
+            onPress={() => onSubmit()}
           >
-            <Text style={[styles.text, { fontSize: 16, color: "white" }]}>
-              Share
+            <Text style={[styles.subtitle, { fontSize: 16, color: "white" }]}>
+              {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
             </Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
@@ -184,9 +212,16 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 20,
   },
+  subtitle: {
+    alignSelf: "center",
+    fontSize: 18,
+
+    letterSpacing: 0.25,
+    color: "white",
+  },
   text: {
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 10,
   },
   textItalized: {
     fontStyle: "italic",

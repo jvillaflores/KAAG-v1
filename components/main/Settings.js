@@ -26,30 +26,6 @@ const onLogout = () => {
 };
 
 function Settings({ currentUser, navigation }) {
-  const [datalist, setDatalist] = useState(currentUser);
-  useEffect(() => {
-    setDatalist(currentUser);
-  }, [currentUser]);
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
-      firebase
-        .firestore()
-        .collection("users")
-        .get()
-        .then((snapshot) => {
-          console.log(snapshot, "-=-=-=-=-=-=-=-=");
-          let currentUser = snapshot.docs.map((doc) => {
-            const data = doc.data();
-            const id = doc.id;
-            return { id, ...data };
-          });
-          setDatalist(currentUser);
-        });
-    });
-
-    return unsubscribe;
-  }, [navigation]);
   if (currentUser.type == "2") {
     return (
       <SafeAreaView style={styles.container}>

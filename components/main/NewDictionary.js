@@ -20,13 +20,14 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { NavigationEvents } from "react-navigation";
 import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system";
+import { useValidation } from "react-native-form-validator";
 
 function NewDictionary({ currentUser, route, navigation }) {
-  const [kagan, setKagan] = useState("Test");
-  const [filipino, setFilipino] = useState("TOST");
-  const [sentence, setSentence] = useState("HOLA TOST");
-  const [filipinoSentence, setFilipinoSentence] = useState("HOLA TOSTA");
-  const [meaning, setMeaning] = useState("Test test test");
+  const [kagan, setKagan] = useState("");
+  const [filipino, setFilipino] = useState("");
+  const [sentence, setSentence] = useState("");
+  const [filipinoSentence, setFilipinoSentence] = useState("");
+  const [meaning, setMeaning] = useState("");
   const [audio, setAudio] = useState(null);
   const [loading, setLoading] = useState(null);
   const [wordID, setWordID] = useState(makeid());
@@ -42,6 +43,12 @@ function NewDictionary({ currentUser, route, navigation }) {
 
     return randomText;
   }
+
+  const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
+    useValidation({
+      state: { kagan, filipino, sentence, filipinoSentence, meaning, audio },
+    });
+
   const chooseFile = async () => {
     let result = await DocumentPicker.getDocumentAsync({
       type: "audio/*",
@@ -112,6 +119,14 @@ function NewDictionary({ currentUser, route, navigation }) {
   };
 
   const uploadAudio = async () => {
+    validate({
+      kagan: { required: true },
+      filipino: { required: true },
+      sentence: { required: true },
+      filipinoSentence: { required: true },
+      meaning: { required: true },
+      audio: { required: true },
+    });
     const childPath = `audio/${
       firebase.auth().currentUser.uid
     }/${Math.random().toString(36)}`;
@@ -206,6 +221,10 @@ function NewDictionary({ currentUser, route, navigation }) {
             {" "}
             Type the Kinagan word you want to explain.{" "}
           </Text>
+          {isFieldInError("kagan") &&
+            getErrorsInField("kagan").map((errorMessage) => (
+              <Text style={{ color: "red" }}>Please enter the kagan word</Text>
+            ))}
           <TextInput
             style={styles.input}
             multiline={true}
@@ -219,6 +238,12 @@ function NewDictionary({ currentUser, route, navigation }) {
           <Text style={styles.guidelines}>
             Translate the Kinagan word you have suggested to Filipino{" "}
           </Text>
+          {isFieldInError("filipino") &&
+            getErrorsInField("filipino").map((errorMessage) => (
+              <Text style={{ color: "red" }}>
+                Please enter the filipino word
+              </Text>
+            ))}
           <TextInput
             style={styles.input}
             multiline={true}
@@ -231,6 +256,12 @@ function NewDictionary({ currentUser, route, navigation }) {
           <Text style={styles.guidelines}>
             Write an example of the word you have suggested in Kinagan.
           </Text>
+          {isFieldInError("sentence") &&
+            getErrorsInField("sentence").map((errorMessage) => (
+              <Text style={{ color: "red" }}>
+                Please enter an example sentence
+              </Text>
+            ))}
           <TextInput
             style={styles.input}
             multiline={true}
@@ -240,8 +271,14 @@ function NewDictionary({ currentUser, route, navigation }) {
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>English Meaning </Text>
           <Text style={styles.guidelines}>
-           Define the Kinagan word you have suggested in English.
+            Define the Kinagan word you have suggested in English.
           </Text>
+          {isFieldInError("filipinoSentence") &&
+            getErrorsInField("filipinoSentence").map((errorMessage) => (
+              <Text style={{ color: "red" }}>
+                Please enter the english meaning
+              </Text>
+            ))}
           <TextInput
             style={styles.input}
             multiline={true}
@@ -256,6 +293,12 @@ function NewDictionary({ currentUser, route, navigation }) {
           <Text style={styles.guidelines}>
             Define the Kinagan word you have suggested in Filipino.
           </Text>
+          {isFieldInError("meaning") &&
+            getErrorsInField("meaning").map((errorMessage) => (
+              <Text style={{ color: "red" }}>
+                Please enter the Filipino meaning
+              </Text>
+            ))}
           <TextInput
             style={styles.description_input}
             multiline={true}
@@ -268,13 +311,17 @@ function NewDictionary({ currentUser, route, navigation }) {
             Upload an audio on how to pronounce the Kinagan word you have
             suggested.
           </Text>
+          {isFieldInError("audio") &&
+            getErrorsInField("aduio").map((errorMessage) => (
+              <Text style={{ color: "red" }}>Please select an audio file</Text>
+            ))}
           <TouchableOpacity
             style={styles.audioButton}
             onPress={() => chooseFile()}
           >
             <View>
               {audio ? (
-                <Text>{audio?.name}</Text>
+                <TextInput>{audio?.name}</TextInput>
               ) : (
                 <MaterialCommunityIcons
                   style={styles.addAudio}

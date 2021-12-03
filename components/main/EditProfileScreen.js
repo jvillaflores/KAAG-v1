@@ -13,7 +13,7 @@ import {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
-
+import { useValidation } from "react-native-form-validator";
 import BottomSheet from "reanimated-bottom-sheet";
 import Animated from "react-native-reanimated";
 
@@ -26,6 +26,11 @@ import { connect } from "react-redux";
 const EditProfileScreen = ({ currentUser, navigation }) => {
   const [image, setImage] = useState(null);
   const [fullname, setFullName] = useState("");
+
+  const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
+    useValidation({
+      state: { fullname },
+    });
 
   const pickImage = async () => {
     let image = await ImagePicker.launchImageLibraryAsync({
@@ -54,6 +59,9 @@ const EditProfileScreen = ({ currentUser, navigation }) => {
   };
 
   const uploadImage = async () => {
+    validate({
+      fullname: { required: true },
+    });
     const uri = image;
     const childPath = `userpictures/${
       firebase.auth().currentUser.uid
@@ -201,6 +209,12 @@ const EditProfileScreen = ({ currentUser, navigation }) => {
             autoCorrect={false}
             onChangeText={(fullname) => setFullName(fullname)}
           />
+          {isFieldInError("fullname") &&
+            getErrorsInField("fullname").map((errorMessage) => (
+              <Text style={{ color: "red" }}>
+                Please enter your Full Name to complete the submission.
+              </Text>
+            ))}
         </View>
         <View style={styles.action}>
           <FontAwesome name="at" size={20} />

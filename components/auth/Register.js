@@ -16,8 +16,9 @@ import Svg, { Path, G, Rect, Polygon, Title } from "react-native-svg";
 import firebase from "firebase/app";
 import "firebase/firestore";
 require("firebase/auth");
+import ValidationComponent from "react-native-form-validator";
 
-export default class Register extends Component {
+export default class Register extends ValidationComponent {
   constructor(props) {
     super(props);
 
@@ -33,6 +34,13 @@ export default class Register extends Component {
 
   onSignUp() {
     const { email, password, name, type } = this.state;
+
+    this.validate({
+      email: { email: true },
+      name: { required: true },
+      password: { required: true },
+    });
+
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -65,6 +73,10 @@ export default class Register extends Component {
         </View>
         <View style={styles.loginGroup}>
           <Text style={styles.textGrey}>Name</Text>
+          {this.isFieldInError("name") &&
+            this.getErrorsInField("name").map((errorMessage) => (
+              <Text style={{ color: "red" }}>Please enter your Full Name</Text>
+            ))}
           <TextInput
             onChangeText={(name) => this.setState({ name })}
             style={styles.input}
@@ -75,6 +87,12 @@ export default class Register extends Component {
             style={styles.input}
           />
           <Text style={styles.textGrey}>Password</Text>
+          {this.isFieldInError("password") &&
+            this.getErrorsInField("password").map((errorMessage) => (
+              <Text style={{ color: "red" }}>
+                Please enter your your password
+              </Text>
+            ))}
           <TextInput
             secureTextEntry={true}
             onChangeText={(password) => this.setState({ password })}
