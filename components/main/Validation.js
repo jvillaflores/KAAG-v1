@@ -45,8 +45,8 @@ function Validation({ currentUser, route, navigation }) {
 
   const Accept = () => {
     setLoading(true);
-    updateDictionaryAll();
     updateUserDictionary();
+    updateDictionaryAll();
   };
 
   const updateDictionaryAll = () => {
@@ -55,6 +55,7 @@ function Validation({ currentUser, route, navigation }) {
       .doc(`dictionaryAll/${data?.id}`)
       .update({
         status: "1",
+        validatedBy: currentUser.name,
       })
       .then((result) => {
         navigation.goBack();
@@ -71,6 +72,7 @@ function Validation({ currentUser, route, navigation }) {
       .doc(`${data?.wordId}`)
       .update({
         status: "1",
+        validatedBy: currentUser.name,
       })
       .catch((err) => console.log(err, "-=error"));
   };

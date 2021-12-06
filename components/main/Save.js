@@ -52,7 +52,7 @@ function Save({ currentUser, route, navigation }) {
     const task = firebase.storage().ref().child(childPath).put(blob);
 
     const taskProgress = (snapshot) => {
-      setLoading((snapshot.bytesTransferred / uri.size) * 100);
+      setLoading((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
       console.log(`transferred: ${snapshot.bytesTransferred}`);
     };
 

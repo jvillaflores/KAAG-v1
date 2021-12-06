@@ -68,6 +68,7 @@ function Validation({ currentUser, route, navigation }) {
               style={styles.input}
               value={data?.kagan}
               multiline={true}
+              editable={false}
             />
           </View>
           <View style={styles.paddingLeft}>
@@ -77,6 +78,7 @@ function Validation({ currentUser, route, navigation }) {
               style={styles.input}
               value={data?.filipino}
               multiline={true}
+              editable={false}
             />
           </View>
 
@@ -87,6 +89,7 @@ function Validation({ currentUser, route, navigation }) {
               style={styles.input}
               value={data?.sentence}
               multiline={true}
+              editable={false}
             />
           </View>
           <View style={styles.paddingLeft}>
@@ -97,6 +100,7 @@ function Validation({ currentUser, route, navigation }) {
               style={styles.input}
               value={data?.filipinoSentence}
               multiline={true}
+              editable={false}
             />
           </View>
 
@@ -106,6 +110,7 @@ function Validation({ currentUser, route, navigation }) {
               style={styles.description_input}
               value={data?.meaning}
               multiline={true}
+              editable={false}
             />
           </View>
           <View style={styles.paddingLeft}>
@@ -131,6 +136,16 @@ function Validation({ currentUser, route, navigation }) {
               style={styles.description_input}
               value={data?.note}
               multiline={true}
+              editable={false}
+            />
+          </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Validated By </Text>
+            <TextInput
+              style={styles.description_input}
+              value={data?.validatedBy}
+              multiline={true}
+              editable={false}
             />
           </View>
         </View>
@@ -147,6 +162,7 @@ function Validation({ currentUser, route, navigation }) {
               style={styles.input}
               value={data?.kagan}
               multiline={true}
+              editable={false}
             />
           </View>
           <View style={styles.paddingLeft}>
@@ -156,6 +172,7 @@ function Validation({ currentUser, route, navigation }) {
               style={styles.input}
               value={data?.filipino}
               multiline={true}
+              editable={false}
             />
           </View>
 
@@ -166,6 +183,7 @@ function Validation({ currentUser, route, navigation }) {
               style={styles.input}
               value={data?.sentence}
               multiline={true}
+              editable={false}
             />
           </View>
           <View style={styles.paddingLeft}>
@@ -176,6 +194,7 @@ function Validation({ currentUser, route, navigation }) {
               style={styles.input}
               value={data?.filipinoSentence}
               multiline={true}
+              editable={false}
             />
           </View>
 
@@ -185,6 +204,7 @@ function Validation({ currentUser, route, navigation }) {
               style={styles.description_input}
               value={data?.meaning}
               multiline={true}
+              editable={false}
             />
           </View>
           <View style={styles.paddingLeft}>
@@ -204,6 +224,15 @@ function Validation({ currentUser, route, navigation }) {
               </View>
             </TouchableOpacity>
           </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Validated By </Text>
+            <TextInput
+              style={styles.description_input}
+              value={data?.validatedBy}
+              multiline={true}
+              editable={false}
+            />
+          </View>
         </View>
       </ScrollView>
     );
@@ -218,6 +247,7 @@ function Validation({ currentUser, route, navigation }) {
               style={styles.input}
               value={data?.kagan}
               multiline={true}
+              editable={false}
             />
           </View>
           <View style={styles.paddingLeft}>
@@ -227,6 +257,7 @@ function Validation({ currentUser, route, navigation }) {
               style={styles.input}
               value={data?.filipino}
               multiline={true}
+              editable={false}
             />
           </View>
 
@@ -237,6 +268,7 @@ function Validation({ currentUser, route, navigation }) {
               style={styles.input}
               value={data?.sentence}
               multiline={true}
+              editable={false}
             />
           </View>
           <View style={styles.paddingLeft}>
@@ -247,6 +279,7 @@ function Validation({ currentUser, route, navigation }) {
               style={styles.input}
               value={data?.filipinoSentence}
               multiline={true}
+              editable={false}
             />
           </View>
 
@@ -256,6 +289,7 @@ function Validation({ currentUser, route, navigation }) {
               style={styles.description_input}
               value={data?.meaning}
               multiline={true}
+              editable={false}
             />
           </View>
           <View style={styles.paddingLeft}>
