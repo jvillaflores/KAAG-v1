@@ -96,7 +96,7 @@ const EditProfileScreen = ({ currentUser, navigation }) => {
       .doc(firebase.auth().currentUser.uid)
       .update({
         name: fullname,
-        image: downloadURL,
+        userImage: downloadURL,
       })
       .then(function () {
         alert("Profile edited! ");

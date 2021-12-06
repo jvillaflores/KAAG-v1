@@ -93,7 +93,7 @@ function Save({ currentUser, route, navigation }) {
       .collection("postsAll")
       .add({
         username: currentUser.name,
-        userImage: currentUser.image,
+        userImage: currentUser.userImage,
         downloadURL,
         title,
         description,
