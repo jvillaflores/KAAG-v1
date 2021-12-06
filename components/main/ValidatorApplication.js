@@ -142,7 +142,11 @@ function ValidatorApplication({ currentUser, route, navigation }) {
             experiences.
           </Text>
           <TextInput
-            style={[styles.addButton, { height: 180 }]}
+            style={[
+              styles.addButton,
+              { height: 180 },
+              { paddingHorizontal: 10 },
+            ]}
             onChangeText={(note) => setNote(note)}
           ></TextInput>
         </View>

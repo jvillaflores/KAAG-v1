@@ -23,10 +23,7 @@ function Course({ currentUser, navigation }) {
           What do you want to learn today?
         </Text>
         <View style={styles.containerbox}>
-          <Pressable
-            style={styles.button}
-            onPress={() => navigation.navigate("Vocabulary")}
-          >
+          <Pressable style={styles.button}>
             <Text style={styles.text}>Get Started</Text>
           </Pressable>
           <Svg

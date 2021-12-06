@@ -142,7 +142,7 @@ function Validation({ currentUser, route, navigation }) {
           <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>Validated By </Text>
             <TextInput
-              style={styles.description_input}
+              style={styles.input}
               value={data?.validatedBy}
               multiline={true}
               editable={false}
@@ -227,7 +227,7 @@ function Validation({ currentUser, route, navigation }) {
           <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>Validated By </Text>
             <TextInput
-              style={styles.description_input}
+              style={styles.input}
               value={data?.validatedBy}
               multiline={true}
               editable={false}

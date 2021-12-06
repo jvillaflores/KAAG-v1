@@ -207,6 +207,7 @@ const EditProfileScreen = ({ currentUser, navigation }) => {
             placeholderTextColor="#666666"
             style={styles.textInput}
             autoCorrect={false}
+            editable={false}
             onChangeText={(fullname) => setFullName(fullname)}
           />
           {isFieldInError("fullname") &&
@@ -219,12 +220,11 @@ const EditProfileScreen = ({ currentUser, navigation }) => {
         <View style={styles.action}>
           <FontAwesome name="at" size={20} />
           <TextInput
-            placeholder="Email Address"
             placeholderTextColor="#666666"
             style={styles.textInput}
             autoCorrect={false}
             keyboardType="email-address"
-            value={currentUser.email}
+            placeholder={currentUser.email}
             editable={false}
           />
         </View>
