@@ -59,9 +59,6 @@ const EditProfileScreen = ({ currentUser, navigation }) => {
   };
 
   const uploadImage = async () => {
-    validate({
-      fullname: { required: true },
-    });
     const uri = image;
     const childPath = `userpictures/${
       firebase.auth().currentUser.uid
@@ -95,7 +92,6 @@ const EditProfileScreen = ({ currentUser, navigation }) => {
       .collection("users")
       .doc(firebase.auth().currentUser.uid)
       .update({
-        name: fullname,
         userImage: downloadURL,
       })
       .then(function () {

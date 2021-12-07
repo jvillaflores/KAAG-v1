@@ -100,9 +100,12 @@ export default class Register extends ValidationComponent {
           />
         </View>
         <View style={{ paddingTop: 20 }}>
-          <Pressable style={styles.button} onPress={() => this.onSignUp()}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.onSignUp()}
+          >
             <Text style={styles.text}>Sign Up</Text>
-          </Pressable>
+          </TouchableOpacity>
 
           {/* <Pressable style={styles.buttonGoogle} onPress={() => this.onSignUp()}>
                   <Svg id="search" xmlns="http://www.w3.org/2000/svg" width="22.845" height="22.845" viewBox="0 0 22.845 22.845">

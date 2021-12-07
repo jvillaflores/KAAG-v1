@@ -71,9 +71,12 @@ export default class Login extends Component {
           </TouchableOpacity>
         </View>
         <View style={{ paddingVertical: 30 }}>
-          <Pressable style={styles.button} onPress={() => this.onSignUp()}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.onSignUp()}
+          >
             <Text style={styles.text}>Login</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
 
         {/* <Pressable style={styles.buttonGoogle} onPress={() => this.onSignUp()}>

@@ -66,7 +66,7 @@ function Community({ currentUser, posts, navigation, props }) {
           <View style={styles.profile}>
             <Image
               style={styles.imageprofile}
-              source={{ uri: currentUser.image }}
+              source={{ uri: currentUser.userImage }}
             />
             <Text style={styles.profilename}> {currentUser.name}</Text>
           </View>

@@ -1,5 +1,12 @@
 import React from "react";
-import { Text, View, Button, StyleSheet, Pressable, Image } from "react-native";
+import {
+  Text,
+  View,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 
 var logo = require("../../assets/info1.png");
 
@@ -11,7 +18,7 @@ export default function Landing({ navigation }) {
       </View>
       <View style={styles.header}>
         <Text style={styles.textHead}>Learn Kagan Language</Text>
-      {/* </View>
+        {/* </View>
       <View style={styles.subHeader}> */}
         <Text style={styles.textSubHead}>
           Kagan has a native language called Kinagan, which is related to the
@@ -20,35 +27,34 @@ export default function Landing({ navigation }) {
           native language and be part of team to by contributing what you know.
         </Text>
       </View>
-      <Pressable
+      <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("Login")}
       >
         <Text style={styles.text}>Sign In</Text>
-      </Pressable>
+      </TouchableOpacity>
 
-      <Pressable
+      <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("Register")}
       >
         <Text style={styles.text}>Sign Up</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-     alignSelf: "center",
-     borderRadius: 10,
-     padding: 15,
-     margin: 5,
-     elevation: 2,
-     width: "80%",
-     backgroundColor: "#8E2835",
-    
+    alignSelf: "center",
+    borderRadius: 10,
+    padding: 15,
+    margin: 5,
+    elevation: 2,
+    width: "80%",
+    backgroundColor: "#8E2835",
   },
- 
+
   text: {
     alignSelf: "center",
     fontSize: 20,
@@ -80,8 +86,8 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
-    alignSelf:"center",
-    margin:10,
+    alignSelf: "center",
+    margin: 10,
   },
   subHeader: {
     alignSelf: "center",
@@ -98,7 +104,7 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
-    margin:15,
+    margin: 15,
     bottom: 10,
   },
 });

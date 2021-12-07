@@ -32,7 +32,7 @@ function Settings({ currentUser, navigation }) {
         <View>
           <View style={styles.userInfoSelection}>
             {currentUser.userImage != " " ? (
-              <Avatar.Image source={{ uri: currentUser.image }} size={80} />
+              <Avatar.Image source={{ uri: currentUser.userImage }} size={80} />
             ) : null}
             {currentUser.userImage == " " ? (
               <Avatar.Image
@@ -91,7 +91,7 @@ function Settings({ currentUser, navigation }) {
         <View>
           <View style={styles.userInfoSelection}>
             {currentUser.userImage != " " ? (
-              <Avatar.Image source={{ uri: currentUser.image }} size={80} />
+              <Avatar.Image source={{ uri: currentUser.userImage }} size={80} />
             ) : null}
             {currentUser.userImage == " " ? (
               <Avatar.Image
@@ -142,7 +142,7 @@ function Settings({ currentUser, navigation }) {
         <View>
           <View style={styles.userInfoSelection}>
             {currentUser.userImage != " " ? (
-              <Avatar.Image source={{ uri: currentUser.image }} size={80} />
+              <Avatar.Image source={{ uri: currentUser.userImage }} size={80} />
             ) : null}
             {currentUser.userImage == " " ? (
               <Avatar.Image

@@ -80,7 +80,7 @@ const data = [
   {
     question:
       "https://firebasestorage.googleapis.com/v0/b/kaag-1aa02.appspot.com/o/audio%2FstaticDictionary%2F38%20pag%20gawa%20-%20pag%20imo.mp3?alt=media&token=66c0cd16-cb5d-4aa2-be82-c3216fcd021f",
-    options: ["Gumawa ", "Pagsulat ", "Para sayo", "Pag tingin"],
+    options: ["Gumawa", "Pagsulat ", "Para sayo", "Pag tingin"],
     correct_option: "Gumawa",
   },
   {

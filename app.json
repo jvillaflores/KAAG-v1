@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "nav",
+    "name": "kaag",
     "slug": "nav",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,21 +13,19 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/logo_kaag.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.kaag.v1"
+      "package": "com.kaag.v2"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/logo_kaag.png"
     }
   }
 }

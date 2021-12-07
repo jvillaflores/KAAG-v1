@@ -84,14 +84,18 @@ function Validation({ currentUser, route, navigation }) {
 
           <TextInput
             style={styles.input}
-            value={data?.wordId}
+            value={data?.kagan}
             multiline={true}
           />
         </View>
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>In Filipino </Text>
 
-          <TextInput style={styles.input} value={data?.uid} multiline={true} />
+          <TextInput
+            style={styles.input}
+            value={data?.filipino}
+            multiline={true}
+          />
         </View>
 
         <View style={styles.paddingLeft}>
