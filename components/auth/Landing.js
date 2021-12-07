@@ -28,17 +28,17 @@ export default function Landing({ navigation }) {
         </Text>
       </View>
       <TouchableOpacity
-        style={styles.button}
+        style={[styles.button, {backgroundColor: "#8E2835"}]}
         onPress={() => navigation.navigate("Login")}
       >
         <Text style={styles.text}>Sign In</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={styles.button}
+        style={[styles.button,{ borderWidth:2, borderColor: "#8E2835"}]}
         onPress={() => navigation.navigate("Register")}
       >
-        <Text style={styles.text}>Sign Up</Text>
+        <Text style={[styles.text,{color:"#8E2835"}]}>Sign Up</Text>
       </TouchableOpacity>
     </View>
   );
@@ -52,7 +52,9 @@ const styles = StyleSheet.create({
     margin: 5,
     elevation: 2,
     width: "80%",
-    backgroundColor: "#8E2835",
+    
+    
+    
   },
 
   text: {

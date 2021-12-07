@@ -6,6 +6,7 @@ import {
   Image,
   Pressable,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 
 import Svg, { Path, G, Rect, Polygon, Title } from "react-native-svg";
@@ -531,7 +532,7 @@ function Course({ currentUser, navigation }) {
         <Text style={styles.textKagan}> Kagan Course </Text>
       </View>
       <View>
-        <Pressable
+        <TouchableOpacity
           style={styles.buttonVocab}
           onPress={() => navigation.navigate("Vocabulary")}
         >
@@ -546,8 +547,8 @@ function Course({ currentUser, navigation }) {
               <Text style={styles.textVocabSub}> Translate words</Text>
             </View>
           </View>
-        </Pressable>
-        <Pressable
+        </TouchableOpacity>
+        <TouchableOpacity
           style={styles.buttonVocab}
           onPress={() => navigation.navigate("Grammar")}
         >
@@ -564,8 +565,8 @@ function Course({ currentUser, navigation }) {
               </Text>
             </View>
           </View>
-        </Pressable>
-        <Pressable
+        </TouchableOpacity>
+        <TouchableOpacity
           style={styles.buttonVocab}
           onPress={() => navigation.navigate("Speech")}
         >
@@ -582,7 +583,7 @@ function Course({ currentUser, navigation }) {
               </Text>
             </View>
           </View>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </View>
   );
