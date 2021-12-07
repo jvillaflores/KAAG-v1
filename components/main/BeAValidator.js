@@ -40,10 +40,14 @@ export default function BeAValidator({ navigation }) {
 
         <Text style={styles.description}>
           {" "}
-          • I acknowledge that the content I am about to submit may be on
-          dictionary of this application.
+          • I acknowledge that I will be resposible to the contents I will be
+          validating and will be validating authentic contents.
         </Text>
-
+        <Text style={styles.description}>
+          {" "}
+          • All information that will be added are purely from Kagan and will
+          help the people from the tribe.
+        </Text>
         <View style={styles.checkboxContainer}>
           <CheckBox
             disabled={false}
