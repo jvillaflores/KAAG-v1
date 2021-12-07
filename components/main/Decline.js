@@ -26,7 +26,6 @@ function Decline({ route, navigation }) {
   const [note, setNote] = useState("");
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
-  console.log(data);
 
   const Reject = () => {
     setLoading(true);

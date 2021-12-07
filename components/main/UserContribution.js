@@ -65,7 +65,7 @@ function Validation({ currentUser, route, navigation }) {
             <Text style={styles.title_text}>Word </Text>
 
             <TextInput
-              style={styles.input}
+              style={[styles.input, { color: "black" }]}
               value={data?.kagan}
               multiline={true}
               editable={false}
@@ -75,7 +75,7 @@ function Validation({ currentUser, route, navigation }) {
             <Text style={styles.title_text}>In Filipino </Text>
 
             <TextInput
-              style={styles.input}
+              style={[styles.input, { color: "black" }]}
               value={data?.filipino}
               multiline={true}
               editable={false}
@@ -86,7 +86,7 @@ function Validation({ currentUser, route, navigation }) {
             <Text style={styles.title_text}>Kagan Sentence Example </Text>
 
             <TextInput
-              style={styles.input}
+              style={[styles.input, { color: "black" }]}
               value={data?.sentence}
               multiline={true}
               editable={false}
@@ -97,7 +97,7 @@ function Validation({ currentUser, route, navigation }) {
               Filipino Sentence Transalation{" "}
             </Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, { color: "black" }]}
               value={data?.filipinoSentence}
               multiline={true}
               editable={false}
@@ -107,7 +107,7 @@ function Validation({ currentUser, route, navigation }) {
           <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>Filipino Meaning </Text>
             <TextInput
-              style={styles.description_input}
+              style={[styles.description_input, { color: "black" }]}
               value={data?.meaning}
               multiline={true}
               editable={false}
@@ -133,7 +133,7 @@ function Validation({ currentUser, route, navigation }) {
           <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>Decline note </Text>
             <TextInput
-              style={styles.description_input}
+              style={[styles.description_input, { color: "black" }]}
               value={data?.note}
               multiline={true}
               editable={false}
@@ -142,7 +142,7 @@ function Validation({ currentUser, route, navigation }) {
           <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>Validated By </Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, { color: "black" }]}
               value={data?.validatedBy}
               multiline={true}
               editable={false}
@@ -159,7 +159,7 @@ function Validation({ currentUser, route, navigation }) {
             <Text style={styles.title_text}>Word </Text>
 
             <TextInput
-              style={styles.input}
+              style={[styles.input, { color: "black" }]}
               value={data?.kagan}
               multiline={true}
               editable={false}
@@ -169,7 +169,7 @@ function Validation({ currentUser, route, navigation }) {
             <Text style={styles.title_text}>In Filipino </Text>
 
             <TextInput
-              style={styles.input}
+              style={[styles.input, { color: "black" }]}
               value={data?.filipino}
               multiline={true}
               editable={false}
@@ -180,7 +180,7 @@ function Validation({ currentUser, route, navigation }) {
             <Text style={styles.title_text}>Kagan Sentence Example </Text>
 
             <TextInput
-              style={styles.input}
+              style={[styles.input, { color: "black" }]}
               value={data?.sentence}
               multiline={true}
               editable={false}
@@ -191,7 +191,7 @@ function Validation({ currentUser, route, navigation }) {
               Filipino Sentence Transalation{" "}
             </Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, { color: "black" }]}
               value={data?.filipinoSentence}
               multiline={true}
               editable={false}
@@ -201,7 +201,7 @@ function Validation({ currentUser, route, navigation }) {
           <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>Filipino Meaning </Text>
             <TextInput
-              style={styles.description_input}
+              style={[styles.description_input, { color: "black" }]}
               value={data?.meaning}
               multiline={true}
               editable={false}
@@ -227,7 +227,7 @@ function Validation({ currentUser, route, navigation }) {
           <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>Validated By </Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, { color: "black" }]}
               value={data?.validatedBy}
               multiline={true}
               editable={false}
@@ -244,7 +244,7 @@ function Validation({ currentUser, route, navigation }) {
             <Text style={styles.title_text}>Word </Text>
 
             <TextInput
-              style={styles.input}
+              style={[styles.input, { color: "black" }]}
               value={data?.kagan}
               multiline={true}
               editable={false}
@@ -254,7 +254,7 @@ function Validation({ currentUser, route, navigation }) {
             <Text style={styles.title_text}>In Filipino </Text>
 
             <TextInput
-              style={styles.input}
+              style={[styles.input, { color: "black" }]}
               value={data?.filipino}
               multiline={true}
               editable={false}
@@ -265,7 +265,7 @@ function Validation({ currentUser, route, navigation }) {
             <Text style={styles.title_text}>Kagan Sentence Example </Text>
 
             <TextInput
-              style={styles.input}
+              style={[styles.input, { color: "black" }]}
               value={data?.sentence}
               multiline={true}
               editable={false}
@@ -276,7 +276,7 @@ function Validation({ currentUser, route, navigation }) {
               Filipino Sentence Transalation{" "}
             </Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, { color: "black" }]}
               value={data?.filipinoSentence}
               multiline={true}
               editable={false}
@@ -286,7 +286,7 @@ function Validation({ currentUser, route, navigation }) {
           <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>Filipino Meaning </Text>
             <TextInput
-              style={styles.description_input}
+              style={[styles.description_input, { color: "black" }]}
               value={data?.meaning}
               multiline={true}
               editable={false}

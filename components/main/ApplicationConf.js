@@ -42,6 +42,21 @@ function ApplicationConf({ currentUser, route, navigation }) {
       })
       .catch((err) => console.log(err, "-=error"));
   };
+  const Decline = () => {
+    setLoading(true);
+    firebase
+      .firestore()
+      .doc(`users/${data?.id}`)
+      .update({
+        status: "2",
+        type: 0,
+      })
+      .then((result) => {
+        navigation.goBack();
+        setLoading(false);
+      })
+      .catch((err) => console.log(err, "-=error"));
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -49,9 +64,10 @@ function ApplicationConf({ currentUser, route, navigation }) {
         <Text style={[styles.text, { color: "#8E2835" }]}> {data?.name} </Text>
       </View>
 
-      <View style={styles.bodycontainer}>
+      <View style={(styles.bodycontainer, { marginTop: 10 })}>
         <Text style={[styles.text, { fontSize: 16 }]}>Resume</Text>
-        <TouchableOpacity style={[styles.addButton, { height: 90 }]}>
+        <Text> (tap to download) </Text>
+        <TouchableOpacity style={[styles.addButton, { height: 110 }]}>
           <Hyperlink linkDefault={true}>
             <MaterialCommunityIcons
               name="file-pdf-box"
@@ -64,34 +80,51 @@ function ApplicationConf({ currentUser, route, navigation }) {
             </Text>
           </Hyperlink>
         </TouchableOpacity>
-
+        <Text style={[styles.text, { fontSize: 16 }]}>Email</Text>
+        <TextInput
+          style={[
+            styles.addButton,
+            { height: 50 },
+            { paddingHorizontal: 10 },
+            { color: "black" },
+          ]}
+          value={data?.email}
+          editable={false}
+        ></TextInput>
         <Text style={[styles.text, { fontSize: 16 }]}>
           Why should you be our validator?
         </Text>
         <Text>Note from the applicant.</Text>
         <TextInput
-          style={[styles.addButton, { height: 200 }]}
+          style={[
+            styles.addButton,
+            { height: 180 },
+            { paddingHorizontal: 10 },
+            { color: "black" },
+          ]}
           value={data?.note}
+          multiline={true}
+          editable={false}
         ></TextInput>
       </View>
 
       <View style={{ flexDirection: "row", flex: 1, justifyContent: "center" }}>
-        <Pressable
+        <TouchableOpacity
           style={[styles.button, { backgroundColor: "#288E4D" }]}
           onPress={() => Accept()}
         >
           <Text style={[styles.text, { fontSize: 16, color: "white" }]}>
             Accept
           </Text>
-        </Pressable>
-        <Pressable
+        </TouchableOpacity>
+        <TouchableOpacity
           style={[styles.button, { backgroundColor: "#BB0000" }]}
-          onPress={() => navigation.navigate("Decline")}
+          onPress={() => Decline()}
         >
           <Text style={[styles.text, { fontSize: 16, color: "white" }]}>
             Decline
           </Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );

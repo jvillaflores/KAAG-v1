@@ -64,10 +64,18 @@ function Community({ currentUser, posts, navigation, props }) {
       renderItem={({ item }) => (
         <View style={styles.container}>
           <View style={styles.profile}>
-            <Image
-              style={styles.imageprofile}
-              source={{ uri: currentUser.userImage }}
-            />
+            {currentUser.userImage != " " ? (
+              <Image
+                style={styles.imageprofile}
+                source={{ uri: currentUser.userImage }}
+              />
+            ) : null}
+            {currentUser.userImage == " " ? (
+              <Image
+                style={styles.imageprofile}
+                source={require("../../assets/blank.png")}
+              />
+            ) : null}
             <Text style={styles.profilename}> {currentUser.name}</Text>
           </View>
           <Text style={{ fontWeight: "bold", marginLeft: 10 }}>

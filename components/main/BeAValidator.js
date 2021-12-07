@@ -1,168 +1,161 @@
 import React, { useState } from "react";
-import { 
-  View, 
-  Text, 
-  StyleSheet, 
-  Image, 
-  Pressable, 
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Pressable,
   ScrollView,
-  CheckBox, } from "react-native";
+  CheckBox,
+} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import Unorderedlist from 'react-native-unordered-list';
-import Svg, {Path, G, Rect, Polygon, Title} from 'react-native-svg';
-
+import Unorderedlist from "react-native-unordered-list";
+import Svg, { Path, G, Rect, Polygon, Title } from "react-native-svg";
 
 export default function BeAValidator({ navigation }) {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  
+
   const [complianceModal, setComplianceModal] = useState(true);
-  
+
   return (
-    
-    
     <View style={styles.container}>
-        <View style={styles.header}>
-            <Text style={styles.textHead}>Help application grow </Text>
-            <Text style={styles.description}>Community language champions, linguistic
-            scholars, and others involved in language revitalization work are invited
-            to help build and improve the mobile application. Here, we can add new content 
-            relevant to language Kinagan. </Text>
-        </View>   
+      <View style={styles.header}>
+        <Text style={styles.textHead}>Help application grow </Text>
+        <Text style={styles.description}>
+          Community language champions, linguistic scholars, and others involved
+          in language revitalization work are invited to help build and improve
+          the mobile application. Here, we can add new content relevant to
+          language Kinagan.{" "}
+        </Text>
+      </View>
 
+      <View style={styles.header}>
+        <Text style={styles.textHead}>Please first check the following:</Text>
 
-        <View style={styles.header}>
-            <Text style={styles.textHead}>Please first check the following:</Text>
+        <Text style={styles.description}>
+          {" "}
+          • I recognize certain type of content are not allowed on the
+          application.
+        </Text>
 
-                <Text style={styles.description}> • I recognize certain type of content are 
-                not allowed on the application.
-                </Text>
+        <Text style={styles.description}>
+          {" "}
+          • I acknowledge that the content I am about to submit may be on
+          dictionary of this application.
+        </Text>
 
-                <Text style={styles.description}> • I acknowledge that the content I am about to submit
-                may be on dictionary of this application.
-                </Text>
-            
-               
-            
+        <View style={styles.checkboxContainer}>
+          <CheckBox
+            disabled={false}
+            value={toggleCheckBox}
+            onValueChange={(newValue) => setToggleCheckBox(newValue)}
+            style={styles.checkbox}
+          />
+          <Text style={styles.description}> I agree to all conditions</Text>
+        </View>
+      </View>
 
-            <View style={styles.checkboxContainer}>
-                <CheckBox
-                  disabled = {false}
-                  value = {toggleCheckBox}
-                  onValueChange={(newValue => setToggleCheckBox(newValue))}
-                  style={styles.checkbox}
-                />
-                <Text style={styles.description}> I agree to all conditions
-                </Text>
-            </View>
-
-            
-            
-        </View> 
-
-        <View>
-        <TouchableOpacity style = {[styles.proceedButton, {backgroundColor: toggleCheckBox ? '#8E2835' : '#8E28353D'}]}
-              disabled = {!toggleCheckBox}
-              onPress={() => navigation.navigate('ValAppScreen')}
-              >
-              <Text style = { styles.subtitle}> PROCEED </Text>
-        </TouchableOpacity>  
-        </View>                      
+      <View>
+        <TouchableOpacity
+          style={[
+            styles.proceedButton,
+            { backgroundColor: toggleCheckBox ? "#8E2835" : "#8E28353D" },
+          ]}
+          disabled={!toggleCheckBox}
+          onPress={() => navigation.navigate("ValAppScreen")}
+        >
+          <Text style={styles.subtitle}> PROCEED </Text>
+        </TouchableOpacity>
+      </View>
     </View>
-  
   );
 }
 
 const styles = StyleSheet.create({
-  
   container: {
-    flex:1,
+    flex: 1,
     top: 50,
-    alignItems:"center",
+    alignItems: "center",
   },
   containerbox: {
-    alignItems:"center",
-    flexDirection:"row",
-    justifyContent:"center"
-    
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
   },
   checkboxContainer: {
     flexDirection: "row",
-    marginVertical:10,
-    alignItems:"center",
-    marginRight:50,
+    marginVertical: 10,
+    alignItems: "center",
+    marginRight: 50,
     paddingRight: 50,
-    justifyContent:"center",
-    paddingTop:20,
+    justifyContent: "center",
+    paddingTop: 20,
   },
   subtitle: {
     alignSelf: "center",
-    fontSize:18,
-    
+    fontSize: 18,
+
     letterSpacing: 0.25,
     color: "white",
   },
-  proceedButton:{
-    justifyContent:"center",
+  proceedButton: {
+    justifyContent: "center",
     alignSelf: "center",
     paddingVertical: 12,
     paddingHorizontal: 110,
     borderRadius: 10,
-    elevation: 1,
+
     width: "100%",
     // paddingRight:30,
     // marginRight: 30,
     marginTop: 20,
-    
-  },  
-  
+  },
+
   checkbox: {
     width: 40,
     height: 40,
     marginRight: 20,
-    
   },
   label: {
     margin: 8,
   },
   header: {
     //flex:1,
-    alignContent:"center",
-    alignSelf:"flex-start",
+    alignContent: "center",
+    alignSelf: "flex-start",
     marginLeft: 30,
     marginTop: 20,
     marginBottom: 30,
-
   },
   button: {
     //flex:1,
-    alignContent:"center",
+    alignContent: "center",
     //alignSelf:"flex-start",
     marginLeft: 30,
     marginTop: 20,
     marginBottom: 30,
-
   },
   headline_box: {
     width: "78%",
     //height: 200,
     backgroundColor: "#EBEBEB",
-    alignItems:"center",
+    alignItems: "center",
     //top: 70,
     padding: 10,
     marginTop: 20,
     //left: 40,
     borderRadius: 15,
   },
-  contextButton:{
+  contextButton: {
     padding: 13,
-    flexDirection:"row",
+    flexDirection: "row",
     left: 20,
-    alignItems:"center"
+    alignItems: "center",
   },
-  text_Context:{
-    flexDirection:"column",
+  text_Context: {
+    flexDirection: "column",
     marginLeft: 30,
-    alignItems:"flex-start"
+    alignItems: "flex-start",
   },
   textHead: {
     flexDirection: "row",
@@ -179,9 +172,8 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: "black",
     marginRight: 35,
-    textAlign:"justify",
-    marginTop:10,
-    
+    textAlign: "justify",
+    marginTop: 10,
   },
   headLine: {
     top: 15,
@@ -195,8 +187,8 @@ const styles = StyleSheet.create({
     marginBottom: -30,
   },
   Kagan: {
-    alignContent:"flex-start",
-    alignSelf:"flex-start",
+    alignContent: "flex-start",
+    alignSelf: "flex-start",
     marginLeft: 50,
     marginTop: 10,
   },
@@ -228,13 +220,12 @@ const styles = StyleSheet.create({
   },
   buttonVocab: {
     alignSelf: "center",
-    alignItems:"flex-start",
+    alignItems: "flex-start",
     marginTop: 10,
     elevation: 0.7,
     width: 300,
     backgroundColor: "#EBEBEB",
     borderRadius: 10,
-    
   },
   buttonGrammar: {
     alignSelf: "center",

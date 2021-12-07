@@ -127,10 +127,14 @@ function ValidatorApplication({ currentUser, route, navigation }) {
               size={35}
               color="#70707033"
             />
-            <Text style={{ color: "#B1B1B1", fontSize: 12 }}>
-              {" "}
-              Upload Resume File
-            </Text>
+            {pdf ? (
+              <TextInput>{pdf?.name}</TextInput>
+            ) : (
+              <Text style={{ color: "#B1B1B1", fontSize: 12 }}>
+                {" "}
+                Upload Resume File
+              </Text>
+            )}
           </TouchableOpacity>
         </View>
         <View>
