@@ -8,6 +8,8 @@ import {
   Image,
 } from "react-native";
 
+
+
 var logo = require("../../assets/info1.png");
 
 export default function Landing({ navigation }) {

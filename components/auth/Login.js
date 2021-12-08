@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {
   View,
   Button,
-  TextInput,
+  
   Text,
   StyleSheet,
   Pressable,
@@ -10,12 +10,15 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+
+import { TextInput } from 'react-native-paper';
+
 import Svg, { Path, G, Rect, Polygon, Title } from "react-native-svg";
 import RegisterScreen from "./Register";
 import firebase from "firebase/app";
 import Register from "./Register";
 require("firebase/auth");
-import PasswordInputText from "@geuntabuwono/react-native-hide-show-password-input";
+
 
 // import { LogBox } from "react-native";
 
@@ -34,6 +37,7 @@ export default class Login extends Component {
 
   onSignUp() {
     const { email, password, name } = this.state;
+    
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
@@ -54,18 +58,31 @@ export default class Login extends Component {
           <Text style={styles.subtitle}>Sign in to continue!</Text>
         </View>
         <View style={styles.loginGroup}>
-          <Text style={styles.textGrey}>Email</Text>
-          <TextInput
-            onChangeText={(email) => this.setState({ email })}
-            style={styles.input}
-          />
-          <Text style={styles.textGrey}>Password</Text>
-          <PasswordInputText
-            iconSize={25}
-            iconColor={"#222222"}
-            onChangeText={(password) => this.setState({ password })}
-            placeholder={" "}
-          />
+          
+          <View style = {styles.space}>
+              <TextInput
+                label = "Email"
+                activeUnderlineColor ="#8E2835"
+                onChangeText={(email) => this.setState({ email })}
+                
+              />
+          </View>
+          <View style = {styles.space}>
+              <TextInput
+                label ="Password"
+                secureTextEntry={true}
+                iconSize={25}
+                iconColor={"#222222"}
+                onChangeText={(password) => this.setState({ password })}
+                placeholder={" "}
+                activeUnderlineColor ="#8E2835"
+                right={
+                  <TextInput.Icon name="eye"
+                  onPress ={()=>{}} />
+                      
+                }
+              />
+          </View>
           <TouchableOpacity
             onPress={() => navigation.navigate("ForgotPassword")}
           >
@@ -116,6 +133,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: 50,
     alignContent: "center",
+  },
+  space:{
+    paddingVertical:5
   },
   banner: {
     //flex: 1,

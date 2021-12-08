@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import {
   View,
   Button,
-  TextInput,
+  
   Text,
   StyleSheet,
   Pressable,
@@ -11,19 +11,24 @@ import {
   ScrollView,
 } from "react-native";
 
+import { TextInput } from 'react-native-paper';
 import Svg, { Path, G, Rect, Polygon, Title } from "react-native-svg";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
 require("firebase/auth");
 import ValidationComponent from "react-native-form-validator";
-import PasswordInputText from "@geuntabuwono/react-native-hide-show-password-input";
+
+
 
 export default class Register extends ValidationComponent {
+  
   constructor(props) {
+
     super(props);
 
     this.state = {
+      
       email: "",
       password: "",
       name: "",
@@ -31,11 +36,15 @@ export default class Register extends ValidationComponent {
       userImage: "",
     };
     this.onSignUp = this.onSignUp.bind(this);
+    
   }
+
+  
 
   onSignUp() {
     const { email, password, name, type } = this.state;
-
+    
+    
     this.validate({
       email: { email: true },
       name: { required: true },
@@ -66,6 +75,8 @@ export default class Register extends ValidationComponent {
 
   render() {
     const { navigation } = this.props;
+    
+    
     return (
       <ScrollView style={styles.container}>
         <View>
@@ -73,33 +84,59 @@ export default class Register extends ValidationComponent {
           <Text style={styles.subtitle}>Create account to get started!</Text>
         </View>
         <View style={styles.loginGroup}>
-          <Text style={styles.textGrey}>Name</Text>
-          {this.isFieldInError("name") &&
-            this.getErrorsInField("name").map((errorMessage) => (
-              <Text style={{ color: "red" }}>Please enter your Full Name</Text>
-            ))}
-          <TextInput
-            onChangeText={(name) => this.setState({ name })}
-            style={styles.input}
-          />
-          <Text style={styles.textGrey}>Email</Text>
-          <TextInput
-            onChangeText={(email) => this.setState({ email })}
-            style={styles.input}
-          />
-          <Text style={styles.textGrey}>Password</Text>
-          {this.isFieldInError("password") &&
-            this.getErrorsInField("password").map((errorMessage) => (
-              <Text style={{ color: "red" }}>
-                Please enter your your password
-              </Text>
-            ))}
-          <PasswordInputText
-            iconSize={25}
-            iconColor={"#222222"}
-            onChangeText={(password) => this.setState({ password })}
-            placeholder={" "}
-          />
+        
+              <View style = {styles.space}>
+              {this.isFieldInError("name") &&
+                this.getErrorsInField("name").map((errorMessage) => (
+                  <Text style={{ color: "red" }}>Please enter your Full Name</Text>
+                ))}
+              <TextInput
+                label='Name'
+                activeUnderlineColor ="#8E2835"
+                onChangeText={(name) => this.setState({ name })}
+                
+              />
+            </View>
+          
+            <View style = {styles.space}> 
+              <TextInput
+                keyboardType = 'email-address'
+                label='Email'
+                activeUnderlineColor ="#8E2835"
+                onChangeText={(email) => this.setState({ email })}
+                
+              />
+            
+            </View>
+
+            <View style = {styles.space}>
+                  {this.isFieldInError("password") &&
+                    this.getErrorsInField("password").map((errorMessage) => (
+                      <Text style={{ color: "red" }}>
+                        Please enter your your password
+                      </Text>
+                    ))}
+                    
+                  <TextInput
+                    label='Password'
+                    secureTextEntry={secureTextEntry}
+                    iconSize={25}
+                    iconColor={"#222222"}
+                    onChangeText={(password) => this.setState({ password })}
+                    placeholder={" "}
+                    activeUnderlineColor ="#8E2835"
+                    right={
+                      <TextInput.Icon 
+                          name="eye"
+                          onPress={() => {
+                            setSecureTextEntry(!secureTextEntry);
+                            return false;
+                          }}
+                          />
+                          
+                    }
+                  />
+            </View>
         </View>
         <View style={{ paddingTop: 20 }}>
           <TouchableOpacity
@@ -146,6 +183,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: 50,
     alignContent: "center",
+  },
+  space:{
+    paddingVertical:5
   },
   banner: {
     //flex: 1,
