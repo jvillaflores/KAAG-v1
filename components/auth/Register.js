@@ -17,6 +17,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 require("firebase/auth");
 import ValidationComponent from "react-native-form-validator";
+import PasswordInputText from "@geuntabuwono/react-native-hide-show-password-input";
 
 export default class Register extends ValidationComponent {
   constructor(props) {
@@ -93,10 +94,11 @@ export default class Register extends ValidationComponent {
                 Please enter your your password
               </Text>
             ))}
-          <TextInput
-            secureTextEntry={true}
+          <PasswordInputText
+            iconSize={25}
+            iconColor={"#222222"}
             onChangeText={(password) => this.setState({ password })}
-            style={styles.input}
+            placeholder={" "}
           />
         </View>
         <View style={{ paddingTop: 20 }}>

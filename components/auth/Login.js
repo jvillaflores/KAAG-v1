@@ -15,6 +15,7 @@ import RegisterScreen from "./Register";
 import firebase from "firebase/app";
 import Register from "./Register";
 require("firebase/auth");
+import PasswordInputText from "@geuntabuwono/react-native-hide-show-password-input";
 
 // import { LogBox } from "react-native";
 
@@ -59,10 +60,11 @@ export default class Login extends Component {
             style={styles.input}
           />
           <Text style={styles.textGrey}>Password</Text>
-          <TextInput
-            secureTextEntry={true}
+          <PasswordInputText
+            iconSize={25}
+            iconColor={"#222222"}
             onChangeText={(password) => this.setState({ password })}
-            style={styles.input}
+            placeholder={" "}
           />
           <TouchableOpacity
             onPress={() => navigation.navigate("ForgotPassword")}
