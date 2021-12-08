@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   View,
   Button,
-  
   Text,
   StyleSheet,
   Pressable,
@@ -11,14 +10,13 @@ import {
   ScrollView,
 } from "react-native";
 
-import { TextInput } from 'react-native-paper';
+import { TextInput } from "react-native-paper";
 
 import Svg, { Path, G, Rect, Polygon, Title } from "react-native-svg";
 import RegisterScreen from "./Register";
 import firebase from "firebase/app";
 import Register from "./Register";
 require("firebase/auth");
-
 
 // import { LogBox } from "react-native";
 
@@ -31,13 +29,14 @@ export default class Login extends Component {
     this.state = {
       email: "",
       password: "",
+      secureTextEntry: true,
     };
     this.onSignUp = this.onSignUp.bind(this);
   }
 
   onSignUp() {
     const { email, password, name } = this.state;
-    
+
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
@@ -51,6 +50,8 @@ export default class Login extends Component {
 
   render() {
     const { navigation } = this.props;
+    const { secureTextEntry } = this.state;
+    const { password } = this.state;
     return (
       <ScrollView style={styles.container}>
         <View>
@@ -58,30 +59,54 @@ export default class Login extends Component {
           <Text style={styles.subtitle}>Sign in to continue!</Text>
         </View>
         <View style={styles.loginGroup}>
-          
-          <View style = {styles.space}>
-              <TextInput
-                label = "Email"
-                activeUnderlineColor ="#8E2835"
-                onChangeText={(email) => this.setState({ email })}
-                
-              />
+          <View style={styles.space}>
+            <TextInput
+              label="Email"
+              activeUnderlineColor="#8E2835"
+              onChangeText={(email) => this.setState({ email })}
+            />
           </View>
-          <View style = {styles.space}>
+          <View style={styles.space}>
+            {secureTextEntry == true ? (
               <TextInput
-                label ="Password"
-                secureTextEntry={true}
+                label="Password"
+                secureTextEntry={secureTextEntry}
                 iconSize={25}
                 iconColor={"#222222"}
                 onChangeText={(password) => this.setState({ password })}
-                placeholder={" "}
-                activeUnderlineColor ="#8E2835"
+                value={password}
+                activeUnderlineColor="#8E2835"
                 right={
-                  <TextInput.Icon name="eye"
-                  onPress ={()=>{}} />
-                      
+                  <TextInput.Icon
+                    name="eye"
+                    onPress={() => {
+                      this.setState({ secureTextEntry: false });
+                      return false;
+                    }}
+                  />
                 }
               />
+            ) : null}
+            {secureTextEntry == false ? (
+              <TextInput
+                label="Password"
+                secureTextEntry={secureTextEntry}
+                iconSize={25}
+                iconColor={"#222222"}
+                onChangeText={(password) => this.setState({ password })}
+                value={password}
+                activeUnderlineColor="#8E2835"
+                right={
+                  <TextInput.Icon
+                    name="eye-off"
+                    onPress={() => {
+                      this.setState({ secureTextEntry: true });
+                      return true;
+                    }}
+                  />
+                }
+              />
+            ) : null}
           </View>
           <TouchableOpacity
             onPress={() => navigation.navigate("ForgotPassword")}
@@ -134,8 +159,8 @@ const styles = StyleSheet.create({
     paddingVertical: 50,
     alignContent: "center",
   },
-  space:{
-    paddingVertical:5
+  space: {
+    paddingVertical: 5,
   },
   banner: {
     //flex: 1,
