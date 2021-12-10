@@ -62,6 +62,7 @@ export default class Login extends Component {
           <View style={styles.space}>
             <TextInput
               label="Email"
+              keyboardType="email-address"
               activeUnderlineColor="#8E2835"
               onChangeText={(email) => this.setState({ email })}
             />

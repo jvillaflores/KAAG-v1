@@ -18,7 +18,7 @@ export default function Course({ navigation }) {
   const [complianceModal, setComplianceModal] = useState(true);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.textHead}>Help application grow </Text>
         <Text style={styles.description}>
@@ -73,15 +73,16 @@ export default function Course({ navigation }) {
           <Text style={styles.subtitle}> PROCEED </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    top: 50,
-    alignItems: "center",
+    paddingHorizontal: 40,
+    paddingVertical: 50,
+    alignContent: "center",
   },
   containerbox: {
     alignItems: "center",
@@ -108,12 +109,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     paddingVertical: 12,
-    paddingHorizontal: 110,
+    //paddingHorizontal: 110,
     borderRadius: 10,
     width: "100%",
     // paddingRight:30,
     // marginRight: 30,
-    marginTop: 20,
+    //marginTop: 20,
   },
 
   checkbox: {
@@ -128,8 +129,7 @@ const styles = StyleSheet.create({
     //flex:1,
     alignContent: "center",
     alignSelf: "flex-start",
-    marginLeft: 30,
-    marginTop: 20,
+    
     marginBottom: 30,
   },
   button: {

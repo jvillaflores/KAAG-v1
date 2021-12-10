@@ -6,6 +6,7 @@ import {
   Image,
   Pressable,
   TextInput,
+  TouchableOpacity
 } from "react-native";
 
 const Grammar = ({ route, navigation }) => {
@@ -14,7 +15,7 @@ const Grammar = ({ route, navigation }) => {
       <Text style={styles.textKagan}> Courses </Text>
 
       <View>
-        <Pressable
+        <TouchableOpacity
           style={styles.buttonVocab}
           onPress={() => navigation.navigate("Phrases1")}
         >
@@ -28,11 +29,11 @@ const Grammar = ({ route, navigation }) => {
               <Text style={styles.textVocabSub}>7 phrases </Text>
             </View>
           </View>
-        </Pressable>
+        </TouchableOpacity>
       </View>
 
       <View>
-        <Pressable
+        <TouchableOpacity
           style={styles.buttonVocab}
           onPress={() => navigation.navigate("Phrases2")}
         >
@@ -46,11 +47,11 @@ const Grammar = ({ route, navigation }) => {
               <Text style={styles.textVocabSub}>3 phrases</Text>
             </View>
           </View>
-        </Pressable>
+        </TouchableOpacity>
       </View>
 
       <View>
-        <Pressable
+        <TouchableOpacity
           style={styles.buttonVocab}
           onPress={() => navigation.navigate("Phrases3")}
         >
@@ -64,7 +65,7 @@ const Grammar = ({ route, navigation }) => {
               <Text style={styles.textVocabSub}>10 phrases</Text>
             </View>
           </View>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </View>
   );

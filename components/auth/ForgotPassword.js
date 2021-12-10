@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   View,
   Button,
-  TextInput,
   Text,
   StyleSheet,
   Pressable,
@@ -10,6 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import { TextInput } from "react-native-paper";
 import Svg, { Path, G, Rect, Polygon, Title } from "react-native-svg";
 
 import firebase from "firebase/app";
@@ -49,11 +49,13 @@ export default class ForgotPassword extends Component {
                   to get back into your account.
                 </Text>
             </View>
-            <View style = {{paddingTop:20}}>
-                <Text style={styles.textGrey}>Email</Text>
+            <View style = {{paddingVertical: 20}}>
                 <TextInput
+                  label="Email"
+                  activeUnderlineColor="#8E2835"
+                  keyboardType="email-address"
                   onChangeText={(email) => this.setState({ email })}
-                  style={styles.input}
+                 
                 />
             </View>
             <View>

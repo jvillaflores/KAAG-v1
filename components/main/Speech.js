@@ -1,30 +1,40 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  Image, 
+  Pressable,
+  ScrollView,
+  TouchableOpacity,
+  Touchable
+ } from "react-native";
 
 const Speech = ({ navigation }) => {
   return (
-    <View style={styles.Kagan}>
+    <ScrollView style={styles.container}>
       <Text style={styles.textKagan}> Courses </Text>
 
-      <View>
-        <Pressable
-          style={styles.buttonVocab}
-          onPress={() => navigation.navigate("Pronunciation1")}
-        >
-          <View style={styles.contextButton}>
-            <Image
-              style={{ width: 60, height: 60 }}
-              source={require("../../assets/Learning-cuate.png")}
-            />
-            <View style={styles.text_Context}>
-              <Text style={styles.textVocab}> Introduction</Text>
-              <Text style={styles.textVocabSub}> Translate the words</Text>
+      <View style = {{paddingVertical:5}}>
+          <TouchableOpacity
+            style={styles.buttonVocab}
+            onPress={() => navigation.navigate("Pronunciation1")}
+          >
+            <View style={styles.contextButton}>
+              <Image
+                style={{ width: 60, height: 60 }}
+                source={require("../../assets/Learning-cuate.png")}
+              />
+              <View style={styles.text_Context}>
+                <Text style={styles.textVocab}>Introduction</Text>
+                <Text style={styles.textVocabSub}>Translate the words</Text>
+              </View>
             </View>
-          </View>
-        </Pressable>
+          </TouchableOpacity>
       </View>
-      <View>
-        <Pressable
+
+      <View style = {{paddingVertical:5}}>
+        <TouchableOpacity
           style={styles.buttonVocab}
           onPress={() => navigation.navigate("Pronunciation2")}
         >
@@ -34,14 +44,15 @@ const Speech = ({ navigation }) => {
               source={require("../../assets/Learning-cuate.png")}
             />
             <View style={styles.text_Context}>
-              <Text style={styles.textVocab}> Adjective</Text>
-              <Text style={styles.textVocabSub}> Translate the words</Text>
+              <Text style={styles.textVocab}>Adjective</Text>
+              <Text style={styles.textVocabSub}>Translate the words</Text>
             </View>
           </View>
-        </Pressable>
+        </TouchableOpacity>
       </View>
-      <View>
-        <Pressable
+
+      <View style = {{paddingVertical:5}}>
+        <TouchableOpacity
           style={styles.buttonVocab}
           onPress={() => navigation.navigate("Pronunciation3")}
         >
@@ -51,14 +62,15 @@ const Speech = ({ navigation }) => {
               source={require("../../assets/Learning-cuate.png")}
             />
             <View style={styles.text_Context}>
-              <Text style={styles.textVocab}> Verbs</Text>
-              <Text style={styles.textVocabSub}> Translate the words</Text>
+              <Text style={styles.textVocab}>Verbs</Text>
+              <Text style={styles.textVocabSub}>Translate the words</Text>
             </View>
           </View>
-        </Pressable>
+        </TouchableOpacity>
       </View>
-      <View>
-        <Pressable
+
+      <View style = {{paddingVertical:5}}>
+        <TouchableOpacity
           style={styles.buttonVocab}
           onPress={() => navigation.navigate("Pronunciation4")}
         >
@@ -72,18 +84,24 @@ const Speech = ({ navigation }) => {
                 {" "}
                 Conjuctions and Prepositions
               </Text>
-              <Text style={styles.textVocabSub}> Translate the words</Text>
+              <Text style={styles.textVocabSub}>Translate the words</Text>
             </View>
           </View>
-        </Pressable>
+        </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 export default Speech;
 
 const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+    paddingHorizontal: 30,
+    paddingVertical: 40,
+    alignContent: "center",
+  },
   header: {
     top: 40,
     left: 30,
@@ -112,20 +130,16 @@ const styles = StyleSheet.create({
   buttonVocab: {
     alignSelf: "center",
     alignItems: "flex-start",
-    marginTop: 10,
     elevation: 0.7,
-    width: 300,
-    // paddingLeft:35,
-    // paddingRight:35,
+    width: '100%',
     backgroundColor: "#EBEBEB",
-    left: -24,
     borderRadius: 10,
   },
   textKagan: {
     flexDirection: "row",
     fontSize: 25,
     fontWeight: "bold",
-    //lineHeight: 21,
+    paddingVertical:5,
     letterSpacing: 0.25,
     color: "black",
     alignSelf: "flex-start",

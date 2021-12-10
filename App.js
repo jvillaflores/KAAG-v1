@@ -114,9 +114,21 @@ export class App extends Component {
             <Stack.Screen
               name="Landing"
               component={LandingScreen}
-              options={{ headerShown: false }}
+              options={{ 
+                headerShown: false }}
             />
-            <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen 
+                name="Register" 
+                component={RegisterScreen}
+                options={{
+                  headerShadowVisible: false,
+                  headerTintColor: "#000000",
+                  headerStyle: {
+                    backgroundColor: "#F2F2F2",
+                    borderBottomWidth: 0,
+                  },
+                }}
+                 />
             <Stack.Screen
               name="ForgotPassword"
               component={ForgotPasswordScreen}
@@ -125,7 +137,17 @@ export class App extends Component {
                 headerShown: false,
               }}
             />
-            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen 
+              name="Login" 
+              component={LoginScreen}
+              options={{
+                headerShadowVisible: false,
+                headerTintColor: "#000000",
+                headerStyle: {
+                  backgroundColor: "#F2F2F2",
+                  borderBottomWidth: 0,
+                },
+              }} />
           </Stack.Navigator>
         </NavigationContainer>
       );
