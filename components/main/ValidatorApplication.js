@@ -146,10 +146,12 @@ function ValidatorApplication({ currentUser, route, navigation }) {
             experiences.
           </Text>
           <TextInput
+            multiline={true}
             style={[
               styles.addButton,
               { height: 180 },
-              { paddingHorizontal: 10 },
+              { paddingHorizontal: 10,
+              flexDirection:"row" },
             ]}
             onChangeText={(note) => setNote(note)}
           ></TextInput>
