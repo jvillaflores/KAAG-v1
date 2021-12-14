@@ -93,9 +93,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginVertical: 10,
     alignItems: "center",
-    marginRight: 50,
-    paddingRight: 50,
-    justifyContent: "center",
+    //marginRight: 50,
+    //paddingRight: 50,
+    alignContent: "center",
     paddingTop: 20,
   },
   subtitle: {
@@ -120,17 +120,14 @@ const styles = StyleSheet.create({
   checkbox: {
     width: 40,
     height: 40,
-    marginRight: 20,
+    //marginRight: 20,
   },
   label: {
     margin: 8,
   },
   header: {
-    //flex:1,
-    alignContent: "center",
-    alignSelf: "flex-start",
     
-    marginBottom: 30,
+    paddingVertical:30,
   },
   button: {
     //flex:1,
@@ -176,7 +173,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     letterSpacing: 0.25,
     color: "black",
-    marginRight: 35,
+    //marginRight: 35,
     textAlign: "justify",
     marginTop: 10,
   },
