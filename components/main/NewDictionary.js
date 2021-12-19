@@ -28,6 +28,7 @@ function NewDictionary({ currentUser, route, navigation }) {
   const [sentence, setSentence] = useState("");
   const [filipinoSentence, setFilipinoSentence] = useState("");
   const [meaning, setMeaning] = useState("");
+  const [pronunciation, setPronunciation] = useState("");
   const [audio, setAudio] = useState(null);
   const [loading, setLoading] = useState(null);
   const [wordID, setWordID] = useState(makeid());
@@ -46,7 +47,15 @@ function NewDictionary({ currentUser, route, navigation }) {
 
   const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
     useValidation({
-      state: { kagan, filipino, sentence, filipinoSentence, meaning, audio },
+      state: {
+        kagan,
+        filipino,
+        sentence,
+        pronunciation,
+        filipinoSentence,
+        meaning,
+        audio,
+      },
     });
 
   const chooseFile = async () => {
@@ -122,6 +131,7 @@ function NewDictionary({ currentUser, route, navigation }) {
     validate({
       kagan: { required: true },
       filipino: { required: true },
+      pronunciation: { required: true },
       sentence: { required: true },
       filipinoSentence: { required: true },
       meaning: { required: true },
@@ -179,6 +189,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         kagan,
         filipino,
         sentence,
+        pronunciation,
         filipinoSentence,
         meaning,
         status: "0",
@@ -198,6 +209,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         downloadURL,
         kagan,
         filipino,
+        pronunciation,
         sentence,
         filipinoSentence,
         meaning,
@@ -223,7 +235,9 @@ function NewDictionary({ currentUser, route, navigation }) {
           </Text>
           {isFieldInError("kagan") &&
             getErrorsInField("kagan").map((errorMessage) => (
-              <Text style={{ color: "red" }}>Please enter the kagan word</Text>
+              <Text style={{ color: "red" }}>
+                Please enter the Kinagan word
+              </Text>
             ))}
           <TextInput
             style={styles.input}
@@ -250,9 +264,26 @@ function NewDictionary({ currentUser, route, navigation }) {
             onChangeText={(filipino) => setFilipino(filipino)}
           />
         </View>
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Pronunciation </Text>
+          <Text style={styles.guidelines}>
+            How to pronounce the Kinagan word, Ex. Ka-gan.{" "}
+          </Text>
+          {isFieldInError("pronunciation") &&
+            getErrorsInField("pronunciation").map((errorMessage) => (
+              <Text style={{ color: "red" }}>
+                Please enter the Pronunciation
+              </Text>
+            ))}
+          <TextInput
+            style={styles.input}
+            multiline={true}
+            onChangeText={(pronunciation) => setPronunciation(pronunciation)}
+          />
+        </View>
 
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Example </Text>
+          <Text style={styles.title_text}>Example Sentence</Text>
           <Text style={styles.guidelines}>
             Write an example of the word you have suggested in Kinagan.
           </Text>

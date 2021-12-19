@@ -81,9 +81,19 @@ function Validation({ currentUser, route, navigation }) {
               editable={false}
             />
           </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Pronunciation </Text>
+
+            <TextInput
+              style={[styles.input, { color: "black" }]}
+              value={data?.pronunciation}
+              multiline={true}
+              editable={false}
+            />
+          </View>
 
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Kagan Sentence Example </Text>
+            <Text style={styles.title_text}>Kinagan Sentence Example </Text>
 
             <TextInput
               style={[styles.input, { color: "black" }]}
@@ -173,9 +183,19 @@ function Validation({ currentUser, route, navigation }) {
               editable={false}
             />
           </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Pronunciation </Text>
+
+            <TextInput
+              style={[styles.input, { color: "black" }]}
+              value={data?.pronunciation}
+              multiline={true}
+              editable={false}
+            />
+          </View>
 
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Kagan Sentence Example </Text>
+            <Text style={styles.title_text}>Kinagan Sentence Example </Text>
 
             <TextInput
               style={[styles.input, { color: "black" }]}
@@ -256,9 +276,19 @@ function Validation({ currentUser, route, navigation }) {
               editable={false}
             />
           </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Pronunciation </Text>
+
+            <TextInput
+              style={[styles.input, { color: "black" }]}
+              value={data?.pronunciation}
+              multiline={true}
+              editable={false}
+            />
+          </View>
 
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Kagan Sentence Example </Text>
+            <Text style={styles.title_text}>Kinagan Sentence Example </Text>
 
             <TextInput
               style={[styles.input, { color: "black" }]}

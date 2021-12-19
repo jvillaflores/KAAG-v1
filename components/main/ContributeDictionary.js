@@ -61,7 +61,7 @@ export default function Course({ navigation }) {
         </View>
       </View>
 
-      <View>
+      <View style={[{ marginTop: -20 }]}>
         <TouchableOpacity
           style={[
             styles.proceedButton,
@@ -126,8 +126,7 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   header: {
-    
-    paddingVertical:30,
+    paddingVertical: 30,
   },
   button: {
     //flex:1,
