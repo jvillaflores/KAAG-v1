@@ -108,7 +108,7 @@ function Validation({ currentUser, route, navigation }) {
           />
         </View>
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Filipino Sentence Transalation </Text>
+          <Text style={styles.title_text}>English Meaning </Text>
           <TextInput
             style={styles.input}
             value={data?.filipinoSentence}

@@ -26,6 +26,7 @@ import { connect } from "react-redux";
 const EditProfileScreen = ({ currentUser, navigation }) => {
   const [image, setImage] = useState(null);
   const [fullname, setFullName] = useState("");
+  const [loading, setLoading] = useState(null);
 
   const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
     useValidation({
@@ -70,17 +71,20 @@ const EditProfileScreen = ({ currentUser, navigation }) => {
     const task = firebase.storage().ref().child(childPath).put(blob);
 
     const taskProgress = (snapshot) => {
+      setLoading((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
       console.log(`transferred: ${snapshot.bytesTransferred}`);
     };
 
     const taskCompleted = () => {
       task.snapshot.ref.getDownloadURL().then((snapshot) => {
         savePostData(snapshot);
+        setLoading(null);
         console.log(snapshot);
       });
     };
 
     const taskError = (snapshot) => {
+      setLoading(null);
       console.log(snapshot);
     };
 
@@ -97,6 +101,7 @@ const EditProfileScreen = ({ currentUser, navigation }) => {
       .then(function () {
         alert("Profile edited! ");
         navigation.popToTop();
+        setLoading(null);
         alert(
           "Profile photo might not yet be available after, please restart application if it occurs. Thank you!"
         );
@@ -228,7 +233,9 @@ const EditProfileScreen = ({ currentUser, navigation }) => {
           style={styles.commandButton}
           onPress={() => uploadImage()}
         >
-          <Text style={styles.panelButtonTitle}>Submit</Text>
+          <Text style={styles.panelButtonTitle}>
+            {loading ? `Submitting...  ${parseInt(loading)}%` : "Submit"}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.commandButton}
