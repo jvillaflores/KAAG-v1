@@ -58,8 +58,6 @@ export default function Contribution({ navigation }) {
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.cancelled) {
       setImage(result.uri);
     }
@@ -129,7 +127,7 @@ export default function Contribution({ navigation }) {
           style={{ bottom: 100, aspectRatio: 1 }}
         />
       )}
-      <View style = {{alignItems:"center"}}>
+      <View style={{ alignItems: "center" }}>
         {image && (
           <TouchableOpacity
             //title="Save"
@@ -191,7 +189,7 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
   },
   checkButton: {
-    alignItems:"center",
+    alignItems: "center",
     borderWidth: 3,
     borderRadius: 100,
     borderColor: "#263238",

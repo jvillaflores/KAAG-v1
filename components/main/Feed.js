@@ -40,7 +40,6 @@ function Community({ currentUser, posts, navigation, props }) {
         .orderBy("creation", "desc")
         .get()
         .then((snapshot) => {
-          console.log(snapshot, "-=-=-=-=-=-=-=-=");
           let posts = snapshot.docs.map((doc) => {
             const data = doc.data();
             const id = doc.id;

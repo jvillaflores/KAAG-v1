@@ -3,7 +3,6 @@ import {
   USER_ALL_STATE_CHANGE,
   USER_POSTS_STATE_CHANGE,
   USER_ALL_POSTS_STATE_CHANGE,
-  DICTIONARY_STATE_CHANGE,
   FILTERED_DICTIONARY_STATE_CHANGE,
   VALIDATE_DICTIONARY_STATE_CHANGE,
 } from "../constants/index";
@@ -126,7 +125,6 @@ export function fetchValidatedDictionary() {
       .where("upload", "==", "1")
       .get()
       .then((snapshot) => {
-        console.log(snapshot, "-=-=-=-=-=-=-=-=");
         let validatedDictionary = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;
