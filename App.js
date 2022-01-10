@@ -73,6 +73,9 @@ import Pronunciation4Screen from "./components/main/coursepacks/screens/Speech/P
 import PhrasesScreen1 from "./components/main/coursepacks/screens/Phrases/Phrases1";
 import PhrasesScreen2 from "./components/main/coursepacks/screens/Phrases/Phrases2";
 import PhrasesScreen3 from "./components/main/coursepacks/screens/Phrases/Phrases3";
+import CultureScreen from "./components/main/AboutCulture";
+import FoodScreen from "./components/main/AboutFood";
+import EventsScreen from "./components/main/AboutEvents";
 
 const Stack = createStackNavigator();
 
@@ -162,6 +165,8 @@ export class App extends Component {
               options={{ headerShown: false }}
             />
 
+              
+
             <Stack.Screen
               name="MainContribution"
               component={ContributionScreen}
@@ -219,6 +224,45 @@ export class App extends Component {
                   backgroundColor: "#8E2835",
                   elevation: 0,
                   borderBottomWidth: 0,
+                },
+              }}
+            />
+
+            <Stack.Screen
+              name="Culture"
+              component={CultureScreen}
+              
+              options={{
+                title: "Culture",
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                },
+              }}
+            />
+
+            <Stack.Screen
+              name="Food"
+              component={FoodScreen}
+              
+              options={{
+                title: "Foods",
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                },
+              }}
+            />
+
+            <Stack.Screen
+              name="Event"
+              component={EventsScreen}
+              
+              options={{
+                title: " ",
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
                 },
               }}
             />

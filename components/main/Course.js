@@ -17,7 +17,7 @@ import { connect } from "react-redux";
 function Course({ currentUser, navigation }) {
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         <View>
           <Text style={[styles.textHead,{}]}>Hello, {currentUser.name}! </Text>
         </View>
@@ -608,7 +608,7 @@ function Course({ currentUser, navigation }) {
                  {/* Vocabulary.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Vocabulary")}
+                  onPress={() => navigation.navigate("Culture")}
                 >
                   <View style={styles.contextButton}>
                     <Image
@@ -626,7 +626,7 @@ function Course({ currentUser, navigation }) {
                 {/* Grammar.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Grammar")}
+                  onPress={() => navigation.navigate("Food")}
                 >
                   <View style={styles.contextButton}>
                     <Image
@@ -636,7 +636,6 @@ function Course({ currentUser, navigation }) {
                     <View style={styles.text_Context}>
                       <Text style={styles.textVocab}>Food</Text>
                       <Text style={styles.textVocabSub}>
-                        {" "}
                         Foods from Kagan
                       </Text>
                     </View>
@@ -655,9 +654,7 @@ function Course({ currentUser, navigation }) {
                     />
                     <View style={styles.text_Context}>
                       <Text style={styles.textVocab}>Events</Text>
-                      <Text style={styles.textVocabSub}>
-                        {" "}
-                        Different Events of Kagan
+                      <Text style={styles.textVocabSub}>Different Events of Kagan
                       </Text>
                     </View>
                   </View>
