@@ -7,6 +7,8 @@ import {
   Pressable,
   ScrollView,
   TouchableOpacity,
+  SafeAreaView,
+  StatusBar
 } from "react-native";
 
 import Svg, { Path, G, Rect, Polygon, Title } from "react-native-svg";
@@ -14,9 +16,10 @@ import { connect } from "react-redux";
 
 function Course({ currentUser, navigation }) {
   return (
-    <ScrollView style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
         <View>
-          <Text style={styles.textHead}>Hello, {currentUser.name}! </Text>
+          <Text style={[styles.textHead,{}]}>Hello, {currentUser.name}! </Text>
         </View>
 
       {/* "What do you want to learn today box" */}
@@ -536,7 +539,7 @@ function Course({ currentUser, navigation }) {
           
           {/* Kagan courses options. */}
           <View>
-                                            
+                 {/* Vocabulary.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab}
                   onPress={() => navigation.navigate("Vocabulary")}
@@ -553,14 +556,16 @@ function Course({ currentUser, navigation }) {
                     </View>
                   </View>
                 </TouchableOpacity>
+
+                {/* Grammar.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab}
                   onPress={() => navigation.navigate("Grammar")}
                 >
                   <View style={styles.contextButton}>
                     <Image
-                      style={{ width: 40, height: 40 }}
-                      source={require("../../assets/grammar.png")}
+                      style={{ width: 30, height: 40 }}
+                      source={require("../../assets/vocab.png")}
                     />
                     <View style={styles.text_Context}>
                       <Text style={styles.textVocab}> Phrases</Text>
@@ -571,14 +576,16 @@ function Course({ currentUser, navigation }) {
                     </View>
                   </View>
                 </TouchableOpacity>
+
+                {/* Speech.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab}
                   onPress={() => navigation.navigate("Speech")}
                 >
                   <View style={styles.contextButton}>
                     <Image
-                      style={{ width: 45, height: 38 }}
-                      source={require("../../assets/pronun.png")}
+                      style={{ width: 30, height: 40 }}
+                      source={require("../../assets/vocab.png")}
                     />
                     <View style={styles.text_Context}>
                       <Text style={styles.textVocab}> Speech</Text>
@@ -589,9 +596,77 @@ function Course({ currentUser, navigation }) {
                     </View>
                   </View>
                 </TouchableOpacity>
-      </View>                                 
+      </View>   
+
+      {/* Images Course text */}
+      <View style={{paddingTop:10, paddingVertical:5}}>
+            <Text style={styles.textKagan}>About Kagan </Text>
+      </View>     
+
+      {/* About Kagan options. */}
+          <View style={{paddingBottom:30}}>
+                 {/* Vocabulary.js */}
+                <TouchableOpacity
+                  style={styles.buttonVocab}
+                  onPress={() => navigation.navigate("Vocabulary")}
+                >
+                  <View style={styles.contextButton}>
+                    <Image
+                      style={{ width: 30, height: 40 }}
+                      source={require("../../assets/vocab.png")}
+                    />
+
+                    <View style={styles.text_Context}>
+                      <Text style={styles.textVocab}>Culture</Text>
+                      <Text style={styles.textVocabSub}>About the Kagan Culture</Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+
+                {/* Grammar.js */}
+                <TouchableOpacity
+                  style={styles.buttonVocab}
+                  onPress={() => navigation.navigate("Grammar")}
+                >
+                  <View style={styles.contextButton}>
+                    <Image
+                      style={{ width: 30, height: 40 }}
+                      source={require("../../assets/vocab.png")}
+                    />
+                    <View style={styles.text_Context}>
+                      <Text style={styles.textVocab}>Food</Text>
+                      <Text style={styles.textVocabSub}>
+                        {" "}
+                        Foods from Kagan
+                      </Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+
+                {/* Speech.js */}
+                <TouchableOpacity
+                  style={styles.buttonVocab}
+                  onPress={() => navigation.navigate("Speech")}
+                >
+                  <View style={styles.contextButton}>
+                    <Image
+                      style={{ width: 30, height: 40 }}
+                      source={require("../../assets/vocab.png")}
+                    />
+                    <View style={styles.text_Context}>
+                      <Text style={styles.textVocab}>Events</Text>
+                      <Text style={styles.textVocabSub}>
+                        {" "}
+                        Different Events of Kagan
+                      </Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+      </View>                       
 
     </ScrollView>
+
+    </SafeAreaView>
   );
 }
 const mapStateToProps = (store) => ({
@@ -603,10 +678,16 @@ export default connect(mapStateToProps, null)(Course);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 40,
-    paddingVertical: 50,
+    paddingTop: StatusBar.currentHeight,
+    // paddingHorizontal: 40,
+    //paddingVertical: 30,
     alignContent: "center",
   },
+    scrollView: {
+      
+      marginHorizontal: 40,
+      //paddingVertical: 30
+    },
   containerbox: {
     alignItems: "center",
     flexDirection: "row",
@@ -643,7 +724,7 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
-    paddingVertical:5
+    paddingVertical:15
   },
   textSubHead: {
     flexDirection: "row",
