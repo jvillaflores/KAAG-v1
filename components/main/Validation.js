@@ -150,6 +150,14 @@ function Validation({ currentUser, route, navigation }) {
             </View>
           </TouchableOpacity>
         </View>
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Contributed by </Text>
+          <TextInput
+            style={styles.input}
+            value={data?.username}
+            editable={false}
+          />
+        </View>
       </View>
       <View style={styles.row}>
         <Pressable style={styles.buttonAccept} onPress={() => Accept()}>
