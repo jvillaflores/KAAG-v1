@@ -20,10 +20,20 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { NavigationEvents } from "react-navigation";
 import { Audio } from "expo-av";
 import { updateDictionary } from "../../redux/actions";
+import { Picker } from "@react-native-picker/picker";
 
 function Validation({ currentUser, route, navigation }) {
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
+  const [kagan, setKagan] = useState(data?.kagan);
+  const [filipino, setFilipino] = useState(data?.filipino);
+  const [sentence, setSentence] = useState(data?.sentence);
+  const [classification, setClassification] = useState(data?.classification);
+  const [filipinoSentence, setFilipinoSentence] = useState(
+    data?.filipinoSentence
+  );
+  const [meaning, setMeaning] = useState(data?.meaning);
+  const [pronunciation, setPronunciation] = useState(data?.pronunciation);
 
   const downloadAudio = async () => {
     let SoundObject = new Audio.Sound();
@@ -56,6 +66,13 @@ function Validation({ currentUser, route, navigation }) {
       .update({
         status: "1",
         validatedBy: currentUser.name,
+        kagan,
+        filipino,
+        classification,
+        sentence,
+        pronunciation,
+        filipinoSentence,
+        meaning,
       })
       .then((result) => {
         navigation.goBack();
@@ -73,6 +90,13 @@ function Validation({ currentUser, route, navigation }) {
       .update({
         status: "1",
         validatedBy: currentUser.name,
+        kagan,
+        filipino,
+        classification,
+        sentence,
+        pronunciation,
+        filipinoSentence,
+        meaning,
       })
       .catch((err) => console.log(err, "-=error"));
   };
@@ -84,8 +108,10 @@ function Validation({ currentUser, route, navigation }) {
 
           <TextInput
             style={styles.input}
-            value={data?.kagan}
+            placeholder={data?.kagan}
+            editable={true}
             multiline={true}
+            onChangeText={(kagan) => setKagan(kagan)}
           />
         </View>
         <View style={styles.paddingLeft}>
@@ -93,17 +119,35 @@ function Validation({ currentUser, route, navigation }) {
 
           <TextInput
             style={styles.input}
-            value={data?.filipino}
+            placeholder={data?.filipino}
             multiline={true}
+            onChangeText={(filipino) => setFilipino(filipino)}
           />
+        </View>
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Classification </Text>
+
+          <Picker
+            style={styles.input}
+            selectedValue={data?.classification}
+            onValueChange={(itemValue, itemIndex) =>
+              setClassification(itemValue)
+            }
+          >
+            <Picker.Item label="Noun" value="Noun" />
+            <Picker.Item label="Verb" value="Verb" />
+            <Picker.Item label="Adverb" value="Adverb" />
+            <Picker.Item label="Adjective" value="Adjective" />
+          </Picker>
         </View>
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Pronunciation </Text>
 
           <TextInput
             style={styles.input}
-            value={data?.pronunciation}
+            placeholder={data?.pronunciation}
             multiline={true}
+            onChangeText={(pronunciation) => setPronunciation(pronunciation)}
           />
         </View>
 
@@ -112,16 +156,20 @@ function Validation({ currentUser, route, navigation }) {
 
           <TextInput
             style={styles.input}
-            value={data?.sentence}
+            placeholder={data?.sentence}
             multiline={true}
+            onChangeText={(sentence) => setSentence(sentence)}
           />
         </View>
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>English Meaning </Text>
           <TextInput
             style={styles.input}
-            value={data?.filipinoSentence}
+            placeholder={data?.filipinoSentence}
             multiline={true}
+            onChangeText={(filipinoSentence) =>
+              setFilipinoSentence(filipinoSentence)
+            }
           />
         </View>
 
@@ -129,8 +177,9 @@ function Validation({ currentUser, route, navigation }) {
           <Text style={styles.title_text}>Filipino Meaning </Text>
           <TextInput
             style={styles.description_input}
-            value={data?.meaning}
+            placeholder={data?.meaning}
             multiline={true}
+            onChangeText={(meaning) => setMeaning(meaning)}
           />
         </View>
         <View style={styles.paddingLeft}>

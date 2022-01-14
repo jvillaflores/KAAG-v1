@@ -21,11 +21,13 @@ import { NavigationEvents } from "react-navigation";
 import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system";
 import { useValidation } from "react-native-form-validator";
+import { Picker } from "@react-native-picker/picker";
 
 function NewDictionary({ currentUser, route, navigation }) {
   const [kagan, setKagan] = useState("");
   const [filipino, setFilipino] = useState("");
   const [sentence, setSentence] = useState("");
+  const [classification, setClassification] = useState("");
   const [filipinoSentence, setFilipinoSentence] = useState("");
   const [meaning, setMeaning] = useState("");
   const [pronunciation, setPronunciation] = useState("");
@@ -188,6 +190,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         downloadURL,
         kagan,
         filipino,
+        classification,
         sentence,
         pronunciation,
         filipinoSentence,
@@ -209,6 +212,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         downloadURL,
         kagan,
         filipino,
+        classification,
         pronunciation,
         sentence,
         filipinoSentence,
@@ -264,6 +268,26 @@ function NewDictionary({ currentUser, route, navigation }) {
             onChangeText={(filipino) => setFilipino(filipino)}
           />
         </View>
+
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Classification </Text>
+          <Text style={styles.guidelines}>
+            Classification of the Kagan word ex.(Verb, Noun, Pronoun, Adverb){" "}
+          </Text>
+          <Picker
+            style={styles.input}
+            selectedValue={classification}
+            onValueChange={(itemValue, itemIndex) =>
+              setClassification(itemValue)
+            }
+          >
+            <Picker.Item label="Noun" value="Noun" />
+            <Picker.Item label="Verb" value="Verb" />
+            <Picker.Item label="Adverb" value="Adverb" />
+            <Picker.Item label="Adjective" value="Adjective" />
+          </Picker>
+        </View>
+
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Pronunciation </Text>
           <Text style={styles.guidelines}>
@@ -484,5 +508,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     borderColor: "#707070",
+  },
+  inputAndroid: {
+    fontSize: 14,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderWidth: 1,
+    borderColor: "blue",
+    borderRadius: 8,
+    color: "black",
+    paddingRight: 30,
   },
 });
