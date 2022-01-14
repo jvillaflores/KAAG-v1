@@ -40,8 +40,10 @@ const Word = ({ route }) => {
   };
 
   const retryPlaySound = () => downloadAudio();
-
-  return (
+  
+  if(data?.upload == 1)
+ {
+    return (
     <ScrollView>
       <View style={styles.headLine}>
         <View style={styles.header_line}>
@@ -79,7 +81,7 @@ const Word = ({ route }) => {
         </View>
       </View>
     </ScrollView>
-  );
+  );}
 };
 
 const mapStateToProps = (store) => ({
