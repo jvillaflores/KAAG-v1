@@ -76,6 +76,8 @@ import PhrasesScreen3 from "./components/main/coursepacks/screens/Phrases/Phrase
 import CultureScreen from "./components/main/AboutCulture";
 import FoodScreen from "./components/main/AboutFood";
 import EventsScreen from "./components/main/AboutEvents";
+import TraditionScreen from "./components/main/Traditions"
+import ClothingScreen from "./components/main/AboutClothing"
 
 const Stack = createStackNavigator();
 
@@ -233,7 +235,7 @@ export class App extends Component {
               component={CultureScreen}
               
               options={{
-                title: "Culture",
+                title: " ",
                 headerTintColor: "#fff",
                 headerStyle: {
                   backgroundColor: "#8E2835",
@@ -246,7 +248,7 @@ export class App extends Component {
               component={FoodScreen}
               
               options={{
-                title: "Foods",
+                title: " ",
                 headerTintColor: "#fff",
                 headerStyle: {
                   backgroundColor: "#8E2835",
@@ -266,6 +268,32 @@ export class App extends Component {
                 },
               }}
             />
+
+            <Stack.Screen
+              name="Clothing"
+              component={ClothingScreen}
+              
+              options={{
+                title: " ",
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                },
+              }}
+            />  
+
+            <Stack.Screen
+              name="Traditions"
+              component={TraditionScreen}
+              
+              options={{
+                title: " ",
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                },
+              }}
+            />  
 
             <Stack.Screen
               name="NewWord"

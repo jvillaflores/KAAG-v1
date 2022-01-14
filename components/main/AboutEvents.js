@@ -6,109 +6,92 @@ import {
     Image, 
     TouchableOpacity,
     ScrollView,
-    Touchable
+    Touchable,
+    SafeAreaView,
+    StatusBar
    } from "react-native";
 
+import { Dimensions } from "react-native";
+
 const AboutEvents = ({ navigation }) => {
+
+  const dimensions = Dimensions.get("window");
+  const imageHeight = Math.round((dimensions.width * 1) / 1);
+  const imageWidth = dimensions.width;
+
   return (
-    <ScrollView style={styles.container}>
-        <Text style={styles.textKagan}>Courses </Text>
+    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+       <View style = {{paddingVertical:30}}>
+          <Text style={styles.textKagan}>THE KAGAN TRIBE</Text>
+            <Image
+                      style={{ width: imageHeight, height: imageWidth }}
+                      source={require("../../assets/1-angkagan.jpg")}
+            />
+            <Text style={{paddingLeft:15}}>Credits from: TOTO (Davao Delights)</Text>
+          
+            <View style = {{paddingHorizontal:15, paddingVertical:10}}>
+            <Text style={styles.paragraph}>The Kagan Tribe is a Muslim Minority group in 
+            Mindanao. The Kagan has a native language called Kagan or Kinagan,
+             which is related to the Mandayan Language and Maguindanaon, Tausug, 
+             Visayan, and Tagalog dialects and influenced by the Arabic Language. 
+             The Kagan tribe is located in the river keys and coastal areas of the 
+             Davao Region, the southeastern part of the Philippines. The "Kagan" 
+             word came from the word 'kaag' which means to inform/to secure. It 
+             is the native
+             word that the tribe uses to communicate with the people within the tribe (Wikipedia).
+             </Text>
+             <Text style={styles.paragraph}>The Kagans are in the District of Poblacion, Talomo, Buhangin, Bunawan and Paquibato.
 
-        <View style = {{paddingVertical:5}}>
-            <TouchableOpacity
-              style={styles.buttonVocab}
-              onPress={() => navigation.navigate("Vocabulary1")}
-            >
-              <View style={styles.contextButton}>
-                <Image
-                  style={{ width: 60, height: 60 }}
-                  source={require("../../assets/Learning-cuate.png")}
-                />
-                <View style={styles.text_Context}>
-                  <Text style={styles.textVocab}>Pronouns</Text>
-                  <Text style={styles.textVocabSub}>Translate the words</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-
+             The most important unifying factor of the Kagans was Islam. 
+             By the 1700s, most of them had been converted to this new faith, 
+             possibly through the Magindanaons. The genealogies of the 
+             various Kagan polities indicate some limkage with minor Magindanaw royalty (10 Tribes of Davao City by Davao Delights Blogspot). 
+             
+              </Text>
+            </View>
         </View>
 
-        <View style = {{paddingVertical:5}}>
-            <TouchableOpacity
-              style={styles.buttonVocab}
-              onPress={() => navigation.navigate("Vocabulary2")}
-            >
-              <View style={styles.contextButton}>
-                <Image
-                  style={{ width: 60, height: 60 }}
-                  source={require("../../assets/Learning-cuate.png")}
-                />
-                <View style={styles.text_Context}>
-                  <Text style={styles.textVocab}>Adjective</Text>
-                  <Text style={styles.textVocabSub}>Translate the words</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-        </View>
-
-        <View style = {{paddingVertical:5}}>
-            <TouchableOpacity
-              style={styles.buttonVocab}
-              onPress={() => navigation.navigate("Vocabulary3")}
-            >
-              <View style={styles.contextButton}>
-                <Image
-                  style={{ width: 60, height: 60 }}
-                  source={require("../../assets/Learning-cuate.png")}
-                />
-                <View style={styles.text_Context}>
-                  <Text style={styles.textVocab}>Verbs</Text>
-                  <Text style={styles.textVocabSub}>Translate the words</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-        </View>
-
-        <View style = {{paddingVertical:5}}>
-            <TouchableOpacity
-              style={styles.buttonVocab}
-              onPress={() => navigation.navigate("Vocabulary4")}
-            >
-              <View style={styles.contextButton}>
-                <Image
-                  style={{ width: 60, height: 60 }}
-                  source={require("../../assets/Learning-cuate.png")}
-                />
-                <View style={styles.text_Context}>
-                  <Text 
-                    style={styles.textVocab}>
-                    {" "}
-                    Conjuctions and Prepositions
-                  </Text>
-                  <Text style={styles.textVocabSub}>Translate the words</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-      </View>
+       
 
 
-    </ScrollView>
+
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 export default AboutEvents;
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
-    paddingHorizontal: 30,
-    paddingVertical: 40,
+    paddingTop: StatusBar.currentHeight,
+    // paddingHorizontal: 40,
+    //paddingVertical: 30,
     alignContent: "center",
   },
+    scrollView: {
+      
+      marginHorizontal: 0,
+      //paddingVertical: 30
+    },
   header: {
     top: 40,
     left: 30,
   },
+
+  paragraph:{
+    flexDirection: "row",
+    fontSize: 16,
+    marginHorizontal: 10,
+    paddingVertical:5,
+    letterSpacing: 0.25,
+    color: "black",
+    alignSelf: "center",
+    textAlign:"justify"
+  },
+
   headline: {
     width: "78%",
     height: 200,
@@ -144,8 +127,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingVertical:5,
     letterSpacing: 0.25,
-    color: "black",
-    alignSelf: "flex-start",
+    color: "#8E2835",
+    alignSelf: "center",
   },
   textHead: {
     flexDirection: "row",

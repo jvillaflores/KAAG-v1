@@ -564,8 +564,8 @@ function Course({ currentUser, navigation }) {
                 >
                   <View style={styles.contextButton}>
                     <Image
-                      style={{ width: 30, height: 40 }}
-                      source={require("../../assets/vocab.png")}
+                      style={{ width: 40, height: 40 }}
+                      source={require("../../assets/grammar.png")}
                     />
                     <View style={styles.text_Context}>
                       <Text style={styles.textVocab}> Phrases</Text>
@@ -584,8 +584,8 @@ function Course({ currentUser, navigation }) {
                 >
                   <View style={styles.contextButton}>
                     <Image
-                      style={{ width: 30, height: 40 }}
-                      source={require("../../assets/vocab.png")}
+                      style={{ width: 50, height: 40 }}
+                      source={require("../../assets/pronun.png")}
                     />
                     <View style={styles.text_Context}>
                       <Text style={styles.textVocab}> Speech</Text>
@@ -605,60 +605,43 @@ function Course({ currentUser, navigation }) {
 
       {/* About Kagan options. */}
           <View style={{paddingBottom:30}}>
-                 {/* Vocabulary.js */}
+                 {/* AboutCulture.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Culture")}
+                  onPress={() => navigation.navigate("Traditions")}
                 >
                   <View style={styles.contextButton}>
                     <Image
-                      style={{ width: 30, height: 40 }}
-                      source={require("../../assets/vocab.png")}
+                      style={{ width: 40, height: 40 }}
+                      source={require("../../assets/images.png")}
                     />
 
                     <View style={styles.text_Context}>
-                      <Text style={styles.textVocab}>Culture</Text>
+                      <Text style={styles.textVocab}>Images</Text>
                       <Text style={styles.textVocabSub}>About the Kagan Culture</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
 
-                {/* Grammar.js */}
+                {/* AboutCulture.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Food")}
+                  onPress={() => navigation.navigate("Event")}
                 >
                   <View style={styles.contextButton}>
                     <Image
-                      style={{ width: 30, height: 40 }}
-                      source={require("../../assets/vocab.png")}
+                      style={{ width: 40, height: 40 }}
+                      source={require("../../assets/book.png")}
                     />
+
                     <View style={styles.text_Context}>
-                      <Text style={styles.textVocab}>Food</Text>
-                      <Text style={styles.textVocabSub}>
-                        Foods from Kagan
-                      </Text>
+                      <Text style={styles.textVocab}>More about Kagan</Text>
+                      <Text style={styles.textVocabSub}>About the Kagan Culture</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
 
-                {/* Speech.js */}
-                <TouchableOpacity
-                  style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Speech")}
-                >
-                  <View style={styles.contextButton}>
-                    <Image
-                      style={{ width: 30, height: 40 }}
-                      source={require("../../assets/vocab.png")}
-                    />
-                    <View style={styles.text_Context}>
-                      <Text style={styles.textVocab}>Events</Text>
-                      <Text style={styles.textVocabSub}>Different Events of Kagan
-                      </Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
+                
       </View>                       
 
     </ScrollView>
