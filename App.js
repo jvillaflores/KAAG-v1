@@ -37,6 +37,7 @@ const firebaseConfig = {
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
+// new
 
 import LandingScreen from "./components/auth/Landing";
 import RegisterScreen from "./components/auth/Register";
